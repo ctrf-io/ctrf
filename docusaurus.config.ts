@@ -58,7 +58,7 @@ const config: Config = {
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
-      title: 'CTRF',
+      title: 'Common Test Report Format',
       logo: {
         alt: 'CTRF Logo',
         src: 'img/logo.png',
@@ -72,7 +72,7 @@ const config: Config = {
         },
         {to: '/blog', label: 'Blog', position: 'left'},
         {
-          href: 'https://github.com/facebook/docusaurus',
+          href: 'https://github.com/ctrf-io',
           label: 'GitHub',
           position: 'right',
         },
