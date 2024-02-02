@@ -9,59 +9,36 @@ type FeatureItem = {
 };
 
 const FeatureList: FeatureItem[] = [
-  // {
-  //   title: 'Simple',
-  //   Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
-  //   description: (
-  //     <>
-  //       Docusaurus was designed from the ground up to be easily installed and
-  //       used to get your website up and running quickly.
-  //     </>
-  //   ),
-  // },
-  // {
-  //   title: 'Thorough',
-  //   Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
-  //   description: (
-  //     <>
-  //       Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-  //       ahead and move your docs into the <code>docs</code> directory.
-  //     </>
-  //   ),
-  // },
-  // {
-  //   title: 'Extendable',
-  //   Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
-  //   description: (
-  //     <>
-  //       Extend or customize your website layout by reusing React. Docusaurus can
-  //       be extended while reusing the same header and footer.
-  //     </>
-  //   ),
-  // },
-  // {
-  //   title: 'Reporters',
-  //   Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
-  //   description: (
-  //     <>
-  //       Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-  //       ahead and move your docs into the <code>docs</code> directory.
-  //     </>
-  //   ),
-  // },
-  // {
-  //   title: 'Plugins',
-  //   Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
-  //   description: (
-  //     <>
-  //       Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-  //       ahead and move your docs into the <code>docs</code> directory.
-  //     </>
-  //   ),
-  // },
+  {
+    title: 'Consistency Across Tools',
+    Svg: require('@site/static/img/hammer.svg').default,
+    description: (
+      <>
+        Different testing tools and frameworks often produce reports in varied formats. CTRF ensures a uniform structure, making it easier to understand and compare reports, regardless of the testing tool used.
+      </>
+    ),
+  },
+  {
+    title: 'Language Agnostic',
+    Svg: require('@site/static/img/globe.svg').default,
+    description: (
+      <>
+        It provides a universal reporting schema that works seamlessly with any programming language and testing framework.
+      </>
+    ),
+  },
+  {
+    title: 'Facilitates Enhanced Programmatic Use',
+    Svg: require('@site/static/img/cog.svg').default,
+    description: (
+      <>
+        With a standardized format, programatically analyzing test outcomes across multiple tools becomes more straightforward.
+      </>
+    ),
+  },
 ];
 
-function Feature({title, Svg, description}: FeatureItem) {
+function Feature({ title, Svg, description }: FeatureItem) {
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center">
@@ -86,5 +63,6 @@ export default function HomepageFeatures(): JSX.Element {
         </div>
       </div>
     </section>
+
   );
 }

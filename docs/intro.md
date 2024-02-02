@@ -1,20 +1,54 @@
 ---
 sidebar_position: 1
 title: What is CTRF?
-description: Welcome to the CTRF Documentation.
+description: What is the Common Test Report Format?
 ---
 
-Common Test Report Format (CTRF) is a JSON test report that is the same structure, no matter which testing tool is used. It's created to provide consistent test reporting across testing libraries and frameworks. In the modern landscape of software testing, many testing libraries exist, each generating test reports in their own way. The CTRF JSON addresses this with a standardised JSON report schema, the report is a simple, comprehensive, and extendable alternative to conventional test report formats.
+Common Test Report Format is a JSON schema that guarantees test reports are the same structure, no matter which testing tool is used. It was created to provide consistent test reporting agnostic of programming languages or testing frameworks.
 
-CTRF is also a collection of open source test reporters and integrations with widely-used testing frameworks and tools, designed to make the generation of CTRF reports as effortless as possible.
+Where many testing frameworks exist, each generating JSON reports in their own way, CTRF provides a standardised schema to generate the same report anywhere.
 
-Whether you're a Developer, Developer in Test, or involved in any aspect of software testing and analysis, CTRF is designed to enhance your test reporting capabilities no matter which test tooling is used.
+``` json
+{
+  "results": {
+    "tool": {
+      "name": "AnyTool"
+    },
+    "summary": {
+      "tests": 2,
+      "passed": 1,
+      "failed": 1,
+      "pending": 0,
+      "skipped": 0,
+      "other": 0,
+      "start": 1706828654274,
+      "stop": 1706828655782
+    },
+    "tests": [
+      {
+        "name": "API Status code is 200",
+        "status": "passed",
+        "duration": 801
+      },
+      ...
+    ],
+    "environment": {
+      "appName": "MyApp",
+      "buildName": "MyApp",
+      "buildNumber": "100"
+    }
+  }
+}
+```
+
+There is also collection of official open source reporters and integrations with widely-used testing frameworks and tools, designed to make the generation of CTRF reports as effortless as possible.
+
 
 ## What Does CTRF Solve?
 
 #### Bridging the Gap in Test Reporting
 
-oOften you want to do something programatically with your test results, like analysing test outcomes or integrating results into other tools. For this, a standardised data serialisation format is essential when using multiple frameworks.
+Often you want to do something programatically with your test results, like analysing test outcomes or integrating results into other tools. For this, a standardised data serialisation format is essential when using multiple frameworks.
 
 #### Moving Beyond JUnit XML
 
