@@ -1,10 +1,8 @@
 ---
 sidebar_position: 10
-title: Go Test
-description: CTRF report examples
+title: Go JSON Reporter
+description: A Go JSON test reporter to create test reports that follow the CTRF standard.
 ---
-# Go JSON Reporter
-
 A Go JSON test reporter to create test reports that follow the CTRF standard.
 
 [Common Test Report Format](https://ctrf.io) ensures the generation of uniform JSON test reports, independent of programming languages or test framework in use.
