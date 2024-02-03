@@ -4,9 +4,13 @@ title: What is CTRF?
 description: What is the Common Test Report Format?
 ---
 
-Common Test Report Format is a JSON schema that guarantees test reports are the same structure, no matter which testing tool is used. It was created to provide consistent test reporting agnostic of programming languages or testing frameworks.
+CTRF is a universal JSON test report schema that addresses the lack of a standardized format for JSON test reports.
 
-Where many testing frameworks exist, each generating JSON reports in their own way, CTRF provides a standardised schema to generate the same report anywhere.
+Consistency Across Tools: Different testing tools and frameworks often produce reports in varied formats. CTRF ensures a uniform structure, making it easier to understand and compare reports, regardless of the testing tool used.
+
+Language and Framework Agnostic: It provides a universal reporting schema that works seamlessly with any programming language and testing framework.
+
+Facilitates Better Analysis: With a standardized format, programatically analyzing test outcomes across multiple platforms becomes more straightforward.
 
 ``` json
 {
@@ -43,12 +47,11 @@ Where many testing frameworks exist, each generating JSON reports in their own w
 
 There is also collection of official open source reporters and integrations with widely-used testing frameworks and tools, designed to make the generation of CTRF reports as effortless as possible.
 
-
 ## What Does CTRF Solve?
 
-#### Bridging the Gap in Test Reporting
+### Bridging the Gap in Test Reporting
 
-Often you want to do something programatically with your test results, like analysing test outcomes or integrating results into other tools. For this, a standardised data serialisation format is essential when using multiple frameworks.
+Often you want to do something programatically with your test results, like analysing test outcomes or integrating results into other tools. For this, a standardized data serialisation format is essential when using multiple frameworks.
 
 #### Moving Beyond JUnit XML
 
@@ -56,11 +59,11 @@ While JUnit XML reports have been the de facto standard, originating from the JU
 
 #### Embracing Modern Engineering with JSON
 
-JSON stands out as the ideal format for test reports, its widespread adoption and ease of use make it perfect. Although many test frameworks and libraries recognise this by offering JSON reporters, the lack of standardisation leads to inconsistent report structures across different tools.
+JSON stands out as the ideal format for test reports, its widespread adoption and ease of use make it perfect. Although many test frameworks and libraries recognise this by offering built in JSON reporters, the lack of standardisation leads to inconsistent report structures across different tools.
 
 #### Catering to a Diverse Testing Ecosystem
 
-The testing framework and library scene is increasingly diverse. It’s common for projects or teams to employ multiple libraries and frameworks, each suited to specific testing needs like unit tests, end-to-end scenarios and so on. CTRF aims to unify this diversity, offering a consistent reporting format that encompasses all types of modern test data.
+The testing framework and library scene is increasingly diverse. It’s common for projects and teams to employ multiple libraries and frameworks, each suited to specific testing needs like unit tests, end-to-end scenarios and so on. CTRF aims to unify this diversity, offering a consistent JSON reporting format that encompasses all types of modern test data.
 
 #### Open Source Solution
 
@@ -86,7 +89,7 @@ Fully documented and versioned. This makes it straightforward for teams to adopt
 
 ### Who might use CTRF?
 
-**Practical Utility for Developers:** As a developer, you frequently need to perform actions post-test execution. Utilising CTRF, with its JSON format that is both widely adopted and easy to parse, simplifies this process. Its standardisation across various testing frameworks means you can write backend logic once and apply it universally, streamlining your workflow and enhancing efficiency in handling test reports.
+**Practical Utility for Developers:** As a developer, you frequently need to perform actions post-test execution. Utilising CTRF simplifies this process. Its standardisation across various testing frameworks means you can write backend logic once and apply it universally, streamlining your workflow and enhancing efficiency in handling test reports.
 
 **Consistency Across Testing Frameworks:** For those utilising multiple testing frameworks, CTRF offers a significant advantage by providing a consistent reporting format. This uniformity means you can integrate various testing results into a singular, coherent structure, greatly simplifying the analysis and comparison of data from different sources. The ability to use a standard report format across all testing frameworks not only streamlines the reporting process but also enhances the overall efficiency of your testing strategy.
 
