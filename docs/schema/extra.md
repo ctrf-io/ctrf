@@ -23,7 +23,7 @@ These examples are not exhaustive but demonstrate the kind of custom data that c
 
 ## Usage Guidelines
 
-The `extra` object is a flexible property designed for custom extensions, for usage guidelines, please refer to [Integration Developers documentation](/docs/integrators/manage-docs-versions).
+The `extra` object is a flexible property designed for custom extensions, for usage guidelines, please refer to [Integration Developers documentation](/docs/integrators/integration).
 
 ## Example
 

@@ -20,4 +20,4 @@ The `status` property in each [`test`](/docs/schema/test) Object is a key descri
 
 ## Usage Guidelines
 
-For guidance on best practices and recommendations for acurately mapping framework specific test status to the appropriate CTRF status value, please refer to [Integration Developers documentation](/docs/integrators/manage-docs-versions).
+For guidance on best practices and recommendations for acurately mapping framework specific test status to the appropriate CTRF status value, please refer to [Integration Developers documentation](/docs/integrators/integration).

@@ -24,7 +24,7 @@ CTRF is a universal JSON test report schema that addresses the lack of a standar
 
 **Facilitates Better Analysis:** With a standardized format, programatically analyzing test outcomes across multiple platforms becomes more straightforward.
 
-```json
+``` javascript
 {
   "results": {
     "tool": {
