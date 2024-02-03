@@ -1,10 +1,8 @@
 ---
 sidebar_position: 7
-title: Webdriverio
-description: CTRF report examples
+title: WWebdriverio JSON Reporter
+description: A WDIO JSON test reporter to create test reports that follow the CTRF standard.
 ---
-# Webdriverio JSON Reporter
-
 A WDIO JSON test reporter to create test reports that follow the CTRF standard.
 
 [Common Test Report Format](https://ctrf.io) ensures the generation of uniform JSON test reports, independent of programming languages or test framework in use.

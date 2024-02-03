@@ -1,9 +1,8 @@
 ---
 sidebar_position: 8
-title: Nightwatch
-description: CTRF report examples
+title: Nightwatch JSON Reporter
+description: A nightwatch.js JSON test reporter to create test reports that follow the CTRF standard.
 ---
-# Nightwatch JSON Reporter
 
 A nightwatch.js JSON test reporter to create test reports that follow the CTRF standard.
 

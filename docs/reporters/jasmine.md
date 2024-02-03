@@ -1,10 +1,8 @@
 ---
 sidebar_position: 6
-title: Jasmine
-description: CTRF report examples
+title: Jasmine JSON Reporter
+description: A jasmine  JSON test reporter to create test reports that follow the CTRF standard.
 ---
-# Jasmine JSON Reporter
-
 A jasmine  JSON test reporter to create test reports that follow the CTRF standard.
 
 [Common Test Report Format](https://ctrf.io) ensures the generation of uniform JSON test reports, independent of programming languages or test framework in use.

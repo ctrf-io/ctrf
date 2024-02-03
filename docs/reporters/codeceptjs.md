@@ -1,9 +1,8 @@
 ---
 sidebar_position: 10
-title: Codeceptjs
-description: CTRF report examples
+title: Codeceptjs JSON Reporter
+description: A codeceptjs JSON test reporter to create test reports that follow the CTRF standard.
 ---
-# codeceptjs JSON Reporter
 
 A codeceptjs JSON test reporter to create test reports that follow the CTRF standard.
 

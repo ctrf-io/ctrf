@@ -1,9 +1,8 @@
 ---
 sidebar_position: 3
-title: Cypress
-description: CTRF report examples
+title: Cypress JSON Reporter
+description: A Cypress JSON test reporter to create test reports that follow the CTRF standard.
 ---
-# Cypress JSON Reporter
 
 A Cypress JSON test reporter to create test reports that follow the CTRF standard.
 
