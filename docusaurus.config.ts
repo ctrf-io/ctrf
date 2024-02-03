@@ -1,5 +1,5 @@
-import {themes as prismThemes} from 'prism-react-renderer';
-import type {Config} from '@docusaurus/types';
+import { themes as prismThemes } from 'prism-react-renderer';
+import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
@@ -33,6 +33,11 @@ const config: Config = {
     [
       'classic',
       {
+        googleAnalytics: {
+          trackingID: 'G-2XQVCZCVV0',
+          // Optional fields.
+          anonymizeIP: true, // Should IPs be anonymized?
+        },
         docs: {
           sidebarPath: './sidebars.ts',
           // Please change this to your repo.
@@ -70,7 +75,7 @@ const config: Config = {
           position: 'left',
           label: 'Docs',
         },
-        {to: '/blog', label: 'Blog', position: 'left'},
+        { to: '/blog', label: 'Blog', position: 'left' },
         {
           href: 'https://github.com/ctrf-io',
           label: 'GitHub',
