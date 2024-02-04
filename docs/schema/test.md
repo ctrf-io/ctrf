@@ -72,8 +72,8 @@ The `step` object contains the following properties:
 
 ``` js
   "steps": [
-    {"name": "Step 1: Navigate to login page", "status": "pass"},
-    {"name": "Step 2: Enter user credentials", "status": "pass"},
+    {"name": "Step 1: Navigate to login page", "status": "passed"},
+    {"name": "Step 2: Enter user credentials", "status": "passed"},
   ]
 ```
 
