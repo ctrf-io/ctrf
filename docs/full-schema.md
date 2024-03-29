@@ -4,7 +4,7 @@ sidebar_position: 10
 
 # JSON Schema Reference
 
-For a downloadable version of the schema, click here.
+[Download the JSON Schema](/ctrf-schema.json)
 
 ``` js
 {

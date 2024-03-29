@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 8
 title: Tests Array
 description: Detailed overview of the Tests Array in CTRF.
 ---

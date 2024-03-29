@@ -14,16 +14,16 @@ const FeatureList: FeatureItem[] = [
     Svg: require('@site/static/img/hammer.svg').default,
     description: (
       <>
-        Different testing tools and frameworks often produce reports in varied formats. CTRF ensures a uniform structure, making it easier to understand and compare reports, regardless of the testing tool used.
+        Ensures a uniform structure, making it easier to understand and compare test reports, regardless of the testing tool used.
       </>
     ),
   },
   {
-    title: 'Language Agnostic',
+    title: 'Open Source Plugins',
     Svg: require('@site/static/img/globe.svg').default,
     description: (
       <>
-        It provides a universal reporting schema that works seamlessly with any programming language and testing framework.
+        Supports a broad ecosystem with its extensive range of open source reporters and plugins.
       </>
     ),
   },
@@ -32,7 +32,7 @@ const FeatureList: FeatureItem[] = [
     Svg: require('@site/static/img/cog.svg').default,
     description: (
       <>
-        With a standardized format, programatically analyzing test outcomes across multiple tools becomes more straightforward.
+        Programatic use with test results reports becomes more straightforward.
       </>
     ),
   },

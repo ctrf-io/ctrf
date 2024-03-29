@@ -1,5 +1,5 @@
 ---
-sidebar_position: 9
+sidebar_position: 7
 title: Extra Object
 description: Extra Object in the CTRF schema for custom extensions.
 ---

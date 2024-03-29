@@ -1,5 +1,5 @@
 ---
-sidebar_position: 6
+sidebar_position: 5
 title: Test Object
 description: Details of the Test Object in CTRF.
 ---
@@ -66,7 +66,6 @@ The `step` object contains the following properties:
     {"name": "Step 2: Enter user credentials", "status": "passed"},
   ]
 ```
-
 
 ## Parameters Object
 

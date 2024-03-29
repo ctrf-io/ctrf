@@ -10,4 +10,4 @@ We are developing a range of open source plugins tailored to enhance and simplif
 
 Our plugins are open source, we welcome you to contribute, helping us expand their capabilities and reach. Your contributions are invaluable and help us grow CTRF.
 
-See Contributing for more information.
+See [Contributing](/docs/contributing) for more information.
