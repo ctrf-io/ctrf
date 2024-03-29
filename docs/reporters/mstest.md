@@ -1,6 +1,6 @@
 ---
 sidebar_position: 13
-title: MSTest JSON Reporter
+title: MSTest
 description: A MSTest JSON test reporter to create test reports that follow the CTRF standard.
 ---
 A Dotnet MSTest JSON test reporter to create test reports that follow the CTRF standard.

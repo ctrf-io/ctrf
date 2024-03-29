@@ -1,6 +1,6 @@
 ---
 sidebar_position: 16
-title: Selenium JSON Reporter
+title: Selenium
 description: A Selenium JSON test reporter to create test reports that follow the CTRF standard.
 ---
 

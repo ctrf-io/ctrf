@@ -1,6 +1,6 @@
 ---
 sidebar_position: 15
-title: XUnit JSON Reporter
+title: XUnit
 description: A XUnit JSON test reporter to create test reports that follow the CTRF standard.
 ---
 A Dotnet XUnit JSON test reporter to create test reports that follow the CTRF standard.

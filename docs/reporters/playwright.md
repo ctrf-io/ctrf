@@ -1,6 +1,6 @@
 ---
 sidebar_position: 2
-title: Playwright JSON Reporter
+title: Playwright
 description: A Playwright JSON test reporter to create test reports that follow the CTRF standard.
 ---
 A Playwright JSON test reporter to create test reports that follow the CTRF standard.

@@ -1,6 +1,6 @@
 ---
 sidebar_position: 10
-title: Go JSON Reporter
+title: Go
 description: A Go JSON test reporter to create test reports that follow the CTRF standard.
 ---
 A Go JSON test reporter to create test reports that follow the CTRF standard.

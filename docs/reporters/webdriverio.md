@@ -1,6 +1,6 @@
 ---
 sidebar_position: 7
-title: Webdriverio JSON Reporter
+title: Webdriverio
 description: A WDIO JSON test reporter to create test reports that follow the CTRF standard.
 ---
 A WDIO JSON test reporter to create test reports that follow the CTRF standard.

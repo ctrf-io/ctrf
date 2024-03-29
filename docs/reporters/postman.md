@@ -1,6 +1,6 @@
 ---
 sidebar_position: 17
-title: Postman Newman JSON Reporter
+title: Postman / Newman
 description: A Postman Newman JSON test reporter to create test reports that follow the CTRF standard.
 ---
 A Postman newman JSON test reporter to create test reports that follow the CTRF standard.

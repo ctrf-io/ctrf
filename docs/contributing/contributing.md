@@ -1,8 +1,10 @@
 ---
 sidebar_position: 1
+title: Contributing
+description: Contributing to CTRF
 ---
 
-We welcome contributions from the community! Here's how you can get involved with CTRF:
+We welcome contributions from the community!
 
 ## Contributing to the Schema
 

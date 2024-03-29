@@ -1,6 +1,6 @@
 ---
 sidebar_position: 14
-title: NUnit JSON Reporter
+title: NUnit
 description: A NUnit JSON test reporter to create test reports that follow the CTRF standard.
 ---
 A Dotnet NUnit JSON test reporter to create test reports that follow the CTRF standard.

@@ -1,6 +1,6 @@
 ---
 sidebar_position: 6
-title: Jasmine JSON Reporter
+title: Jasmine
 description: A jasmine  JSON test reporter to create test reports that follow the CTRF standard.
 ---
 A jasmine JSON test reporter to create test reports that follow the CTRF standard.

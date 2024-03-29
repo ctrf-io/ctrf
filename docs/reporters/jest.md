@@ -1,6 +1,6 @@
 ---
 sidebar_position: 4
-title: Jest JSON Reporter
+title: Jest
 description: A Jest test reporter to create test reports that follow the CTRF standard.
 ---
 A Jest test reporter to create test reports that follow the CTRF standard.
