@@ -28,7 +28,7 @@ The `summary` object encompasses the following properties:
 Below is an example of the `summary` object.
 
 ```js
-"totals": {
+"summary": {
   "tests": 10,
   "passed": 7,
   "failed": 2,

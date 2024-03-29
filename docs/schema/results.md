@@ -34,11 +34,11 @@ Below is an example of the `results` object. Detailed information about each pro
     "tests": [
       ...
     ],
-     "environment": [
+     "environment": {
       ...
-    ],
-     "extra": [
+     },
+     "extra": {
       ...
-    ],
+     },
   }
 ```

@@ -16,14 +16,11 @@ Below is an example of the `tests` array
         "name": "Test1",
         "status": "passed",
         "duration": 120
-        ...
       },
       {
         "name": "Test2",
         "status": "failed",
         "duration": 300
-        ...
       }
-      ...
     ]
 ```
