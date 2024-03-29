@@ -26,7 +26,6 @@ The `test` object contains the following properties:
 | `filepath`   | `String` | Optional | The file path where the test is located in the project.         |
 | `retry`    | `Number` | Optional | The number of retries attempted for the test.                     |
 | `flake`      | `Boolean`| Optional | Indicates whether the test result is flaky                      |
-| `attempts`      | `Array of Test`| Optional | Previous attempts of test during this run              |
 | `browser`    | `string` | Optional | The browser used for the test.                                  |
 | `device`    | `string` | Optional | The device used for the test.                                    |
 | `screenshot` | `String` | Optional | A base64 encoded screenshot taken during the test               |
@@ -40,18 +39,9 @@ Below is an example of the `test` object.
 
 ```js
 {
-  "name": "ExampleTest",
+  "name": "should contain required properties",
   "status": "passed",
-  "duration": 150,
-  "message": "Test completed successfully",
-  "trace": "",
-  "screenshot": "data:image/png;base64,...",
-  "filepath": "/tests/exampleTest.js",
-  "parameters": {...},
-  "steps": [{...}],
-  "flake": false,
-  "retries": 0,
-  "extras": {...},
+  "duration": 1200
 }
 ```
 

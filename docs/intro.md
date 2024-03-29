@@ -4,13 +4,13 @@ title: What is CTRF?
 description: What is the Common Test Report Format?
 ---
 
-CTRF is a universal JSON test report schema that addresses the lack of a standardized format for JSON test reports.
+Common Test Report Format is a JSON test report schema that provides standardized JSON test results reports.
 
-Consistency Across Tools: Different testing tools and frameworks often produce reports in varied formats. CTRF ensures a uniform structure, making it easier to understand and compare reports, regardless of the testing tool used.
+Consistency Across Tools: Different testing tools and frameworks often produce reports in varied formats. CTRF provides a common schema, making it easy to understand and compare reports, regardless of the testing tool used.
 
-Language and Framework Agnostic: It provides a universal reporting schema that works seamlessly with any programming language and testing framework.
+Language and Framework Agnostic: A universal reporting schema that works seamlessly with any programming language and testing framework.
 
-Facilitates Better Analysis: With a standardized format, programatically analyzing test outcomes across multiple platforms becomes more straightforward.
+Facilitates Enhanced Programmatic Use: Programatically interacting with test outcomes across multiple tools becomes more straightforward.
 
 ``` json
 {

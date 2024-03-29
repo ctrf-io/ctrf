@@ -22,7 +22,7 @@ Below is an example of the `tool` object.
 
 ```js
     "tool": {
-      "name": "...",
-      "version": "..."
+      "name": "jest",
+      "version": "29.4"
     },
 ```

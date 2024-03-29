@@ -34,9 +34,10 @@ const config: Config = {
       'classic',
       {
         googleAnalytics: {
-          trackingID: 'G-2XQVCZCVV0',
-          // Optional fields.
-          anonymizeIP: true, // Should IPs be anonymized?
+          trackingID: 'GT-5TQFGJL',
+        },
+        googleTagManager: {
+          containerId: 'GTM-M6WNX85V',
         },
         docs: {
           sidebarPath: './sidebars.ts',

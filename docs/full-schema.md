@@ -4,8 +4,6 @@ sidebar_position: 10
 
 # JSON Schema Reference
 
-Below is the complete JSON schema for the Common Test Report Format (CTRF). This schema outlines the full structure, including all required and optional properties. You can use this as a reference for implementation of the schema in your projects.
-
 For a downloadable version of the schema, click here.
 
 ``` js
@@ -64,7 +62,7 @@ For a downloadable version of the schema, click here.
               "browser": { "type": "string" },
               "device": { "type": "string" },
               "screenshot": { "type": "string" },
-              "parameters": { "type": "object", "additionalProperties": true },
+              "parameters": { "type": "object" },
               "steps": {
                 "type": "array",
                 "items": {
@@ -102,5 +100,3 @@ For a downloadable version of the schema, click here.
   "required": ["results"]
 }
 ```
-
-Ensure you are referring to the latest version for your implementations.

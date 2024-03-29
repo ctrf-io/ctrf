@@ -1,6 +1,6 @@
 ---
 sidebar_position: 3
 title: Github
-description: CTRF report examples
+description: Github CTRF Plugin
 ---
-wip
+Coming soon! 

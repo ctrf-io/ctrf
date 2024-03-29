@@ -1,12 +1,10 @@
 ---
 sidebar_position: 10
 title: Examples
-description: CTRF report examples
+description: CTRF examples
 ---
 
-### Required properties only
-
- In this example we have three tests
+### Minimal report
 
 ``` js
 {
@@ -14,7 +12,7 @@ description: CTRF report examples
     "tool": {
       "name": "jest"
     },
-    "totals": {
+    "summary": {
       "tests": 3,
       "passed": 1,
       "failed": 1,
@@ -49,81 +47,78 @@ description: CTRF report examples
 
 ``` js
 {
-  "results": {
-    "tool": {
-      "name": "jest",
-      "version": "27.1.1"
+    "results": {
+      "tool": {
+        "name": "playwright",
+        "version": "1.27.0"
+      },
+      "summary": {
+        "tests": 3,
+        "passed": 1,
+        "failed": 1,
+        "pending": 0,
+        "skipped": 1,
+        "other": 0,
+        "suites": 2,
+        "start": 1706644023,
+        "stop": 1706644043
+      },
+      "tests": [
+        {
+          "name": "User should be able to login",
+          "status": "passed",
+          "duration": 1200,
+          "start": 1679812091000,
+          "stop": 1679812092200,
+          "suite": "Authentication",
+          "rawStatus": "passed",
+          "tags": ["UI", "Auth", "Critical"],
+          "type": "e2e",
+          "filePath": "/tests/auth/login.test.js",
+          "retry": 0,
+          "flake": false,
+          "browser": "Chrome 98",
+          "extras": {
+            "customMetric": "200ms"
+          },
+          "screenshot": "data:image/png;base64,iVBORw0KG..."
+        },
+        {
+          "name": "User profile information should be correct",
+          "status": "failed",
+          "duration": 800,
+          "start": 1679812093000,
+          "stop": 1679812093800,
+          "suite": "User Data",
+          "message": "Profile information mismatch",
+          "trace": "Error at /tests/user/profile.test.js:45",
+          "rawStatus": "failed",
+          "tags": ["API", "Non-Critical"],
+          "type": "Integration",
+          "filePath": "/tests/user/profile.test.js",
+          "retries": 0,
+          "flake": false,
+          "browser": "Safari 14",
+          "screenshot": "data:image/png;base64,aGVsbG93b3JsZA==",
+           "extra": {
+            "relatedIssue": "USER-123"
+          }
+        },
+        {
+          "name": "User should be able to logout",
+          "status": "skipped",
+          "duration": 0,
+          "start": 1679812094000,
+          "stop": 1679812094000,
+          "tags": ["UI", "Auth"],
+          "type": "e2e",
+          "suite": "Authentication",
+          "filePath": "/tests/auth/logout.test.js",
+          "flake": false,
+          "retries": 0,
+          "browser": "Firefox 92"
+        }
+      ]
     }
-    "summary": {
-      "tests": 3,
-      "passed": 1,
-      "failed": 1,
-      "pending": 0,
-      "skipped": 1,
-      "other": 0,
-      "start": 1706644023
-      "stop": 1706644043
-    },
-    "tests": [
-      {
-        "name": "User should be able to login",
-        "status": "passed",
-        "duration": 1200,
-        "start": 1679812091000,
-        "end": 1679812092200,
-        "environment": "Windows 10, Chrome 98",
-        "message": "Login successful",
-        "stackTrace": null,
-        "tags": ["UI", "Auth", "Critical"],
-        "type": "e2e",
-        "suite": "Authentication Suite",
-        "filePath": "/tests/auth/login.test.js",
-        "flake": false,
-        "retries": 0,
-        "extras": {
-          "customMetric": "200ms"
-        },
-        "screenshot": "data:image/png;base64,iVBORw0KG..."
-      },
-      {
-        "name": "User profile information should be correct",
-        "status": "failed",
-        "duration": 800,
-        "start": 1679812093000,
-        "end": 1679812093800,
-        "environment": "macOS, Safari 14",
-        "message": "Profile information mismatch",
-        "stackTrace": "Error at /tests/user/profile.test.js:45",
-        "tags": ["API", "Non-Critical"],
-        "type": "Integration",
-        "suite": "User Data Suite",
-        "filePath": "/tests/user/profile.test.js",
-        "flake": true,
-        "retries": 1,
-        "extras": {
-          "relatedIssue": "USER-123"
-        },
-        "screenshot": "data:image/png;base64,aGVsbG93b3JsZA=="
-      },
-      {
-        "name": "User should be able to logout",
-        "status": "skipped",
-        "duration": 0,
-        "start": 1679812094000,
-        "end": 1679812094000,
-        "environment": "Windows 10, Firefox 92",
-        "message": "Test skipped due to dependency failure",
-        "stackTrace": null,
-        "tags": ["UI", "Auth"],
-        "type": "e2e",
-        "suite": "Authentication Suite",
-        "filePath": "/tests/auth/logout.test.js",
-        "flake": false,
-        "retries": 0,
-        "extras": {},
-        "screenshot": null
-      }
-    ]
   }
-}
 ```
