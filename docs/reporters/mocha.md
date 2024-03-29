@@ -3,7 +3,6 @@ sidebar_position: 5
 title: Mocha JSON Reporter
 description: A Mocha JSON test reporter to create test reports that follow the CTRF standard.
 ---
-
 A Mocha JSON test reporter to create test reports that follow the CTRF standard.
 
 [Common Test Report Format](https://ctrf.io) ensures the generation of uniform JSON test reports, independent of programming languages or test framework in use.
@@ -23,7 +22,7 @@ CTRF is a universal JSON test report schema that addresses the lack of a standar
 
 **Facilitates Better Analysis:** With a standardized format, programatically analyzing test outcomes across multiple platforms becomes more straightforward.
 
-``` javascript
+```json
 {
   "results": {
     "tool": {
@@ -141,3 +140,9 @@ The test object in the report includes the following [CTRF properties](https://c
 | `name`     | String | Required | The name of the test.                                                               |
 | `status`   | String | Required | The outcome of the test. One of: `passed`, `failed`, `skipped`, `pending`, `other`. |
 | `duration` | Number | Required | The time taken for the test execution, in milliseconds.                             |
+| `message`  | String | Optional | The failure message if the test failed.                                             |
+| `trace`    | String | Optional | The stack trace captured if the test failed.                                        |
+
+## Support Us
+
+If you find this project useful, consider giving it a GitHub star ⭐ It means a lot to us.

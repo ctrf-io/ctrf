@@ -4,7 +4,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'CTRF: Common Test Report Format',
-  tagline: 'A common JSON test automation report for any tool',
+  tagline: 'A common JSON test automation results report',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -41,17 +41,13 @@ const config: Config = {
         },
         docs: {
           sidebarPath: './sidebars.ts',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/ctrf-io/ctrf/tree/main/',
         },
         blog: {
           showReadingTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/ctrf-io/ctrf/tree/main/',
         },
         theme: {
           customCss: './src/css/custom.css',
@@ -62,7 +58,7 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
+    image: 'img/logo.png',
     navbar: {
       title: 'Common Test Report Format',
       logo: {
@@ -86,7 +82,9 @@ const config: Config = {
     },
     footer: {
       style: 'dark',
-      copyright: `Copyright © ${new Date().getFullYear()} CTRF`,
+      copyright: `Released under the MIT License. 
+      <br />
+      Copyright © ${new Date().getFullYear()}`,
     },
     prism: {
       theme: prismThemes.github,

@@ -23,7 +23,7 @@ CTRF is a universal JSON test report schema that addresses the lack of a standar
 
 **Facilitates Better Analysis:** With a standardized format, programatically analyzing test outcomes across multiple platforms becomes more straightforward.
 
-``` javascript
+```json
 {
   "results": {
     "tool": {
@@ -112,3 +112,7 @@ The test object in the report includes the following [CTRF properties](https://c
 | `name`     | String | Required | The name of the test.                                                               |
 | `status`   | String | Required | The outcome of the test. One of: `passed`, `failed`, `skipped`, `pending`, `other`. |
 | `duration` | Number | Required | The time taken for the test execution, in milliseconds.                             |
+
+## Support Us
+
+If you find this project useful, consider giving it a GitHub star ⭐ It means a lot to us.

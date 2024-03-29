@@ -23,7 +23,7 @@ CTRF is a universal JSON test report schema that addresses the lack of a standar
 
 **Facilitates Better Analysis:** With a standardized format, programatically analyzing test outcomes across multiple platforms becomes more straightforward.
 
-``` javascript
+```json
 {
   "results": {
     "tool": {
@@ -65,7 +65,7 @@ Add the reporter to your cypress.config.js/ts file:
 
 ```javascript
 const { defineConfig } = require('cypress')
-const { generateCypressCtrfJsonReport } = require('cypress-ctrf-json-report')
+const { generateCtrfJsonReport } = require('cypress-ctrf-json-report')
 
 module.exports = defineConfig({
   e2e: {
@@ -92,7 +92,7 @@ You'll find a JSON file named `ctrf-report.json` in the `ctrf` directory.
 Add the reporter to your cypress/plugins/index.js/ts
 
 ```javascript
-const { generateCypressCtrfJsonReport } = require('cypress-ctrf-json-report')
+const { generateCtrfJsonReport } = require('cypress-ctrf-json-report')
 
 /// <reference types="cypress" />
 
@@ -113,17 +113,19 @@ The reporter supports several configuration options:
 
 ```javascript
 GenerateCtrfReport({
-        on, {
-              outputFile: 'custom-name.json', // Optional: Output file name. Defaults to 'ctrf-report.json'.
-              outputDir: 'custom-directory',  // Optional: Output directory path. Defaults to 'ctrf'.
-              appName: 'MyApp',               // Optional: Specify the name of the application under test.
-              appVersion: '1.0.0',            // Optional: Specify the version of the application under test.
-              osPlatform: 'linux',            // Optional: Specify the OS platform.
-              osRelease: '18.04',             // Optional: Specify the OS release version.
-              osVersion: '5.4.0',             // Optional: Specify the OS version.
-              buildName: 'MyApp Build',       // Optional: Specify the build name.
-              buildNumber: '100',             // Optional: Specify the build number.
-            }
+  on, {
+    outputFile: 'custom-name.json', // Optional: Output file name. Defaults to 'ctrf-report.json'.
+    outputDir: 'custom-directory',  // Optional: Output directory path. Defaults to 'ctrf'.
+    minimal: true,                  // Optional: Generate a minimal report. Defaults to 'false'. Overrides screenshot and testType when set to true
+    testType: 'e2e',                // Optional: Specify the test type (e.g., 'api', 'e2e'). Defaults to 'e2e'.
+    appName: 'MyApp',               // Optional: Specify the name of the application under test.
+    appVersion: '1.0.0',            // Optional: Specify the version of the application under test.
+    osPlatform: 'linux',            // Optional: Specify the OS platform.
+    osRelease: '18.04',             // Optional: Specify the OS release version.
+    osVersion: '5.4.0',             // Optional: Specify the OS version.
+    buildName: 'MyApp Build',       // Optional: Specify the build name.
+    buildNumber: '100',             // Optional: Specify the build number.
+  }
 })
 
 ```
@@ -132,8 +134,20 @@ GenerateCtrfReport({
 
 The test object in the report includes the following [CTRF properties](https://ctrf.io/docs/schema/test):
 
-| Name       | Type   | Required | Details                                                                             |
-| ---------- | ------ | -------- | ----------------------------------------------------------------------------------- |
-| `name`     | String | Required | The name of the test.                                                               |
-| `status`   | String | Required | The outcome of the test. One of: `passed`, `failed`, `skipped`, `pending`, `other`. |
-| `duration` | Number | Required | The time taken for the test execution, in milliseconds.                             |
+| Name        | Type    | Required | Details                                                                             |
+| ----------- | ------- | -------- | ----------------------------------------------------------------------------------- |
+| `name`      | String  | Required | The name of the test.                                                               |
+| `status`    | String  | Required | The outcome of the test. One of: `passed`, `failed`, `skipped`, `pending`, `other`. |
+| `duration`  | Number  | Required | The time taken for the test execution, in milliseconds.                             |
+| `message`   | String  | Optional | The failure message if the test failed.                                             |
+| `trace`     | String  | Optional | The stack trace captured if the test failed.                                        |
+| `rawStatus` | String  | Optional | The original cypress status of the test before mapping to CTRF status.           |
+| `type`      | String  | Optional | The type of test (e.g., `api`, `e2e`).                                              |
+| `filepath`  | String  | Optional | The file path where the test is located in the project.                             |
+| `retry`     | Number  | Optional | The number of retries attempted for the test.                                       |
+| `flake`     | Boolean | Optional | Indicates whether the test result is flaky.                                         |
+| `browser`   | String  | Optional | The browser used for the test.                                                      |
+
+## Support Us
+
+If you find this project useful, consider giving it a GitHub star ⭐ It means a lot to us.

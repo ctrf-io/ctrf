@@ -1,6 +1,6 @@
 ---
 sidebar_position: 7
-title: WWebdriverio JSON Reporter
+title: Webdriverio JSON Reporter
 description: A WDIO JSON test reporter to create test reports that follow the CTRF standard.
 ---
 A WDIO JSON test reporter to create test reports that follow the CTRF standard.
@@ -22,7 +22,7 @@ CTRF is a universal JSON test report schema that addresses the lack of a standar
 
 **Facilitates Better Analysis:** With a standardized format, programatically analyzing test outcomes across multiple platforms becomes more straightforward.
 
-``` javascript
+```json
 {
   "results": {
     "tool": {
@@ -73,7 +73,7 @@ Run your tests:
 npm run wdio
 ```
 
-You'll find a JSON file named `ctrf-report.json` in the `ctrf` directory.
+In the `ctrf` directory, you will find the JSON report files generated for each spec.
 
 ## Reporter Options
 
@@ -84,6 +84,8 @@ reporter: [
     ['wdio-ctrf-json-reporter', {
         outputFile: 'custom-name.json', // Optional: Output file name. Defaults to 'ctrf-report.json'.
         outputDir: 'custom-directory',  // Optional: Output directory path. Defaults to 'ctrf'.
+         minimal: true,                  // Optional: Generate a minimal report. Defaults to 'false'. Overrides screenshot and testType when set to true
+        testType: 'e2e',                // Optional: Specify the test type (e.g., 'api', 'e2e'). Defaults to 'e2e'.
         appName: 'MyApp',               // Optional: Specify the name of the application under test.
         appVersion: '1.0.0',            // Optional: Specify the version of the application under test.
         osPlatform: 'linux',            // Optional: Specify the OS platform.
@@ -99,8 +101,23 @@ reporter: [
 
 The test object in the report includes the following [CTRF properties](https://ctrf.io/docs/schema/test):
 
-| Name       | Type   | Required | Details                                                                             |
-| ---------- | ------ | -------- | ----------------------------------------------------------------------------------- |
-| `name`     | String | Required | The name of the test.                                                               |
-| `status`   | String | Required | The outcome of the test. One of: `passed`, `failed`, `skipped`, `pending`, `other`. |
-| `duration` | Number | Required | The time taken for the test execution, in milliseconds.                             |
+| Name        | Type    | Required | Details                                                                             |
+| ----------- | ------- | -------- | ----------------------------------------------------------------------------------- |
+| `name`      | String  | Required | The name of the test.                                                               |
+| `status`    | String  | Required | The outcome of the test. One of: `passed`, `failed`, `skipped`, `pending`, `other`. |
+| `duration`  | Number  | Required | The time taken for the test execution, in milliseconds.                             |
+| `start`     | Number  | Optional | The start time of the test as a Unix epoch timestamp.                               |
+| `stop`      | Number  | Optional | The end time of the test as a Unix epoch timestamp.                                 |
+| `suite`     | String  | Optional | The suite or group to which the test belongs.                                       |
+| `message`   | String  | Optional | The failure message if the test failed.                                             |
+| `trace`     | String  | Optional | The stack trace captured if the test failed.                                        |
+| `rawStatus` | String  | Optional | The original wdio status of the test before mapping to CTRF status.                 |
+| `type`      | String  | Optional | The type of test (e.g., `api`, `e2e`).                                              |
+| `filepath`  | String  | Optional | The file path where the test is located in the project.                             |
+| `retry`     | Number  | Optional | The number of retries attempted for the test.                                       |
+| `flake`     | Boolean | Optional | Indicates whether the test result is flaky.                                         |
+| `browser`   | String  | Optional | The browser used for the test.                                                      |
+
+## Support Us
+
+If you find this project useful, consider giving it a GitHub star ⭐. It means a lot to us.
