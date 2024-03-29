@@ -58,7 +58,6 @@ sidebar_position: 10
               "filePath": { "type": "string" },
               "retry": { "type": "integer" },
               "flake": { "type": "boolean" },
-              "attempts": { "$ref": "#/properties/results/properties/tests/items" },
               "browser": { "type": "string" },
               "device": { "type": "string" },
               "screenshot": { "type": "string" },
