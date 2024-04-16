@@ -3,7 +3,7 @@ import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
-  title: 'CTRF: Common Test Report Format',
+  title: 'CTRF | Common Test Report Format',
   tagline: 'A common JSON test automation results report',
   favicon: 'img/favicon.ico',
 
@@ -57,6 +57,7 @@ const config: Config = {
   ],
 
   themeConfig: {
+    metadata: [{name: 'description', content: 'A common universal JSON test report schema that provides standardized format for JSON test results reports'}],
     // Replace with your project's social card
     image: 'img/logo.png',
     navbar: {

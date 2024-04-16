@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: What is CTRF?
-description: What is the Common Test Report Format?
+description: Common Test Report Format is a JSON test report schema that provides standardized JSON test results reports
 ---
 
 Common Test Report Format is a JSON test report schema that provides standardized JSON test results reports.
@@ -50,7 +50,7 @@ There is also collection of official open source reporters and integrations with
 
 ### Bridging the Gap in Test Reporting
 
-Often you want to do something programatically with your test results, like analysing test outcomes or integrating results into other tools. For this, a standardized data serialisation format is helpful. 
+Often you want to do something programatically with your test results, like analysing test outcomes or integrating results into other tools. For this, a standardized data serialisation format is helpful.
 
 ### Moving Beyond JUnit XML
 

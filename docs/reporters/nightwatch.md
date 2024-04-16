@@ -1,7 +1,7 @@
 ---
 sidebar_position: 8
 title: Nightwatch
-description: A nightwatch.js JSON test reporter to create test reports that follow the CTRF standard.
+description: A nightwatchjs JSON test results report
 ---
 
 A nightwatch.js JSON test reporter to create test reports that follow the CTRF standard.

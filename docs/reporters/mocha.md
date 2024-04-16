@@ -1,7 +1,7 @@
 ---
 sidebar_position: 5
 title: Mocha
-description: A Mocha JSON test reporter to create test reports that follow the CTRF standard.
+description: A Mocha JSON test results report
 ---
 A Mocha JSON test reporter to create test reports that follow the CTRF standard.
 
