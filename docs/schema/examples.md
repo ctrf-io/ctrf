@@ -78,7 +78,7 @@ description: CTRF examples
           "retry": 0,
           "flake": false,
           "browser": "Chrome 98",
-          "extras": {
+          "extra": {
             "customMetric": "200ms"
           },
           "screenshot": "data:image/png;base64,iVBORw0KG..."
@@ -96,7 +96,7 @@ description: CTRF examples
           "tags": ["API", "Non-Critical"],
           "type": "Integration",
           "filePath": "/tests/user/profile.test.js",
-          "retries": 0,
+          "retry": 0,
           "flake": false,
           "browser": "Safari 14",
           "screenshot": "data:image/png;base64,aGVsbG93b3JsZA==",
@@ -115,7 +115,7 @@ description: CTRF examples
           "suite": "Authentication",
           "filePath": "/tests/auth/logout.test.js",
           "flake": false,
-          "retries": 0,
+          "retry": 0,
           "browser": "Firefox 92"
         }
       ]
