@@ -19,7 +19,7 @@ description: CTRF examples
       "pending": 0,
       "skipped": 1,
       "other": 0,
-      "start": 1706644023
+      "start": 1706644023,
       "stop": 1706644043
     },
     "tests": [
