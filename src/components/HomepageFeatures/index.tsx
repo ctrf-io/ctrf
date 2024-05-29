@@ -14,7 +14,7 @@ const FeatureList: FeatureItem[] = [
     Svg: require('@site/static/img/hammer.svg').default,
     description: (
       <>
-        Ensures a uniform structure, making it easier to understand and compare test reports, regardless of the testing tool used.
+        The same JSON structure no matter the test framework, regardless of the testing tool used.
       </>
     ),
   },
@@ -23,16 +23,16 @@ const FeatureList: FeatureItem[] = [
     Svg: require('@site/static/img/globe.svg').default,
     description: (
       <>
-        Supports a broad ecosystem with its extensive range of open source reporters and plugins.
+        An extensive range of open source reporters for test frameworks such as Playwright, Cypress, Jest and plugins for CI/CD tools like Jenkins and Github Actions
       </>
     ),
   },
   {
-    title: 'Facilitates Enhanced Programmatic Use',
+    title: 'Enhanced Programmatic Use',
     Svg: require('@site/static/img/cog.svg').default,
     description: (
       <>
-        Programatic use with test results reports becomes more straightforward.
+        With a single JSON schema for all, programatic use with test reports becomes more straightforward 
       </>
     ),
   },

@@ -4,7 +4,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'CTRF | Common Test Report Format',
-  tagline: 'A common JSON test automation results report',
+  tagline: 'A common JSON test automation results report format',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here

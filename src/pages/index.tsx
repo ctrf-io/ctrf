@@ -33,7 +33,7 @@ export default function Home(): JSX.Element {
   return (
     <Layout
       title={`${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
+      description="A universal standard for JSON test results report with a wide range of reporters and plugins supporting modern test automation frameworks">
       <HomepageHeader />
       <main>
         <HomepageFeatures />
