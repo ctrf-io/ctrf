@@ -6,7 +6,7 @@ description: Details of the Environment Object in CTRF.
 
 The `environment` object within [`results`](/docs/schema/results) is an optional property.
 
-## Test Object Properties
+## Environment Object Properties
 
 The `environment` object contains the following properties:
 
