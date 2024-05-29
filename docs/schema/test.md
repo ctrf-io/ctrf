@@ -24,8 +24,8 @@ The `test` object contains the following properties:
 | `tags`       | `Array of Strings`| Optional | Labels or categorisation for the test (e.g., ["UI", "Login"]). |
 | `type`       | `String`| Optional | The type of test (e.g., "unit", "integration", "e2e").           |
 | `filepath`   | `String` | Optional | The file path where the test is located in the project.         |
-| `retry`    | `Number` | Optional | The number of retries attempted for the test.                     |
-| `flake`      | `Boolean`| Optional | Indicates whether the test result is flaky                      |
+| `retries`    | `Number` | Optional | The number of retries attempted for the test.                     |
+| `flaky`      | `Boolean`| Optional | Indicates whether the test result is flaky                      |
 | `browser`    | `string` | Optional | The browser used for the test.                                  |
 | `device`    | `string` | Optional | The device used for the test.                                    |
 | `screenshot` | `String` | Optional | A base64 encoded screenshot taken during the test               |

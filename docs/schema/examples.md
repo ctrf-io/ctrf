@@ -75,8 +75,8 @@ description: CTRF examples
           "tags": ["UI", "Auth", "Critical"],
           "type": "e2e",
           "filePath": "/tests/auth/login.test.js",
-          "retry": 0,
-          "flake": false,
+          "retries": 0,
+          "flaky": false,
           "browser": "Chrome 98",
           "extra": {
             "customMetric": "200ms"
@@ -96,8 +96,8 @@ description: CTRF examples
           "tags": ["API", "Non-Critical"],
           "type": "Integration",
           "filePath": "/tests/user/profile.test.js",
-          "retry": 0,
-          "flake": false,
+          "retries": 0,
+          "flaky": false,
           "browser": "Safari 14",
           "screenshot": "data:image/png;base64,aGVsbG93b3JsZA==",
            "extra": {
@@ -114,8 +114,8 @@ description: CTRF examples
           "type": "e2e",
           "suite": "Authentication",
           "filePath": "/tests/auth/logout.test.js",
-          "flake": false,
-          "retry": 0,
+          "flaky": false,
+          "retries": 0,
           "browser": "Firefox 92"
         }
       ]
