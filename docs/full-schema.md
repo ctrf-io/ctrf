@@ -92,6 +92,7 @@ sidebar_position: 10
             "osPlatform": { "type": "string" },
             "osRelease": { "type": "string" },
             "osVersion": { "type": "string" },
+            "testEnvironment": { "type": "string" },
             "extra": { "type": "object", "additionalProperties": true }
           }
         },
