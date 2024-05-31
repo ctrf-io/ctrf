@@ -83,11 +83,16 @@ sidebar_position: 10
           "properties": {
             "appName": { "type": "string" },
             "appVersion": { "type": "string" },
+            "buildName": { "type": "string" },
+            "buildNumber": { "type": "string" },
+            "buildUrl": { "type": "string" },  
+            "repositoryName": { "type": "string" }, 
+            "repositoryUrl": { "type": "string" },     
+            "branchName": { "type": "string" },
             "osPlatform": { "type": "string" },
             "osRelease": { "type": "string" },
             "osVersion": { "type": "string" },
-            "buildName": { "type": "string" },
-            "buildNumber": { "type": "string" },
+            "testEnvironment": { "type": "string" },
             "extra": { "type": "object", "additionalProperties": true }
           }
         },
