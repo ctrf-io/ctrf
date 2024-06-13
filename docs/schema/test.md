@@ -20,6 +20,7 @@ The `test` object contains the following properties:
 | `suite`       | `String`| Optional | The suite or group to which the test belongs.                   |
 | `message`    | `String` | Optional | A descriptive message or note associated with the test result.  |
 | `trace`      | `String` | Optional | The stack trace captured if the test failed.                    |
+| `line`      | `Number` | Optional | Line number in the source file if the test failed.               |
 | `rawStatus`   | `String`| Optional | The original status of the test before mapping to CTRF status.  |
 | `tags`       | `Array of Strings`| Optional | Labels or categorisation for the test (e.g., ["UI", "Login"]). |
 | `type`       | `String`| Optional | The type of test (e.g., "unit", "integration", "e2e").           |

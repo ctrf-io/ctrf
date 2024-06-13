@@ -52,6 +52,7 @@ sidebar_position: 10
               "suite": { "type": "string" },
               "message": { "type": "string" },
               "trace": { "type": "string" },
+              "line": { "type": "integer" },
               "rawStatus": { "type": "string" },
               "tags": { "type": "array", "items": { "type": "string" } },
               "type": { "type": "string" },
