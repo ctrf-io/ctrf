@@ -19,6 +19,7 @@ The `environment` object contains the following properties:
 | `buildUrl`     | `String` | No       | The URL to the build in the CI/CD system.                    |
 | `repositoryName`| `String`| No       | The name of the repository where the code is hosted.         |
 | `repositoryUrl`| `String` | No       | The URL of the repository.                                   |
+| `commit`       | `String` | No       | The commit hash.                                             |
 | `branchName`  | `String`  | No       | The name of the branch from which the tests were run.        |
 | `osPlatform`   | `String` | No       | The operating system platform (e.g., Windows, Linux).        |
 | `osRelease`    | `String` | No       | The release version of the operating system.                 |

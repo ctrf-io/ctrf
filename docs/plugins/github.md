@@ -1,6 +1,9 @@
 ---
 sidebar_position: 3
-title: Github
-description: Github CTRF Plugin
+title: GitHub
+description: GitHub CTRF Plugin
 ---
-Coming soon!
+
+Publish and view test results in GitHub Actions.
+
+See [Github](https://github.com/ctrf-io/github-actions-ctrf) for upto date information.
