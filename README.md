@@ -1,8 +1,8 @@
 # CTRF 
 
-Generate the same JSON report, no matter the test framework
+Generate the same JSON test report, no matter the test framework
 
-A JSON test results report with a wide range of reporters and plugins supporting modern test automation frameworks.
+CTRF is A JSON test results report with many reporters and plugins supporting modern test automation frameworks.
 
 Documentation website [ctrf.io](https://www.ctrf.io/)
 
