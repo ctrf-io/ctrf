@@ -32,7 +32,6 @@ export default function Home(): JSX.Element {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      title={`${siteConfig.title}`}
       description="A universal standard for JSON test results report with a wide range of reporters and plugins supporting modern test automation frameworks">
       <HomepageHeader />
       <main>
