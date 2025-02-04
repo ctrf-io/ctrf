@@ -12,6 +12,8 @@ Language and Framework Agnostic: A universal reporting schema that works seamles
 
 Facilitates Enhanced Programmatic Use: Programatically interacting with test outcomes across multiple tools becomes more straightforward.
 
+Developer Tooling Integration: Modern development teams often use a diverse set of platforms—CI/CD tools, build automation systems, project management apps, and bug trackers. CTRF’s standardized reports can be seamlessly integrated with these tools using our open-source plugins
+
 ``` js
 {
   "results": {
@@ -87,6 +89,9 @@ Fully documented and versioned. This makes it straightforward for teams to adopt
 | **Goodbye XML!**                     | A JSON-based test report schema, moving away from the traditional XML format often used, leveraging the widespread use and flexibility of JSON.                                                                  |
 
 ### Who might use CTRF?
+
+**Developer Tooling Integration**
+Many modern development teams rely on a diverse ecosystem of tools—ranging from CI/CD platforms and build automation tools to project management systems and bug trackers. CTRF’s standardized JSON format bridges the gap between testing frameworks and these varied tools, eliminating the complexity of having to parse multiple, framework-specific report formats. With CTRF, you can seamlessly integrate your tests into your existing toolchain using our open source plugins, enabling more efficient test result ingestion, centralised reporting, and automated feedback loops in your development workflow—whether you want to visualize data directly in GitHub, receive Slack notifications, or orchestrate builds and deployments in Jenkins and other CI/CD services.
 
 **Practical Utility for Developers:** As a developer, you frequently need to perform actions post-test execution. Utilising CTRF simplifies this process. Its standardization means you can write backend logic once and apply it universally, streamlining your workflow and enhancing efficiency in handling test reports.
 

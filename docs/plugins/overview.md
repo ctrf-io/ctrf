@@ -4,7 +4,7 @@ title: Open Source Plugins
 description: CTRF report examples
 ---
 
-We are developing a range of open source plugins tailored to enhance and simplify the integration of CTRF with various build and communication tools
+We are developing a range of open source plugins tailored to enhance and simplify the integration of CTRF with your favourite Developer Tools.
 
 ### **Open Source Community and Contributions**
 

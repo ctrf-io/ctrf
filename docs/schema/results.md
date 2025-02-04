@@ -18,7 +18,6 @@ The `results` object has the following properties:
 | `environment` | `Object` | Optional | Information about the test environment |
 | `extra`      | `Object` | Optional | custom data relevant to the test run                         |
 
-
 ## Example
 
 Below is an example of the `results` object. Detailed information about each property ([`tool`](/docs/schema/tool), [`summary`](/docs/schema//summary) [`tests`](/docs/schema/tests)), [environment](/docs/schema/environment) and [extra](/docs/schema/extra) will be provided in the respective sections.

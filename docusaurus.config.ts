@@ -3,8 +3,8 @@ import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
-  title: 'CTRF | Common Test Report Format',
-  tagline: 'A common JSON test automation results report format',
+  title: 'Common Test Report Format',
+  tagline: 'A JSON test report schema and integration tooling',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -33,11 +33,9 @@ const config: Config = {
     [
       'classic',
       {
-        googleAnalytics: {
-          trackingID: 'GT-5TQFGJL',
-        },
-        googleTagManager: {
-          containerId: 'GTM-M6WNX85V',
+        gtag: {
+          trackingID: 'G-VHP5B22KSH',
+          anonymizeIP: true,
         },
         docs: {
           sidebarPath: './sidebars.ts',
@@ -60,6 +58,14 @@ const config: Config = {
     metadata: [{name: 'description', content: 'A common universal JSON test report schema that provides standardized format for JSON test results reports'}],
     // Replace with your project's social card
     image: 'img/logo.png',
+    announcementBar: {
+      id: 'support_us',
+      content:
+'<b>⭐ If you like CTRF, consider following us on <a target="_blank" rel="noopener noreferrer" href="https://github.com/ctrf-io">GitHub<img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub logo" style="width: 20px; height: 20px; vertical-align: middle;"/></a></b>',
+      backgroundColor: '#d1d1d1',
+      textColor: '#000000',
+      isCloseable: true,
+    },
     navbar: {
       title: 'Common Test Report Format',
       logo: {
@@ -74,16 +80,21 @@ const config: Config = {
           label: 'Docs',
         },
         { to: '/blog', label: 'Blog', position: 'left' },
+        { to: '/docs/contributing/', label: 'Contribute', position: 'left'},
+        // { to: '/reporters', label: 'Reporters', position: 'left' },
         {
           href: 'https://github.com/ctrf-io',
-          label: 'GitHub',
           position: 'right',
+          className: 'header-github-link',
+          'aria-label': 'GitHub repository',
         },
       ],
     },
     footer: {
       style: 'dark',
-      copyright: `Released under the MIT License. 
+      copyright: `Built and maintained by <a href="https://github.com/ma11hewthomas">Matthew Thomas</a>
+      <br />
+      Released under the MIT License. 
       <br />
       Copyright © ${new Date().getFullYear()}`,
     },

@@ -10,29 +10,29 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Consistency Across Tools',
+    title: 'Consistency',
     Svg: require('@site/static/img/hammer.svg').default,
     description: (
       <>
-        The same JSON structure no matter the test framework, regardless of the testing tool used.
+        The same JSON structure no matter the test framework.
       </>
     ),
   },
   {
-    title: 'Open Source Plugins',
+    title: 'Developer Tooling',
     Svg: require('@site/static/img/globe.svg').default,
     description: (
       <>
-        An extensive range of open source reporters for test frameworks such as Playwright, Cypress, Jest and plugins for CI/CD tools like Jenkins and Github Actions
+        A wide variety of plugins for integration with developer tools.
       </>
     ),
   },
   {
-    title: 'Enhanced Programmatic Use',
+    title: 'Open Source',
     Svg: require('@site/static/img/cog.svg').default,
     description: (
       <>
-        With a single JSON schema for all, programatic use with test reports becomes more straightforward 
+        Created by the community, open-source, licensed under MIT, with millions of user downloads
       </>
     ),
   },
@@ -52,7 +52,7 @@ function Feature({ title, Svg, description }: FeatureItem) {
   );
 }
 
-export default function HomepageFeatures(): JSX.Element {
+export default function Features(): JSX.Element {
   return (
     <section className={styles.features}>
       <div className="container">
@@ -63,6 +63,5 @@ export default function HomepageFeatures(): JSX.Element {
         </div>
       </div>
     </section>
-
   );
 }

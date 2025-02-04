@@ -19,8 +19,8 @@ The `summary` object encompasses the following properties:
 | `skipped`     | `Number` | Required | The count of tests skipped.                           |
 | `other`       | `Number` | Required | The count of tests with other outcomes.               |
 | `suites`      | `Number` | Optional | The count of suites                                   |
-| `start`      | `Number` | Required | The start time of the test run                         |
-| `stop`      | `Number` | Required | The stop time of the test run                           |
+| `start`      | `Number` | Required | The start time of the test run, in milliseconds since the Unix Epoch.                      |
+| `stop`      | `Number` | Required | TThe stop time of the test run, in milliseconds since the Unix Epoch.                       |
 | `extra`      | `Object` | Optional | Custom data relevant to the summary                 |
 
 ## Example
@@ -36,7 +36,7 @@ Below is an example of the `summary` object.
   "skipped": 0,
   "other": 0,
   "suites": 1,
-  "start": 1706644023
-  "stop": 1706644043
+  "start": 1706644023000,
+  "stop": 1706644043000
 }
 ```

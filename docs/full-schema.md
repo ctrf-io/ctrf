@@ -52,6 +52,7 @@ sidebar_position: 10
               "suite": { "type": "string" },
               "message": { "type": "string" },
               "trace": { "type": "string" },
+              "ai": { "type": "string" },
               "line": { "type": "integer" },
               "rawStatus": { "type": "string" },
               "tags": { "type": "array", "items": { "type": "string" } },
@@ -62,6 +63,19 @@ sidebar_position: 10
               "browser": { "type": "string" },
               "device": { "type": "string" },
               "screenshot": { "type": "string" },
+               "attachments": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": { "type": "string" },
+                    "contentType": { "type": "string" },
+                    "path": { "type": "string" },
+                    "extra": { "type": "object", "additionalProperties": true }
+                  },
+                  "required": ["name", "contentType", "path"]
+                }
+              },
               "parameters": { "type": "object" },
               "steps": {
                 "type": "array",
@@ -69,7 +83,8 @@ sidebar_position: 10
                   "type": "object",
                   "properties": {
                     "name": { "type": "string" },
-                    "status": { "type": "string", "enum": ["passed", "failed", "skipped", "pending", "other"] }
+                    "status": { "type": "string", "enum": ["passed", "failed", "skipped", "pending", "other"] },
+                    "extra": { "type": "object", "additionalProperties": true }
                   },
                   "required": ["name", "status"]
                 }
@@ -82,6 +97,7 @@ sidebar_position: 10
         "environment": {
           "type": "object",
           "properties": {
+            "reportName": { "type": "string" },
             "appName": { "type": "string" },
             "appVersion": { "type": "string" },
             "buildName": { "type": "string" },

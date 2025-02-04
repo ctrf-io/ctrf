@@ -17,3 +17,7 @@ Looking to expand CTRF with new reporters or plugins? We use GitHub Discussions 
 ## Contributing to Existing Reporters or Plugins
 
 If you're interested in contributing to the development of existing reporters and plugins, please visit the specific repository of the reporter or plugin you're interested in. Look for the CONTRIBUTING.md document in the repository, which will guide you through the process of making your contribution.
+
+## Build Your Own Reporters and Plugins
+
+We welcome and encourage community-built plugins! Share these with the community by posting them in the [discussions](https://github.com/orgs/ctrf-io/discussions).

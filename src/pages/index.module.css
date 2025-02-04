@@ -3,21 +3,57 @@
  * and scoped locally.
  */
 
-.heroBanner {
-  padding: 4rem 0;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
+ .heroTitle {
+  font-size: 60px;
+  color: #f5f6f7;
 }
 
 @media screen and (max-width: 996px) {
+  .heroTitle {
+    font-size: 30px;
+  }
   .heroBanner {
     padding: 2rem;
   }
 }
 
-.buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.heroBanner {
+  padding: 4rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background-color: #2b3137;
+  text-align: left;
+}
+
+.toolingContainer {
+  background-color: #2b3137;
+  width: 100%;
+  color: #f5f6f7;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.customButton {
+  background-color: transparent !important;
+  border: 2px solid #45ba4b !important;
+  color: white !important;
+  margin: 10px !important;
+  transition: all 0.3s ease !important;
+}
+
+.customButton:hover,
+.githubButton:hover {
+  background-color: #45ba4b !important;
+  color: #2b3137 !important;
+  border-color: #45ba4b !important;
+}
+
+@media screen and (max-width: 768px) {
+  .customButton,
+  .githubButton {
+    width: calc(100% - 20px) !important;
+    display: block !important;
+    margin: 10px auto !important;
+  }
 }
