@@ -9,3 +9,74 @@
   height: 200px;
   width: 200px;
 }
+
+.code-frame {
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  background: var(--ifm-background-surface-color);
+}
+
+.code-frame__header {
+  padding: 0.75rem;
+  background: var(--ifm-background-surface-color);
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  display: flex;
+  align-items: center;
+}
+
+.code-frame__buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-right: 1rem;
+}
+
+.code-frame__button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.code-frame__button--red {
+  background-color: #ff5f56;
+}
+
+.code-frame__button--yellow {
+  background-color: #ffbd2e;
+}
+
+.code-frame__button--green {
+  background-color: #27c93f;
+}
+
+.code-frame__title {
+  color: var(--ifm-color-emphasis-600);
+  font-size: 0.875rem;
+  font-family: var(--ifm-font-family-monospace);
+}
+
+.code-frame__content {
+  /* Remove any background color here as CodeBlock will handle it */
+}
+
+/* Override CodeBlock styles to remove its default border radius since it's inside the frame */
+.code-frame :global(.theme-code-block) {
+  border-radius: 0;
+  margin: 0;
+}
+
+/* Ensure proper padding around the code */
+.code-frame :global(.theme-code-block pre) {
+  margin: 0;
+}
+
+/* Remove default margin from CodeBlock when inside code-frame */
+.code-frame :global(.margin-bottom--xl) {
+  margin-bottom: 0 !important;
+}
+
+/* Optional: Add a subtle hover effect on the buttons */
+.code-frame__button:hover {
+  filter: brightness(0.9);
+}

@@ -1,137 +1,149 @@
-// import clsx from 'clsx';
-// import Heading from '@theme/Heading';
-// import styles from './styles.module.css';
-// import CodeBlock from '@theme/CodeBlock'
-
-// type FeatureItem = {
-//   title: string;
-//   Svg: React.ComponentType<React.ComponentProps<'svg'>>;
-//   description: JSX.Element;
-// };
-
-// const FeatureList: FeatureItem[] = [
-//   {
-//     title: 'Common Report',
-//     Svg: require('@site/static/img/hammer.svg').default,
-//     description: (
-//       <>
-//         The same JSON structure no matter the test framework.
-//       </>
-//     ),
-//   },
-//   {
-//     title: 'Developer Tooling',
-//     Svg: require('@site/static/img/globe.svg').default,
-//     description: (
-//       <>
-//         A wide variety of plugins for integration with developer tools.
-//       </>
-//     ),
-//   },
-//   {
-//     title: 'Open Source',
-//     Svg: require('@site/static/img/cog.svg').default,
-//     description: (
-//       <>
-//         Created by the community, open-source, MIT license and millions of downloads
-//       </>
-//     ),
-//   },
-// ];
-
-// function Code({ title, Svg, description }: FeatureItem) {
-//   return (
-//     <div className={clsx('col col--4')}>
-
-
-//       <div className="card-demo item shadow--md text--center">
-//         <div className="card">
-//           <div className="card__header text--bold">
-//             <Heading as="h3">{title}</Heading>
-//           </div>
-//           <div className="card__body">
-//             <p>{description}</p>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default function CodeSection(): JSX.Element {
-//   return (
-//     <section className={styles.features}>
-//       <div className="container">
-//         <div className="row">
-//             <CodeBlock language='js'children='console.log("hello world!")'></CodeBlock>
-//           {FeatureList.map((props, idx) => (
-//             <Code key={idx} {...props} />
-//           ))}
-//         </div>
-//       </div>
-//     </section>
-//   );
-// }
-
-// src/pages/index.js
-
 import React from 'react';
-import Layout from '@theme/Layout';
+import CodeBlock from '@theme/CodeBlock';
+import clsx from 'clsx';
+import styles from './styles.module.css';
+const exampleReport = `
+{
+  "results": {
+    "tool": {
+      "name": "AnyTool"
+    },
+    "summary": {
+      "tests": 1,
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "skipped": 0,
+      "other": 0,
+      "start": 1706828654274,
+      "stop": 1706828655782
+    },
+    "tests": [
+      {
+        "name": "should be able to login",
+        "status": "passed",
+        "duration": 801
+      }
+    ],
+    "environment": {
+      "appName": "MyApp",
+      "buildName": "MyApp",
+      "buildNumber": "100"
+    }
+  }
+}
+`;
 
-export default function Code() {
+const schemaExplanation = [
+  {
+    field: 'stats',
+    description: 'Overall test execution statistics',
+    children: [
+      { field: 'suites', description: 'Total number of test suites executed' },
+      { field: 'tests', description: 'Total number of individual tests run' },
+      { field: 'passes', description: 'Number of passing tests' },
+      { field: 'failures', description: 'Number of failed tests' },
+      { field: 'pending', description: 'Number of skipped or pending tests' },
+      { field: 'duration', description: 'Total execution time in milliseconds' },
+      { field: 'start', description: 'Test execution start timestamp' },
+      { field: 'end', description: 'Test execution end timestamp' },
+    ],
+  },
+  {
+    field: 'results',
+    description: 'Array of test suite results',
+    children: [
+      { field: 'title', description: 'Name of the test suite' },
+      { 
+        field: 'tests', 
+        description: 'Array of test results within the suite',
+        children: [
+          { field: 'title', description: 'Name of the individual test' },
+          { field: 'status', description: 'Test result status (passed, failed, pending)' },
+          { field: 'duration', description: 'Individual test execution time' },
+          { field: 'error', description: 'Error message if the test failed' },
+        ],
+      },
+    ],
+  },
+];
+
+function SchemaItem({ field, description, children }) {
   return (
-    <Layout
-      title="Home"
-      description="A simple responsive grid test for Docusaurus"
-    >
-      <main>
-        {/* Container gives us some horizontal padding */}
-        <div className="container margin-top--xl margin-bottom--xl">
+    <div className="schema-item margin-bottom--sm">
+      <div className="schema-header">
+        <code className="schema-field">{field}</code>
+        <span className="schema-description">{description}</span>
+      </div>
+      {children && (
+        <div className="schema-children margin-left--md">
+          {children.map((child, idx) => (
+            <SchemaItem key={idx} {...child} />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
-          <h2 style={{ textAlign: 'center' }}>Responsive Grid Example</h2>
+function CodeFrame({ children }) {
+  return (
+    <div className={styles['code-frame']}>
+      <div className={styles['code-frame__header']}>
+        <div className={styles['code-frame__buttons']}>
+          <span className={clsx(styles['code-frame__button'], styles['code-frame__button--red'])}></span>
+          <span className={clsx(styles['code-frame__button'], styles['code-frame__button--yellow'])}></span>
+          <span className={clsx(styles['code-frame__button'], styles['code-frame__button--green'])}></span>
+        </div>
+        <div className={styles['code-frame__title']}>ctrf/ctrf-report.json</div>
+      </div>
+      <div className={styles['code-frame__content']}>
+        {children}
+      </div>
+    </div>
+  );
+}
 
-          <div className="row">
-            {/* Each column is full-width on small screens (col--12),
-                half-width on medium (col--md-6),
-                and one-third on large (col--lg-4). */}
-            <div className="col col--12 col--md-6 col--lg-4">
-              <div
-                style={{
-                  backgroundColor: 'lightblue',
-                  padding: '1rem',
-                  textAlign: 'center',
-                }}
-              >
-                Column 1
+export default function CodeSection(): JSX.Element {
+  return (
+    <div className="container margin-top--xl margin-bottom--xl">
+      <h1 className="text--center"> Straightforward JSON Report</h1>
+      <div className="row">
+        <div className="col col--6">
+          <CodeFrame>
+            <CodeBlock language="javascript" className="margin-bottom--xl">
+              {exampleReport}
+            </CodeBlock>
+          </CodeFrame>
+        </div>
+        
+        <div className="col col--6">
+          <div className="schema-documentation" style={{ 
+            display: 'flex', 
+            flexDirection: 'column',
+            height: '100%'
+          }}>
+            <div className="card margin-bottom--md text--center" style={{ flex: 1 }}>
+              <div className="card__body">
+                <h2>Simple Design</h2>
+                <p>Just three essential properties required for each test - name, duration, and status, simplifying the test report while capturing crucial information.</p>
               </div>
             </div>
-
-            <div className="col col--12 col--md-6 col--lg-4">
-              <div
-                style={{
-                  backgroundColor: 'lightgreen',
-                  padding: '1rem',
-                  textAlign: 'center',
-                }}
-              >
-                Column 2
+            <div className="card margin-bottom--md text--center" style={{ flex: 1 }}>
+              <div className="card__body">
+                <h2>Comprehensive Data</h2>
+                <p>Beyond the essential properties, the report includes a variety of optional properties, encompassing extensive detail about the tests, tools, environment, and build.</p>
               </div>
             </div>
-
-            <div className="col col--12 col--md-6 col--lg-4">
-              <div
-                style={{
-                  backgroundColor: 'lightcoral',
-                  padding: '1rem',
-                  textAlign: 'center',
-                }}
-              >
-                Column 3
+            <div className="card margin-bottom--md text--center" style={{ flex: 1 }}>
+              <div className="card__body">
+                <h2>Fully Extendable</h2>
+                <p>The report is designed with extendability at its core, allowing for the addition of extra properties, catering to additional report requirements.</p>
               </div>
             </div>
           </div>
         </div>
-      </main>
-    </Layout>
+      </div>
+    </div>
   );
 }

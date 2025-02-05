@@ -3,6 +3,7 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/homepage/Features';
+import HomepageTooling from '@site/src/components/homepage/Tooling';
 import useBaseUrl from '@docusaurus/useBaseUrl'
 import HomepageCode from '../components/homepage/Code';
 import Heading from '@theme/Heading';
@@ -37,12 +38,6 @@ function HomepageHeader() {
           >
             Schema
           </Link>
-          {/* <a
-            className={clsx('button button--secondary button--lg', styles.customButton)}
-            href="https://github.com/ctrf-io"
-          >
-            View on GitHub
-          </a> */}
           <span className={styles.githubButtons}
           style={{ 
             display: 'inline-flex', 
@@ -72,10 +67,13 @@ export default function Home(): JSX.Element {
     <Layout
       description="A universal standard for JSON test results report with a wide range of reporters and plugins supporting modern test automation frameworks">
       <HomepageHeader />
+      <HomepageFeatures />
+
+      <HomepageTooling />
+
       <main>
-        {/* <HomepageCode /> */}
-        <HomepageFeatures />
-        {/* <HomepageTooling /> */}
+        <HomepageCode />
+
       </main>
     </Layout>
   );

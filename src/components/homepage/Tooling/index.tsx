@@ -49,17 +49,16 @@ function Tooling({ Svg, name }: ToolingItem) {
 export default function HomepageTooling(): JSX.Element {
   return (
     <div className={styles.toolingContainer}>
-
-    <section className={styles.features}>
-    <div className="container">
-      <h1>Supporting your favorite frameworks and tools</h1>
-      <div className={clsx('row', styles.rowBackground)}>
-        {FeatureList.map((props, idx) => (
-          <Tooling key={idx} {...props} />
-        ))}
-      </div>
+      <section className={styles.features}>
+        <div className="container">
+          <h1>Supporting your favorite frameworks and tools</h1>
+          <div className={clsx('row', styles.rowBackground, styles.toolingGrid)}>
+            {FeatureList.map((props, idx) => (
+              <Tooling key={idx} {...props} />
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
-  </section>
-  </div>
   );
 }

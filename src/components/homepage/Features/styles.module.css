@@ -1,11 +1,38 @@
 .features {
-  display: flex;
-  align-items: center;
-  padding: 2rem;
+  padding: 2rem 0;
   width: 100%;
 }
 
- .featureSvg {
-  height: 200px;
-  width: 200px;
+.featureSvg {
+  height: 96px;
+  width: 96px;
+  margin-bottom: 0.5rem;
+}
+
+/* Add these new styles */
+:global(.card) {
+  border: none;
+  box-shadow: 0 8px 28px -6px rgba(24, 39, 75, 0.12),
+              0 18px 88px -4px rgba(24, 39, 75, 0.14);
+  transition: all 0.3s ease-in-out;
+  height: 100%;
+}
+
+:global(.card:hover) {
+  transform: translateY(-5px);
+}
+
+:global(.card__header) {
+  border-bottom: none;
+  padding: 1.5rem 1rem 0;
+}
+
+:global(.card__body) {
+  padding: 0.5rem 2rem 1.5rem;
+}
+
+@media screen and (max-width: 996px) {
+  .features {
+    padding: 1rem;
+  }
 }

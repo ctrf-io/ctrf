@@ -1,9 +1,9 @@
-/* .features {
+.features {
   display: flex;
   align-items: center;
   padding: 2rem 0;
   width: 100%;
-} */
+}
 
 .featureSvg {
   height: 100px;
@@ -52,5 +52,12 @@
 .toolingItem:hover .tooltip {
   visibility: visible;
   opacity: 1;
+}
+
+.toolingGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
 }
 
