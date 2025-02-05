@@ -42,18 +42,32 @@
   transition: all 0.3s ease !important;
 }
 
-.customButton:hover,
-.githubButton:hover {
+.customButton:hover {
   background-color: #45ba4b !important;
   color: #2b3137 !important;
   border-color: #45ba4b !important;
 }
 
 @media screen and (max-width: 768px) {
-  .customButton,
-  .githubButton {
+  .customButton
+   {
     width: calc(100% - 20px) !important;
     display: block !important;
-    margin: 10px auto !important;
+    margin: 20px !important;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .githubButtons {
+    width: calc(100% - 20px) !important;
+    display: block !important;
+    margin: 20px auto !important;
+    gap: 20px !important;
+    text-align: center !important;
+    transform: scale(1.5) !important;
+    transform-origin: center !important;
+    display: 'inline-flex',
+  }
+}
+
+

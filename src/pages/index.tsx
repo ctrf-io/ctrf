@@ -43,7 +43,8 @@ function HomepageHeader() {
           >
             View on GitHub
           </a> */}
-          <span style={{ 
+          <span className={styles.githubButtons}
+          style={{ 
             display: 'inline-flex', 
             alignItems: 'center', 
             gap: '10px',
