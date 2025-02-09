@@ -1,0 +1,89 @@
+.container {
+  padding: 4rem 0;
+  width: 100%;
+}
+
+.content {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: center;
+  gap: 2rem;
+}
+
+.textSection {
+  flex: 1;
+}
+
+.visualSection {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.frameworkIcons {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+}
+
+.devToolsIcon {
+  width: 48px;
+  height: 48px;
+}
+
+.arrows {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.arrow {
+  width: 100px;
+  height: 2px;
+  background: var(--ifm-color-primary);
+  position: relative;
+  margin: 20px 0;
+}
+
+.arrow::after {
+  content: '';
+  position: absolute;
+  right: -10px;
+  top: -4px;
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid var(--ifm-color-primary);
+  border-right: 2px solid var(--ifm-color-primary);
+  transform: rotate(45deg);
+}
+
+@keyframes flowRight {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.arrow {
+  animation: flowRight 1.5s infinite;
+}
+
+.arrow:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.arrow:nth-child(3) {
+  animation-delay: 0.4s;
+}

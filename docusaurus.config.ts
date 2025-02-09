@@ -79,9 +79,9 @@ const config: Config = {
           position: 'left',
           label: 'Docs',
         },
-        { to: '/blog', label: 'Blog', position: 'left' },
+        { to: '/integrations', label: 'Integrations', position: 'left' },
         { to: '/docs/contributing/', label: 'Contribute', position: 'left'},
-        // { to: '/reporters', label: 'Reporters', position: 'left' },
+        { to: '/blog', label: 'Blog', position: 'left' },
         {
           href: 'https://github.com/ctrf-io',
           position: 'right',

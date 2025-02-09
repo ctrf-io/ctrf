@@ -11,9 +11,9 @@
 }
 
 .toolingContainer {
-  background-color: #1b1b1d;
+  background: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
   width: 100%;
-  color: #f5f6f7; 
   padding: 20px 0; 
   text-align: center; 
 } 
@@ -34,9 +34,9 @@
   bottom: 110%; 
   left: 50%;
   transform: translateX(-50%);
-  background-color: #2b3137; 
-  border: 2px solid #45ba4b;
-  color: #fff; 
+  background-color: var(--ifm-background-surface-color);
+  border: 2px solid var(--ifm-color-primary);
+  color: var(--ifm-font-color-base);
   text-align: center;
   padding: 8px 12px;
   border-radius: 4px;
@@ -59,5 +59,6 @@
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   gap: 2rem;
   padding: 2rem;
+  background: var(--ifm-background-color);
 }
 

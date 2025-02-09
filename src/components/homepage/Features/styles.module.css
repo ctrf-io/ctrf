@@ -9,7 +9,6 @@
   margin-bottom: 0.5rem;
 }
 
-/* Add these new styles */
 :global(.card) {
   border: none;
   box-shadow: 0 8px 28px -6px rgba(24, 39, 75, 0.12),

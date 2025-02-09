@@ -124,19 +124,37 @@ export default function CodeSection(): JSX.Element {
             height: '100%'
           }}>
             <div className="card margin-bottom--md text--center" style={{ flex: 1 }}>
-              <div className="card__body">
+              <div className="card__body" style={{ 
+                display: 'flex', 
+                flexDirection: 'column', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                height: '100%' 
+              }}>
                 <h2>Simple Design</h2>
                 <p>Just three essential properties required for each test - name, duration, and status, simplifying the test report while capturing crucial information.</p>
               </div>
             </div>
             <div className="card margin-bottom--md text--center" style={{ flex: 1 }}>
-              <div className="card__body">
+              <div className="card__body" style={{ 
+                display: 'flex', 
+                flexDirection: 'column', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                height: '100%' 
+              }}>
                 <h2>Comprehensive Data</h2>
                 <p>Beyond the essential properties, the report includes a variety of optional properties, encompassing extensive detail about the tests, tools, environment, and build.</p>
               </div>
             </div>
             <div className="card margin-bottom--md text--center" style={{ flex: 1 }}>
-              <div className="card__body">
+              <div className="card__body" style={{ 
+                display: 'flex', 
+                flexDirection: 'column', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                height: '100%' 
+              }}>
                 <h2>Fully Extendable</h2>
                 <p>The report is designed with extendability at its core, allowing for the addition of extra properties, catering to additional report requirements.</p>
               </div>

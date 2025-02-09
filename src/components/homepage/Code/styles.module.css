@@ -56,27 +56,19 @@
   font-family: var(--ifm-font-family-monospace);
 }
 
-.code-frame__content {
-  /* Remove any background color here as CodeBlock will handle it */
-}
-
-/* Override CodeBlock styles to remove its default border radius since it's inside the frame */
 .code-frame :global(.theme-code-block) {
   border-radius: 0;
   margin: 0;
 }
 
-/* Ensure proper padding around the code */
 .code-frame :global(.theme-code-block pre) {
   margin: 0;
 }
 
-/* Remove default margin from CodeBlock when inside code-frame */
 .code-frame :global(.margin-bottom--xl) {
   margin-bottom: 0 !important;
 }
 
-/* Optional: Add a subtle hover effect on the buttons */
 .code-frame__button:hover {
   filter: brightness(0.9);
 }

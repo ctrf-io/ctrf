@@ -4,17 +4,14 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/homepage/Features';
 import HomepageTooling from '@site/src/components/homepage/Tooling';
-import useBaseUrl from '@docusaurus/useBaseUrl'
+// import DeveloperTools from '@site/src/components/homepage/DeveloperTools';
 import HomepageCode from '../components/homepage/Code';
 import Heading from '@theme/Heading';
 
 import styles from './index.module.css';
-// import HomepageTooling from '../components/homepage/Tooling';
 import GitHubButton from 'react-github-btn';
 
 function HomepageHeader() {
-  const {siteConfig} = useDocusaurusContext();
-  
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container">
@@ -22,8 +19,8 @@ function HomepageHeader() {
           as="h1"
           className={styles.heroTitle}
         >
-          <span style={{ color: '#45ba4b' }}>CTRF</span> is a JSON test report
-          that simplifies developer tooling integration
+          <span style={{ color: '#45ba4b', display: 'block' }}>CTRF</span>
+          Unified JSON Test Report With Seamless Developer Tool Integration
         </Heading>
         <div>
           <Link
@@ -67,13 +64,22 @@ export default function Home(): JSX.Element {
     <Layout
       description="A universal standard for JSON test results report with a wide range of reporters and plugins supporting modern test automation frameworks">
       <HomepageHeader />
+      
+      <div style={{
+        textAlign: 'center',
+        padding: '2rem 0',
+        fontSize: '1.2rem'
+      }}>
+        <div style={{ color: '#45ba4b', fontSize: '2rem' }}>💚</div>
+        <h4 style={{ marginBottom: '0.3rem' }}>CTRF tooling is free and open source</h4>
+        <h4 style={{ marginTop: '0.3rem' }}>You can support the project by following us on GitHub</h4>
+      </div>
       <HomepageFeatures />
-
       <HomepageTooling />
 
       <main>
         <HomepageCode />
-
+        {/* <DeveloperTools /> */}
       </main>
     </Layout>
   );

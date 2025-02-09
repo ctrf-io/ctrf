@@ -4,14 +4,12 @@ import styles from './styles.module.css';
 
 type FeatureItem = {
   title: string;
-  Svg: React.ComponentType<React.ComponentProps<'svg'>>;
   description: JSX.Element;
 };
 
 const FeatureList: FeatureItem[] = [
   {
     title: 'Consistency',
-    Svg: require('@site/static/img/hammer.svg').default,
     description: (
       <>
         The same JSON structure no matter the test framework.
@@ -20,7 +18,6 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Developer Tooling',
-    Svg: require('@site/static/img/globe.svg').default,
     description: (
       <>
         A wide variety of plugins for integration with developer tools.
@@ -29,7 +26,6 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Open Source',
-    Svg: require('@site/static/img/cog.svg').default,
     description: (
       <>
         Created by the community, open-source, licensed under MIT, with millions of user downloads
@@ -38,7 +34,7 @@ const FeatureList: FeatureItem[] = [
   },
 ];
 
-function Feature({ title, Svg, description }: FeatureItem) {
+function Feature({ title, description }: FeatureItem) {
   return (
     <div className={clsx('col col--4')} style={{ padding: '1rem' }}>
       <div className="card margin-bottom--lg">

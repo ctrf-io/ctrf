@@ -1,0 +1,37 @@
+.tag {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  margin-right: 8px;
+  font-weight: 500;
+}
+
+.officialTag {
+  background-color: var(--theme-green);
+  color: white;
+}
+
+.builtInTag {
+  background-color: #0366d6;
+  color: white;
+}
+
+.communityTag {
+  background-color: #6f42c1;
+  color: white;
+}
+
+.tag.officialTag {
+  background-color: var(--theme-green);
+  color: white;
+}
+
+.tag.builtInTag {
+  background-color: #0366d6;
+  color: white;
+}
+
+.tag.communityTag {
+  background-color: #6f42c1;
+  color: white;
+} 

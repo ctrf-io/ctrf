@@ -1,58 +1,77 @@
 import clsx from 'clsx';
 import styles from './styles.module.css';
+import ThemedImage from '@theme/ThemedImage';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 
 type ToolingItem = {
-  Svg: React.ComponentType<React.ComponentProps<'svg'>>;
   name: string;
+  image: string;
+  hasDarkVersion?: boolean;
 };
 
 const FeatureList: ToolingItem[] = [
-  { Svg: require('@site/static/img/playwright.svg').default, name: 'Playwright' },
-  { Svg: require('@site/static/img/jest.svg').default, name: 'Jest' },
-  { Svg: require('@site/static/img/cypress.svg').default, name: 'Cypress' },
-  { Svg: require('@site/static/img/wdio.svg').default, name: 'WebdriverIO' },
-  { Svg: require('@site/static/img/go.svg').default, name: 'Go' },
-  { Svg: require('@site/static/img/postman.svg').default, name: 'Postman' },
-  { Svg: require('@site/static/img/mochajs.svg').default, name: 'Mocha' },
-  { Svg: require('@site/static/img/dotnet.svg').default, name: '.NET' },
-  { Svg: require('@site/static/img/xunit.svg').default, name: 'xUnit' },
-  { Svg: require('@site/static/img/nightwatch.svg').default, name: 'Nightwatch' },
-  { Svg: require('@site/static/img/junit.svg').default, name: 'JUnit' },
-  { Svg: require('@site/static/img/selenium.svg').default, name: 'Selenium' },
-  { Svg: require('@site/static/img/codeceptjs.svg').default, name: 'CodeceptJS' },
-  { Svg: require('@site/static/img/jasmine.svg').default, name: 'Jasmine' },
-  { Svg: require('@site/static/img/pytest.svg').default, name: 'Pytest' },
-  { Svg: require('@site/static/img/rspec.svg').default, name: 'RSpec' },
-  { Svg: require('@site/static/img/github.svg').default, name: 'GitHub' },
-  { Svg: require('@site/static/img/slack.svg').default, name: 'Slack' },
-  { Svg: require('@site/static/img/teams.svg').default, name: 'Microsoft Teams' },
-  { Svg: require('@site/static/img/jenkins.svg').default, name: 'Jenkins' },
-  { Svg: require('@site/static/img/mattermost.svg').default, name: 'Mattermost' },
-  { Svg: require('@site/static/img/openai.svg').default, name: 'OpenAI' },
-  { Svg: require('@site/static/img/anthropic.svg').default, name: 'Anthropic' },
-  { Svg: require('@site/static/img/jira2.svg').default, name: 'Jira' },
+  { name: 'Playwright', image: '/img/playwright.svg' },
+  { name: 'Jest', image: '/img/jest.svg' },
+  { name: 'Cypress', image: '/img/cypress.svg', hasDarkVersion: true },
+  { name: 'WebdriverIO', image: '/img/wdio.svg' },
+  { name: 'Go', image: '/img/go.svg' },
+  { name: 'Postman', image: '/img/postman.svg' },
+  { name: 'Mocha', image: '/img/mochajs.svg' },
+  { name: '.NET', image: '/img/dotnet.svg' },
+  { name: 'xUnit', image: '/img/xunit.svg' },
+  { name: 'Nightwatch', image: '/img/nightwatch.svg' },
+  { name: 'JUnit', image: '/img/junit.svg' },
+  { name: 'Selenium', image: '/img/selenium.svg' },
+  { name: 'Vitest', image: '/img/vitest.svg' },
+  { name: 'Jasmine', image: '/img/jasmine.svg' },
+  { name: 'Pytest', image: '/img/pytest.svg' },
+  { name: 'RSpec', image: '/img/rspec.svg' },
+  { name: 'GitHub', image: '/img/github.svg', hasDarkVersion: true },
+  { name: 'Slack', image: '/img/slack.svg' },
+  { name: 'Microsoft Teams', image: '/img/teams.svg' },
+  { name: 'Jenkins', image: '/img/jenkins.svg' },
+  { name: 'Mattermost', image: '/img/mattermost.svg' },
+  { name: 'OpenAI', image: '/img/openai.svg', hasDarkVersion: true },
+  { name: 'Anthropic', image: '/img/anthropic.svg', hasDarkVersion: true },
+  { name: 'Jira', image: '/img/jira2.svg' },
 ];
 
-
-function Tooling({ Svg, name }: ToolingItem) {
+function Tooling({ name, image, hasDarkVersion }: ToolingItem) {
+  const imagePath = image.replace('.svg', '');
   return (
     <div className={clsx(styles.toolingItem)}>
       <div className="text--center">
-        <Svg className={styles.featureSvg} role="img" />
+        {hasDarkVersion ? (
+          <ThemedImage
+            alt={name}
+            sources={{
+              light: useBaseUrl(`${imagePath}.svg`),
+              dark: useBaseUrl(`${imagePath}-dark.svg`),
+            }}
+            className={styles.featureSvg}
+            role="img"
+          />
+        ) : (
+          <img
+            src={useBaseUrl(image)}
+            alt={name}
+            className={styles.featureSvg}
+            role="img"
+          />
+        )}
         <div className={styles.tooltip}>{name}</div>
       </div>
     </div>
   );
 }
 
-
 export default function HomepageTooling(): JSX.Element {
   return (
     <div className={styles.toolingContainer}>
       <section className={styles.features}>
         <div className="container">
-          <h1>Supporting your favorite frameworks and tools</h1>
-          <div className={clsx('row', styles.rowBackground, styles.toolingGrid)}>
+          <h1 className="text--center">Supporting your favorite test frameworks and developer tools</h1>
+          <div className={clsx('row', styles.toolingGrid)}>
             {FeatureList.map((props, idx) => (
               <Tooling key={idx} {...props} />
             ))}
