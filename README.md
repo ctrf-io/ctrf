@@ -4,14 +4,6 @@ Generate the same JSON test report, no matter the test framework
 
 CTRF is a unified JSON Test Report With Seamless Developer Tool Integration
 
-<a href="https://ctrf.io/docs/intro">Docs</a>
-<br/>
-<a href="hhttps://ctrf.io/docs/schema/overview">Schema</a>
-<br/>
-<a href="https://ctrf.io/integrations">Integrations</a>
-<br/>
-<a href="https://github.com/orgs/ctrf-io/discussions">Discuss</a>
-
 You'll notice that v1 of the schema hasn't been released yet, we are still getting feedback from users. There might be changes but these will be minor.
 
 <div align="center">
@@ -36,7 +28,15 @@ Contributions are very welcome! <br/>
 </p>
 </div>
 
-<div align="center">
+## Useful Links
+
+<a href="https://ctrf.io/docs/intro">Docs</a>
+<br/>
+<a href="hhttps://ctrf.io/docs/schema/overview">Schema</a>
+<br/>
+<a href="https://ctrf.io/integrations">Integrations</a>
+<br/>
+<a href="https://github.com/orgs/ctrf-io/discussions">Discuss</a>
   
 ![CTRF Dashboard](./static/img/code.png)
 
