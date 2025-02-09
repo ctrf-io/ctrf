@@ -32,7 +32,7 @@ Contributions are very welcome! <br/>
 
 <a href="https://ctrf.io/docs/intro">Docs</a>
 <br/>
-<a href="hhttps://ctrf.io/docs/schema/overview">Schema</a>
+<a href="https://ctrf.io/docs/schema/overview">Schema</a>
 <br/>
 <a href="https://ctrf.io/integrations">Integrations</a>
 <br/>
