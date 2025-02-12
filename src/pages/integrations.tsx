@@ -34,7 +34,7 @@ const CommunityTag = () => (
 );
 
 const ReporterCard: React.FC<Reporter> = React.memo(({ name, description, image, source, language, type, githubUrl, category }) => {
-  const hasDarkVersion = ['github', 'cypress', 'openai', 'anthropic', 'openrouter'];
+  const hasDarkVersion = ['github', 'cypress', 'openai', 'anthropic', 'openrouter', 'grok'];
   
   const baseImage = useBaseUrl(image || '/img/no-image.svg');
   const darkImagePath = image && hasDarkVersion.some(name => image.includes(name))
@@ -418,6 +418,16 @@ const ReportersPage: React.FC = () => {
       name: 'OpenRouter Plugin',
       description: 'A unified interface for LLMs',
       image: '/img/openrouter.svg',
+      source: 'official',
+      language: 'JavaScript',
+      type: 'plugin',
+      githubUrl: 'https://github.com/ctrf-io/ai-test-reporter',
+      category: 'AI'
+    },
+    {
+      name: 'Grok Plugin',
+      description: 'AI company with the mission of advancing scientific discovery and gaining a deeper understanding of our universe.',
+      image: '/img/grok.svg',
       source: 'official',
       language: 'JavaScript',
       type: 'plugin',
