@@ -513,7 +513,7 @@ const ReportersPage: React.FC = () => {
   );
 
   return (
-    <Layout title="CTRF Reporters">
+    <Layout title="CTRF Integrations">
       <div className={styles.container}>
         <aside className={styles.sidebar}>
           <div className={styles.filterSection}>
