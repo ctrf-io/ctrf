@@ -56,7 +56,7 @@ Often you want to do something programatically with your test results, like anal
 
 ### Moving Beyond JUnit XML
 
-While JUnit XML reports have been the de facto standard, originating from the JUnit testing library created in the late '90s, the evolving landscape of software testing calls for a more modern solution. There is no official specification for the JUnit XML file format and various tools generate and support different flavors of this format. JUnit's longevity is commendable, while JUnit XML reports have served well and continue to be useful, the dynamic and diverse needs of contemporary software engineering often deserve a more adaptable and versatile reporting format.
+While JUnit XML reports have been the de facto standard, originating from the JUnit testing library created in the late '90s, the evolving landscape of software testing calls for a more modern solution. There is no official specification for the JUnit XML file format and various tools generate and support different flavors of this format. While JUnit's longevity is commendable, the dynamic and diverse needs of contemporary software engineering often deserve a more adaptable and versatile reporting format.
 
 ### Embracing Modern Engineering with JSON
 
