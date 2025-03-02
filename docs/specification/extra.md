@@ -1,10 +1,10 @@
 ---
 sidebar_position: 7
 title: Extra Object
-description: Extra Object in the CTRF schema for custom extensions.
+description: Extra Object in the CTRF specification for custom extensions.
 ---
 
-The `extra` object is a flexible optional property designed for custom extensions. It allows users to include additional key-value pairs that are not predefined in the standard schema. This object is an optional property of [`results`](/docs/schema/results), [`tool`](/docs/schema/tool), [`summary`](/docs/schema/summary), [`test`](/docs/schema/test), [`step`](docs/schema/test#step-object) and [`environment`](/docs/schema/environment). Providing a powerful way to capture and include custom data.
+The `extra` object is a flexible optional property designed for custom extensions. It allows users to include additional key-value pairs that are not predefined in the standard specification. This object is an optional property of [`results`](/docs/specification/results), [`tool`](/docs/specification/tool), [`summary`](/docs/specification/summary), [`test`](/docs/specification/test), [`step`](docs/specification/test#step-object) and [`environment`](/docs/specification/environment). Providing a powerful way to capture and include custom data.
 
 ## Structure and Flexibility
 
@@ -27,7 +27,7 @@ The `extra` object is a flexible property designed for custom extensions, for us
 
 ## Example
 
-Below is an example of the `extra` object in [`results`](/docs/schema/results) and [`test`](/docs/schema/test).
+Below is an example of the `extra` object in [`results`](/docs/specification/results) and [`test`](/docs/specification/test).
 
 ```js
 {

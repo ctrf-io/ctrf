@@ -11,6 +11,17 @@ sidebar_position: 10
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
   "properties": {
+    "reportFormat": { 
+        "type": "string", 
+        "enum": ["CTRF"] 
+    },
+    "specVersion": { 
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "reportId": { "type": "string", "format": "uuid" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "generatedBy": { "type": "string" },
     "results": {
       "type": "object",
       "properties": {
@@ -63,7 +74,7 @@ sidebar_position: 10
               "browser": { "type": "string" },
               "device": { "type": "string" },
               "screenshot": { "type": "string" },
-               "attachments": {
+              "attachments": {
                 "type": "array",
                 "items": {
                   "type": "object",
@@ -117,8 +128,9 @@ sidebar_position: 10
         "extra": { "type": "object", "additionalProperties": true }
       },
       "required": ["tool", "summary", "tests"]
-    }
+    },
+    "extra": { "type": "object", "additionalProperties": true }
   },
-  "required": ["results"]
+  "required": ["results", "reportFormat", "specVersion"]
 }
 ```

@@ -6,4 +6,4 @@ description: Teams CTRF Plugin
 
 Send Teams notifications with test results from a CTRF report.
 
-See [Github](https://github.com/ctrf-io/teams-ctrf) for upto date information.
+See [GitHub](https://github.com/ctrf-io/teams-ctrf) for upto date information.

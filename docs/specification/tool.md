@@ -4,7 +4,7 @@ title: Tool Object
 description: Detailed documentation on the Tool object in CTRF.
 ---
 
-The `tool` object within [`results`](/docs/schema/results) is a required property that provides information about the testing tool or framework used during the test run.
+The `tool` object within [`results`](/docs/specification/results) is a required property that provides information about the testing tool or framework used during the test run.
 
 ## Properties
 

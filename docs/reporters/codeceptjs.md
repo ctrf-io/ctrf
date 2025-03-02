@@ -6,4 +6,4 @@ description: A codeceptjs JSON test results report
 
 A CodeCeptJS JSON test reporter to create test reports that follow the CTRF standard.
 
-See [Github](https://github.com/ctrf-io/codeceptjs-ctrf-json-reporter) for upto date information.
+See [GitHub](https://github.com/ctrf-io/codeceptjs-ctrf-json-reporter) for upto date information.

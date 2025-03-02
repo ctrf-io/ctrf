@@ -4,7 +4,7 @@ title: Summary Object
 description: Overview of the Summary object in CTRF.
 ---
 
-The `summary` object within [`results`](/docs/schema/results) is a required property. It provides a high-level summary of the test run, offering an at-a-glance view of the overall test results.
+The `summary` object within [`results`](/docs/specification/results) is a required property. It provides a high-level summary of the test run, offering an at-a-glance view of the overall test results.
 
 ## Properties
 

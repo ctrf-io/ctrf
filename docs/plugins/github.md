@@ -6,4 +6,4 @@ description: GitHub CTRF Plugin
 
 Publish and view test results in GitHub Actions.
 
-See [Github](https://github.com/ctrf-io/github-actions-ctrf) for upto date information.
+See [GitHub](https://github.com/ctrf-io/github-actions-ctrf) for upto date information.

@@ -4,7 +4,7 @@ title: Environment Object
 description: Details of the Environment Object in CTRF.
 ---
 
-The `environment` object within [`results`](/docs/schema/results) is an optional property.
+The `environment` object within [`results`](/docs/specification/results) is an optional property.
 
 ## Environment Object Properties
 

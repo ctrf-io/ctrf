@@ -8,6 +8,8 @@ description: CTRF examples
 
 ``` js
 {
+  "reportFormat": "CTRF",
+  "specVersion": "0.0.0",
   "results": {
     "tool": {
       "name": "jest"
@@ -47,6 +49,8 @@ description: CTRF examples
 
 ``` js
 {
+    "reportFormat": "CTRF",
+    "specVersion": "0.0.0",
     "results": {
       "tool": {
         "name": "playwright",

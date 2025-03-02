@@ -4,7 +4,7 @@ title: Test Object
 description: Details of the Test Object in CTRF.
 ---
 
-The `test` object is situated as an array element within the tests property of the [`results`](/docs/schema/results). Each `test` object provides detailed information about an individual test's execution and outcome.
+The `test` object is situated as an array element within the tests property of the [`results`](/docs/specification/results). Each `test` object provides detailed information about an individual test's execution and outcome.
 
 ## Test Object Properties
 
@@ -13,7 +13,7 @@ The `test` object contains the following properties:
 | Name         | Type     | Required | Details                                                         |
 | ------------ | -------- | -------- | --------------------------------------------------------------- |
 | `name`       | `String` | Required | The name or identifier of the test.                             |
-| `status` | `String` | Required | The outcome of the test. Must be one of the specified values: [`passed`, `failed`, `skipped`, `pending`, `other`](/docs/schema/status). |
+| `status` | `String` | Required | The outcome of the test. Must be one of the specified values: [`passed`, `failed`, `skipped`, `pending`, `other`](/docs/specification/status). |
 | `duration`   | `Number` | Required | The time taken for the test execution, in milliseconds.         |
 | `start`      | `Number` | Optional | The start time of the test as a Unix epoch                      |
 | `stop`        | `Number` | Optional | The end time of the test as a Unix epoch timestamp.            |
@@ -88,7 +88,7 @@ The `step` object contains the following properties:
 | Property | Type     | Required | Description                                                     |
 |----------|----------|----------|-----------------------------------------------------------------|
 | `name`   | `String` | Required | The description or title of the test step.                      |
-| `status` | `String` | Required | The outcome of the step. Must be one of the specified values: [`passed`, `failed`, `skipped`, `pending`, `other`](/docs/schema/status). |
+| `status` | `String` | Required | The outcome of the step. Must be one of the specified values: [`passed`, `failed`, `skipped`, `pending`, `other`](/docs/specification/status). |
 | `extra`      | `Object` | Optional | Custom data relevant to the step.                           |
 
 ## Step Object Example

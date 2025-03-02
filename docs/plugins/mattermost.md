@@ -6,4 +6,4 @@ description: Slack CTRF Plugin
 
 Send MatterMost notifications with test results from a CTRF report.
 
-See [Github](https://github.com/ctrf-io/mattermost-ctrf) for upto date information.
+See [GitHub](https://github.com/ctrf-io/mattermost-ctrf) for upto date information.

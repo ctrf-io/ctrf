@@ -4,7 +4,7 @@ title: Test Status
 description: Explanation of the Status property in Test Object within CTRF.
 ---
 
-The `status` property in each [`test`](/docs/schema/test) Object is a key descriptor that indicates the outcome of a test. It's a required field and must be one of the following string values: `passed`, `failed`, `skipped`, or `pending`. Each status value conveys specific information about the test's execution and result.
+The `status` property in each [`test`](/docs/specification/test) Object is a key descriptor that indicates the outcome of a test. It's a required field and must be one of the following string values: `passed`, `failed`, `skipped`, or `pending`. Each status value conveys specific information about the test's execution and result.
 
 ## Status Values
 

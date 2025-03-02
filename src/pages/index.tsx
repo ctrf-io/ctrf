@@ -31,9 +31,9 @@ function HomepageHeader() {
           </Link>
           <Link
             className={clsx('button button--secondary button--lg', styles.customButton)}
-            to="/docs/schema/overview"
+            to="/docs/specification/overview"
           >
-            Schema
+            Specification
           </Link>
           <span className={styles.githubButtons}
           style={{ 
@@ -71,8 +71,8 @@ export default function Home(): JSX.Element {
         fontSize: '1.2rem'
       }}>
         <div style={{ color: '#45ba4b', fontSize: '2rem' }}>💚</div>
-        <h4 style={{ marginBottom: '0.3rem' }}>CTRF tooling is free and open source</h4>
-        <h4 style={{ marginTop: '0.3rem' }}>You can support the project by following us on GitHub</h4>
+        <h3 style={{ marginBottom: '0.3rem' }}>CTRF tooling is free and open source</h3>
+        <h3 style={{ marginTop: '0.3rem' }}>You can support the project by following on GitHub</h3>
       </div>
       <HomepageFeatures />
       <HomepageTooling />

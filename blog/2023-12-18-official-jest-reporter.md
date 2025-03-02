@@ -5,4 +5,4 @@ authors: mt
 tags: [jest, release, announcement]
 ---
 
-CTRF has released an official Jest reporter, that can be used to generate CTRF compliant test reports. See [Github](https://github.com/ctrf-io/jest-ctrf-json-reporter) for upto date information
+CTRF has released an official Jest reporter, that can be used to generate CTRF compliant test reports. See [GitHub](https://github.com/ctrf-io/jest-ctrf-json-reporter) for upto date information

@@ -56,7 +56,6 @@ const config: Config = {
 
   themeConfig: {
     metadata: [{name: 'description', content: 'A common universal JSON test report schema that provides standardized format for JSON test results reports'}],
-    // Replace with your project's social card
     image: 'img/logo.png',
     announcementBar: {
       id: 'support_us',
@@ -79,6 +78,7 @@ const config: Config = {
           position: 'left',
           label: 'Docs',
         },
+        { to: 'docs/specification/overview', label: 'Specification', position: 'left' },
         { to: '/integrations', label: 'Integrations', position: 'left' },
         { to: '/docs/contributing/', label: 'Contribute', position: 'left'},
         { to: '/blog', label: 'Blog', position: 'left' },
