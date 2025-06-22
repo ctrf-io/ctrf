@@ -256,6 +256,15 @@ const ReportersPage: React.FC = () => {
       githubUrl: 'https://github.com/dusc-dev/rspec-ctrf',
     }, 
     {
+      name: 'Rust Reporter',
+      description: 'A language empowering everyone to build reliable and efficient software.',
+      image: '/img/rust.svg',
+      source: 'community',
+      language: 'Rust',
+      type: 'reporter',
+      githubUrl: 'https://gitlab.com/ctrf-rs/ctrf-rs',
+    },
+    {
       name: 'Cucumber Ruby Reporter',
       description: 'Cucumber Ruby lets you write automated tests in plain language',
       image: '/img/cucumber.svg',
@@ -266,7 +275,16 @@ const ReportersPage: React.FC = () => {
     },
     {
       name: 'Vitest Reporter',
-      description: 'Next Generation Testing Framework',
+      description: 'Next Generation Testing Framework - D2T implementation',
+      image: '/img/vitest.svg',
+      source: 'community',
+      language: 'JavaScript',
+      type: 'reporter',
+      githubUrl: 'https://github.com/david2tm/d2t-vitest-ctrf-json-reporter',
+    },
+    {
+      name: 'Vitest Reporter',
+      description: 'Next Generation Testing Framework - Avinya implementation',
       image: '/img/vitest.svg',
       source: 'community',
       language: 'JavaScript',
