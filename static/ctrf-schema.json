@@ -54,6 +54,7 @@
               "suite": { "type": "string" },
               "message": { "type": "string" },
               "trace": { "type": "string" },
+              "snippet": { "type": "string" },
               "ai": { "type": "string" },
               "line": { "type": "integer" },
               "rawStatus": { "type": "string" },
@@ -62,10 +63,13 @@
               "filePath": { "type": "string" },
               "retries": { "type": "integer" },
               "flaky": { "type": "boolean" },
+              "stdout": { "type": "array", "items": { "type": "string" } },
+              "stderr": { "type": "array", "items": { "type": "string" } },
+              "threadId": { "type": "string" },
               "browser": { "type": "string" },
               "device": { "type": "string" },
               "screenshot": { "type": "string" },
-               "attachments": {
+              "attachments": {
                 "type": "array",
                 "items": {
                   "type": "object",
