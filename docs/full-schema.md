@@ -28,9 +28,10 @@ sidebar_position: 10
         "tool": {
           "type": "object",
           "properties": {
-            "name": { "type": "string" },
+            "name": { "type": "string", "minLength": 1 },
             "version": { "type": "string" },
-            "extra": { "type": "object", "additionalProperties": true }
+            "extra": { "type": "object", "additionalProperties": true },
+            "additionalProperties": false
           },
           "required": ["name"]
         },
@@ -43,10 +44,12 @@ sidebar_position: 10
             "skipped": { "type": "integer" },
             "pending": { "type": "integer" },
             "other": { "type": "integer" },
+            "flaky": { "type": "integer" },
             "suites": { "type": "integer" },
             "start": { "type": "integer" },
             "stop": { "type": "integer" },
-            "extra": { "type": "object", "additionalProperties": true }
+            "extra": { "type": "object", "additionalProperties": true },
+            "additionalProperties": false
           },
           "required": ["tests", "passed", "failed", "skipped", "pending", "other", "start", "stop"]
         },
@@ -55,12 +58,17 @@ sidebar_position: 10
           "items": {
             "type": "object",
             "properties": {
-              "name": { "type": "string" },
+              "id": { "type": "string", "format": "uuid" },
+              "name": { "type": "string", "minLength": 1 },
               "status": { "type": "string", "enum": ["passed", "failed", "skipped", "pending", "other"] },
               "duration": { "type": "integer" },
               "start": { "type": "integer" },
               "stop": { "type": "integer" },
-              "suite": { "type": "string" },
+              "suite": {
+                "type": "array",
+                "items": { "type": "string", "minLength": 1 },
+                "minItems": 1
+              },
               "message": { "type": "string" },
               "trace": { "type": "string" },
               "snippet": { "type": "string" },
@@ -71,6 +79,54 @@ sidebar_position: 10
               "type": { "type": "string" },
               "filePath": { "type": "string" },
               "retries": { "type": "integer" },
+              "retryAttempts": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "attempt": { "type": "integer", "minimum": 1 },
+                    "status": {
+                      "type": "string",
+                      "enum": ["passed", "failed", "skipped", "pending", "other"]
+                    },
+                    "duration": { "type": "integer" },
+                    "message": { "type": "string" },
+                    "trace": { "type": "string" },
+                    "line": { "type": "integer" },
+                    "snippet": { "type": "string" },
+                    "stdout": {
+                      "type": "array",
+                      "items": { "type": "string" }
+                    },
+                    "stderr": {
+                      "type": "array",
+                      "items": { "type": "string" }
+                    },
+                    "start": { "type": "integer" },
+                    "stop": { "type": "integer" },
+                    "attachments": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": { "type": "string" },
+                          "contentType": { "type": "string" },
+                          "path": { "type": "string" },
+                          "extra": { "type": "object", "additionalProperties": true },
+                          "additionalProperties": false
+                        },
+                        "required": ["name", "contentType", "path"]
+                      }
+                    },
+                    "extra": {
+                      "type": "object",
+                      "additionalProperties": true
+                    },
+                    "additionalProperties": false
+                  },
+                  "required": ["attempt", "status"]
+                }
+              },
               "flaky": { "type": "boolean" },
               "stdout": { "type": "array", "items": { "type": "string" } },
               "stderr": { "type": "array", "items": { "type": "string" } },
@@ -86,12 +142,13 @@ sidebar_position: 10
                     "name": { "type": "string" },
                     "contentType": { "type": "string" },
                     "path": { "type": "string" },
-                    "extra": { "type": "object", "additionalProperties": true }
+                    "extra": { "type": "object", "additionalProperties": true },
+                    "additionalProperties": false
                   },
                   "required": ["name", "contentType", "path"]
                 }
               },
-              "parameters": { "type": "object" },
+              "parameters": { "type": "object", "additionalProperties": true },
               "steps": {
                 "type": "array",
                 "items": {
@@ -99,12 +156,27 @@ sidebar_position: 10
                   "properties": {
                     "name": { "type": "string" },
                     "status": { "type": "string", "enum": ["passed", "failed", "skipped", "pending", "other"] },
-                    "extra": { "type": "object", "additionalProperties": true }
+                    "extra": { "type": "object", "additionalProperties": true },
+                    "additionalProperties": false
                   },
                   "required": ["name", "status"]
                 }
               },
-              "extra": { "type": "object", "additionalProperties": true }
+              "insights": {
+                "type": "object",
+                "properties": {
+                  "passRate": { "$ref": "#/definitions/metricDelta" },
+                  "failRate": { "$ref": "#/definitions/metricDelta" },
+                  "flakyRate": { "$ref": "#/definitions/metricDelta" },
+                  "averageDuration": { "$ref": "#/definitions/metricDelta" },
+                  "p95Duration": { "$ref": "#/definitions/metricDelta" },
+                  "executedInRuns": { "type": "integer" },
+                  "extra": { "type": "object", "additionalProperties": true },
+                  "additionalProperties": false
+                }
+              },
+              "extra": { "type": "object", "additionalProperties": true },
+              "additionalProperties": false
             },
             "required": ["name", "status", "duration"]
           }
@@ -115,6 +187,7 @@ sidebar_position: 10
             "reportName": { "type": "string" },
             "appName": { "type": "string" },
             "appVersion": { "type": "string" },
+            "buildId": { "type": "string" },
             "buildName": { "type": "string" },
             "buildNumber": { "type": "string" },
             "buildUrl": { "type": "string" },  
@@ -126,15 +199,42 @@ sidebar_position: 10
             "osRelease": { "type": "string" },
             "osVersion": { "type": "string" },
             "testEnvironment": { "type": "string" },
-            "extra": { "type": "object", "additionalProperties": true }
+            "extra": { "type": "object", "additionalProperties": true },
+            "additionalProperties": false
           }
         },
-        "extra": { "type": "object", "additionalProperties": true }
+        "extra": { "type": "object", "additionalProperties": true },
+        "additionalProperties": false
       },
       "required": ["tool", "summary", "tests"]
     },
-    "extra": { "type": "object", "additionalProperties": true }
+    "insights": {
+      "type": "object",
+      "properties": {
+        "runsAnalyzed": { "type": "integer" },
+        "passRate": { "$ref": "#/definitions/metricDelta" },
+        "failRate": { "$ref": "#/definitions/metricDelta" },
+        "flakyRate": { "$ref": "#/definitions/metricDelta" },
+        "averageRunDuration": { "$ref": "#/definitions/metricDelta" },
+        "averageTestDuration": { "$ref": "#/definitions/metricDelta" },
+        "extra": { "type": "object", "additionalProperties": true },
+        "additionalProperties": false
+      }
+    },
+    "extra": { "type": "object", "additionalProperties": true },
+    "additionalProperties": false
   },
-  "required": ["results", "reportFormat", "specVersion"]
+  "required": ["results", "reportFormat", "specVersion"],
+  "definitions": {
+    "metricDelta": {
+      "type": "object",
+      "properties": {
+        "current": { "type": "number" },
+        "previous": { "type": "number" },
+        "change": { "type": "number" }
+      },
+      "additionalProperties": false
+    }
+  }
 }
 ```

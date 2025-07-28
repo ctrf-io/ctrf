@@ -14,4 +14,5 @@ The root object is the top-level object in the CTRF specification. It contains t
 | `timestamp`    | `String` | Optional      | The timestamp when the report was generated.            |
 | `generatedBy`  | `String` | Optional      | The tool that generated the report.                     |
 | `results`      | `Object` | Required      | The results of the report.                              |
+| `insights`     | `Object` | Optional      | The insights of the report.                             |
 | `extra`        | `Object` | Optional      | Custom data relevant to the report.                     |
