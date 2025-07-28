@@ -44,6 +44,40 @@
           },
           "required": ["tests", "passed", "failed", "skipped", "pending", "other", "start", "stop"]
         },
+        "metrics": {
+          "type": "object",
+          "properties": {
+            "passRate": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "failRate": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "flakyRate": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "averageTestDuration": {
+              "type": "number",
+              "minimum": 0
+            },
+            "p95TestDuration": {
+              "type": "number",
+              "minimum": 0
+            },
+            "extra": {
+              "type": "object",
+              "additionalProperties": true
+            },
+            "additionalProperties": false
+          },
+          "additionalProperties": false
+        },  
         "tests": {
           "type": "array",
           "items": {
