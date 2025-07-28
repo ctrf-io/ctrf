@@ -202,8 +202,8 @@ sidebar_position: 10
                   "passRate": { "$ref": "#/definitions/metricDelta" },
                   "failRate": { "$ref": "#/definitions/metricDelta" },
                   "flakyRate": { "$ref": "#/definitions/metricDelta" },
-                  "averageDuration": { "$ref": "#/definitions/metricDelta" },
-                  "p95Duration": { "$ref": "#/definitions/metricDelta" },
+                  "averageTestDuration": { "$ref": "#/definitions/metricDelta" },
+                  "p95TestDuration": { "$ref": "#/definitions/metricDelta" },
                   "executedInRuns": { "type": "integer" },
                   "extra": { "type": "object", "additionalProperties": true },
                   "additionalProperties": false
@@ -254,6 +254,17 @@ sidebar_position: 10
         "extra": { "type": "object", "additionalProperties": true },
         "additionalProperties": false
       }
+    },
+    "baseline": {
+      "type": "object",
+      "properties": {
+        "reportId": { "type": "string", "format": "uuid" },
+        "source": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "extra": { "type": "object", "additionalProperties": true },
+        "additionalProperties": false
+      },
+      "required": ["reportId"]
     },
     "extra": { "type": "object", "additionalProperties": true },
     "additionalProperties": false

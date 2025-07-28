@@ -17,12 +17,13 @@ The top-level report `insights` object includes aggregated metrics for the entir
 
 | Property           | Type           | Description                                                |
 | ------------------ | -------------- | ----------------------------------------------------------|
-| `runsAnalyzed`      | `integer`      | Number of test runs included in the insights calculation. |
-| `flakyRate`        | [`metricDelta`](#/definitions/metricDelta) | Change in flaky test rate compared to previous runs.       |
+| `runsAnalyzed`      | `Number`      | Number of test runs included in the insights calculation. |
+| `passRate`         | [`metricDelta`](#/definitions/metricDelta) | Change in pass rate across all tests.                    |
 | `failRate`         | [`metricDelta`](#/definitions/metricDelta) | Change in failure rate across all tests.                    |
+| `flakyRate`        | [`metricDelta`](#/definitions/metricDelta) | Change in flaky test rate compared to previous runs.       |
 | `averageRunDuration` | [`metricDelta`](#/definitions/metricDelta) | Change in average total test run duration.                 |
 | `averageTestDuration`| [`metricDelta`](#/definitions/metricDelta) | Change in average duration per test.                        |
-| `extra`            | `object`       | Optional custom metrics or data.                            |
+| `extra`            | `Object`       | Optional custom metrics or data.                            |
 
 ## Test-level Insights
 
@@ -30,13 +31,13 @@ Within each test object in the `results.tests` array, there is an `insights` obj
 
 | Property         | Type           | Description                                                |
 | ---------------- | -------------- | ----------------------------------------------------------|
-| `flakyRate`      | [`metricDelta`](#/definitions/metricDelta) | Change in flakiness for this test.                         |
+| `passRate`       | [`metricDelta`](#/definitions/metricDelta) | Change in pass rate for this test.                          |
 | `failRate`       | [`metricDelta`](#/definitions/metricDelta) | Change in failure rate for this test.                      |
-| `skippedRate`    | [`metricDelta`](#/definitions/metricDelta) | Change in skip rate for this test.                          |
-| `averageDuration`| [`metricDelta`](#/definitions/metricDelta) | Change in average execution duration for this test.        |
-| `p95Duration`    | [`metricDelta`](#/definitions/metricDelta) | Change in 95th percentile execution duration.               |
-| `executedInRuns` | `integer`      | Number of runs in which this test was executed.            |
-| `extra`          | `object`       | Optional additional insights or metadata for this test.   |
+| `flakyRate`      | [`metricDelta`](#/definitions/metricDelta) | Change in flakiness for this test.                         |
+| `averageTestDuration`| [`metricDelta`](#/definitions/metricDelta) | Change in average execution duration for this test.        |
+| `p95TestDuration`    | [`metricDelta`](#/definitions/metricDelta) | Change in 95th percentile execution duration for this test. |
+| `executedInRuns` | `Number`      | Number of runs in which this test was executed.            |
+| `extra`          | `Object`       | Optional additional insights or metadata for this test.   |
 
 ## What is a `metricDelta`?
 
@@ -44,11 +45,9 @@ The `metricDelta` object represents the change in a metric over time, with these
 
 | Property   | Type    | Description                                                                                  |
 | ---------- | ------- | --------------------------------------------------------------------------------------------|
-| `current`  | number  | Current value of the metric.                                           |
-| `previous` | number  | Previous value of the metric.                                                               |
-| `change`   | number  | Percent change between current and previous values. |
-
-All percentage values are expressed as **fractional decimals** between `0` and `1`. For example, `0.25` represents `25%`.
+| `current`  | `Number`  | Current value of the metric.                                           |
+| `previous` | `Number`  | Previous value of the metric.                                                               |
+| `change`   | `Number`  | Percent change between current and previous values. |
 
 ## Example
 
