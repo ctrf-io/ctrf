@@ -22,6 +22,7 @@ The top-level report `insights` object includes aggregated metrics for the entir
 | `failRate`         | [`metricDelta`](#/definitions/metricDelta) | Change in failure rate across all tests.                    |
 | `flakyRate`        | [`metricDelta`](#/definitions/metricDelta) | Change in flaky test rate compared to previous runs.       |
 | `averageRunDuration` | [`metricDelta`](#/definitions/metricDelta) | Change in average total test run duration.                 |
+| `p95RunDuration` | [`metricDelta`](#/definitions/metricDelta) | Change in 95th percentile total test run duration.        |
 | `averageTestDuration`| [`metricDelta`](#/definitions/metricDelta) | Change in average duration per test.                        |
 | `extra`            | `Object`       | Optional custom metrics or data.                            |
 
@@ -70,7 +71,8 @@ Here is a simplified example of an `insights` object at the report and test leve
         "insights": {
           "flakyRate": { "current": 0.15, "previous": 0.10, "change": 0.05 },
           "failRate": { "current": 0.20, "previous": 0.15, "change": 0.05 },
-          "averageDuration": { "current": 100, "previous": 90, "change": 0.1 },
+          "averageTestDuration": { "current": 100, "previous": 90, "change": 0.1 },
+          "p95TestDuration": { "current": 150, "previous": 120, "change": 0.25 },
           "executedInRuns": 4
         }
       }

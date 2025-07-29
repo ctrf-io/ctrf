@@ -250,6 +250,7 @@ sidebar_position: 10
         "failRate": { "$ref": "#/definitions/metricDelta" },
         "flakyRate": { "$ref": "#/definitions/metricDelta" },
         "averageRunDuration": { "$ref": "#/definitions/metricDelta" },
+        "p95RunDuration": { "$ref": "#/definitions/metricDelta" },
         "averageTestDuration": { "$ref": "#/definitions/metricDelta" },
         "extra": { "type": "object", "additionalProperties": true },
         "additionalProperties": false
