@@ -38,6 +38,7 @@ The `test` object contains the following properties:
 | `parameters` | `Object` | Optional | The parameters or data inputs used in the test.                 |
 | `steps`      | `Array of Objects` | Optional | Individual steps in the test, especially for BDD-style testing.|
 | `attachments` | `Array of Objects` | Optional | Attachments relevant to the test.                     |
+| `insights`   | `Object` | Optional | Insights relevant to the test.                           |
 | `extra`      | `Object` | Optional | Custom data relevant to the test.                           |
 
 ## Test Object Example
@@ -66,6 +67,7 @@ The `attachment` object contains the following properties:
 | `contentType` | `String` | Required | The MIME type of the attachment (e.g., `image/png`, `text/plain`).          |
 | `path`        | `String` | Required | The absolute or relative file path to the attachment.                      |
 | `extra`      | `Object` | Optional | Custom data relevant to the attachment.                           |
+
 
 ## Attachment Object Example
 

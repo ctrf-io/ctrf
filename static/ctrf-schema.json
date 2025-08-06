@@ -214,7 +214,7 @@
             "appVersion": { "type": "string" },
             "buildId": { "type": "string" },
             "buildName": { "type": "string" },
-            "buildNumber": { "type": "string" },
+            "buildNumber": { "type": "number" },
             "buildUrl": { "type": "string" },  
             "repositoryName": { "type": "string" }, 
             "repositoryUrl": { "type": "string" },   
@@ -247,19 +247,23 @@
         "additionalProperties": false
       }
     },
-    "baseline": {
-      "type": "object",
-      "properties": {
-        "reportId": { "type": "string", "format": "uuid" },
-        "source": { "type": "string" },
-        "timestamp": { "type": "string", "format": "date-time" },
-        "extra": { "type": "object", "additionalProperties": true },
+      "baseline": {
+        "type": "object",
+        "properties": {
+          "reportId": { "type": "string", "format": "uuid" },
+          "source": { "type": "string" },
+          "timestamp": { "type": "string", "format": "date-time" },
+          "buildNumber": { "type": "integer" },
+          "buildUrl": { "type": "string", "format": "uri" },
+          "buildName": { "type": "string" },
+          "extra": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "required": ["reportId"],
         "additionalProperties": false
-      },
-      "required": ["reportId"]
-    },
-    "extra": { "type": "object", "additionalProperties": true },
-    "additionalProperties": false
+      }
   },
   "required": ["results", "reportFormat", "specVersion"],
   "definitions": {
@@ -267,7 +271,7 @@
       "type": "object",
       "properties": {
         "current": { "type": "number" },
-        "previous": { "type": "number" },
+        "baseline": { "type": "number" },
         "change": { "type": "number" }
       },
       "additionalProperties": false
