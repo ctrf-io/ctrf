@@ -1,27 +1,47 @@
 ---
-sidebar_position: 11
+sidebar_position: 12
 title: Metrics Reference
 description: Definitions for standard metrics used in CTRF insights.
 ---
 
-A metric is a numerical measurement that quantifies a specific aspect of performance, quality, or behavior of a test run.
+## Metrics Reference
 
-All percentages are expressed as **fractional decimals** between `0` and `1`. For example, a value of `0.25` represents `25%`.
+CTRF defines and uses various metrics to quantify and analyze test outcomes. A *metric* is a numerical value that represents a specific attribute or trend within the test results.
 
-## Report-level Metrics
+### Report-Level Metrics
 
-For report level metrics, all tests from all runs are included in the calculation.
+Report-level metrics are calculated using **all tests from all runs in consideration**. These metrics provide a holistic view of tests across multiple runs.
 
-## Test-level Metrics
+### Test-Level Metrics
 
-For test level metrics, all executions of the test are included in the calculation.
+Test-level metrics are computed using **all executions of a specific test case** across all runs in consideration. These metrics help evaluate individual tests over time.
+
+### Run-Level Metrics
+
+Run-level metrics are based solely on **tests executed in a single run**.
+
+### Percentage Metrics
+
+All percentage-based metrics are represented as **fractional decimal values between `0` and `1`**. For example:
+
+- `0.25` represents 25%
+- `1.0` represents 100%
+- `0` represents 0%
+
+## Terminology
+
+See the [terminology](/docs/specification/terminology) for definitions of the terms used in this document.
+
+## Metrics
+
+The following metrics are defined by the CTRF specification.
 
 ### `passRate`
 
 The pass rate is the proportion of tests with status `success`.
 
 ```text
-passRate = successes / totalAttempts
+passRate = successes / total attempts
 ```
 
 ### `failRate`
@@ -29,7 +49,7 @@ passRate = successes / totalAttempts
 The fail rate is the proportion of tests with status `failure`.
 
 ```text
-failRate = failures / totalAttempts
+failRate = failures / total attempts
 ```
 
 ### `flakyRate`
@@ -49,7 +69,7 @@ flakyRate = retries / (retries + 1)
 The average run duration is the average duration of all test runs.
 
 ```text
-averageRunDuration = totalDuration / totalRuns
+averageRunDuration = total run duration / total runs
 ```
 
 ### `averageTestDuration`
@@ -57,13 +77,21 @@ averageRunDuration = totalDuration / totalRuns
 The average test duration is the average duration of all test attempts.
 
 ```text
-averageTestDuration = totalDuration / totalAttempts
+averageTestDuration = total test duration / total results
 ```
 
 ### `p95TestDuration`
 
-The 95th percentile test duration is the duration of the 95th percentile of test attempts.
+The 95th percentile test duration is the duration of the 95th percentile of test results.
 
 ```text
-p95TestDuration = 95th percentile duration
+p95TestDuration = 95th percentile test duration from all test results
+```
+
+### `p95RunDuration`
+
+The 95th percentile run duration is the duration of the 95th percentile of test results from all runs.
+
+```text
+p95RunDuration = 95th percentile run duration from all runs
 ```

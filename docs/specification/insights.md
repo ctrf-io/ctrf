@@ -4,18 +4,28 @@ title: Insights Object
 description: Details of the Insights Object in CTRF.
 ---
 
-The `insights` object captures aggregated and comparative metrics over multiple runs. 
+## Insights
 
-Insights are calculated in two main places:
-
-- **Report-level Insights**: Summarize trends and metrics across multiple runs for the entire test report.
-- **Test-level Insights**: Summarize trends and metrics across multiple runs for individual tests within the report.
+The `insights` object captures aggregated and comparative metrics derived from multiple test runs. Insights help identify trends, patterns, and changes in test behavior over time. Insights are generated using data from previous test reports.
 
 
+Insights are computed at two primary levels:
 
-## Report Level Insights
+### Report-Level Insights
 
-The top-level report `insights` object includes aggregated metrics for the entire test report across multiple runs:
+Report-level insights summarize metrics and trends across **all runs in consideration**. These insights provide a high-level view of the overall health, stability, and performance of the test runs.
+
+### Test-Level Insights
+
+Test-level insights summarize metrics and trends across **all executions of a specific test case** in consideration. These insights help identify individual test reliability, flakiness, performance regressions, or improvements.
+
+### Metrics Definitions
+
+See the [metrics reference](/docs/specification/metrics-reference) for definitions of the metrics used in the `insights` object.
+
+## Report Level Insights Properties
+
+The top-level report `insights` object includes the following properties:
 
 | Property           | Type           | Description                                                |
 | ------------------ | -------------- | ----------------------------------------------------------|
@@ -42,7 +52,7 @@ Within each test object in the `tests` array, there is an `insights` object prov
 | `executedInRuns` | `Number`      | Number of runs in which this test was executed.            |
 | `extra`          | `Object`       | Custom data relevant to the insights   |
 
-## What is a `metricDelta`?
+## Metric Delta
 
 The `metricDelta` object represents the change in a metric over time, with these fields:
 
@@ -51,6 +61,10 @@ The `metricDelta` object represents the change in a metric over time, with these
 | `current`  | `Number`  | Current value of the metric.                                           |
 | `baseline` | `Number`  | Previous value of the metric from the baseline run.                                                               |
 | `change`   | `Number`  | Percent change between current and previous values. |
+
+## Baseline
+
+`Insights` contain changes in metrics compared to a baseline report, see the [baseline documentation](/docs/specification/baseline) for more information.
 
 ## Example
 
