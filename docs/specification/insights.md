@@ -56,8 +56,8 @@ The `metricDelta` object represents the change in a metric over time, it contain
 | Property   | Type    | Description                                                                                  |
 | ---------- | ------- | --------------------------------------------------------------------------------------------|
 | `current`  | `Number`  | Current value of the metric.                                           |
-| `baseline` | `Number`  | value of the metric from the baseline run.                                                               |
-| `change`   | `Number`  | Percent change between current and baseline values. |
+| `baseline` | `Number`  | Value of the metric from the baseline run.                                                               |
+| `change`   | `Number`  | Change between current and baseline values. |
 
 ## Baseline
 
