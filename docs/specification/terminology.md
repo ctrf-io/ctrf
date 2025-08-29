@@ -4,8 +4,6 @@ title: Terminology
 description: Definitions for terms used in the CTRF specification.
 ---
 
-## Terminology
-
 This section defines key terms used in the CTRF specification. These terms describe concepts relevant to test execution reporting and analysis.
 
 ### `report`

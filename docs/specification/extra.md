@@ -4,7 +4,7 @@ title: Extra Object
 description: Extra Object in the CTRF specification for custom extensions.
 ---
 
-The `extra` object is a flexible optional property designed for custom extensions. It allows users to include additional key-value pairs that are not predefined in the standard specification. This object is an optional property of [`results`](/docs/specification/results), [`tool`](/docs/specification/tool), [`summary`](/docs/specification/summary), [`test`](/docs/specification/test), [`step`](docs/specification/test#step-object) and [`environment`](/docs/specification/environment). Providing a powerful way to capture and include custom data.
+The `extra` object is a flexible optional property designed for custom extensions. It allows users to include additional key-value pairs that are not predefined in the standard specification providing a powerful way to capture and include custom data.
 
 ## Structure and Flexibility
 
@@ -20,10 +20,6 @@ While the `extra` object does not have a fixed structure, below are examples of 
 | `relatedTicket`   | `String`           | Identifier for a related issue or ticket in a tracking system. |
 
 These examples are not exhaustive but demonstrate the kind of custom data that can be included in the `extra` object.
-
-## Usage Guidelines
-
-The `extra` object is a flexible property designed for custom extensions, for usage guidelines, please refer to [Integration Developers documentation](/docs/integrators/integration).
 
 ## Example
 

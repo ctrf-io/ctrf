@@ -4,9 +4,7 @@ title: Metrics Reference
 description: Definitions for standard metrics used in CTRF insights.
 ---
 
-## Metric
-
-A **metric** is a quantitative measurement or calculation of related to a run, runs or tests.
+A metric is a quantitative measurement or calculation of related to a run, runs or tests.
 
 ### Run Level Metrics
 
