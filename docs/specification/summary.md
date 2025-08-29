@@ -25,7 +25,7 @@ The `summary` object encompasses the following properties:
 | `passRate`   | `Number` | Optional | The pass rate of the test run, as a decimal between 0 and 1.                              |
 | `failRate`   | `Number` | Optional | The fail rate of the test run, as a decimal between 0 and 1.                              |
 | `flakyRate`  | `Number` | Optional | The flaky rate of the test run, as a decimal between 0 and 1.                             |
-| `averageTestDuration` | `Number` | Optional | The average test duration of the test run, in milliseconds.                             |
+| `averageTestDuration` | `Number` | Optional | The average duration of tests, in milliseconds.                             |
 | `p95TestDuration` | `Number` | Optional | The 95th percentile test duration of the test run, in milliseconds.                      |
 | `extra`      | `Object` | Optional | Custom data relevant to the summary                 |
 
