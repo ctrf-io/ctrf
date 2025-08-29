@@ -1,24 +1,24 @@
 ---
-sidebar_position: 12
+sidebar_position: 11
 title: Metrics Reference
 description: Definitions for standard metrics used in CTRF insights.
 ---
 
-## Metrics Reference
+## Metric
 
-CTRF defines and uses various metrics to quantify and analyze test outcomes. A *metric* is a numerical value that represents a specific attribute or trend within the test results.
+A **metric** is a quantitative measurement or calculation of related to a run, runs or tests.
 
-### Report-Level Metrics
+### Run Level Metrics
 
-Report-level metrics are calculated using **all tests from all runs in consideration**. These metrics provide a holistic view of tests across multiple runs.
+Run level metrics are calculated using **all tests from all runs in consideration**. These metrics provide a holistic view of tests across multiple runs.
 
-### Test-Level Metrics
+### Test Level Metrics
 
-Test-level metrics are computed using **all executions of a specific test case** across all runs in consideration. These metrics help evaluate individual tests over time.
+Test level metrics are calculated using **all executions of a specific test case** across all runs in consideration. These metrics help evaluate individual tests over time.
 
-### Run-Level Metrics
+### Single Run Level Metrics
 
-Run-level metrics are based solely on **tests executed in a single run**.
+Single run level metrics are based solely on **tests executed in the current run**.
 
 ### Percentage Metrics
 
@@ -38,7 +38,7 @@ The following metrics are defined by the CTRF specification.
 
 ### `passRate`
 
-The pass rate is the proportion of tests with status `success`.
+The pass rate is the proportion of tests with status `passed`.
 
 ```text
 passRate = successes / total attempts
@@ -46,7 +46,7 @@ passRate = successes / total attempts
 
 ### `failRate`
 
-The fail rate is the proportion of tests with status `failure`.
+The fail rate is the proportion of tests with status `failed`.
 
 ```text
 failRate = failures / total attempts
@@ -82,7 +82,7 @@ averageTestDuration = total test duration / total results
 
 ### `p95TestDuration`
 
-The 95th percentile test duration is the duration of the 95th percentile of test results.
+The 95th percentile test duration is the duration of the 95th percentile of all tests results.
 
 ```text
 p95TestDuration = 95th percentile test duration from all test results

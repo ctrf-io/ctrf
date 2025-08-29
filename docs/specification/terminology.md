@@ -1,5 +1,5 @@
 ---
-sidebar_position: 13
+sidebar_position: 12
 title: Terminology
 description: Definitions for terms used in the CTRF specification.
 ---
@@ -18,11 +18,11 @@ A logical grouping of test executions. A `run` may include multiple shards or re
 
 ### `attempt`
 
-A single execution of a test case. Multiple `attempt` objects may exist for the same test due to retries.
+A single execution of a test case. Multiple attempts may exist for the same test due to retries.
 
 ### `result`
 
-The final outcome of a test attempt, including its status and related metadata.
+The final outcome of a test.
 
 ### `build`
 
@@ -32,9 +32,9 @@ The CI/CD build or pipeline execution in which the tests were run.
 
 Derived data summarizing trends, patterns, or aggregated test results across one or more runs.
 
-### `metrics`
+### `metric`
 
-Quantitative values that describe properties of tests or runs, such as duration, pass rate, or coverage.
+Quantitative value that describes properties of tests or runs, such as duration, pass rate, or coverage.
 
 ### `flaky`
 

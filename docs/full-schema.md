@@ -48,45 +48,16 @@ sidebar_position: 10
             "suites": { "type": "integer" },
             "start": { "type": "integer" },
             "stop": { "type": "integer" },
+            "passRate": { "type": "number", "minimum": 0, "maximum": 1 },
+            "failRate": { "type": "number", "minimum": 0, "maximum": 1 },
+            "flakyRate": { "type": "number", "minimum": 0, "maximum": 1 },
+            "averageTestDuration": { "type": "number", "minimum": 0 },
+            "p95TestDuration": { "type": "number", "minimum": 0 },
             "extra": { "type": "object", "additionalProperties": true },
             "additionalProperties": false
           },
           "required": ["tests", "passed", "failed", "skipped", "pending", "other", "start", "stop"]
-        },
-        "metrics": {
-          "type": "object",
-          "properties": {
-            "passRate": {
-              "type": "number",
-              "minimum": 0,
-              "maximum": 1
-            },
-            "failRate": {
-              "type": "number",
-              "minimum": 0,
-              "maximum": 1
-            },
-            "flakyRate": {
-              "type": "number",
-              "minimum": 0,
-              "maximum": 1
-            },
-            "averageTestDuration": {
-              "type": "number",
-              "minimum": 0
-            },
-            "p95TestDuration": {
-              "type": "number",
-              "minimum": 0
-            },
-            "extra": {
-              "type": "object",
-              "additionalProperties": true
-            },
-            "additionalProperties": false
-          },
-          "additionalProperties": false
-        },  
+        }, 
         "tests": {
           "type": "array",
           "items": {
@@ -245,13 +216,13 @@ sidebar_position: 10
     "insights": {
       "type": "object",
       "properties": {
-        "runsAnalyzed": { "type": "integer" },
         "passRate": { "$ref": "#/definitions/metricDelta" },
         "failRate": { "$ref": "#/definitions/metricDelta" },
         "flakyRate": { "$ref": "#/definitions/metricDelta" },
         "averageRunDuration": { "$ref": "#/definitions/metricDelta" },
         "p95RunDuration": { "$ref": "#/definitions/metricDelta" },
         "averageTestDuration": { "$ref": "#/definitions/metricDelta" },
+        "runsAnalyzed": { "type": "integer" },
         "extra": { "type": "object", "additionalProperties": true },
         "additionalProperties": false
       }
@@ -260,11 +231,11 @@ sidebar_position: 10
         "type": "object",
         "properties": {
           "reportId": { "type": "string", "format": "uuid" },
-          "source": { "type": "string" },
           "timestamp": { "type": "string", "format": "date-time" },
+          "source": { "type": "string" },
           "buildNumber": { "type": "integer" },
-          "buildUrl": { "type": "string", "format": "uri" },
           "buildName": { "type": "string" },
+          "buildUrl": { "type": "string", "format": "uri" },
           "extra": {
             "type": "object",
             "additionalProperties": true

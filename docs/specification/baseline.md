@@ -4,9 +4,9 @@ title: Baseline Object
 description: Details of the Baseline Object in CTRF.
 ---
 
-The `baseline` object within the [`results`](/docs/specification/results) contains data about the baseline report.
+The `baseline` object within the [`results`](/docs/specification/results) contains information about the baseline run.
 
-A baseline report is a report that is used to compare against the current report. It is commonly used to build [`insights`](/docs/specification/insights.md) and view changes in tests over time.
+A baseline run is a run that is used to compare against the current run.
 
 ## Properties
 

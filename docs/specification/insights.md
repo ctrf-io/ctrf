@@ -6,41 +6,40 @@ description: Details of the Insights Object in CTRF.
 
 ## Insights
 
-The `insights` object captures aggregated and comparative metrics derived from multiple test runs. Insights help identify trends, patterns, and changes in test behavior over time. Insights are generated using data from previous test reports.
-
+The `insights` object contains metrics derived from multiple test runs. Insights help identify trends, patterns, and changes in test behavior over time.
 
 Insights are computed at two primary levels:
 
-### Report-Level Insights
+### Run Level Insights
 
-Report-level insights summarize metrics and trends across **all runs in consideration**. These insights provide a high-level view of the overall health, stability, and performance of the test runs.
+The `insights` object within the `root` level object contains metrics from across **all runs in consideration**. These insights provide a run level view of the test runs.
 
-### Test-Level Insights
+### Test Level Insights
 
-Test-level insights summarize metrics and trends across **all executions of a specific test case** in consideration. These insights help identify individual test reliability, flakiness, performance regressions, or improvements.
+The `insights` object within the `test` object contains metrics fromt across **all executions of a specific test case in consideration**. These insights provide a test level view of the of the test.
 
 ### Metrics Definitions
 
-See the [metrics reference](/docs/specification/metrics-reference) for definitions of the metrics used in the `insights` object.
+See the [metrics reference](/docs/specification/metrics-reference) for definitions of the metrics contained in the `insights` object.
 
-## Report Level Insights Properties
+## Run Level Insights Properties
 
-The top-level report `insights` object includes the following properties:
+The run level `insights` object includes the following properties:
 
 | Property           | Type           | Description                                                |
 | ------------------ | -------------- | ----------------------------------------------------------|
-| `runsAnalyzed`      | `Number`      | Number of test runs included in the insights calculation. |
 | `passRate`         | [`metricDelta`](#/definitions/metricDelta) | Pass rate across all tests.                    |
 | `failRate`         | [`metricDelta`](#/definitions/metricDelta) | Failure rate across all tests.                    |
 | `flakyRate`        | [`metricDelta`](#/definitions/metricDelta) | Flaky test rate across all tests.       |
 | `averageRunDuration` | [`metricDelta`](#/definitions/metricDelta) | Average total test run duration.                 |
 | `p95RunDuration` | [`metricDelta`](#/definitions/metricDelta) | 95th percentile total test run duration.        |
 | `averageTestDuration`| [`metricDelta`](#/definitions/metricDelta) | Average duration per test.                        |
+| `runsAnalyzed`      | `Number`      | Number of test runs included in the insights calculation. |
 | `extra`            | `Object`       | Optional custom metrics or data.                            |
 
-## Test Level Insights
+## Test Level Insights Properties
 
-Within each test object in the `tests` array, there is an `insights` object providing per-test metrics:
+The test level `insights` object includes the following properties:
 
 | Property         | Type           | Description                                                |
 | ---------------- | -------------- | ----------------------------------------------------------|
@@ -54,21 +53,21 @@ Within each test object in the `tests` array, there is an `insights` object prov
 
 ## Metric Delta
 
-The `metricDelta` object represents the change in a metric over time, with these fields:
+The `metricDelta` object represents the change in a metric over time, it contains the following properties:
 
 | Property   | Type    | Description                                                                                  |
 | ---------- | ------- | --------------------------------------------------------------------------------------------|
 | `current`  | `Number`  | Current value of the metric.                                           |
-| `baseline` | `Number`  | Previous value of the metric from the baseline run.                                                               |
-| `change`   | `Number`  | Percent change between current and previous values. |
+| `baseline` | `Number`  | value of the metric from the baseline run.                                                               |
+| `change`   | `Number`  | Percent change between current and baseline values. |
 
 ## Baseline
 
-`Insights` contain changes in metrics compared to a baseline report, see the [baseline documentation](/docs/specification/baseline) for more information.
+See the [baseline documentation](/docs/specification/baseline) for more information on baselines.
 
 ## Example
 
-Here is a simplified example of an `insights` object at the report and test level:
+Here is an example of an `insights` object at the report and test level:
 
 ```json
 {

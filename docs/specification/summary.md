@@ -18,9 +18,15 @@ The `summary` object encompasses the following properties:
 | `pending`     | `Number` | Required | The count of tests pending.                           |
 | `skipped`     | `Number` | Required | The count of tests skipped.                           |
 | `other`       | `Number` | Required | The count of tests with other outcomes.               |
+| `flaky`      | `Number` | Required | The count of tests that were flaky.                    |
 | `suites`      | `Number` | Optional | The count of suites                                   |
 | `start`      | `Number` | Required | The start time of the test run, in milliseconds since the Unix Epoch.                      |
-| `stop`      | `Number` | Required | TThe stop time of the test run, in milliseconds since the Unix Epoch.                       |
+| `stop`      | `Number` | Required | The stop time of the test run, in milliseconds since the Unix Epoch.                       |
+| `passRate`   | `Number` | Optional | The pass rate of the test run, as a decimal between 0 and 1.                              |
+| `failRate`   | `Number` | Optional | The fail rate of the test run, as a decimal between 0 and 1.                              |
+| `flakyRate`  | `Number` | Optional | The flaky rate of the test run, as a decimal between 0 and 1.                             |
+| `averageTestDuration` | `Number` | Optional | The average test duration of the test run, in milliseconds.                             |
+| `p95TestDuration` | `Number` | Optional | The 95th percentile test duration of the test run, in milliseconds.                      |
 | `extra`      | `Object` | Optional | Custom data relevant to the summary                 |
 
 ## Example
@@ -35,6 +41,7 @@ Below is an example of the `summary` object.
   "pending": 1,
   "skipped": 0,
   "other": 0,
+  "flaky": 1,
   "suites": 1,
   "start": 1706644023000,
   "stop": 1706644043000
