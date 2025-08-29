@@ -6,7 +6,7 @@ description: Details of the Baseline Object in CTRF.
 
 The `baseline` object within the [`results`](/docs/specification/results) contains information about the baseline run.
 
-A baseline run is a run that is used to compare against the current run.
+A baseline run is used to compare against the current run.
 
 ## Properties
 

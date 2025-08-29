@@ -22,6 +22,7 @@ The `summary` object encompasses the following properties:
 | `suites`      | `Number` | Optional | The count of suites                                   |
 | `start`      | `Number` | Required | The start time of the test run, in milliseconds since the Unix Epoch.                      |
 | `stop`      | `Number` | Required | The stop time of the test run, in milliseconds since the Unix Epoch.                       |
+| `duration`   | `Number` | Required | The total duration of the test run, in milliseconds. |
 | `passRate`   | `Number` | Optional | The pass rate of the test run, as a decimal between 0 and 1.                              |
 | `failRate`   | `Number` | Optional | The fail rate of the test run, as a decimal between 0 and 1.                              |
 | `flakyRate`  | `Number` | Optional | The flaky rate of the test run, as a decimal between 0 and 1.                             |

@@ -17,6 +17,7 @@ This project is pre v1. Breaking changes may occur. All notable changes to the C
 - Root level baseline object
 - summary flaky property
 - summary passRate, failRate, flakyRate, averageTestDuration, p95TestDuration properties
+- summary duration property
 
 ---
 

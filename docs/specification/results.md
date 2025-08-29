@@ -14,7 +14,6 @@ The `results` object has the following properties:
 | ------- | -------- | -------- | -------------------------------------------         |
 | `tool`  | `Object` | Required | Information about the tooling used in the test run. |
 | `summary`| `Object` | Required | A high-level summary of the test run.               |
-| `metrics`| `Object` | Required | A collection of metrics for the test run. |
 | `tests` | `Array` of [`test`](/docs/specification/test) | Required | Information about each test. |
 | `environment` | `Object` | Optional | Information about the test environment |
 | `extra`      | `Object` | Optional | custom data relevant to the test run                         |
@@ -29,9 +28,6 @@ Below is an example of the `results` object. Detailed information about each pro
       ...
     },
     "summary": {
-      ...
-    },
-    "metrics": {
       ...
     },
     "tests": [
