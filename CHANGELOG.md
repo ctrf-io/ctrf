@@ -1,6 +1,6 @@
 # Changelog
 
-This project is pre v1. Breaking changes may occur. All notable changes to the CTRF schema will be documented in this file.
+You'll notice that v1 of the schema hasn't been released yet, we are still getting feedback from users. All notable changes to the CTRF schema will be documented in this file.
 
 ## [0.0.0] - 2025-08-29
 

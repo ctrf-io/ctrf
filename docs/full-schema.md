@@ -195,7 +195,7 @@ sidebar_position: 10
             "appVersion": { "type": "string" },
             "buildId": { "type": "string" },
             "buildName": { "type": "string" },
-            "buildNumber": { "type": "number" },
+            "buildNumber": { "type": "integer" },
             "buildUrl": { "type": "string" },  
             "repositoryName": { "type": "string" }, 
             "repositoryUrl": { "type": "string" },   
