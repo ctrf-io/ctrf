@@ -25,7 +25,8 @@ The `test` object contains the following properties:
 | `rawStatus`   | `String`| Optional | The original status of the test before mapping to CTRF status.  |
 | `tags`       | `Array of Strings`| Optional | Labels or categorisation for the test (e.g., ["UI", "Login"]). |
 | `type`       | `String`| Optional | The type of test (e.g., "unit", "integration", "e2e").           |
-| `filePath`   | `String` | Optional | The file path where the test is located in the project.         |
+| `filePath`   | `String` | Optional | The file path where the test is located.         |
+| `line`      | `Number` | Optional | Line number where the test is located.               |
 | `retries`    | `Number` | Optional | The number of retries attempted for the test.                     |
 | `flaky`      | `Boolean`| Optional | Indicates whether the test result is flaky                      |
 | `stdout`     | `Array of Strings` | Optional | The standard output of the test.                      |
