@@ -6,6 +6,8 @@ description: Details of the Insights Object in CTRF.
 
 The `insights` object contains metrics derived from multiple test runs. Insights help identify trends, patterns, and changes in test behavior over time.
 
+The `insights` object is optional and is usually added by post-processing tools.
+
 Insights are computed at two primary levels:
 
 ### Run Level Insights
