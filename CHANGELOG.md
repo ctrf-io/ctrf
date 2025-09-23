@@ -18,6 +18,7 @@ You'll notice that v1 of the schema hasn't been released yet, we are still getti
 - summary flaky property
 - summary passRate, failRate, flakyRate, averageTestDuration, p95TestDuration properties
 - summary duration property
+- baseline commit property
 
 ---
 

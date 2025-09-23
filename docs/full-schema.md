@@ -233,6 +233,7 @@ sidebar_position: 10
           "buildNumber": { "type": "integer" },
           "buildName": { "type": "string" },
           "buildUrl": { "type": "string", "format": "uri" },
+          "commit": { "type": "string" },
           "extra": {
             "type": "object",
             "additionalProperties": true

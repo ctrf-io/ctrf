@@ -17,7 +17,8 @@ A baseline run is used to compare against the current run.
 | `timestamp`        | `string`       | The timestamp of the baseline report.                              |
 | `buildName`        | `string`       | The name of the build.                              |
 | `buildNumber`      | `number`       | The number of the build.                              |
-| `buildUrl`         | `string`       | The URL of the build.                              |
+| `buildUrl`         | `string`       | The URL of the build.                                   |
+| `commit`           | `string`       | The commit hash of the baseline report.                              |
 | `extra`            | `object`       | Custom data relevant to the baseline report.                              |
 
 ## Example
@@ -32,5 +33,6 @@ Below is an example of the `baseline` object:
   "buildName": "1.0.0",
   "buildNumber": 1,
   "buildUrl": "https://example.com/1.0.0",
+  "commit": "abc123",
 }
 ```
