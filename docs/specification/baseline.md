@@ -27,7 +27,6 @@ A baseline run is used to compare against the current run.
 | `commit`           | `string`       | No       | The commit hash of the baseline report.                              |
 | `extra`            | `object`       | No       | Custom data relevant to the baseline report.                              |
 
-
 ## Example
 
 Below is an example of the `baseline` object:
