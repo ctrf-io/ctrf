@@ -49,11 +49,6 @@ sidebar_position: 10
             "start": { "type": "integer" },
             "stop": { "type": "integer" },
             "duration": { "type": "integer" },
-            "passRate": { "type": "number", "minimum": 0, "maximum": 1 },
-            "failRate": { "type": "number", "minimum": 0, "maximum": 1 },
-            "flakyRate": { "type": "number", "minimum": 0, "maximum": 1 },
-            "averageTestDuration": { "type": "number", "minimum": 0 },
-            "p95TestDuration": { "type": "number", "minimum": 0 },
             "extra": { "type": "object", "additionalProperties": true },
             "additionalProperties": false
           },
