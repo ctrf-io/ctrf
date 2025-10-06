@@ -26,40 +26,40 @@ See the [metrics reference](/docs/specification/metrics-reference) for definitio
 
 The run level `insights` object includes the following properties:
 
-| Property           | Type           | Description                                                |
-| ------------------ | -------------- | ----------------------------------------------------------|
-| `passRate`         | [`metricDelta`](#/definitions/metricDelta) | Pass rate across all tests.                    |
-| `failRate`         | [`metricDelta`](#/definitions/metricDelta) | Failure rate across all tests.                    |
-| `flakyRate`        | [`metricDelta`](#/definitions/metricDelta) | Flaky test rate across all tests.       |
-| `averageRunDuration` | [`metricDelta`](#/definitions/metricDelta) | Average total test run duration.                 |
-| `p95RunDuration` | [`metricDelta`](#/definitions/metricDelta) | 95th percentile total test run duration.        |
-| `averageTestDuration`| [`metricDelta`](#/definitions/metricDelta) | Average duration per test.                        |
-| `runsAnalyzed`      | `Number`      | Number of test runs included in the insights calculation. |
-| `extra`            | `Object`       | Optional custom metrics or data.                            |
+| Property           | Type           | Required | Description                                                |
+| ------------------ | -------------- | -------- | ----------------------------------------------------------|
+| `passRate`         | [`metricDelta`](#/definitions/metricDelta) | No | Pass rate across all tests.                    |
+| `failRate`         | [`metricDelta`](#/definitions/metricDelta) | No | Failure rate across all tests.                    |
+| `flakyRate`        | [`metricDelta`](#/definitions/metricDelta) | No | Flaky test rate across all tests.       |
+| `averageRunDuration` | [`metricDelta`](#/definitions/metricDelta) | No | Average total test run duration.                 |
+| `p95RunDuration` | [`metricDelta`](#/definitions/metricDelta) | No | 95th percentile total test run duration.        |
+| `averageTestDuration`| [`metricDelta`](#/definitions/metricDelta) | No | Average duration per test.                        |
+| `runsAnalyzed`      | `Number`      | No | Number of test runs included in the insights calculation. |
+| `extra`            | `Object`       | No | Optional custom metrics or data.                            |
 
 ## Test Level Insights Properties
 
 The test level `insights` object includes the following properties:
 
-| Property         | Type           | Description                                                |
-| ---------------- | -------------- | ----------------------------------------------------------|
-| `passRate`       | [`metricDelta`](#/definitions/metricDelta) | Pass rate for this test.                          |
-| `failRate`       | [`metricDelta`](#/definitions/metricDelta) | Failure rate for this test.                      |
-| `flakyRate`      | [`metricDelta`](#/definitions/metricDelta) | Flaky rate for this test.                         |
-| `averageTestDuration`| [`metricDelta`](#/definitions/metricDelta) | Average execution duration for this test.        |
-| `p95TestDuration`    | [`metricDelta`](#/definitions/metricDelta) | 95th percentile execution duration for this test. |
-| `executedInRuns` | `Number`      | Number of runs in which this test was executed.            |
-| `extra`          | `Object`       | Custom data relevant to the insights   |
+| Property         | Type           | Required | Description                                                |
+| ---------------- | -------------- | -------- | ----------------------------------------------------------|
+| `passRate`       | [`metricDelta`](#/definitions/metricDelta) | No | Pass rate for this test.                          |
+| `failRate`       | [`metricDelta`](#/definitions/metricDelta) | No | Failure rate for this test.                      |
+| `flakyRate`      | [`metricDelta`](#/definitions/metricDelta) | No | Flaky rate for this test.                         |
+| `averageTestDuration`| [`metricDelta`](#/definitions/metricDelta) | No | Average execution duration for this test.        |
+| `p95TestDuration`    | [`metricDelta`](#/definitions/metricDelta) | No | 95th percentile execution duration for this test. |
+| `executedInRuns` | `Number`      | No | Number of runs in which this test was executed.            |
+| `extra`          | `Object`       | No | Custom data relevant to the insights   |
 
 ## Metric Delta
 
 The `metricDelta` object represents the change in a metric over time, it contains the following properties:
 
-| Property   | Type    | Description                                                                                  |
-| ---------- | ------- | --------------------------------------------------------------------------------------------|
-| `current`  | `Number`  | Current value of the metric.                                           |
-| `baseline` | `Number`  | Value of the metric from the baseline run.                                                               |
-| `change`   | `Number`  | Absolute change between current and baseline values. |
+| Property   | Type    | Required | Description                                                                                  |
+| ---------- | ------- | -------- | --------------------------------------------------------------------------------------------|
+| `current`  | `Number`  | No | Current value of the metric.                                           |
+| `baseline` | `Number`  | No | Value of the metric from the baseline run.                                                               |
+| `change`   | `Number`  | No | Absolute change between current and baseline values. |
 
 ## Baseline
 

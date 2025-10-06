@@ -12,16 +12,21 @@ A baseline run is used to compare against the current run.
 
 ## Properties
 
-| Property           | Type           | Description                                                |
-| ------------------ | -------------- | ----------------------------------------------------------|
-| `reportId`         | `string`       | The ID of the baseline report.                              |
-| `source`           | `string`       | The source of the baseline report.                              |
-| `timestamp`        | `string`       | The timestamp of the baseline report.                              |
-| `buildName`        | `string`       | The name of the build.                              |
-| `buildNumber`      | `number`       | The number of the build.                              |
-| `buildUrl`         | `string`       | The URL of the build.                                   |
-| `commit`           | `string`       | The commit hash of the baseline report.                              |
-| `extra`            | `object`       | Custom data relevant to the baseline report.                              |
+// ...existing code...
+
+## Properties
+
+| Property           | Type           | Required | Description                                                |
+| ------------------ | -------------- | -------- | ----------------------------------------------------------|
+| `reportId`         | `string`       | Yes      | The ID of the baseline report.                              |
+| `source`           | `string`       | No       | The source of the baseline report.                              |
+| `timestamp`        | `string`       | No       | The timestamp of the baseline report.                              |
+| `buildName`        | `string`       | No       | The name of the build.                              |
+| `buildNumber`      | `number`       | No       | The number of the build.                              |
+| `buildUrl`         | `string`       | No       | The URL of the build.                                   |
+| `commit`           | `string`       | No       | The commit hash of the baseline report.                              |
+| `extra`            | `object`       | No       | Custom data relevant to the baseline report.                              |
+
 
 ## Example
 
