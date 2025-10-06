@@ -18,11 +18,11 @@ The `summary` object encompasses the following properties:
 | `pending`     | `Number` | Required | The count of tests pending.                           |
 | `skipped`     | `Number` | Required | The count of tests skipped.                           |
 | `other`       | `Number` | Required | The count of tests with other outcomes.               |
-| `flaky`      | `Number` | Required | The count of tests that were flaky.                    |
+| `flaky`      | `Number` | Optional | The count of tests that were flaky.                    |
 | `suites`      | `Number` | Optional | The count of suites                                   |
 | `start`      | `Number` | Required | The start time of the test run, in milliseconds since the Unix Epoch.                      |
 | `stop`      | `Number` | Required | The stop time of the test run, in milliseconds since the Unix Epoch.                       |
-| `duration`   | `Number` | Required | The total duration of the test run, in milliseconds. |
+| `duration`   | `Number` | Optional | The total duration of the test run, in milliseconds. |
 | `extra`      | `Object` | Optional | Custom data relevant to the summary                 |
 
 ## Example
