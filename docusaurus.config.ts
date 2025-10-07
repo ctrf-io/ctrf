@@ -92,7 +92,7 @@ const config: Config = {
     },
     footer: {
       style: 'dark',
-      copyright: `Built and maintained by <a href="https://github.com/ma11hewthomas">Matthew Thomas</a>
+      copyright: `Built and maintained by CTRF contributors
       <br />
       Released under the MIT License. 
       <br />
