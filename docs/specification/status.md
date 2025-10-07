@@ -15,7 +15,3 @@ The `status` property in each [`test`](/docs/specification/test) Object is a key
 | `skipped`      | The test was intentionally not executed or was skipped.                       |
 | `pending`      | The test is awaiting execution or some condition to be fulfilled.             |
 | `other`        | A catch-all status for test outcomes that cannot be mapped to the predefined statuses, typically indicating a unique or library-specific status. |
-
-## Usage Guidelines
-
-For guidance on best practices and recommendations for acurately mapping framework specific test status to the appropriate CTRF status value, please refer to [Integration Developers documentation](/docs/integrators/integration).

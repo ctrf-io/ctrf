@@ -16,6 +16,14 @@ The specification is divided into several main components, each serving a distin
 
 [**Status:**](/docs/specification/status) Allowed values that indicate the outcome of a test
 
+[**Insights:**](/docs/specification/insights) Metrics derived from multiple test runs to identify trends and patterns.
+
+[**Metrics Reference:**](/docs/specification/metrics-reference) Definitions for standard metrics used in CTRF insights.
+
+[**Baseline:**](/docs/specification/baseline) Details on how to define and use a baseline report for comparison.
+
+[**Environment:**](/docs/specification/environment) Information about the environment in which the tests were executed.
+
 [**Custom Extras:**](/docs/specification/extra) Flexible property designed for custom extendability
 
 ## Examples

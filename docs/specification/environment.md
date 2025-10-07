@@ -15,8 +15,9 @@ The `environment` object contains the following properties:
 | `reportName`   | `String` | No       | The name of the CTRF report.                                 |
 | `appName`      | `String` | No       | The name of the application being tested.                    |
 | `appVersion`   | `String` | No       | The version of the application being tested.                 |
+| `buildId`      | `String` | No       | The unique identifier for the build.                         |
 | `buildName`    | `String` | No       | The name of the build (e.g., feature branch name).           |
-| `buildNumber`  | `String` | No       | The build number or identifier.                              |
+| `buildNumber`  | `Number` | No       | The build number or identifier.                              |
 | `buildUrl`     | `String` | No       | The URL to the build in the CI/CD system.                    |
 | `repositoryName`| `String`| No       | The name of the repository where the code is hosted.         |
 | `repositoryUrl`| `String` | No       | The URL of the repository.                                   |

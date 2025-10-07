@@ -4,7 +4,7 @@ Generate the same JSON test report, no matter the test framework
 
 CTRF is a unified JSON Test Report With Seamless Developer Tool Integration
 
-You'll notice that v1 of the schema hasn't been released yet, we are still getting feedback from users. There might be changes but these will be minor. specVersion is currently 0.0.0
+You'll notice that v1 of the specification hasn't been released yet, we are still getting feedback from users. There might be changes but these will be minor. specVersion is currently 0.0.0
 
 <div align="center">
 <div style="padding: 1.5rem; border-radius: 8px; margin: 1rem 0; border: 1px solid #30363d;">
@@ -23,8 +23,11 @@ You'll notice that v1 of the schema hasn't been released yet, we are still getti
 </div>
 
 <p style="font-size: 14px; margin: 1rem 0;">
-Maintained by <a href="https://github.com/ma11hewthomas">Matthew Thomas</a><br/>
+
 Contributions are very welcome! <br/>
+Explore <a href="https://www.ctrf.io/integrations">integrations</a> <br/>
+We’d love your feedback, <a href="https://app.formbricks.com/s/cmefs524mhlh1tl01gkpvefrb">share it anonymously</a>.
+
 </p>
 </div>
 
