@@ -4,15 +4,11 @@ title: Baseline Object
 description: Details of the Baseline Object in CTRF.
 ---
 
-The `baseline` object within the [`results`](/docs/specification/results) contains information about the baseline run.
+The `baseline` object within the `root` level object contains information about the baseline run.
 
-The `baseline` object is optional and is usually added by post-processing tools.
+The `baseline` object is optional and is usually added by **consumers with post-processing**.
 
 A baseline run is used to compare against the current run.
-
-## Properties
-
-// ...existing code...
 
 ## Properties
 
