@@ -14,13 +14,13 @@ The complete CTRF report.
 
 A logical grouping of test executions. A `run` may include multiple shards or retries that are part of a single coordinated execution context.
 
-### `attempt`
-
-A single execution of a test case. Multiple attempts may exist for the same test due to retries.
-
 ### `result`
 
 The final outcome of a test.
+
+### `attempt`
+
+A single execution of a test case. Multiple attempts may exist for the same test due to retries.
 
 ### `build`
 
@@ -32,15 +32,11 @@ Derived data summarizing trends, patterns, or aggregated test results across one
 
 ### `metric`
 
-Quantitative value that describes properties of tests or runs, such as duration, pass rate, or coverage.
+Quantitative value that describes properties of tests or runs, such as pass rate.
 
 ### `flaky`
 
 A test is considered flaky if it produces both passing and failing outcomes within the same run (e.g., fails initially, then passes on retry).
-
-### `unstable`
-
-A test is considered unstable if it produces inconsistent outcomes across multiple runs, without a predictable pattern.
 
 ### `consumer`
 

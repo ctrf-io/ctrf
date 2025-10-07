@@ -4,7 +4,7 @@ title: Metrics Reference
 description: Definitions for standard metrics used in CTRF insights.
 ---
 
-A metric is a quantitative measurement or calculation of related to a collection of runs or tests.
+A metric is a quantitative measurement or calculation from a collection of runs or tests.
 
 ### Run Level Metrics
 
@@ -66,14 +66,14 @@ The average test duration is the average duration of all test attempts.
 
 This is an absolute metric, represented in milliseconds.
 
-### `p95TestDuration`
-
-The 95th percentile test duration is the duration of the 95th percentile of all tests results.
-
-This is an absolute metric, represented in milliseconds.
-
 ### `p95RunDuration`
 
 The 95th percentile run duration is the duration of the 95th percentile of test results from all runs.
+
+This is an absolute metric, represented in milliseconds.
+
+### `p95TestDuration`
+
+The 95th percentile test duration is the duration of the 95th percentile of all tests results.
 
 This is an absolute metric, represented in milliseconds.
