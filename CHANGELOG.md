@@ -1,6 +1,6 @@
 # Changelog
 
-You'll notice that v1 of the schema hasn't been released yet, we are still getting feedback from users. All notable changes to the CTRF schema will be documented in this file.
+You'll notice that v1 of the specification hasn't been released yet, we want to build a specification that reflects the needs of its users. We are still getting feedback. There might be changes but these will be tracked in this changelog. specVersion is currently 0.0.0
 
 ## [0.0.0] - 2025-08-29
 
