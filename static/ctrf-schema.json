@@ -210,7 +210,7 @@
         "additionalProperties": false
       }
     },
-      "baseline": {
+    "baseline": {
         "type": "object",
         "properties": {
           "reportId": { "type": "string", "format": "uuid" },
@@ -227,7 +227,7 @@
         },
         "required": ["reportId"],
         "additionalProperties": false
-      }
+    }
   },
   "required": ["results", "reportFormat", "specVersion"],
   "definitions": {
