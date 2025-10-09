@@ -4,7 +4,7 @@ Generate the same JSON test report, no matter the test framework
 
 CTRF is a unified JSON Test Report With Seamless Developer Tool Integration
 
-The latest specification can be found at [ctrf-schema.json](static/ctrf-schema.json)
+The schema is defined in [ctrf-schema.json](static/ctrf-schema.json)
 
 You'll notice that v1 of the specification hasn't been released yet, **we want to build a specification that reflects the needs of its users** and we are still receiving feedback. There might be changes but these will be tracked in the [changelog](CHANGELOG.md). specVersion is currently 0.0.0
 

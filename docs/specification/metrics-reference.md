@@ -48,9 +48,11 @@ This is a percentage metric.
 
 ### `flakyRate`
 
-The flaky rate is the proportion of test attempts that initially failed but eventually passed after one or more retries.
+The flaky rate is the proportion of tests attempts that failed, prior to eventually passing.
 
-The total number of test attempts is calculated as `test.retries + 1`, where the `+1` accounts for the final attempt, whether it passed or failed.
+A test is considered flaky only if its final status is `passed` and it experienced one or more failed attempts before succeeding.
+
+Tests that retry but never pass (final status `failed`) are not considered flaky and their retries are ignored.
 
 This is a percentage metric.
 

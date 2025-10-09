@@ -18,6 +18,7 @@ You'll notice that v1 of the specification hasn't been released yet, we want to 
 - summary flaky property
 - summary duration property
 - baseline commit property
+- suite as array of strings in test object
 
 ---
 

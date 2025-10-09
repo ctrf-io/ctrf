@@ -56,7 +56,11 @@
               "duration": { "type": "integer" },
               "start": { "type": "integer" },
               "stop": { "type": "integer" },
-              "suite": { "type": "string" },
+              "suite": {
+                "type": "array",
+                "items": { "type": "string" },
+                "minItems": 1
+              },
               "message": { "type": "string" },
               "trace": { "type": "string" },
               "snippet": { "type": "string" },
@@ -210,7 +214,7 @@
         "additionalProperties": false
       }
     },
-    "baseline": {
+      "baseline": {
         "type": "object",
         "properties": {
           "reportId": { "type": "string", "format": "uuid" },
@@ -227,7 +231,7 @@
         },
         "required": ["reportId"],
         "additionalProperties": false
-    }
+      }
   },
   "required": ["results", "reportFormat", "specVersion"],
   "definitions": {
