@@ -208,7 +208,7 @@ const ReportersPage: React.FC = () => {
       source: 'community',
       language: 'Java',
       type: 'reporter',
-      githubUrl: 'https://github.com/alexshamrai/junit-ctrf-extension',
+      githubUrl: 'https://github.com/alexshamrai/junit-ctrf-reporter',
     },
     {
       name: 'Selenium Reporter',
