@@ -17,7 +17,7 @@ The `test` object contains the following properties:
 | `duration`   | `Number` | Required | The time taken for the test execution, in milliseconds.         |
 | `start`      | `Number` | Optional | The start time of the test as a Unix epoch                      |
 | `stop`        | `Number` | Optional | The end time of the test as a Unix epoch timestamp.            |
-| `suite`       | `String`| Optional | The suite or group to which the test belongs.                   |
+| `suite`       | `Array of Strings`| Optional | suites for the test, from top-level suite to the immediate parent of the test                   |
 | `message`    | `String` | Optional | A descriptive message or note associated with the test result.  |
 | `trace`      | `String` | Optional | The stack trace captured if the test failed.                    |
 | `snippet`    | `String` | Optional | The code snippet that caused the test failure.                   |

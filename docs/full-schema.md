@@ -65,7 +65,11 @@ sidebar_position: 10
               "duration": { "type": "integer" },
               "start": { "type": "integer" },
               "stop": { "type": "integer" },
-              "suite": { "type": "string" },
+              "suite": {
+                "type": "array",
+                "items": { "type": "string" },
+                "minItems": 1
+              },
               "message": { "type": "string" },
               "trace": { "type": "string" },
               "snippet": { "type": "string" },
