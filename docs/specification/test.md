@@ -12,7 +12,7 @@ The `test` object contains the following properties:
 
 | Name         | Type     | Required | Details                                                         |
 | ------------ | -------- | -------- | --------------------------------------------------------------- |
-| `id`       | `String` | Optional | A UUID for the test.                              |
+| `id`       | `String` | Optional | A deterministic UUID derived from test identifiers such as name, suite and filePath.                              |
 | `name`       | `String` | Required | The name or identifier of the test.                             |
 | `status` | `String` | Required | The outcome of the test. Must be one of the specified values: [`passed`, `failed`, `skipped`, `pending`, `other`](/docs/specification/status). |
 | `duration`   | `Number` | Required | The time taken for the test execution, in milliseconds.         |
