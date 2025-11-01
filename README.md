@@ -14,7 +14,7 @@ The schema is defined in [schema-0.0.0.json](specification/schema-0.0.0.json)
 
 ## Specification
 
-The full specification is available in the [documentation](https://ctrf.io/docs/specification/overview).
+The full specification is defined in the [documentation](https://ctrf.io/docs/specification/overview).
 
 ## Versioning
 
@@ -32,7 +32,7 @@ Core tooling provides utilities for working with CTRF reports, including validat
 
 The CTRF CLI is a command-line interface for working with CTRF reports. It allows you to validate and process CTRF reports from the terminal.
 
-- [CTRF CLI](https://github.com/ctrf-io/ctrf-cli)
+- [CLI](https://github.com/ctrf-io/ctrf-cli)
 
 ## Integrations
 
