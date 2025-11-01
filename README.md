@@ -8,6 +8,13 @@ CTRF is a language and framework-agnostic JSON format for test results with firs
 
 Designed to be universal, CTRF works with any programming language, test framework, and developer tool.
 
+## Support Us
+
+You can support the project by:
+
+- Giving this repository a ⭐
+- Following the organization [@ctrf](https://github.com/ctrf-io)
+
 ## Schema
 
 The schema is defined in [schema-0.0.0.json](specification/schema-0.0.0.json)
