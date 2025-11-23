@@ -30,9 +30,9 @@ sidebar_position: 10
           "properties": {
             "name": { "type": "string", "minLength": 1 },
             "version": { "type": "string" },
-            "extra": { "type": "object", "additionalProperties": true },
-            "additionalProperties": false
+            "extra": { "type": "object", "additionalProperties": true }
           },
+          "additionalProperties": false,
           "required": ["name"]
         },
         "summary": {
@@ -49,9 +49,9 @@ sidebar_position: 10
             "start": { "type": "integer" },
             "stop": { "type": "integer" },
             "duration": { "type": "integer" },
-            "extra": { "type": "object", "additionalProperties": true },
-            "additionalProperties": false
+            "extra": { "type": "object", "additionalProperties": true }
           },
+          "additionalProperties": false,
           "required": ["tests", "passed", "failed", "skipped", "pending", "other", "start", "stop"]
         }, 
         "tests": {
@@ -113,18 +113,18 @@ sidebar_position: 10
                           "name": { "type": "string" },
                           "contentType": { "type": "string" },
                           "path": { "type": "string" },
-                          "extra": { "type": "object", "additionalProperties": true },
-                          "additionalProperties": false
+                          "extra": { "type": "object", "additionalProperties": true }
                         },
+                        "additionalProperties": false,
                         "required": ["name", "contentType", "path"]
                       }
                     },
                     "extra": {
                       "type": "object",
                       "additionalProperties": true
-                    },
-                    "additionalProperties": false
+                    }
                   },
+                  "additionalProperties": false,
                   "required": ["attempt", "status"]
                 }
               },
@@ -143,9 +143,9 @@ sidebar_position: 10
                     "name": { "type": "string" },
                     "contentType": { "type": "string" },
                     "path": { "type": "string" },
-                    "extra": { "type": "object", "additionalProperties": true },
-                    "additionalProperties": false
+                    "extra": { "type": "object", "additionalProperties": true }
                   },
+                   "additionalProperties": false,
                   "required": ["name", "contentType", "path"]
                 }
               },
@@ -157,9 +157,9 @@ sidebar_position: 10
                   "properties": {
                     "name": { "type": "string" },
                     "status": { "type": "string", "enum": ["passed", "failed", "skipped", "pending", "other"] },
-                    "extra": { "type": "object", "additionalProperties": true },
-                    "additionalProperties": false
+                    "extra": { "type": "object", "additionalProperties": true }
                   },
+                  "additionalProperties": false,
                   "required": ["name", "status"]
                 }
               },
@@ -172,13 +172,13 @@ sidebar_position: 10
                   "averageTestDuration": { "$ref": "#/definitions/metricDelta" },
                   "p95TestDuration": { "$ref": "#/definitions/metricDelta" },
                   "executedInRuns": { "type": "integer" },
-                  "extra": { "type": "object", "additionalProperties": true },
-                  "additionalProperties": false
-                }
+                  "extra": { "type": "object", "additionalProperties": true }
+                },
+                "additionalProperties": false
               },
-              "extra": { "type": "object", "additionalProperties": true },
-              "additionalProperties": false
+              "extra": { "type": "object", "additionalProperties": true }
             },
+             "additionalProperties": false,
             "required": ["name", "status", "duration"]
           }
         },
@@ -200,13 +200,13 @@ sidebar_position: 10
             "osRelease": { "type": "string" },
             "osVersion": { "type": "string" },
             "testEnvironment": { "type": "string" },
-            "extra": { "type": "object", "additionalProperties": true },
-            "additionalProperties": false
-          }
+            "extra": { "type": "object", "additionalProperties": true }
+          },
+          "additionalProperties": false
         },
-        "extra": { "type": "object", "additionalProperties": true },
-        "additionalProperties": false
+        "extra": { "type": "object", "additionalProperties": true }
       },
+      "additionalProperties": false,
       "required": ["tool", "summary", "tests"]
     },
     "insights": {
@@ -219,9 +219,9 @@ sidebar_position: 10
         "p95RunDuration": { "$ref": "#/definitions/metricDelta" },
         "averageTestDuration": { "$ref": "#/definitions/metricDelta" },
         "runsAnalyzed": { "type": "integer" },
-        "extra": { "type": "object", "additionalProperties": true },
-        "additionalProperties": false
-      }
+        "extra": { "type": "object", "additionalProperties": true }
+      },
+      "additionalProperties": false
     },
       "baseline": {
         "type": "object",
@@ -242,6 +242,7 @@ sidebar_position: 10
         "additionalProperties": false
       }
   },
+  "additionalProperties": false,
   "required": ["results", "reportFormat", "specVersion"],
   "definitions": {
     "metricDelta": {
