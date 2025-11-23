@@ -22,6 +22,7 @@ sidebar_position: 10
     "reportId": { "type": "string", "format": "uuid" },
     "timestamp": { "type": "string", "format": "date-time" },
     "generatedBy": { "type": "string" },
+    "extra": { "type": "object", "additionalProperties": true },
     "results": {
       "type": "object",
       "properties": {
