@@ -201,6 +201,7 @@ sidebar_position: 10
             "osRelease": { "type": "string" },
             "osVersion": { "type": "string" },
             "testEnvironment": { "type": "string" },
+            "healthy": { "type": "boolean" },
             "extra": { "type": "object", "additionalProperties": true }
           },
           "additionalProperties": false

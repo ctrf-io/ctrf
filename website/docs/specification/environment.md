@@ -27,4 +27,5 @@ The `environment` object contains the following properties:
 | `osRelease`    | `String` | No       | The release version of the operating system.                 |
 | `osVersion`    | `String` | No       | The version number of the operating system.                  |
 | `testEnvironment`| `String`| No      | The environment where the tests were run (e.g., staging, production). |
+| `healthy`    | `Boolean`| No       | Indicates whether the environment is healthy.                |
 | `extra`      | `Object` | Optional    | custom data relevant to the environment                       |
