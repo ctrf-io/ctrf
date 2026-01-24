@@ -167,6 +167,20 @@ Feedback and consensus are encouraged, but the maintainer makes final decisions 
 
 ---
 
+## Building Integrations
+
+CTRF welcomes community-built integrations.
+
+Integrations can be built independently and hosted in your own repositories. When ready, you can submit your integration to be listed on [ctrf.io/integrations](https://ctrf.io/integrations).
+
+For guidance on building integrations:
+
+- Follow the [reference implementation](https://github.com/ctrf-io/ctrf-js) for best practices
+- Ensure your integration produces valid CTRF output
+- Open a discussion if you need design feedback
+
+---
+
 ## Code of Conduct
 
 All contributors are expected to engage respectfully.

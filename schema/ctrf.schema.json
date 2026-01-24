@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "CTRF Report",
-  "description": "Common Test Report Format - a standardized JSON format for test execution results",
+  "title": "CTRF JSON Schema",
+  "description": "Common Test Report Format - an open standard JSON format for test results reports",
   "type": "object",
   "required": [ "results", "reportFormat", "specVersion" ],
   "properties": {

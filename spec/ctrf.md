@@ -1804,564 +1804,642 @@ to this specification.
 
 ```json title="CTRF JSON Schema"
 {
-   "$schema":"http://json-schema.org/draft-07/schema#",
-   "type":"object",
-   "properties":{
-      "reportFormat":{
-         "type":"string",
-         "enum":[
-            "CTRF"
-         ]
-      },
-      "specVersion":{
-         "type":"string",
-         "pattern":"^[0-9]+\\.[0-9]+\\.[0-9]+$"
-      },
-      "reportId":{
-         "type":"string",
-         "format":"uuid"
-      },
-      "timestamp":{
-         "type":"string",
-         "format":"date-time"
-      },
-      "generatedBy":{
-         "type":"string"
-      },
-      "extra":{
-         "type":"object",
-         "additionalProperties":true
-      },
-      "results":{
-         "type":"object",
-         "properties":{
-            "tool":{
-               "type":"object",
-               "properties":{
-                  "name":{
-                     "type":"string",
-                     "minLength":1
-                  },
-                  "version":{
-                     "type":"string"
-                  },
-                  "extra":{
-                     "type":"object",
-                     "additionalProperties":true
-                  }
-               },
-               "additionalProperties":false,
-               "required":[
-                  "name"
-               ]
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CTRF JSON Schema",
+  "description": "Common Test Report Format - an open standard JSON format for test results reports",
+  "type": "object",
+  "required": [ "results", "reportFormat", "specVersion" ],
+  "properties": {
+    "reportFormat": {
+      "description": "Document format identifier. Must be 'CTRF'",
+      "const": "CTRF"
+    },
+    "specVersion": {
+      "description": "CTRF specification version in SemVer format (MAJOR.MINOR.PATCH)",
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "reportId": {
+      "description": "Unique identifier for this report instance (UUID)",
+      "type": "string",
+      "format": "uuid"
+    },
+    "timestamp": {
+      "description": "Report generation time (RFC 3339 / ISO 8601)",
+      "type": "string",
+      "format": "date-time"
+    },
+    "generatedBy": {
+      "description": "Tool or system that produced this CTRF document",
+      "type": "string"
+    },
+    "extra": {
+      "description": "Extension point for arbitrary metadata",
+      "type": "object"
+    },
+    "results": {
+      "description": "Results of a single test execution run",
+      "type": "object",
+      "required": [ "tool", "summary", "tests" ],
+      "properties": {
+        "tool": {
+          "description": "Tool or framework that produced the test results",
+          "type": "object",
+          "required": [ "name" ],
+          "properties": {
+            "name": {
+              "description": "Name of the testing tool or framework",
+              "type": "string",
+              "minLength": 1
             },
-            "summary":{
-               "type":"object",
-               "properties":{
-                  "tests":{
-                     "type":"integer"
-                  },
-                  "passed":{
-                     "type":"integer"
-                  },
-                  "failed":{
-                     "type":"integer"
-                  },
-                  "skipped":{
-                     "type":"integer"
-                  },
-                  "pending":{
-                     "type":"integer"
-                  },
-                  "other":{
-                     "type":"integer"
-                  },
-                  "flaky":{
-                     "type":"integer"
-                  },
-                  "suites":{
-                     "type":"integer"
-                  },
-                  "start":{
-                     "type":"integer"
-                  },
-                  "stop":{
-                     "type":"integer"
-                  },
-                  "duration":{
-                     "type":"integer"
-                  },
-                  "extra":{
-                     "type":"object",
-                     "additionalProperties":true
-                  }
-               },
-               "additionalProperties":false,
-               "required":[
-                  "tests",
-                  "passed",
-                  "failed",
-                  "skipped",
-                  "pending",
-                  "other",
-                  "start",
-                  "stop"
-               ]
+            "version": {
+              "description": "Version of the testing tool",
+              "type": "string"
             },
-            "tests":{
-               "type":"array",
-               "items":{
-                  "type":"object",
-                  "properties":{
-                     "id":{
-                        "type":"string",
-                        "format":"uuid"
-                     },
-                     "name":{
-                        "type":"string",
-                        "minLength":1
-                     },
-                     "status":{
-                        "type":"string",
-                        "enum":[
-                           "passed",
-                           "failed",
-                           "skipped",
-                           "pending",
-                           "other"
-                        ]
-                     },
-                     "duration":{
-                        "type":"integer"
-                     },
-                     "start":{
-                        "type":"integer"
-                     },
-                     "stop":{
-                        "type":"integer"
-                     },
-                     "suite":{
-                        "type":"array",
-                        "items":{
-                           "type":"string"
+            "extra": {
+              "description": "Extension point for arbitrary metadata",
+              "type": "object"
+            }
+          },
+          "additionalProperties": false
+        },
+        "summary": {
+          "description": "Aggregated statistics and timing for the test run",
+          "type": "object",
+          "required": [
+            "tests",
+            "passed",
+            "failed",
+            "skipped",
+            "pending",
+            "other",
+            "start",
+            "stop"
+          ],
+          "properties": {
+            "tests": {
+              "description": "Total number of tests executed",
+              "type": "integer"
+            },
+            "passed": {
+              "description": "Count of tests with status 'passed'",
+              "type": "integer"
+            },
+            "failed": {
+              "description": "Count of tests with status 'failed'",
+              "type": "integer"
+            },
+            "skipped": {
+              "description": "Count of tests with status 'skipped'",
+              "type": "integer"
+            },
+            "pending": {
+              "description": "Count of tests with status 'pending'",
+              "type": "integer"
+            },
+            "other": {
+              "description": "Count of tests with status 'other'",
+              "type": "integer"
+            },
+            "flaky": {
+              "description": "Count of flaky tests (passed after failed attempts)",
+              "type": "integer"
+            },
+            "suites": {
+              "description": "Number of test suites in the run",
+              "type": "integer"
+            },
+            "start": {
+              "description": "Run start time (milliseconds since Unix epoch)",
+              "type": "integer"
+            },
+            "stop": {
+              "description": "Run end time (milliseconds since Unix epoch)",
+              "type": "integer"
+            },
+            "duration": {
+              "description": "Total run duration (milliseconds)",
+              "type": "integer"
+            },
+            "extra": {
+              "description": "Extension point for arbitrary metadata",
+              "type": "object"
+            }
+          },
+          "additionalProperties": false
+        },
+        "tests": {
+          "description": "List of test cases executed during the run",
+          "type": "array",
+          "items": {
+            "description": "Individual test case result",
+            "type": "object",
+            "required": [ "name", "status", "duration" ],
+            "properties": {
+              "id": {
+                "description": "Unique, stable identifier for the test case (UUID)",
+                "type": "string",
+                "format": "uuid"
+              },
+              "name": {
+                "description": "Name or title of the test case",
+                "type": "string",
+                "minLength": 1
+              },
+              "status": {
+                "description": "Final outcome of the test case",
+                "enum": [ "passed", "failed", "skipped", "pending", "other" ]
+              },
+              "duration": {
+                "description": "Test execution time (milliseconds)",
+                "type": "integer"
+              },
+              "start": {
+                "description": "Test start time (milliseconds since Unix epoch)",
+                "type": "integer"
+              },
+              "stop": {
+                "description": "Test end time (milliseconds since Unix epoch)",
+                "type": "integer"
+              },
+              "suite": {
+                "description": "Suite hierarchy from top-level to immediate parent",
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string"
+                }
+              },
+              "message": {
+                "description": "Error or failure message",
+                "type": "string"
+              },
+              "trace": {
+                "description": "Stack trace or failure trace information",
+                "type": "string"
+              },
+              "snippet": {
+                "description": "Code snippet associated with the failure",
+                "type": "string"
+              },
+              "ai": {
+                "description": "AI-generated diagnostic data or suggestions",
+                "type": "string"
+              },
+              "line": {
+                "description": "Line number of the test definition",
+                "type": "integer"
+              },
+              "rawStatus": {
+                "description": "Original status from source tool before normalization",
+                "type": "string"
+              },
+              "tags": {
+                "description": "User-defined tags",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "type": {
+                "description": "Test classification (e.g., 'unit', 'integration', 'e2e')",
+                "type": "string"
+              },
+              "filePath": {
+                "description": "Path to the file defining this test",
+                "type": "string"
+              },
+              "retries": {
+                "description": "Number of retry attempts performed",
+                "type": "integer"
+              },
+              "retryAttempts": {
+                "description": "List of retry attempts for this test",
+                "type": "array",
+                "items": {
+                  "description": "Single retry attempt result",
+                  "type": "object",
+                  "required": [ "attempt", "status" ],
+                  "properties": {
+                    "attempt": {
+                      "description": "Attempt number (1 = first execution)",
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "status": {
+                      "description": "Outcome of this attempt",
+                      "enum": [
+                        "passed",
+                        "failed",
+                        "skipped",
+                        "pending",
+                        "other"
+                      ]
+                    },
+                    "duration": {
+                      "description": "Attempt execution time (milliseconds)",
+                      "type": "integer"
+                    },
+                    "message": {
+                      "description": "Error or failure message for this attempt",
+                      "type": "string"
+                    },
+                    "trace": {
+                      "description": "Stack trace for this attempt",
+                      "type": "string"
+                    },
+                    "line": {
+                      "description": "Line number associated with failure",
+                      "type": "integer"
+                    },
+                    "snippet": {
+                      "description": "Code snippet for this attempt",
+                      "type": "string"
+                    },
+                    "stdout": {
+                      "description": "Standard output lines from this attempt",
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "stderr": {
+                      "description": "Standard error lines from this attempt",
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "start": {
+                      "description": "Attempt start time (milliseconds since Unix epoch)",
+                      "type": "integer"
+                    },
+                    "stop": {
+                      "description": "Attempt end time (milliseconds since Unix epoch)",
+                      "type": "integer"
+                    },
+                    "attachments": {
+                      "description": "Artifacts from this attempt",
+                      "type": "array",
+                      "items": {
+                        "description": "External file or resource reference",
+                        "type": "object",
+                        "required": [ "name", "contentType", "path" ],
+                        "properties": {
+                          "name": {
+                            "description": "Display name of the attachment",
+                            "type": "string"
+                          },
+                          "contentType": {
+                            "description": "MIME type of the attachment",
+                            "type": "string"
+                          },
+                          "path": {
+                            "description": "Path or URI to the attachment",
+                            "type": "string"
+                          },
+                          "extra": {
+                            "description": "Extension point for arbitrary metadata",
+                            "type": "object"
+                          }
                         },
-                        "minItems":1
-                     },
-                     "message":{
-                        "type":"string"
-                     },
-                     "trace":{
-                        "type":"string"
-                     },
-                     "snippet":{
-                        "type":"string"
-                     },
-                     "ai":{
-                        "type":"string"
-                     },
-                     "line":{
-                        "type":"integer"
-                     },
-                     "rawStatus":{
-                        "type":"string"
-                     },
-                     "tags":{
-                        "type":"array",
-                        "items":{
-                           "type":"string"
-                        }
-                     },
-                     "type":{
-                        "type":"string"
-                     },
-                     "filePath":{
-                        "type":"string"
-                     },
-                     "retries":{
-                        "type":"integer"
-                     },
-                     "retryAttempts":{
-                        "type":"array",
-                        "items":{
-                           "type":"object",
-                           "properties":{
-                              "attempt":{
-                                 "type":"integer",
-                                 "minimum":1
-                              },
-                              "status":{
-                                 "type":"string",
-                                 "enum":[
-                                    "passed",
-                                    "failed",
-                                    "skipped",
-                                    "pending",
-                                    "other"
-                                 ]
-                              },
-                              "duration":{
-                                 "type":"integer"
-                              },
-                              "message":{
-                                 "type":"string"
-                              },
-                              "trace":{
-                                 "type":"string"
-                              },
-                              "line":{
-                                 "type":"integer"
-                              },
-                              "snippet":{
-                                 "type":"string"
-                              },
-                              "stdout":{
-                                 "type":"array",
-                                 "items":{
-                                    "type":"string"
-                                 }
-                              },
-                              "stderr":{
-                                 "type":"array",
-                                 "items":{
-                                    "type":"string"
-                                 }
-                              },
-                              "start":{
-                                 "type":"integer"
-                              },
-                              "stop":{
-                                 "type":"integer"
-                              },
-                              "attachments":{
-                                 "type":"array",
-                                 "items":{
-                                    "type":"object",
-                                    "properties":{
-                                       "name":{
-                                          "type":"string"
-                                       },
-                                       "contentType":{
-                                          "type":"string"
-                                       },
-                                       "path":{
-                                          "type":"string"
-                                       },
-                                       "extra":{
-                                          "type":"object",
-                                          "additionalProperties":true
-                                       }
-                                    },
-                                    "additionalProperties":false,
-                                    "required":[
-                                       "name",
-                                       "contentType",
-                                       "path"
-                                    ]
-                                 }
-                              },
-                              "extra":{
-                                 "type":"object",
-                                 "additionalProperties":true
-                              }
-                           },
-                           "additionalProperties":false,
-                           "required":[
-                              "attempt",
-                              "status"
-                           ]
-                        }
-                     },
-                     "flaky":{
-                        "type":"boolean"
-                     },
-                     "stdout":{
-                        "type":"array",
-                        "items":{
-                           "type":"string"
-                        }
-                     },
-                     "stderr":{
-                        "type":"array",
-                        "items":{
-                           "type":"string"
-                        }
-                     },
-                     "threadId":{
-                        "type":"string"
-                     },
-                     "browser":{
-                        "type":"string"
-                     },
-                     "device":{
-                        "type":"string"
-                     },
-                     "screenshot":{
-                        "type":"string"
-                     },
-                     "attachments":{
-                        "type":"array",
-                        "items":{
-                           "type":"object",
-                           "properties":{
-                              "name":{
-                                 "type":"string"
-                              },
-                              "contentType":{
-                                 "type":"string"
-                              },
-                              "path":{
-                                 "type":"string"
-                              },
-                              "extra":{
-                                 "type":"object",
-                                 "additionalProperties":true
-                              }
-                           },
-                           "additionalProperties":false,
-                           "required":[
-                              "name",
-                              "contentType",
-                              "path"
-                           ]
-                        }
-                     },
-                     "parameters":{
-                        "type":"object",
-                        "additionalProperties":true
-                     },
-                     "steps":{
-                        "type":"array",
-                        "items":{
-                           "type":"object",
-                           "properties":{
-                              "name":{
-                                 "type":"string"
-                              },
-                              "status":{
-                                 "type":"string",
-                                 "enum":[
-                                    "passed",
-                                    "failed",
-                                    "skipped",
-                                    "pending",
-                                    "other"
-                                 ]
-                              },
-                              "extra":{
-                                 "type":"object",
-                                 "additionalProperties":true
-                              }
-                           },
-                           "additionalProperties":false,
-                           "required":[
-                              "name",
-                              "status"
-                           ]
-                        }
-                     },
-                     "insights":{
-                        "type":"object",
-                        "properties":{
-                           "passRate":{
-                              "$ref":"#/definitions/metricDelta"
-                           },
-                           "failRate":{
-                              "$ref":"#/definitions/metricDelta"
-                           },
-                           "flakyRate":{
-                              "$ref":"#/definitions/metricDelta"
-                           },
-                           "averageTestDuration":{
-                              "$ref":"#/definitions/metricDelta"
-                           },
-                           "p95TestDuration":{
-                              "$ref":"#/definitions/metricDelta"
-                           },
-                           "executedInRuns":{
-                              "type":"integer"
-                           },
-                           "extra":{
-                              "type":"object",
-                              "additionalProperties":true
-                           }
-                        },
-                        "additionalProperties":false
-                     },
-                     "extra":{
-                        "type":"object",
-                        "additionalProperties":true
-                     }
+                        "additionalProperties": false
+                      }
+                    },
+                    "extra": {
+                      "description": "Extension point for arbitrary metadata",
+                      "type": "object"
+                    }
                   },
-                  "additionalProperties":false,
-                  "required":[
-                     "name",
-                     "status",
-                     "duration"
-                  ]
-               }
-            },
-            "environment":{
-               "type":"object",
-               "properties":{
-                  "reportName":{
-                     "type":"string"
+                  "additionalProperties": false
+                }
+              },
+              "flaky": {
+                "description": "True if test passed after one or more failed attempts",
+                "type": "boolean"
+              },
+              "stdout": {
+                "description": "Standard output lines from test execution",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "stderr": {
+                "description": "Standard error lines from test execution",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "threadId": {
+                "description": "Thread or worker identifier",
+                "type": "string"
+              },
+              "browser": {
+                "description": "Browser used for browser-based tests",
+                "type": "string"
+              },
+              "device": {
+                "description": "Device or device profile used",
+                "type": "string"
+              },
+              "screenshot": {
+                "description": "Single base64-encoded screenshot image",
+                "type": "string"
+              },
+              "attachments": {
+                "description": "Additional artifacts (screenshots, logs, videos, etc.)",
+                "type": "array",
+                "items": {
+                  "description": "External file or resource reference",
+                  "type": "object",
+                  "required": [ "name", "contentType", "path" ],
+                  "properties": {
+                    "name": {
+                      "description": "Display name of the attachment",
+                      "type": "string"
+                    },
+                    "contentType": {
+                      "description": "MIME type of the attachment",
+                      "type": "string"
+                    },
+                    "path": {
+                      "description": "Path or URI to the attachment",
+                      "type": "string"
+                    },
+                    "extra": {
+                      "description": "Extension point for arbitrary metadata",
+                      "type": "object"
+                    }
                   },
-                  "appName":{
-                     "type":"string"
+                  "additionalProperties": false
+                }
+              },
+              "parameters": {
+                "description": "Test parameters or input values",
+                "type": "object"
+              },
+              "steps": {
+                "description": "Test steps or sub-operations",
+                "type": "array",
+                "items": {
+                  "description": "Individual test step",
+                  "type": "object",
+                  "required": [ "name", "status" ],
+                  "properties": {
+                    "name": {
+                      "description": "Name of the step",
+                      "type": "string"
+                    },
+                    "status": {
+                      "description": "Outcome of the step",
+                      "enum": [
+                        "passed",
+                        "failed",
+                        "skipped",
+                        "pending",
+                        "other"
+                      ]
+                    },
+                    "extra": {
+                      "description": "Extension point for arbitrary metadata",
+                      "type": "object"
+                    }
                   },
-                  "appVersion":{
-                     "type":"string"
+                  "additionalProperties": false
+                }
+              },
+              "insights": {
+                "description": "Derived metrics for this test across runs",
+                "type": "object",
+                "properties": {
+                  "passRate": {
+                    "description": "Pass rate metric with baseline comparison",
+                    "$ref": "#/definitions/metricDelta"
                   },
-                  "buildId":{
-                     "type":"string"
+                  "failRate": {
+                    "description": "Fail rate metric with baseline comparison",
+                    "$ref": "#/definitions/metricDelta"
                   },
-                  "buildName":{
-                     "type":"string"
+                  "flakyRate": {
+                    "description": "Flaky rate metric with baseline comparison",
+                    "$ref": "#/definitions/metricDelta"
                   },
-                  "buildNumber":{
-                     "type":"integer"
+                  "averageTestDuration": {
+                    "description": "Average duration metric with baseline comparison",
+                    "$ref": "#/definitions/metricDelta"
                   },
-                  "buildUrl":{
-                     "type":"string"
+                  "p95TestDuration": {
+                    "description": "95th percentile duration with baseline comparison",
+                    "$ref": "#/definitions/metricDelta"
                   },
-                  "repositoryName":{
-                     "type":"string"
+                  "executedInRuns": {
+                    "description": "Number of runs this test was executed in",
+                    "type": "integer"
                   },
-                  "repositoryUrl":{
-                     "type":"string"
-                  },
-                  "commit":{
-                     "type":"string"
-                  },
-                  "branchName":{
-                     "type":"string"
-                  },
-                  "osPlatform":{
-                     "type":"string"
-                  },
-                  "osRelease":{
-                     "type":"string"
-                  },
-                  "osVersion":{
-                     "type":"string"
-                  },
-                  "testEnvironment":{
-                     "type":"string"
-                  },
-                  "healthy":{
-                     "type":"boolean"
-                  },
-                  "extra":{
-                     "type":"object",
-                     "additionalProperties":true
+                  "extra": {
+                    "description": "Extension point for arbitrary metadata",
+                    "type": "object"
                   }
-               },
-               "additionalProperties":false
+                },
+                "additionalProperties": false
+              },
+              "extra": {
+                "description": "Extension point for arbitrary metadata",
+                "type": "object"
+              }
             },
-            "extra":{
-               "type":"object",
-               "additionalProperties":true
+            "additionalProperties": false
+          }
+        },
+        "environment": {
+          "description": "Execution environment, system configuration, and build context",
+          "type": "object",
+          "properties": {
+            "reportName": {
+              "description": "Human-readable name for this report",
+              "type": "string"
+            },
+            "appName": {
+              "description": "Name of the application under test",
+              "type": "string"
+            },
+            "appVersion": {
+              "description": "Version of the application under test",
+              "type": "string"
+            },
+            "buildId": {
+              "description": "Unique identifier for the CI/CD build",
+              "type": "string"
+            },
+            "buildName": {
+              "description": "Name of the CI/CD build or pipeline",
+              "type": "string"
+            },
+            "buildNumber": {
+              "description": "Sequential build number",
+              "type": "integer"
+            },
+            "buildUrl": {
+              "description": "URL to the CI/CD build",
+              "type": "string"
+            },
+            "repositoryName": {
+              "description": "Name of the source code repository",
+              "type": "string"
+            },
+            "repositoryUrl": {
+              "description": "URL of the source code repository",
+              "type": "string"
+            },
+            "commit": {
+              "description": "Git commit SHA or VCS revision identifier",
+              "type": "string"
+            },
+            "branchName": {
+              "description": "Git branch or VCS branch name",
+              "type": "string"
+            },
+            "osPlatform": {
+              "description": "Operating system platform (e.g., 'linux', 'darwin', 'win32')",
+              "type": "string"
+            },
+            "osRelease": {
+              "description": "Operating system release version",
+              "type": "string"
+            },
+            "osVersion": {
+              "description": "Operating system version string",
+              "type": "string"
+            },
+            "testEnvironment": {
+              "description": "Logical test environment (e.g., 'staging', 'production')",
+              "type": "string"
+            },
+            "healthy": {
+              "description": "Indicates if the run is considered healthy",
+              "type": "boolean"
+            },
+            "extra": {
+              "description": "Extension point for arbitrary metadata",
+              "type": "object"
             }
-         },
-         "additionalProperties":false,
-         "required":[
-            "tool",
-            "summary",
-            "tests"
-         ]
+          },
+          "additionalProperties": false
+        },
+        "extra": {
+          "description": "Extension point for arbitrary metadata",
+          "type": "object"
+        }
       },
-      "insights":{
-         "type":"object",
-         "properties":{
-            "passRate":{
-               "$ref":"#/definitions/metricDelta"
-            },
-            "failRate":{
-               "$ref":"#/definitions/metricDelta"
-            },
-            "flakyRate":{
-               "$ref":"#/definitions/metricDelta"
-            },
-            "averageRunDuration":{
-               "$ref":"#/definitions/metricDelta"
-            },
-            "p95RunDuration":{
-               "$ref":"#/definitions/metricDelta"
-            },
-            "averageTestDuration":{
-               "$ref":"#/definitions/metricDelta"
-            },
-            "runsAnalyzed":{
-               "type":"integer"
-            },
-            "extra":{
-               "type":"object",
-               "additionalProperties":true
-            }
-         },
-         "additionalProperties":false
+      "additionalProperties": false
+    },
+    "insights": {
+      "description": "Aggregated metrics computed across multiple test runs",
+      "type": "object",
+      "properties": {
+        "passRate": {
+          "description": "Overall pass rate with baseline comparison",
+          "$ref": "#/definitions/metricDelta"
+        },
+        "failRate": {
+          "description": "Overall fail rate with baseline comparison",
+          "$ref": "#/definitions/metricDelta"
+        },
+        "flakyRate": {
+          "description": "Overall flaky rate with baseline comparison",
+          "$ref": "#/definitions/metricDelta"
+        },
+        "averageRunDuration": {
+          "description": "Average run duration with baseline comparison",
+          "$ref": "#/definitions/metricDelta"
+        },
+        "p95RunDuration": {
+          "description": "95th percentile run duration with baseline comparison",
+          "$ref": "#/definitions/metricDelta"
+        },
+        "averageTestDuration": {
+          "description": "Average test duration with baseline comparison",
+          "$ref": "#/definitions/metricDelta"
+        },
+        "runsAnalyzed": {
+          "description": "Number of historical runs analyzed for insights",
+          "type": "integer"
+        },
+        "extra": {
+          "description": "Extension point for arbitrary metadata",
+          "type": "object"
+        }
       },
-      "baseline":{
-         "type":"object",
-         "properties":{
-            "reportId":{
-               "type":"string",
-               "format":"uuid"
-            },
-            "timestamp":{
-               "type":"string",
-               "format":"date-time"
-            },
-            "source":{
-               "type":"string"
-            },
-            "buildNumber":{
-               "type":"integer"
-            },
-            "buildName":{
-               "type":"string"
-            },
-            "buildUrl":{
-               "type":"string",
-               "format":"uri"
-            },
-            "commit":{
-               "type":"string"
-            },
-            "extra":{
-               "type":"object",
-               "additionalProperties":true
-            }
-         },
-         "required":[
-            "reportId"
-         ],
-         "additionalProperties":false
-      }
-   },
-   "additionalProperties":false,
-   "required":[
-      "results",
-      "reportFormat",
-      "specVersion"
-   ],
-   "definitions":{
-      "metricDelta":{
-         "type":"object",
-         "properties":{
-            "current":{
-               "type":"number"
-            },
-            "baseline":{
-               "type":"number"
-            },
-            "change":{
-               "type":"number"
-            }
-         },
-         "additionalProperties":false
-      }
-   }
+      "additionalProperties": false
+    },
+    "baseline": {
+      "description": "Reference to a previous report used for comparison",
+      "type": "object",
+      "required": [ "reportId" ],
+      "properties": {
+        "reportId": {
+          "description": "UUID of the baseline report",
+          "type": "string",
+          "format": "uuid"
+        },
+        "timestamp": {
+          "description": "Generation time of the baseline report",
+          "type": "string",
+          "format": "date-time"
+        },
+        "source": {
+          "description": "Origin or location of the baseline report",
+          "type": "string"
+        },
+        "buildNumber": {
+          "description": "Build number of the baseline run",
+          "type": "integer"
+        },
+        "buildName": {
+          "description": "Build name of the baseline run",
+          "type": "string"
+        },
+        "buildUrl": {
+          "description": "URL to the baseline build",
+          "type": "string",
+          "format": "uri"
+        },
+        "commit": {
+          "description": "Git commit SHA of the baseline run",
+          "type": "string"
+        },
+        "extra": {
+          "description": "Extension point for arbitrary metadata",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "metricDelta": {
+      "description": "Metric value with baseline comparison",
+      "type": "object",
+      "properties": {
+        "current": {
+          "description": "Current metric value",
+          "type": "number"
+        },
+        "baseline": {
+          "description": "Baseline metric value for comparison",
+          "type": "number"
+        },
+        "change": {
+          "description": "Computed difference between current and baseline",
+          "type": "number"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
 }
 ```
 

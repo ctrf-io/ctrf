@@ -1,6 +1,6 @@
 # Common Test Report Format
 
-**The open standard for test reporting.**
+**An open standard for test reporting.**
 
 CTRF provides a unified JSON format for test outcomes that works across all languages and frameworks.
 
@@ -20,6 +20,15 @@ By standardizing the output of test execution, it enables results to be shared, 
 
 You can support the project by giving this repository a star ⭐
 
+## Open Standard
+
+CTRF is an open standard built and shaped by community contributions.
+
+Your feedback and contributions are essential to the project's success:
+
+- [Contribute](CONTRIBUTING.md)
+- [Discuss](https://github.com/orgs/ctrf-io/discussions)
+
 ## Schema
 
 The schema is defined in [`schema/ctrf.schema.json`](schema/ctrf.schema.json).
@@ -35,6 +44,8 @@ The written specification defines the semantics and rules.
 ## Versioning
 
 CTRF follows Semantic Versioning.
+
+Releases are defined in [Releases](https://github.com/ctrf-io/ctrf/releases).
 
 ## Reference Implementation
 
