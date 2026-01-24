@@ -12,7 +12,7 @@ By standardizing the output of test execution, it enables results to be shared, 
 >
 > We are maintaining a pre-1.0 version to allow for community-driven refinements before locking the v1.0.0 standard.
 >
-> CTRF was released in 2023 and has been gathering community feedback and real-world usage since. For details on the planned evolution of CTRF, see the [CTRF Roadmap](ROADMAP.md).
+> CTRF was released in 2023 and has been gathering community feedback and real-world usage since. For details on the planned evolution of CTRF, see the [Roadmap](ROADMAP.md).
 >
 > We encourage you to adopt CTRF today and help shape the final specification.
 
