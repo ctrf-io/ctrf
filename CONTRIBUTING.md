@@ -18,7 +18,7 @@ Thank you for your interest in contributing to CTRF.
 | **Clarifications** | Wording changes that may affect interpretation | Issue → PR |
 | **Schema Changes** | Constraints, formats, validation rules | Issue → PR |
 | **New Features** | New properties | Discussion → Issue → PR |
-| **Breaking Changes** | Removed fields, changed semantics | Design discussion → Issue → PR |
+| **Breaking Changes** | Removed fields, changed semantics | Discussion → Issue → PR |
 
 Use Discussions for:
 
