@@ -122,6 +122,29 @@ Informative tests cover edge cases and additional examples. These SHOULD pass bu
 
 Tests use the [sourcemeta/jsonschema](https://github.com/sourcemeta/jsonschema) CLI.
 
+### Schema Validation and Formatting
+
+Before submitting a PR, ensure the schema passes all validation checks:
+
+```bash
+# Format the schema
+jsonschema fmt schema/ctrf.schema.json
+
+# Lint the schema
+jsonschema lint schema/ctrf.schema.json --exclude top_level_examples
+
+# Run normative tests
+jsonschema test tests/normative
+
+# Run informative tests
+jsonschema test tests/informative
+
+# Validate example documents
+jsonschema validate schema/ctrf.schema.json examples/*.json
+```
+
+The `--exclude top_level_examples` flag is used because CTRF maintains examples in the `examples/` directory rather than embedding them in the schema itself.
+
 ### Adding Tests for Changes
 
 When contributing changes, you SHOULD add or update tests:

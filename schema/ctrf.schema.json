@@ -7,8 +7,7 @@
   "properties": {
     "reportFormat": {
       "description": "Document format identifier. Must be 'CTRF'",
-      "type": "string",
-      "enum": [ "CTRF" ]
+      "const": "CTRF"
     },
     "specVersion": {
       "description": "CTRF specification version in SemVer format (MAJOR.MINOR.PATCH)",
@@ -31,8 +30,7 @@
     },
     "extra": {
       "description": "Extension point for arbitrary metadata",
-      "type": "object",
-      "additionalProperties": true
+      "type": "object"
     },
     "results": {
       "description": "Results of a single test execution run",
@@ -55,8 +53,7 @@
             },
             "extra": {
               "description": "Extension point for arbitrary metadata",
-              "type": "object",
-              "additionalProperties": true
+              "type": "object"
             }
           },
           "additionalProperties": false
@@ -121,8 +118,7 @@
             },
             "extra": {
               "description": "Extension point for arbitrary metadata",
-              "type": "object",
-              "additionalProperties": true
+              "type": "object"
             }
           },
           "additionalProperties": false
@@ -147,7 +143,6 @@
               },
               "status": {
                 "description": "Final outcome of the test case",
-                "type": "string",
                 "enum": [ "passed", "failed", "skipped", "pending", "other" ]
               },
               "duration": {
@@ -228,7 +223,6 @@
                     },
                     "status": {
                       "description": "Outcome of this attempt",
-                      "type": "string",
                       "enum": [
                         "passed",
                         "failed",
@@ -301,8 +295,7 @@
                           },
                           "extra": {
                             "description": "Extension point for arbitrary metadata",
-                            "type": "object",
-                            "additionalProperties": true
+                            "type": "object"
                           }
                         },
                         "additionalProperties": false
@@ -310,8 +303,7 @@
                     },
                     "extra": {
                       "description": "Extension point for arbitrary metadata",
-                      "type": "object",
-                      "additionalProperties": true
+                      "type": "object"
                     }
                   },
                   "additionalProperties": false
@@ -373,8 +365,7 @@
                     },
                     "extra": {
                       "description": "Extension point for arbitrary metadata",
-                      "type": "object",
-                      "additionalProperties": true
+                      "type": "object"
                     }
                   },
                   "additionalProperties": false
@@ -382,8 +373,7 @@
               },
               "parameters": {
                 "description": "Test parameters or input values",
-                "type": "object",
-                "additionalProperties": true
+                "type": "object"
               },
               "steps": {
                 "description": "Test steps or sub-operations",
@@ -399,7 +389,6 @@
                     },
                     "status": {
                       "description": "Outcome of the step",
-                      "type": "string",
                       "enum": [
                         "passed",
                         "failed",
@@ -410,8 +399,7 @@
                     },
                     "extra": {
                       "description": "Extension point for arbitrary metadata",
-                      "type": "object",
-                      "additionalProperties": true
+                      "type": "object"
                     }
                   },
                   "additionalProperties": false
@@ -447,16 +435,14 @@
                   },
                   "extra": {
                     "description": "Extension point for arbitrary metadata",
-                    "type": "object",
-                    "additionalProperties": true
+                    "type": "object"
                   }
                 },
                 "additionalProperties": false
               },
               "extra": {
                 "description": "Extension point for arbitrary metadata",
-                "type": "object",
-                "additionalProperties": true
+                "type": "object"
               }
             },
             "additionalProperties": false
@@ -532,16 +518,14 @@
             },
             "extra": {
               "description": "Extension point for arbitrary metadata",
-              "type": "object",
-              "additionalProperties": true
+              "type": "object"
             }
           },
           "additionalProperties": false
         },
         "extra": {
           "description": "Extension point for arbitrary metadata",
-          "type": "object",
-          "additionalProperties": true
+          "type": "object"
         }
       },
       "additionalProperties": false
@@ -580,8 +564,7 @@
         },
         "extra": {
           "description": "Extension point for arbitrary metadata",
-          "type": "object",
-          "additionalProperties": true
+          "type": "object"
         }
       },
       "additionalProperties": false
@@ -624,8 +607,7 @@
         },
         "extra": {
           "description": "Extension point for arbitrary metadata",
-          "type": "object",
-          "additionalProperties": true
+          "type": "object"
         }
       },
       "additionalProperties": false

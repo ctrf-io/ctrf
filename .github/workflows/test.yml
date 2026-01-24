@@ -22,6 +22,9 @@ jobs:
       - name: Run format validation
         run: jsonschema fmt schema/ctrf.schema.json --check
 
+      - name: Run schema linting
+        run: jsonschema lint schema/ctrf.schema.json --exclude top_level_examples
+
       - name: Run conformance tests (normative)
         run: jsonschema test tests/normative --json > ctrf-normative.json
 
