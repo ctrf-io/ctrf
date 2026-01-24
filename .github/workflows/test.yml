@@ -19,6 +19,9 @@ jobs:
       - name: Setup jsonschema
         uses: sourcemeta/jsonschema@v14.4.0
 
+      - name: Run format validation
+        run: jsonschema fmt schema/ctrf.schema.json --check
+
       - name: Run conformance tests (normative)
         run: jsonschema test tests/normative --json > ctrf-normative.json
 
