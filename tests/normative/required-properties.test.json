@@ -1,0 +1,403 @@
+{
+  "target": "../../schema/ctrf.schema.json",
+  "$comment": "Normative test suite - Missing required properties MUST be rejected",
+  "tests": [
+    {
+      "description": "Document missing required reportFormat property",
+      "valid": false,
+      "data": {
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100 }]
+        }
+      }
+    },
+    {
+      "description": "Document missing required specVersion property",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100 }]
+        }
+      }
+    },
+    {
+      "description": "Document missing required results property",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0"
+      }
+    },
+    {
+      "description": "Results object missing required tool property",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100 }]
+        }
+      }
+    },
+    {
+      "description": "Results object missing required summary property",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100 }]
+        }
+      }
+    },
+    {
+      "description": "Results object missing required tests property",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 }
+        }
+      }
+    },
+    {
+      "description": "Test object missing required name property",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "status": "passed", "duration": 100 }]
+        }
+      }
+    },
+    {
+      "description": "Test object missing required status property",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "duration": 100 }]
+        }
+      }
+    },
+    {
+      "description": "Test object missing required duration property",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed" }]
+        }
+      }
+    },
+    {
+      "description": "Tool object missing required name property",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": {},
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100 }]
+        }
+      }
+    },
+    {
+      "description": "Summary object missing required tests property",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100 }]
+        }
+      }
+    },
+    {
+      "description": "Summary object missing required passed property",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100 }]
+        }
+      }
+    },
+    {
+      "description": "Summary object missing required failed property",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100 }]
+        }
+      }
+    },
+    {
+      "description": "Summary object missing required skipped property",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100 }]
+        }
+      }
+    },
+    {
+      "description": "Summary object missing required pending property",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100 }]
+        }
+      }
+    },
+    {
+      "description": "Summary object missing required other property",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "skipped": 0, "pending": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100 }]
+        }
+      }
+    },
+    {
+      "description": "Summary object missing required start property",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "skipped": 0, "pending": 0, "other": 0, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100 }]
+        }
+      }
+    },
+    {
+      "description": "Summary object missing required stop property",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "skipped": 0, "pending": 0, "other": 0, "start": 1609459200000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100 }]
+        }
+      }
+    },
+    {
+      "description": "RetryAttempt object missing required attempt property",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "skipped": 0, "pending": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100, "retryAttempts": [{ "status": "failed" }] }]
+        }
+      }
+    },
+    {
+      "description": "RetryAttempt object missing required status property",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "skipped": 0, "pending": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100, "retryAttempts": [{ "attempt": 1 }] }]
+        }
+      }
+    },
+    {
+      "description": "Attachment object missing required name property",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "skipped": 0, "pending": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100, "attachments": [{ "contentType": "image/png", "path": "/path" }] }]
+        }
+      }
+    },
+    {
+      "description": "Attachment object missing required contentType property",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "skipped": 0, "pending": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100, "attachments": [{ "name": "screenshot", "path": "/path" }] }]
+        }
+      }
+    },
+    {
+      "description": "Attachment object missing required path property",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "skipped": 0, "pending": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100, "attachments": [{ "name": "screenshot", "contentType": "image/png" }] }]
+        }
+      }
+    },
+    {
+      "description": "Step object missing required name property",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "skipped": 0, "pending": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100, "steps": [{ "status": "passed" }] }]
+        }
+      }
+    },
+    {
+      "description": "Step object missing required status property",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "skipped": 0, "pending": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100, "steps": [{ "name": "step1" }] }]
+        }
+      }
+    },
+    {
+      "description": "Baseline object missing required reportId property",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "skipped": 0, "pending": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100 }]
+        },
+        "baseline": {
+          "timestamp": "2021-01-01T00:00:00Z"
+        }
+      }
+    },
+    {
+      "description": "RetryAttempt attachment object missing required name property",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "skipped": 0, "pending": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ 
+            "name": "test", 
+            "status": "passed", 
+            "duration": 100, 
+            "retryAttempts": [{ 
+              "attempt": 1, 
+              "status": "failed",
+              "attachments": [{ "contentType": "image/png", "path": "/path" }] 
+            }] 
+          }]
+        }
+      }
+    },
+    {
+      "description": "RetryAttempt attachment object missing required contentType property",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "skipped": 0, "pending": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ 
+            "name": "test", 
+            "status": "passed", 
+            "duration": 100, 
+            "retryAttempts": [{ 
+              "attempt": 1, 
+              "status": "failed",
+              "attachments": [{ "name": "screenshot", "path": "/path" }] 
+            }] 
+          }]
+        }
+      }
+    },
+    {
+      "description": "RetryAttempt attachment object missing required path property",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "skipped": 0, "pending": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ 
+            "name": "test", 
+            "status": "passed", 
+            "duration": 100, 
+            "retryAttempts": [{ 
+              "attempt": 1, 
+              "status": "failed",
+              "attachments": [{ "name": "screenshot", "contentType": "image/png" }] 
+            }] 
+          }]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "reportFormat": "CTRF",
+  "specVersion": "1.0.0",
+  "reportId": "7c4e1c20-7c89-4f30-9b52-1f6f9d6b8f21",
+  "results": {
+    "tool": {
+      "name": "example-runner",
+      "version": "3.0.0"
+    },
+    "summary": {
+      "tests": 2,
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "skipped": 0,
+      "other": 0,
+      "start": 1609459200000,
+      "stop": 1609459205000
+    },
+    "tests": [
+      {
+        "name": "login test",
+        "status": "passed",
+        "duration": 2500,
+        "insights": {
+          "passRate": {
+            "current": 1.0,
+            "baseline": 0.95,
+            "change": 0.05
+          },
+          "averageTestDuration": {
+            "current": 2500,
+            "baseline": 2200,
+            "change": 300
+          },
+          "executedInRuns": 10
+        }
+      },
+      {
+        "name": "checkout test",
+        "status": "passed",
+        "duration": 3200,
+        "insights": {
+          "passRate": {
+            "current": 1.0,
+            "baseline": 1.0,
+            "change": 0
+          },
+          "averageTestDuration": {
+            "current": 3200,
+            "baseline": 3100,
+            "change": 100
+          },
+          "executedInRuns": 10
+        }
+      }
+    ]
+  },
+  "insights": {
+    "passRate": {
+      "current": 1.0,
+      "baseline": 0.97,
+      "change": 0.03
+    },
+    "averageRunDuration": {
+      "current": 5700,
+      "baseline": 5300,
+      "change": 400
+    },
+    "runsAnalyzed": 10
+  },
+  "baseline": {
+    "reportId": "2f8c9a90-3e1a-4c3d-9b3a-8f0a9c123456",
+    "timestamp": "2025-11-23T12:00:00Z",
+    "source": "main",
+    "buildNumber": 142
+  }
+}

@@ -1,0 +1,216 @@
+{
+  "target": "../../schema/ctrf.schema.json",
+  "$comment": "Normative test suite - Unknown properties MUST be rejected (additionalProperties: false)",
+  "tests": [
+    {
+      "description": "Document with unknown property at root level",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "unknownProperty": "should fail",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100 }]
+        }
+      }
+    },
+    {
+      "description": "Test object with unknown property",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100, "unknownField": true }]
+        }
+      }
+    },
+    {
+      "description": "Tool object with unknown property",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner", "unknownField": true },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100 }]
+        }
+      }
+    },
+    {
+      "description": "Summary object with unknown property",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000, "unknownField": true },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100 }]
+        }
+      }
+    },
+    {
+      "description": "Results object with unknown property",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100 }],
+          "unknownField": true
+        }
+      }
+    },
+    {
+      "description": "Environment object with unknown property",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100 }],
+          "environment": { "appName": "test-app", "unknownField": true }
+        }
+      }
+    },
+    {
+      "description": "Attachment object with unknown property",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100, "attachments": [{ "name": "screenshot", "contentType": "image/png", "path": "/path/to/file", "unknownField": true }] }]
+        }
+      }
+    },
+    {
+      "description": "Step object with unknown property",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100, "steps": [{ "name": "step1", "status": "passed", "unknownField": true }] }]
+        }
+      }
+    },
+    {
+      "description": "RetryAttempt object with unknown property",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100, "retryAttempts": [{ "attempt": 1, "status": "failed", "unknownField": true }] }]
+        }
+      }
+    },
+    {
+      "description": "Test insights object with unknown property",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100, "insights": { "passRate": { "current": 0.95 }, "unknownField": true } }]
+        }
+      }
+    },
+    {
+      "description": "Root-level insights object with unknown property",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100 }]
+        },
+        "insights": {
+          "passRate": { "current": 0.95 },
+          "unknownField": true
+        }
+      }
+    },
+    {
+      "description": "Baseline object with unknown property",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100 }]
+        },
+        "baseline": {
+          "reportId": "550e8400-e29b-41d4-a716-446655440000",
+          "unknownField": true
+        }
+      }
+    },
+    {
+      "description": "MetricDelta object with unknown property",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100 }]
+        },
+        "insights": {
+          "passRate": { "current": 0.95, "baseline": 0.90, "unknownField": true }
+        }
+      }
+    },
+    {
+      "description": "RetryAttempt attachment object with unknown property",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ 
+            "name": "test", 
+            "status": "passed", 
+            "duration": 100, 
+            "retryAttempts": [{ 
+              "attempt": 1, 
+              "status": "failed",
+              "attachments": [{ 
+                "name": "screenshot", 
+                "contentType": "image/png", 
+                "path": "/path/to/file", 
+                "unknownField": true 
+              }] 
+            }] 
+          }]
+        }
+      }
+    }
+  ]
+}

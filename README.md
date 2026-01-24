@@ -1,76 +1,77 @@
 # Common Test Report Format
 
-Generate the same JSON test report, no matter the test framework.
+**The open standard for test reporting.**
 
-## Introduction
+CTRF provides a unified JSON format for test outcomes that works across all languages and frameworks.
 
-CTRF is a language and framework-agnostic JSON format for test results with first class tooling and integrations. It standardizes how test results are represented, making them easy to share, analyze, and visualize across tools and platforms.
+By standardizing the output of test execution, it enables results to be shared, validated, aggregated, and analyzed consistently across tools and platforms.
 
-Designed to be universal, CTRF works with any programming language, test framework, and developer tool.
+## Project Status
 
-## Support Us
-
-You can support the project by:
-
-- Giving this repository a ⭐
-- Following the organization [@ctrf](https://github.com/ctrf-io)
+> The CTRF specification is ready for use.
+>
+> We are maintaining a pre-1.0 version to allow for community-driven refinements before locking the v1.0.0 standard.
+>
+> CTRF was released in 2023 and has been gathering community feedback and real-world usage since. For details on the planned evolution of CTRF, see the [CTRF Roadmap](ROADMAP.md).
+>
+> We encourage you to adopt CTRF today and help shape the final specification.
 
 ## Schema
 
-The schema is defined in [schema-0.0.0.json](specification/schema-0.0.0.json)
+The schema is defined in [`schema/ctrf.schema.json`](schema/ctrf.schema.json).
+
+The JSON Schema is normative and used for validation.
 
 ## Specification
 
-The full specification is defined in the [documentation](https://ctrf.io/docs/specification/overview).
+The specification is defined in [`spec/ctrf.md`](spec/ctrf.md).
+
+The written specification defines the semantics and rules.
 
 ## Versioning
 
-You'll notice that v1 of the specification hasn't been released yet, **we want to build a specification that reflects the needs of its users** and we are still receiving feedback. There might be changes but these will be tracked in the changelog.
+CTRF follows Semantic Versioning.
 
-specVersion is currently 0.0.0
+## Reference Implementation
 
-## Core Tooling
+The reference implementation, written in TypeScript, provides utilities for working with CTRF reports and is maintained alongside the specification. It serves as the canonical guide for implementing CTRF in any language.
 
-Core tooling provides utilities for working with CTRF reports, including validation and processing capabilities.
+- [ctrf-js](https://github.com/ctrf-io/ctrf-js)
 
-- [Node.js Core](https://github.com/ctrf-io/ctrf-core-js)
+Community implementations should follow the design principles and API surface of the reference implementation as closely as possible to ensure consistency across the ecosystem.
+
+We welcome contributions to build implementations for the following languages: Python, Java, Go, C#/.NET, Rust, and Ruby. Each implementation should reference the TypeScript implementation for guidance on module structure, method signatures, and error handling.
 
 ## CLI Tooling
 
-The CTRF CLI is a command-line interface for working with CTRF reports. It allows you to validate and process CTRF reports from the terminal.
+The CTRF CLI is a command-line interface for working with CTRF reports. It is maintained alongside the specification and provides validation, conformance checking, and report processing capabilities from the terminal.
 
 - [CLI](https://github.com/ctrf-io/ctrf-cli)
 
 ## Integrations
 
-Many integrations with popular testing frameworks and developer tools are available.
+The CTRF ecosystem includes community built integrations for popular testing frameworks and developer tools.
 
-- [Integrations](https://ctrf.io/integrations)
+- [View integrations](https://ctrf.io/integrations)
+
+## Adopters
+
+Tools and frameworks with native CTRF support.
+
+- [View adopters](https://ctrf.io/adopters)
 
 ## Contributing
 
-CTRF is community-built and open source. Contributions and feedback are welcome.
+CTRF is community-built and open source.
 
-- [Contribute](https://ctrf.io/docs/contributing/)
+Contributions and feedback are welcome.
+
+- [Contribute](CONTRIBUTING.md)
 - [Discuss](https://github.com/orgs/ctrf-io/discussions)
 
 ## Repository Layout
 
-- Schema: [specification/schema-0.0.0.json](specification/schema-0.0.0.json)
-- Website & documentation: [website/README.md](website/README.md)
-
-## Example
-
-![CTRF Example](./website/static/img/code.png)
-
-## Useful Links
-
-<a href="https://ctrf.io/docs/intro">Docs</a>
-<br/>
-<a href="https://ctrf.io/docs/specification/overview">Specification</a>
-<br/>
-<a href="https://ctrf.io/integrations">Integrations</a>
-<br/>
-<a href="https://github.com/orgs/ctrf-io/discussions">Discuss</a>  
-
-</div>
+- Schema: [schema/ctrf.schema.json](schema/ctrf.schema.json)
+- Specification: [spec/ctrf.md](spec/ctrf.md)
+- Examples: [examples/](examples/)
+- Tests: [tests/](tests/)

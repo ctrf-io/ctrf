@@ -1,0 +1,31 @@
+{
+  "target": "../../schema/ctrf.schema.json",
+  "$comment": "Normative test suite - Valid CTRF documents that MUST be accepted by conformant implementations",
+  "tests": [
+    {
+      "description": "Minimal valid CTRF document",
+      "valid": true,
+      "dataPath": "../../examples/minimal.json"
+    },
+    {
+      "description": "Comprehensive CTRF document",
+      "valid": true,
+      "dataPath": "../../examples/comprehensive.json"
+    },
+    {
+      "description": "Document with diagnostics",
+      "valid": true,
+      "dataPath": "../../examples/with-diagnostics.json"
+    },
+    {
+      "description": "Document with insights",
+      "valid": true,
+      "dataPath": "../../examples/with-insights.json"
+    },
+    {
+      "description": "Document with retries",
+      "valid": true,
+      "dataPath": "../../examples/with-retries.json"
+    }
+  ]
+}

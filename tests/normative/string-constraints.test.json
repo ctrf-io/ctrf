@@ -1,0 +1,84 @@
+{
+  "target": "../../schema/ctrf.schema.json",
+  "$comment": "Normative test suite - String constraint violations MUST be rejected",
+  "tests": [
+    {
+      "description": "Document with specVersion violating pattern constraint",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "v1.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100 }]
+        }
+      }
+    },
+    {
+      "description": "Tool with name violating minLength constraint",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100 }]
+        }
+      }
+    },
+    {
+      "description": "Test with name violating minLength constraint",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "", "status": "passed", "duration": 100 }]
+        }
+      }
+    },
+    {
+      "description": "Test with suite violating minItems constraint",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100, "suite": [] }]
+        }
+      }
+    },
+    {
+      "description": "RetryAttempt with attempt value of zero violating minimum constraint",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100, "retryAttempts": [{ "attempt": 0, "status": "failed" }] }]
+        }
+      }
+    },
+    {
+      "description": "RetryAttempt with negative attempt value violating minimum constraint",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100, "retryAttempts": [{ "attempt": -1, "status": "failed" }] }]
+        }
+      }
+    }
+  ]
+}

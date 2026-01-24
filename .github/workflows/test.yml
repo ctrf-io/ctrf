@@ -1,0 +1,44 @@
+name: Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Validate Schema
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run conformance tests (normative)
+        uses: docker://sourcemeta/jsonschema:latest
+        with:
+          args: test tests/normative --json > ctrf-normative.json
+
+      - name: Run informative tests
+        uses: docker://sourcemeta/jsonschema:latest
+        continue-on-error: true
+        with:
+          args: test tests/informative --json > ctrf-informative.json
+
+      - name: Validate example documents
+        uses: docker://sourcemeta/jsonschema:latest
+        with:
+          args: validate schema/ctrf.schema.json examples/*.json
+
+      - name: Publish Conformance Test Results
+        uses: ctrf-io/github-test-reporter@v1
+        if: always()
+        with:
+          report-path: ctrf-normative.json
+
+      - name: Publish Informative Test Results
+        uses: ctrf-io/github-test-reporter@v1
+        if: always()
+        with:
+          report-path: ctrf-informative.json

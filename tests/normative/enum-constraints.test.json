@@ -1,0 +1,58 @@
+{
+  "target": "../../schema/ctrf.schema.json",
+  "$comment": "Normative test suite - Invalid enum values MUST be rejected",
+  "tests": [
+    {
+      "description": "Test with invalid status enumeration value",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "invalid-status", "duration": 100 }]
+        }
+      }
+    },
+    {
+      "description": "Document with invalid reportFormat enumeration value",
+      "valid": false,
+      "data": {
+        "reportFormat": "NOT-CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100 }]
+        }
+      }
+    },
+    {
+      "description": "RetryAttempt with invalid status enumeration value",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100, "retryAttempts": [{ "attempt": 1, "status": "invalid-status" }] }]
+        }
+      }
+    },
+    {
+      "description": "Step with invalid status enumeration value",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100, "steps": [{ "name": "step1", "status": "invalid-status" }] }]
+        }
+      }
+    }
+  ]
+}
