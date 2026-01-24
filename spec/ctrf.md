@@ -168,7 +168,7 @@ Fields not defined by the specification are prohibited except within explicitly 
 - forward compatibility
 - consistent interpretation of data
 
-The `extra` object provides a controlled extension mechanism that allows producers and consumers to include tool-specific or domain-specific metadata without fragmenting the core format.
+The `extra` object provides a controlled extension mechanism that allows producers and consumers to include tool-specific or domain-specific metadata without fragmenting the core format. This includes user-provided information that producers capture and embed within `extra` objects.
 
 ---
 
@@ -313,7 +313,7 @@ A CTRF document MUST include:
 - `specVersion` - MUST follow Semantic Versioning 2.0.0.  
 - `results` - MUST contain the results of a single test execution run.
 
-   Additional top-level fields MAY be included.
+Additional top-level fields MUST be included within an `extra` object.
 
 ### 4.3. Schema Conformance
 
