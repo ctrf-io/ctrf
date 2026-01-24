@@ -16,6 +16,10 @@ By standardizing the output of test execution, it enables results to be shared, 
 >
 > We encourage you to adopt CTRF today and help shape the final specification.
 
+## Support
+
+You can support the project by giving this repository a star ⭐
+
 ## Schema
 
 The schema is defined in [`schema/ctrf.schema.json`](schema/ctrf.schema.json).
