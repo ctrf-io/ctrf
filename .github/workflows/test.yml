@@ -34,9 +34,11 @@ jobs:
         if: always()
         with:
           report-path: ctrf-normative.json
+          github-report: true
 
       - name: Publish Informative Test Results
         uses: ctrf-io/github-test-reporter@v1
         if: always()
         with:
           report-path: ctrf-informative.json
+          github-report: true
