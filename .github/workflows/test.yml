@@ -22,7 +22,7 @@ jobs:
           args: test tests/normative --json > ctrf-normative.json
 
       - name: Run informative tests
-        uses: docker://sourcemeta/jsonschema:latest
+        uses: sourcemeta/jsonschema@v14.4.0
         continue-on-error: true
         with:
           args: test tests/informative --json > ctrf-informative.json
