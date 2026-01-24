@@ -16,21 +16,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Run conformance tests (normative)
+      - name: Setup jsonschema
         uses: sourcemeta/jsonschema@v14.4.0
-        with:
-          args: test tests/normative --json > ctrf-normative.json
+
+      - name: Run conformance tests (normative)
+        run: jsonschema test tests/normative --json > ctrf-normative.json
 
       - name: Run informative tests
-        uses: sourcemeta/jsonschema@v14.4.0
+        run: jsonschema test tests/informative --json > ctrf-informative.json
         continue-on-error: true
-        with:
-          args: test tests/informative --json > ctrf-informative.json
 
       - name: Validate example documents
-        uses: sourcemeta/jsonschema@v14.4.0
-        with:
-          args: validate schema/ctrf.schema.json examples/*.json
+        run: jsonschema validate schema/ctrf.schema.json examples/*.json
 
       - name: Publish Conformance Test Results
         uses: ctrf-io/github-test-reporter@v1
