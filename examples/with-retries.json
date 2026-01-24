@@ -1,0 +1,54 @@
+{
+  "reportFormat": "CTRF",
+  "specVersion": "1.0.0",
+  "results": {
+    "tool": {
+      "name": "example-runner",
+      "version": "1.0.0"
+    },
+    "summary": {
+      "tests": 2,
+      "passed": 2,
+      "failed": 0,
+      "pending": 0,
+      "skipped": 0,
+      "other": 0,
+      "flaky": 1,
+      "start": 1609459200000,
+      "stop": 1609459210000
+    },
+    "tests": [
+      {
+        "name": "stable test",
+        "status": "passed",
+        "duration": 150
+      },
+      {
+        "name": "flaky test",
+        "status": "passed",
+        "duration": 300,
+        "flaky": true,
+        "retries": 2,
+        "retryAttempts": [
+          {
+            "attempt": 1,
+            "status": "failed",
+            "duration": 120,
+            "message": "Connection timeout"
+          },
+          {
+            "attempt": 2,
+            "status": "failed",
+            "duration": 130,
+            "message": "Connection timeout"
+          },
+          {
+            "attempt": 3,
+            "status": "passed",
+            "duration": 140
+          }
+        ]
+      }
+    ]
+  }
+}

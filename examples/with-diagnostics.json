@@ -1,0 +1,56 @@
+{
+  "reportFormat": "CTRF",
+  "specVersion": "1.0.0",
+  "results": {
+    "tool": {
+      "name": "example-runner",
+      "version": "2.0.0"
+    },
+    "summary": {
+      "tests": 1,
+      "passed": 0,
+      "failed": 1,
+      "pending": 0,
+      "skipped": 0,
+      "other": 0,
+      "start": 1609459200000,
+      "stop": 1609459205000
+    },
+    "tests": [
+      {
+        "name": "should render homepage",
+        "status": "failed",
+        "duration": 5000,
+        "message": "Expected element to be visible",
+        "trace": "Error: Expected element to be visible\n    at checkVisibility (test.js:45:10)\n    at Object.<anonymous> (test.js:12:5)",
+        "screenshot": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==",
+        "stdout": [
+          "Starting test execution",
+          "Loading page: https://example.com",
+          "Waiting for element: .hero-section"
+        ],
+        "stderr": [
+          "Warning: Network slow",
+          "Error: Element not found after 5000ms"
+        ],
+        "attachments": [
+          {
+            "name": "full-page-screenshot.png",
+            "contentType": "image/png",
+            "path": "/artifacts/screenshots/test-1.png"
+          },
+          {
+            "name": "console-logs.txt",
+            "contentType": "text/plain",
+            "path": "/artifacts/logs/console-1.txt"
+          },
+          {
+            "name": "network-trace.har",
+            "contentType": "application/json",
+            "path": "/artifacts/traces/network-1.har"
+          }
+        ]
+      }
+    ]
+  }
+}

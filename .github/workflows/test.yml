@@ -1,0 +1,50 @@
+name: Validate Schema
+
+on:
+  push:
+    branches: ['**']
+
+  pull_request:
+    branches: ['**']
+
+jobs:
+  test:
+    name: Validate Schema
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup jsonschema
+        uses: sourcemeta/jsonschema@v14.4.0
+
+      - name: Run format validation
+        run: jsonschema fmt schema/ctrf.schema.json --check
+
+      - name: Run schema linting
+        run: jsonschema lint schema/ctrf.schema.json --exclude top_level_examples
+
+      - name: Run conformance tests (normative)
+        run: jsonschema test tests/normative --json > ctrf-normative.json
+
+      - name: Run informative tests
+        run: jsonschema test tests/informative --json > ctrf-informative.json
+        continue-on-error: true
+
+      - name: Validate example documents
+        run: jsonschema validate schema/ctrf.schema.json examples/*.json
+
+      - name: Publish Conformance Test Results
+        uses: ctrf-io/github-test-reporter@v1
+        if: always()
+        with:
+          report-path: ctrf-normative.json
+          github-report: true
+
+      - name: Publish Informative Test Results
+        uses: ctrf-io/github-test-reporter@v1
+        if: always()
+        with:
+          report-path: ctrf-informative.json
+          github-report: true

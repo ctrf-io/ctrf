@@ -1,0 +1,253 @@
+{
+  "reportFormat": "CTRF",
+  "specVersion": "1.0.0",
+  "reportId": "9d2c6a10-3f7a-4e22-9a8f-1a2b3c4d5e6f",
+  "timestamp": "2025-11-24T12:00:00Z",
+  "generatedBy": "example-ci",
+  "extra": {
+    "pipelineStage": "e2e",
+    "trigger": "pull_request"
+  },
+  "results": {
+    "tool": {
+      "name": "example-runner",
+      "version": "3.5.0",
+      "extra": {
+        "plugins": ["retry", "screenshots", "video"]
+      }
+    },
+    "summary": {
+      "tests": 3,
+      "passed": 2,
+      "failed": 1,
+      "pending": 0,
+      "skipped": 0,
+      "other": 0,
+      "flaky": 1,
+      "suites": 2,
+      "start": 1609459200000,
+      "stop": 1609459220000,
+      "duration": 20000
+    },
+    "tests": [
+      {
+        "id": "550e8400-e29b-41d4-a716-446655440000",
+        "name": "user can login",
+        "status": "passed",
+        "duration": 3500,
+        "start": 1609459200000,
+        "stop": 1609459203500,
+        "suite": ["Authentication", "Login"],
+        "type": "e2e",
+        "tags": ["smoke", "critical"],
+        "filePath": "tests/auth/login.test.js",
+        "browser": "chromium",
+        "threadId": "worker-1",
+        "insights": {
+          "passRate": {
+            "current": 1.0,
+            "baseline": 0.95,
+            "change": 0.05
+          },
+          "averageTestDuration": {
+            "current": 3500,
+            "baseline": 3200,
+            "change": 300
+          },
+          "executedInRuns": 15
+        }
+      },
+      {
+        "id": "550e8400-e29b-41d4-a716-446655440001",
+        "name": "user can checkout",
+        "status": "passed",
+        "duration": 5200,
+        "start": 1609459203500,
+        "stop": 1609459208700,
+        "suite": ["Checkout"],
+        "type": "e2e",
+        "tags": ["smoke"],
+        "filePath": "tests/checkout/checkout.test.js",
+        "browser": "chromium",
+        "threadId": "worker-2",
+        "flaky": true,
+        "retries": 1,
+        "retryAttempts": [
+          {
+            "attempt": 1,
+            "status": "failed",
+            "duration": 5100,
+            "start": 1609459203500,
+            "stop": 1609459208600,
+            "message": "Payment gateway timeout",
+            "trace": "Error: Payment gateway timeout\n    at processPayment (payment.js:23:10)",
+            "attachments": [
+              {
+                "name": "attempt-1-screenshot.png",
+                "contentType": "image/png",
+                "path": "/artifacts/retry-1.png"
+              }
+            ]
+          },
+          {
+            "attempt": 2,
+            "status": "passed",
+            "duration": 5200,
+            "start": 1609459208700,
+            "stop": 1609459213900
+          }
+        ],
+        "insights": {
+          "passRate": {
+            "current": 1.0,
+            "baseline": 0.9,
+            "change": 0.1
+          },
+          "flakyRate": {
+            "current": 0.2,
+            "baseline": 0.3,
+            "change": -0.1
+          },
+          "executedInRuns": 15
+        }
+      },
+      {
+        "id": "550e8400-e29b-41d4-a716-446655440002",
+        "name": "admin dashboard loads",
+        "status": "failed",
+        "duration": 8000,
+        "start": 1609459213900,
+        "stop": 1609459221900,
+        "suite": ["Admin", "Dashboard"],
+        "type": "e2e",
+        "tags": ["regression"],
+        "filePath": "tests/admin/dashboard.test.js",
+        "line": 42,
+        "browser": "chromium",
+        "threadId": "worker-1",
+        "message": "Element not found: .dashboard-metrics",
+        "trace": "Error: Element not found: .dashboard-metrics\n    at waitForElement (test.js:45:10)\n    at Object.<anonymous> (dashboard.test.js:42:5)",
+        "snippet": "const metrics = await page.locator('.dashboard-metrics');\nawait expect(metrics).toBeVisible();",
+        "screenshot": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==",
+        "stdout": [
+          "Loading admin dashboard",
+          "Checking authentication"
+        ],
+        "stderr": [
+          "Warning: Slow network detected",
+          "Error: Timeout waiting for .dashboard-metrics"
+        ],
+        "attachments": [
+          {
+            "name": "failure-screenshot.png",
+            "contentType": "image/png",
+            "path": "/artifacts/screenshots/admin-dashboard-fail.png"
+          },
+          {
+            "name": "trace.zip",
+            "contentType": "application/zip",
+            "path": "/artifacts/traces/admin-dashboard.trace.zip"
+          },
+          {
+            "name": "video.webm",
+            "contentType": "video/webm",
+            "path": "/artifacts/videos/admin-dashboard.webm"
+          }
+        ],
+        "parameters": {
+          "userRole": "admin",
+          "environment": "staging"
+        },
+        "steps": [
+          {
+            "name": "Navigate to dashboard",
+            "status": "passed"
+          },
+          {
+            "name": "Wait for metrics",
+            "status": "failed"
+          }
+        ],
+        "insights": {
+          "passRate": {
+            "current": 0.0,
+            "baseline": 0.8,
+            "change": -0.8
+          },
+          "executedInRuns": 15
+        }
+      }
+    ],
+    "environment": {
+      "reportName": "PR #123 E2E Tests",
+      "appName": "example-app",
+      "appVersion": "2.5.0",
+      "buildId": "build-456",
+      "buildName": "PR #123",
+      "buildNumber": 456,
+      "buildUrl": "https://ci.example.com/builds/456",
+      "repositoryName": "example-app",
+      "repositoryUrl": "https://github.com/example/example-app",
+      "commit": "a1b2c3d4e5f6",
+      "branchName": "feature/new-dashboard",
+      "osPlatform": "linux",
+      "osRelease": "5.10.0",
+      "osVersion": "Ubuntu 20.04",
+      "testEnvironment": "staging",
+      "healthy": false,
+      "extra": {
+        "nodeVersion": "18.0.0",
+        "region": "us-west-2"
+      }
+    },
+    "extra": {
+      "shardIndex": 1,
+      "totalShards": 4
+    }
+  },
+  "insights": {
+    "passRate": {
+      "current": 0.67,
+      "baseline": 0.85,
+      "change": -0.18
+    },
+    "failRate": {
+      "current": 0.33,
+      "baseline": 0.15,
+      "change": 0.18
+    },
+    "flakyRate": {
+      "current": 0.33,
+      "baseline": 0.2,
+      "change": 0.13
+    },
+    "averageRunDuration": {
+      "current": 20000,
+      "baseline": 18000,
+      "change": 2000
+    },
+    "p95RunDuration": {
+      "current": 22000,
+      "baseline": 20000,
+      "change": 2000
+    },
+    "averageTestDuration": {
+      "current": 5567,
+      "baseline": 5100,
+      "change": 467
+    },
+    "runsAnalyzed": 10
+  },
+  "baseline": {
+    "reportId": "2f8c9a90-3e1a-4c3d-9b3a-8f0a9c123456",
+    "timestamp": "2025-11-23T12:00:00Z",
+    "source": "main",
+    "buildNumber": 442,
+    "buildName": "Nightly Build",
+    "buildUrl": "https://ci.example.com/builds/442",
+    "commit": "f6e5d4c3b2a1",
+    "extra": {
+      "branch": "main"
+    }
+  }
+}

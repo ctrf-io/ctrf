@@ -1,0 +1,74 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    name: Validate Schema
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup jsonschema
+        uses: sourcemeta/jsonschema@v14.4.0
+
+      - name: Run conformance tests (normative)
+        run: jsonschema test tests/normative --json > ctrf-normative.json
+
+      - name: Run informative tests
+        run: jsonschema test tests/informative --json > ctrf-informative.json
+        continue-on-error: true
+
+      - name: Validate example documents
+        run: jsonschema validate schema/ctrf.schema.json examples/*.json
+
+      - name: Publish Conformance Test Results
+        uses: ctrf-io/github-test-reporter@v1
+        if: always()
+        with:
+          report-path: ctrf-normative.json
+          github-report: true
+
+      - name: Publish Informative Test Results
+        uses: ctrf-io/github-test-reporter@v1
+        if: always()
+        with:
+          report-path: ctrf-informative.json
+          github-report: true
+
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Extract version from tag
+        id: version
+        run: echo "version=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: CTRF ${{ steps.version.outputs.version }}
+          draft: true
+          make_latest: true
+          generate_release_notes: true
+          files: |
+            schema/ctrf.schema.json
+            spec/ctrf.md
+            examples/*.json
+            CHANGELOG.md
+            LICENSE
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
