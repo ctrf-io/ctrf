@@ -40,6 +40,12 @@
         "suite": ["Authentication", "Login"],
         "type": "e2e",
         "tags": ["smoke", "critical"],
+        "labels": {
+          "priority": "P1",
+          "severity": 2,
+          "automated": true,
+          "externalId": 45678
+        },
         "filePath": "tests/auth/login.test.js",
         "browser": "chromium",
         "threadId": "worker-1",
@@ -67,6 +73,12 @@
         "suite": ["Checkout"],
         "type": "e2e",
         "tags": ["smoke"],
+        "labels": {
+          "priority": "P2",
+          "severity": 3,
+          "automated": true,
+          "externalId": 45679
+        },
         "filePath": "tests/checkout/checkout.test.js",
         "browser": "chromium",
         "threadId": "worker-2",
@@ -121,6 +133,12 @@
         "suite": ["Admin", "Dashboard"],
         "type": "e2e",
         "tags": ["regression"],
+        "labels": {
+          "priority": "P3",
+          "severity": 2,
+          "automated": true,
+          "externalId": 45677
+        },
         "filePath": "tests/admin/dashboard.test.js",
         "line": 42,
         "browser": "chromium",

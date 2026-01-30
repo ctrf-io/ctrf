@@ -196,6 +196,13 @@
                   "type": "string"
                 }
               },
+              "labels": {
+                "description": "Structured key-value metadata for the test case (e.g. priority, severity, external identifiers)",
+                "type": "object",
+                "additionalProperties": {
+                  "type": [ "string", "number", "boolean" ]
+                }
+              },
               "type": {
                 "description": "Test classification (e.g., 'unit', 'integration', 'e2e')",
                 "type": "string"
