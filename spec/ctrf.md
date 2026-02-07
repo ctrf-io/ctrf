@@ -851,13 +851,24 @@ If present, it MUST be a string.
 ### 9.14. `tags`
 
 **Description:**  
-A list of user-defined tags or labels associated with the test.
+A list of user-defined tags associated with the test.
 
 **Requirements:**  
 `tags` is OPTIONAL.  
 If present, it MUST be an array of strings.
 
-### 9.15. `type`
+### 9.15. `labels`
+
+**Description:**  
+Structured key-value metadata, commonly used for classification and external system integration (e.g. priority, severity, external identifiers).
+
+**Requirements:**  
+`labels` is OPTIONAL.  
+If present, it MUST be an object.  
+Each value MUST be one of: string, number, or boolean.  
+Consumers MUST treat label keys as opaque and MUST NOT require any particular keys to be present.
+
+### 9.16. `type`
 
 **Description:**  
 A classification or category for the test (for example, `"unit"`, `"integration"`, or `"e2e"`).
@@ -866,7 +877,7 @@ A classification or category for the test (for example, `"unit"`, `"integration"
 `type` is OPTIONAL.  
 If present, it MUST be a string.
 
-### 9.16. `filePath`
+### 9.17. `filePath`
 
 **Description:**  
 The path to the file that defines the test case.
@@ -875,7 +886,7 @@ The path to the file that defines the test case.
 `filePath` is OPTIONAL.  
 If present, it MUST be a string.
 
-### 9.17. `retries`
+### 9.18. `retries`
 
 **Description:**  
 The number of retries performed for this test case.
@@ -885,7 +896,7 @@ The number of retries performed for this test case.
 If present, it MUST be a non-negative integer.  
 It SHOULD equal the count of entries in `retryAttempts`.
 
-### 9.18. `retryAttempts`
+### 9.19. `retryAttempts`
 
 **Description:**  
 A list of retry attempts performed for this test case.
@@ -895,7 +906,7 @@ A list of retry attempts performed for this test case.
 If present, it MUST be an array.  
 Each entry MUST follow the structure defined in Section 11 (Retry Attempt Object).
 
-### 9.19. `flaky`
+### 9.20. `flaky`
 
 **Description:**  
 Indicates whether the test is considered flaky.
@@ -906,7 +917,7 @@ A test is considered flaky only if its final status is `passed` and it experienc
 `flaky` is OPTIONAL.  
 If present, it MUST be a boolean.
 
-### 9.20. `stdout`
+### 9.21. `stdout`
 
 **Description:**  
 Lines of standard output generated during test execution.
@@ -915,7 +926,7 @@ Lines of standard output generated during test execution.
 `stdout` is OPTIONAL.  
 If present, it MUST be an array of strings.
 
-### 9.21. `stderr`
+### 9.22. `stderr`
 
 **Description:**  
 Lines of standard error output generated during test execution.
@@ -924,7 +935,7 @@ Lines of standard error output generated during test execution.
 `stderr` is OPTIONAL.  
 If present, it MUST be an array of strings.
 
-### 9.22. `threadId`
+### 9.23. `threadId`
 
 **Description:**  
 Identifies the thread or worker on which the test executed.
@@ -933,7 +944,7 @@ Identifies the thread or worker on which the test executed.
 `threadId` is OPTIONAL.  
 If present, it MUST be a string.
 
-### 9.23. `browser`
+### 9.24. `browser`
 
 **Description:**  
 Identifies the browser used during test execution (for browser-based tests).
@@ -942,7 +953,7 @@ Identifies the browser used during test execution (for browser-based tests).
 `browser` is OPTIONAL.  
 If present, it MUST be a string.
 
-### 9.24. `device`
+### 9.25. `device`
 
 **Description:**  
 Identifies the device or device profile used during test execution.
@@ -951,7 +962,7 @@ Identifies the device or device profile used during test execution.
 `device` is OPTIONAL.  
 If present, it MUST be a string.
 
-### 9.25. `screenshot`
+### 9.26. `screenshot`
 
 **Description:**  
 A single base64-encoded screenshot captured during execution of the test case.
@@ -968,7 +979,7 @@ Producers MUST use the `attachments` array if providing additional screenshots o
 Screenshots are base64-encoded and may significantly increase document size.  
 Producers SHOULD prefer file-based attachments for large images.
 
-### 9.26. `attachments`
+### 9.27. `attachments`
 
 **Description:**  
 A list of additional artifacts associated with the test case (screenshots, logs, videos, etc.).
@@ -978,7 +989,7 @@ A list of additional artifacts associated with the test case (screenshots, logs,
 If present, it MUST be an array.  
 Each entry MUST follow the structure defined in Section 12 (Attachment Object).
 
-### 9.27. `parameters`
+### 9.28. `parameters`
 
 **Description:**  
 A set of test parameters, input values, or contextual data relevant to the execution.
@@ -988,7 +999,7 @@ A set of test parameters, input values, or contextual data relevant to the execu
 If present, it MUST be an object.  
 It MAY contain arbitrary fields.
 
-### 9.28. `steps`
+### 9.29. `steps`
 
 **Description:**  
 A list of test steps or sub-operations performed during the test.
@@ -998,7 +1009,7 @@ A list of test steps or sub-operations performed during the test.
 If present, it MUST be an array.  
 Each element MUST follow the structure defined in Section 13 (Step Object).
 
-### 9.29. `insights`
+### 9.30. `insights`
 
 **Description:**  
 Derived or aggregated insights specific to this test case.
@@ -1007,7 +1018,7 @@ Derived or aggregated insights specific to this test case.
 `insights` is OPTIONAL.  
 If present, it MUST follow the structure defined in Section 15 (Test-Level Insights Object).
 
-### 9.30. `extra`
+### 9.31. `extra`
 
 **Description:**  
 An extensibility object containing arbitrary metadata.
@@ -1999,6 +2010,13 @@ to this specification.
                 "type": "array",
                 "items": {
                   "type": "string"
+                }
+              },
+              "labels": {
+                "description": "Structured key-value metadata for the test case (e.g. priority, severity, external identifiers)",
+                "type": "object",
+                "additionalProperties": {
+                  "type": [ "string", "number", "boolean" ]
                 }
               },
               "type": {
