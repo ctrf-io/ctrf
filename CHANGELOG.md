@@ -9,5 +9,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Added immutability guidance for emitted CTRF report artifacts.
 - Clarified `tags` as simple keyless classifications and `labels` as structured key-value test metadata ([#54](https://github.com/ctrf-io/ctrf/pull/54)).
 - Allowed non-empty arrays of strings, numbers, and booleans as label values ([#54](https://github.com/ctrf-io/ctrf/pull/54)).

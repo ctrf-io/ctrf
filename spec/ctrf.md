@@ -238,6 +238,26 @@ As long as the document structure and semantics are respected, CTRF does not con
 
 ---
 
+### 2.11. Immutable Report Artifacts
+
+CTRF treats an emitted report as an immutable artifact.
+
+A CTRF document represents a snapshot of test results at the time it is produced. Implementations are free to build or transform documents internally before emission, but once a CTRF document has been written, published, or otherwise made available as an artifact, it is treated as a fixed record.
+
+Immutability supports:
+
+- auditability of test results
+- reproducibility of analysis
+- stable caching and artifact storage
+- compatibility with hashing, signing, and deduplication
+- clear separation between raw results and derived results
+
+When a tool or system performs additional processing after initial report generation — such as merging shard reports, adding metadata, or computing insights — the design intent is that this produces a new CTRF document with a new `reportId`, rather than modifying the original.
+
+This distinction between the act of constructing a report and the resulting artifact as an immutable record is central to how CTRF is designed to be used in pipelines, artifact stores, and analysis systems.
+
+---
+
 ## 3. Terminology
 
 The key words **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**,  
@@ -404,6 +424,8 @@ A unique identifier for this report instance.
 **Requirements:**  
 `reportId` is OPTIONAL.  
 If present, it MUST be a valid UUID as defined in [RFC4122].
+
+Each emitted CTRF document represents a distinct report instance. If a new CTRF document is produced through post-processing, it SHOULD receive a new `reportId`.
 
 ---
 
@@ -1764,6 +1786,8 @@ Producers:
 - MUST NOT introduce fields outside `extra` objects  
 - MUST NOT emit invalid enum values (status, etc.)
 - MAY include `insights` if historical or aggregate data is available
+- SHOULD treat emitted CTRF documents as immutable artifacts
+- SHOULD emit a new CTRF document with a new `reportId` when performing post-processing after initial report generation, rather than modifying an emitted CTRF document
 
 Producers SHOULD:
 
@@ -1784,6 +1808,8 @@ Consumers:
 - MUST NOT require optional fields to be present
 - MUST NOT assume the presence of `insights`
 - SHOULD compute insights when sufficient historical data is available
+- SHOULD assume that CTRF documents are immutable once emitted
+- MUST NOT rely on in-place modification of existing reports
 
 ---
 
