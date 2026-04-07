@@ -15,9 +15,13 @@
       "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
     },
     "reportId": {
-      "description": "Unique identifier for this report instance (UUID)",
+      "description": "Unique identifier for this CTRF document instance (UUID). Identifies the serialized artifact.",
       "type": "string",
       "format": "uuid"
+    },
+    "runId": {
+      "description": "Identifier for the logical test run. Shared across shards/documents belonging to the same run.",
+      "type": "string"
     },
     "timestamp": {
       "description": "Report generation time (RFC 3339 / ISO 8601)",
@@ -132,9 +136,17 @@
             "required": [ "name", "status", "duration" ],
             "properties": {
               "id": {
-                "description": "Unique, stable identifier for the test case (UUID)",
+                "description": "Deprecated: use testId instead. Unique, stable identifier for the test case (UUID)",
                 "type": "string",
                 "format": "uuid"
+              },
+              "testId": {
+                "description": "Stable identifier for the logical test case. Should be deterministic and stable across runs.",
+                "type": "string"
+              },
+              "executionId": {
+                "description": "Unique identifier for this specific execution of the test case within a run. UUID recommended.",
+                "type": "string"
               },
               "name": {
                 "description": "Name or title of the test case",
@@ -255,6 +267,10 @@
                       "type": "integer",
                       "minimum": 1
                     },
+                    "attemptId": {
+                      "description": "Unique identifier for this individual retry attempt. UUID recommended.",
+                      "type": "string"
+                    },
                     "status": {
                       "description": "Outcome of this attempt",
                       "enum": [
@@ -315,6 +331,10 @@
                         "type": "object",
                         "required": [ "name", "contentType", "path" ],
                         "properties": {
+                          "attachmentId": {
+                            "description": "Unique identifier for this attachment reference instance. UUID recommended.",
+                            "type": "string"
+                          },
                           "name": {
                             "description": "Display name of the attachment",
                             "type": "string"
@@ -385,6 +405,10 @@
                   "type": "object",
                   "required": [ "name", "contentType", "path" ],
                   "properties": {
+                    "attachmentId": {
+                      "description": "Unique identifier for this attachment reference instance. UUID recommended.",
+                      "type": "string"
+                    },
                     "name": {
                       "description": "Display name of the attachment",
                       "type": "string"
@@ -544,6 +568,10 @@
             },
             "testEnvironment": {
               "description": "Logical test environment (e.g., 'staging', 'production')",
+              "type": "string"
+            },
+            "shardId": {
+              "description": "Shard or partition label identifying which part of a distributed run produced this document",
               "type": "string"
             },
             "healthy": {
