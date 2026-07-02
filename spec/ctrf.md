@@ -851,22 +851,39 @@ If present, it MUST be a string.
 ### 9.14. `tags`
 
 **Description:**  
-A list of user-defined tags associated with the test.
+A list of simple, keyless classifications associated with the test.
 
 **Requirements:**  
 `tags` is OPTIONAL.  
-If present, it MUST be an array of strings.
+If present, it MUST be an array of strings.  
+Producers SHOULD use `tags` for keyless categorization, such as `"smoke"`, `"regression"`, or `"api"`.  
+Metadata that has a named key and one or more associated values SHOULD use `labels` instead.
 
 ### 9.15. `labels`
 
 **Description:**  
-Structured key-value metadata, commonly used for classification and external system integration (e.g. priority, severity, external identifiers).
+Structured key-value metadata associated with the test, including framework traits, classification, ownership, and external system integration (for example, priority, severity, owner, category, or external identifiers).
 
 **Requirements:**  
 `labels` is OPTIONAL.  
 If present, it MUST be an object.  
-Each value MUST be one of: string, number, or boolean.  
-Consumers MUST treat label keys as opaque and MUST NOT require any particular keys to be present.
+Each value MUST be either a string, number, or boolean, or a non-empty array containing those primitive types.  
+Array values MAY contain more than one primitive type, but producers SHOULD use a consistent primitive type for all values associated with a label key.  
+Consumers MUST treat label keys as opaque and MUST NOT require any particular keys to be present.  
+Producers SHOULD use `labels` rather than `tags` when the metadata has a named key or may contain multiple values.
+
+Example:
+
+```json
+{
+  "tags": ["smoke", "regression", "api"],
+  "labels": {
+    "priority": "high",
+    "owners": ["qa", "platform"],
+    "category": ["smoke", "staging"]
+  }
+}
+```
 
 ### 9.16. `type`
 
@@ -2006,17 +2023,44 @@ to this specification.
                 "type": "string"
               },
               "tags": {
-                "description": "User-defined tags",
+                "description": "Simple keyless classifications associated with the test case",
                 "type": "array",
                 "items": {
                   "type": "string"
                 }
               },
               "labels": {
-                "description": "Structured key-value metadata for the test case (e.g. priority, severity, external identifiers)",
+                "description": "Structured key-value metadata for the test case. Values may be scalar primitives or non-empty arrays of primitive values",
                 "type": "object",
                 "additionalProperties": {
-                  "type": [ "string", "number", "boolean" ]
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "boolean"
+                    },
+                    {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "boolean"
+                          }
+                        ]
+                      }
+                    }
+                  ]
                 }
               },
               "type": {
@@ -2960,6 +3004,12 @@ It includes:
         "name": "user can log in",
         "suite": ["auth", "login"],
         "filePath": "tests/auth/login.test.js",
+        "tags": ["smoke", "authentication"],
+        "labels": {
+          "priority": "high",
+          "owners": ["qa", "platform"],
+          "category": ["smoke", "staging"]
+        },
         "status": "passed",
         "duration": 3000,
         "retries": 1,

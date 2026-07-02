@@ -44,7 +44,9 @@
           "priority": "P1",
           "severity": 2,
           "automated": true,
-          "externalId": 45678
+          "externalId": 45678,
+          "owners": ["qa", "platform"],
+          "category": ["smoke", "staging"]
         },
         "filePath": "tests/auth/login.test.js",
         "browser": "chromium",

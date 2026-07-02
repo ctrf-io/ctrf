@@ -190,17 +190,44 @@
                 "type": "string"
               },
               "tags": {
-                "description": "User-defined tags",
+                "description": "Simple keyless classifications associated with the test case",
                 "type": "array",
                 "items": {
                   "type": "string"
                 }
               },
               "labels": {
-                "description": "Structured key-value metadata for the test case (e.g. priority, severity, external identifiers)",
+                "description": "Structured key-value metadata for the test case. Values may be scalar primitives or non-empty arrays of primitive values",
                 "type": "object",
                 "additionalProperties": {
-                  "type": [ "string", "number", "boolean" ]
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "boolean"
+                    },
+                    {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "boolean"
+                          }
+                        ]
+                      }
+                    }
+                  ]
                 }
               },
               "type": {

@@ -471,8 +471,8 @@
       }
     },
     {
-      "description": "Test with labels containing invalid value type (array)",
-      "valid": false,
+      "description": "Test with valid labels containing string array values",
+      "valid": true,
       "data": {
         "reportFormat": "CTRF",
         "specVersion": "1.0.0",
@@ -480,6 +480,84 @@
           "tool": { "name": "runner" },
           "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
           "tests": [{ "name": "test", "status": "passed", "duration": 100, "labels": { "priority": ["P1", "P2"] } }]
+        }
+      }
+    },
+    {
+      "description": "Test with valid labels containing number array values",
+      "valid": true,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100, "labels": { "externalIds": [123, 456] } }]
+        }
+      }
+    },
+    {
+      "description": "Test with valid labels containing boolean array values",
+      "valid": true,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100, "labels": { "featureFlags": [true, false] } }]
+        }
+      }
+    },
+    {
+      "description": "Test with valid labels containing mixed primitive array values",
+      "valid": true,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100, "labels": { "sourceValues": ["manual", 2, true] } }]
+        }
+      }
+    },
+    {
+      "description": "Test with labels containing an empty array value",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100, "labels": { "owners": [] } }]
+        }
+      }
+    },
+    {
+      "description": "Test with labels containing an object in an array value",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100, "labels": { "owners": ["qa", { "team": "platform" }] } }]
+        }
+      }
+    },
+    {
+      "description": "Test with labels containing null in an array value",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100, "labels": { "owners": ["qa", null] } }]
         }
       }
     },
