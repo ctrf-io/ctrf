@@ -856,13 +856,14 @@ A list of simple, keyless classifications associated with the test.
 **Requirements:**  
 `tags` is OPTIONAL.  
 If present, it MUST be an array of strings.  
-Producers SHOULD use `tags` for keyless categorization, such as `"smoke"`, `"regression"`, or `"api"`.  
-Metadata that has a named key and one or more associated values SHOULD use `labels` instead.
+Producers SHOULD use `tags` for simple, keyless categorization, such as `"smoke"`, `"regression"`, or `"nightly"`. Metadata consisting of named attributes and associated values SHOULD use `labels` instead.
+
+---
 
 ### 9.15. `labels`
 
 **Description:**  
-Structured key-value metadata associated with the test, including framework traits, classification, ownership, and external system integration (for example, priority, severity, owner, category, or external identifiers).
+Structured key-value metadata associated with the test, such as ownership, priority, severity, external identifiers, or other named attributes.
 
 **Requirements:**  
 `labels` is OPTIONAL.  
@@ -870,20 +871,7 @@ If present, it MUST be an object.
 Each value MUST be either a string, number, or boolean, or a non-empty array containing those primitive types.  
 Array values MAY contain more than one primitive type, but producers SHOULD use a consistent primitive type for all values associated with a label key.  
 Consumers MUST treat label keys as opaque and MUST NOT require any particular keys to be present.  
-Producers SHOULD use `labels` rather than `tags` when the metadata has a named key or may contain multiple values.
-
-Example:
-
-```json
-{
-  "tags": ["smoke", "regression", "api"],
-  "labels": {
-    "priority": "high",
-    "owners": ["qa", "platform"],
-    "category": ["smoke", "staging"]
-  }
-}
-```
+Producers SHOULD use `labels` whenever the metadata consists of named attributes and associated values.
 
 ### 9.16. `type`
 
