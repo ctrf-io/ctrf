@@ -369,8 +369,8 @@ Extension keys:
 - SHOULD use a stable, recognizable prefix identifying the extension owner (e.g. `myorg.myproject`)
 - SHOULD include a delimiter (e.g. `.` or `/`) separating the namespace from the identifier
 
-The `ctrf.*` namespace is reserved for CTRF-defined extensions.  
-Producers other than CTRF MUST NOT use the `ctrf.*` namespace.
+The `ctrf.` and `ctrf/` namespace prefixes are reserved for CTRF-defined extensions.  
+Producers other than CTRF MUST NOT use extension keys beginning with `ctrf.` or `ctrf/`.
 
 Extension keys are opaque identifiers.  
 Consumers MUST NOT interpret extension keys as hierarchical paths.
@@ -393,7 +393,7 @@ Producers SHOULD group related extension data under a single extension key.
 The structure and semantics of each extension value are defined by the extension producer.
 
 - CTRF does not define or validate extension value structure.
-- Consumers MUST treat unknown extension values as opaque.
+- Consumers MUST treat values for unrecognized extension keys as opaque.
 - Consumers MUST NOT assume the presence or meaning of any extension unless explicitly supported.
 
 ### 4.7. Versioning and Forward Compatibility
@@ -3204,7 +3204,7 @@ Two producers contribute extensions in this example:
 - `myorg.ci` (the CI system) contributes extensions at the top level, `results`, `summary`, and per-test level — using the `myorg.ci` namespace key consistently throughout.
 - `acme.test-management` (a test management integration) contributes extensions at the per-test level only — using the `acme.test-management` namespace key consistently.
 
-The `ctrf.*` namespace is reserved for CTRF-defined extensions and MUST NOT be used by other producers.
+The `ctrf.` and `ctrf/` namespace prefixes are reserved for CTRF-defined extensions and MUST NOT be used by other producers.
 
 ```json title="CTRF document with namespaced extra objects"
 {
