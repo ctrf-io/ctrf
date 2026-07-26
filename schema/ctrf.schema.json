@@ -197,7 +197,7 @@
                 }
               },
               "labels": {
-                "description": "Structured key-value metadata describing the test case. Values may be scalar primitives or non-empty arrays of primitive values.",
+                "description": "Structured key-value metadata describing the test case. Values may be scalar primitives or non-empty arrays of primitive values",
                 "type": "object",
                 "additionalProperties": {
                   "anyOf": [
