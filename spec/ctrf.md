@@ -252,7 +252,7 @@ Immutability supports:
 - compatibility with hashing, signing, and deduplication
 - clear separation between raw results and derived results
 
-When a tool or system performs additional processing after initial report generation — such as merging shard reports, adding metadata, or computing insights — the design intent is that this produces a new CTRF document with a new `reportId`, rather than modifying the original.
+When a tool or system performs additional processing after initial report generation — such as merging shard reports, adding metadata, or computing insights — the design intent is that this produces a new CTRF document and, when `reportId` is used, assigns a different `reportId` value, rather than modifying the original.
 
 This distinction between the act of constructing a report and the resulting artifact as an immutable record is central to how CTRF is designed to be used in pipelines, artifact stores, and analysis systems.
 
@@ -425,7 +425,7 @@ A unique identifier for this report instance.
 `reportId` is OPTIONAL.  
 If present, it MUST be a valid UUID as defined in [RFC4122].
 
-Each emitted CTRF document represents a distinct report instance. If a new CTRF document is produced through post-processing, it SHOULD receive a new `reportId`.
+Each emitted CTRF document represents a distinct report instance. If a new CTRF document is produced through post-processing, it SHOULD use a different `reportId` value than the source document when `reportId` is used.
 
 ---
 
@@ -1787,7 +1787,7 @@ Producers:
 - MUST NOT emit invalid enum values (status, etc.)
 - MAY include `insights` if historical or aggregate data is available
 - SHOULD treat emitted CTRF documents as immutable artifacts
-- SHOULD emit a new CTRF document with a new `reportId` when performing post-processing after initial report generation, rather than modifying an emitted CTRF document
+- SHOULD emit a new CTRF document when performing post-processing after initial report generation and, when `reportId` is used, assign a different `reportId` value rather than modifying an emitted CTRF document
 
 Producers SHOULD:
 
