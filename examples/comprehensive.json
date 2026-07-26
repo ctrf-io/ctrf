@@ -2,6 +2,7 @@
   "reportFormat": "CTRF",
   "specVersion": "1.0.0",
   "reportId": "9d2c6a10-3f7a-4e22-9a8f-1a2b3c4d5e6f",
+  "runId": "run-2025-11-24-pr-123",
   "timestamp": "2025-11-24T12:00:00Z",
   "generatedBy": "example-ci",
   "extra": {
@@ -36,6 +37,8 @@
     "tests": [
       {
         "id": "550e8400-e29b-41d4-a716-446655440000",
+        "testId": "auth-login-user-can-login",
+        "executionId": "2cf7e0b4-ea0c-4ef4-a18a-b9d6f6f0e100",
         "name": "user can login",
         "status": "passed",
         "duration": 3500,
@@ -71,6 +74,8 @@
       },
       {
         "id": "550e8400-e29b-41d4-a716-446655440001",
+        "testId": "checkout-user-can-checkout",
+        "executionId": "2cf7e0b4-ea0c-4ef4-a18a-b9d6f6f0e101",
         "name": "user can checkout",
         "status": "passed",
         "duration": 5200,
@@ -93,6 +98,7 @@
         "retryAttempts": [
           {
             "attempt": 1,
+            "attemptId": "48c3f90b-95a9-4c13-a42f-0888bb0b1001",
             "status": "failed",
             "duration": 5100,
             "start": 1609459203500,
@@ -101,6 +107,7 @@
             "trace": "Error: Payment gateway timeout\n    at processPayment (payment.js:23:10)",
             "attachments": [
               {
+                "attachmentId": "72d531af-9d77-4f3b-bf67-0d8ec26c2001",
                 "name": "attempt-1-screenshot.png",
                 "contentType": "image/png",
                 "path": "/artifacts/retry-1.png"
@@ -109,6 +116,7 @@
           },
           {
             "attempt": 2,
+            "attemptId": "48c3f90b-95a9-4c13-a42f-0888bb0b1002",
             "status": "passed",
             "duration": 5200,
             "start": 1609459208700,
@@ -131,6 +139,8 @@
       },
       {
         "id": "550e8400-e29b-41d4-a716-446655440002",
+        "testId": "admin-dashboard-loads",
+        "executionId": "2cf7e0b4-ea0c-4ef4-a18a-b9d6f6f0e102",
         "name": "admin dashboard loads",
         "status": "failed",
         "duration": 8000,
@@ -163,16 +173,19 @@
         ],
         "attachments": [
           {
+            "attachmentId": "72d531af-9d77-4f3b-bf67-0d8ec26c2002",
             "name": "failure-screenshot.png",
             "contentType": "image/png",
             "path": "/artifacts/screenshots/admin-dashboard-fail.png"
           },
           {
+            "attachmentId": "72d531af-9d77-4f3b-bf67-0d8ec26c2003",
             "name": "trace.zip",
             "contentType": "application/zip",
             "path": "/artifacts/traces/admin-dashboard.trace.zip"
           },
           {
+            "attachmentId": "72d531af-9d77-4f3b-bf67-0d8ec26c2004",
             "name": "video.webm",
             "contentType": "video/webm",
             "path": "/artifacts/videos/admin-dashboard.webm"
@@ -214,6 +227,7 @@
       "repositoryUrl": "https://github.com/example/example-app",
       "commit": "a1b2c3d4e5f6",
       "branchName": "feature/new-dashboard",
+      "shardId": "shard-1",
       "osPlatform": "linux",
       "osRelease": "5.10.0",
       "osVersion": "Ubuntu 20.04",

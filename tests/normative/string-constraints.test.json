@@ -16,6 +16,34 @@
       }
     },
     {
+      "description": "Document with empty reportId violating minLength constraint",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "reportId": "",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100 }]
+        }
+      }
+    },
+    {
+      "description": "Document with empty runId violating minLength constraint",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "runId": "",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100 }]
+        }
+      }
+    },
+    {
       "description": "Tool with name violating minLength constraint",
       "valid": false,
       "data": {
@@ -38,6 +66,45 @@
           "tool": { "name": "runner" },
           "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
           "tests": [{ "name": "", "status": "passed", "duration": 100 }]
+        }
+      }
+    },
+    {
+      "description": "Test with empty legacy id violating minLength constraint",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "id": "", "name": "test", "status": "passed", "duration": 100 }]
+        }
+      }
+    },
+    {
+      "description": "Test with empty testId violating minLength constraint",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "testId": "", "name": "test", "status": "passed", "duration": 100 }]
+        }
+      }
+    },
+    {
+      "description": "Test with empty executionId violating minLength constraint",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "executionId": "", "name": "test", "status": "passed", "duration": 100 }]
         }
       }
     },
@@ -78,6 +145,60 @@
           "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
           "tests": [{ "name": "test", "status": "passed", "duration": 100, "retryAttempts": [{ "attempt": -1, "status": "failed" }] }]
         }
+      }
+    },
+    {
+      "description": "RetryAttempt with empty attemptId violating minLength constraint",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100, "retryAttempts": [{ "attempt": 1, "attemptId": "", "status": "failed" }] }]
+        }
+      }
+    },
+    {
+      "description": "Attachment with empty attachmentId violating minLength constraint",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100, "attachments": [{ "attachmentId": "", "name": "file", "contentType": "text/plain", "path": "/path" }] }]
+        }
+      }
+    },
+    {
+      "description": "Environment with empty shardId violating minLength constraint",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100 }],
+          "environment": { "shardId": "" }
+        }
+      }
+    },
+    {
+      "description": "Baseline with empty reportId violating minLength constraint",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100 }]
+        },
+        "baseline": { "reportId": "" }
       }
     }
   ]

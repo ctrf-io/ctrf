@@ -143,18 +143,19 @@ Consumers MAY reconstruct hierarchical views for presentation purposes, but such
 
 ---
 
-### 2.4. Deterministic Test Identity
+### 2.4. Identity Model
 
-CTRF supports stable identification of test cases across runs.
+CTRF provides a layered identity model that supports stable identifiers for test cases, correlation of documents belonging to the same logical run, deduplication, aggregation, and future provenance support.
 
-While test identifiers are OPTIONAL, producers are encouraged to generate deterministic identifiers (for example, using UUID version 5) derived from stable test attributes such as name, suite path, and file location.
+Identity fields are OPTIONAL. When provided, they enable:
 
-Deterministic identifiers enable:
-
-- cross-run analysis
+- cross-run analysis and trend detection
 - flakiness detection
-- historical trend analysis
-- baseline comparisons
+- shard and parallel-execution merging
+- historical baseline comparisons
+- artifact correlation
+
+Producers are encouraged to assign identity fields when the corresponding correlation is meaningful for their workflow. The normative requirements for identity fields are defined in Section 4.9.
 
 ---
 
@@ -411,6 +412,57 @@ Unless otherwise specified in this document, all timestamps and duration values 
 This applies to all fields representing points in time or elapsed durations,
 including (but not limited to) `start`, `stop`, and `duration` fields at all levels.
 
+### 4.9. Identity Model
+
+CTRF defines a layered identity model that enables correlation of test data across documents, runs, test cases, and individual executions.
+
+Each layer addresses a distinct identification concern:
+
+1. **Document**: `reportId` identifies the emitted CTRF document as a serialized artifact. When `reportId` is used, each CTRF document SHOULD have exactly one `reportId`.
+2. **Run**: `runId` identifies the logical test run. Multiple CTRF documents MAY share the same `runId` when they represent shards or partitions of a single coordinated execution.
+3. **Test case**: `testId` identifies the logical test case within the producer's chosen scope. It SHOULD be deterministic and stable across runs within that scope, enabling cross-run analysis, trending, and flake detection.
+4. **Execution**: `executionId` identifies a concrete execution of a test case within a run. An execution MAY include multiple retry attempts represented in `retryAttempts`.
+5. **Attempt**: `attemptId` identifies an individual retry attempt within an execution.
+6. **Attachment**: `attachmentId` identifies a specific attachment reference instance.
+7. **Shard**: `shardId` labels the partition or shard that produced this document within a logical run.
+
+All identity fields are OPTIONAL. Producers SHOULD assign them when the corresponding correlation is meaningful for their workflow.
+
+This identity model provides primitives that can be used by future provenance and lineage extensions. It does not itself define derivation, parent/child report relationships, transformation history, or trust metadata.
+
+#### 4.9.1. Uniqueness
+
+Each identity field has an intended uniqueness scope:
+
+| Field | Uniqueness Scope |
+|---|---|
+| `reportId` | Unique per document |
+| `runId` | Unique per logical run |
+| `testId` | Stable within the producer's chosen scope for the logical test case |
+| `executionId` | Unique for one execution of a logical test case within a run |
+| `attemptId` | Unique for one retry attempt of an execution |
+| `attachmentId` | Unique within the containing parent object |
+| `shardId` | Unique within a logical run |
+
+Producers SHOULD NOT knowingly reuse identity values outside their intended scope.
+Producers SHOULD NOT emit duplicate identity values within a single CTRF document when those duplicates would make correlation ambiguous.
+
+#### 4.9.2. Stability
+
+Identity fields differ in whether their values persist across runs or are unique to a single emission:
+
+| Field | Stability |
+|---|---|
+| `reportId` | Stable across retransmissions of the same report; changes for materially changed report content |
+| `runId` | Stable across all documents belonging to the same logical run |
+| `testId` | Stable across runs for the same logical test case within the producer's chosen scope |
+| `executionId` | Unique per execution; not stable across runs |
+| `attemptId` | Unique per attempt; not stable across runs |
+| `attachmentId` | Unique per attachment reference instance |
+| `shardId` | Stable across retransmissions of the same shard |
+
+Producers that generate `testId` values SHOULD ensure stability by deriving identifiers from deterministic inputs such as the test name, suite path, and file path (see Appendix B).
+
 ---
 
 ## 5. Top-Level Fields
@@ -457,17 +509,39 @@ Consumers MUST NOT assume compatibility across different MAJOR versions.
 ### 5.3. `reportId`
 
 **Description:**  
-A unique identifier for this report instance.
+A unique identifier for this CTRF document instance.
+
+`reportId` identifies the report artifact or content — the emitted file or payload — rather than the logical test run or any entity within it. See Section 4.9 for the full identity model.
 
 **Requirements:**  
 `reportId` is OPTIONAL.  
-If present, it MUST be a valid UUID as defined in [RFC4122].
+If present, it MUST be a valid UUID as defined in [RFC4122].  
+When `reportId` is used, each emitted document SHOULD receive a distinct `reportId`.
 
-Each emitted CTRF document represents a distinct report instance. If a new CTRF document is produced through post-processing, it SHOULD use a different `reportId` value than the source document when `reportId` is used.
+Retransmitting the same report means sending or uploading the same already-emitted CTRF document again without changing its content. A retransmission of the same report SHOULD preserve the same `reportId` when `reportId` is used.
+
+If a materially changed, regenerated, merged, filtered, or transformed CTRF document is produced, it SHOULD use a different `reportId` value than the source document when `reportId` is used.
 
 ---
 
-### 5.4. `timestamp`
+### 5.4. `runId`
+
+**Description:**  
+Identifies the logical test run to which this document belongs.
+
+A logical run MAY span multiple CTRF documents (for example, when tests are distributed across shards or parallel workers). All documents belonging to the same coordinated execution SHOULD share the same `runId`.
+
+Multiple CTRF documents MAY share the same `runId` when they describe results from the same logical run.
+
+**Requirements:**  
+`runId` is OPTIONAL.  
+If present, it MUST be a non-empty string.  
+Producers SHOULD ensure that `runId` is unique across distinct logical runs.  
+Consumers MAY use `runId` to merge or correlate documents from the same logical run.
+
+---
+
+### 5.5. `timestamp`
 
 **Description:**  
 The time at which the report was generated.
@@ -478,7 +552,7 @@ If present, it MUST be a valid RFC 3339 / ISO 8601 date-time string.
 
 ---
 
-### 5.5. `generatedBy`
+### 5.6. `generatedBy`
 
 **Description:**  
 Identifies the tool, framework, or system that produced the CTRF document.
@@ -489,7 +563,7 @@ No specific format or structure is required.
 
 ---
 
-### 5.6. `results`
+### 5.7. `results`
 
 **Description:**  
 Contains the results of a single test execution run.
@@ -500,7 +574,7 @@ It MUST follow the structure defined in Section 6 (Results Object).
 
 ---
 
-### 5.7. `insights`
+### 5.8. `insights`
 
 **Description:**  
 Contains aggregated or derived metrics computed across multiple test runs.
@@ -511,7 +585,7 @@ If present, it MUST follow the structure described in Section 14 (Run-Level Insi
 
 ---
 
-### 5.8. `baseline`
+### 5.9. `baseline`
 
 **Description:**  
 Identifies a previous report used as a comparison reference when computing insights.
@@ -522,7 +596,7 @@ If present, it MUST follow the structure described in Section 17 (Baseline Objec
 
 ---
 
-### 5.9. `extra`
+### 5.10. `extra`
 
 **Description:**  
 An extensibility object containing arbitrary metadata.
@@ -786,19 +860,49 @@ Each field within the test object is described in the subsections below.
 
 ### 9.1. `id`
 
+> **Legacy.** `id` is retained for backward compatibility. New producers SHOULD prefer `testId` (Section 9.2).
+
 **Description:**  
 A unique, stable identifier for the test case.
 
 **Requirements:**  
 `id` is OPTIONAL.  
-If present, it MUST be a valid UUID as defined in [RFC4122].
-If a producer chooses to assign test identifiers, they SHOULD be deterministic for a given test case and stable across runs, machines, and environments.
+If present, it MUST be a valid UUID as defined in [RFC4122].  
+Producers SHOULD prefer `testId` for new implementations.  
+When both `id` and `testId` are present, consumers SHOULD use `testId`.
+Consumers SHOULD treat `id` as legacy unless a producer documents stronger semantics.
 
-CTRF RECOMMENDS using UUID version 5 (name-based UUID) derived from stable test properties such as the test name, suite path, and file path.
+### 9.2. `testId`
 
-Consumers MUST treat the `id` value as opaque.
+**Description:**  
+A stable identifier for the logical test case.
 
-### 9.2. `name`
+`testId` identifies the test case itself, independent of any particular run or execution. Producers SHOULD keep `testId` stable for the same logical test within their own documented scope.
+
+**Requirements:**  
+`testId` is OPTIONAL.  
+If present, it MUST be a non-empty string.  
+`testId` SHOULD be deterministic and stable across runs for the same test case.  
+When generated by a producer, `testId` SHOULD be derived from stable test attributes such as file path, suite path, and test name.  
+A producer MAY use a canonical string directly, or MAY encode that canonical string as a deterministic identifier such as a UUID version 5 or hash.
+
+Consumers MUST treat the `testId` value as opaque.
+Consumers MUST NOT assume that `testId` values generated by different producers are globally comparable unless the producers document a shared generation scheme.
+
+### 9.3. `executionId`
+
+**Description:**  
+A unique identifier for the specific reported execution of a logical test case within a run.
+
+An execution represents a single reported outcome for a test case in this document. An execution MAY include multiple retry attempts represented in `retryAttempts`.
+
+**Requirements:**  
+`executionId` is OPTIONAL.  
+If present, it MUST be a non-empty string.  
+UUID is RECOMMENDED.  
+`executionId` SHOULD be unique across executions and SHOULD NOT be reused across runs.
+
+### 9.4. `name`
 
 **Description:**  
 The name or title of the test case.
@@ -807,7 +911,7 @@ The name or title of the test case.
 `name` MUST be present.  
 It MUST be a non-empty string.
 
-### 9.3. `status`
+### 9.5. `status`
 
 **Description:**  
 The final outcome of the test case.
@@ -816,7 +920,7 @@ The final outcome of the test case.
 `status` MUST be present.  
 It MUST be one of: `passed`, `failed`, `skipped`, `pending`, or `other`.
 
-### 9.4. `duration`
+### 9.6. `duration`
 
 **Description:**  
 The total execution time for the test case.
@@ -825,7 +929,7 @@ The total execution time for the test case.
 `duration` MUST be present.  
 It MUST be an integer representing milliseconds.
 
-### 9.5. `start`
+### 9.7. `start`
 
 **Description:**  
 The timestamp when test execution began.
@@ -834,7 +938,7 @@ The timestamp when test execution began.
 `start` is OPTIONAL.  
 If present, it MUST be an integer representing milliseconds since the Unix epoch.
 
-### 9.6. `stop`
+### 9.8. `stop`
 
 **Description:**  
 The timestamp when test execution ended.
@@ -844,7 +948,7 @@ The timestamp when test execution ended.
 If present, it MUST be an integer representing milliseconds since the Unix epoch.  
 If both `start` and `stop` are present, `stop` SHOULD be greater than or equal to `start`.
 
-### 9.7. `suite`
+### 9.9. `suite`
 
 **Description:**  
 An ordered list of suite or grouping names to which this test belongs, ordered from the top-level suite to the immediate parent of the test.
@@ -854,7 +958,7 @@ An ordered list of suite or grouping names to which this test belongs, ordered f
 If present, it MUST be an array of strings containing at least one entry.  
 The array MUST be ordered from the top-level suite to the immediate parent suite of the test.
 
-### 9.8. `message`
+### 9.10. `message`
 
 **Description:**  
 A user-visible error or failure message associated with the test result.
@@ -863,7 +967,7 @@ A user-visible error or failure message associated with the test result.
 `message` is OPTIONAL.  
 If present, it MUST be a string.
 
-### 9.9. `trace`
+### 9.11. `trace`
 
 **Description:**  
 A stack trace or structured trace information describing the failure.
@@ -872,7 +976,7 @@ A stack trace or structured trace information describing the failure.
 `trace` is OPTIONAL.  
 If present, it MUST be a string.
 
-### 9.10. `snippet`
+### 9.12. `snippet`
 
 **Description:**  
 A code snippet or relevant source excerpt associated with the failure.
@@ -881,7 +985,7 @@ A code snippet or relevant source excerpt associated with the failure.
 `snippet` is OPTIONAL.  
 If present, it MUST be a string.
 
-### 9.11. `ai`
+### 9.13. `ai`
 
 **Description:**  
 AI-generated diagnostic data, commentary, or suggestions related to the test.
@@ -890,7 +994,7 @@ AI-generated diagnostic data, commentary, or suggestions related to the test.
 `ai` is OPTIONAL.  
 If present, it MUST be a string.
 
-### 9.12. `line`
+### 9.14. `line`
 
 **Description:**  
 The line number associated with the test definition.
@@ -899,7 +1003,7 @@ The line number associated with the test definition.
 `line` is OPTIONAL.  
 If present, it MUST be an integer.
 
-### 9.13. `rawStatus`
+### 9.15. `rawStatus`
 
 **Description:**  
 The unmodified status reported by the source tool before CTRF normalization.
@@ -908,7 +1012,7 @@ The unmodified status reported by the source tool before CTRF normalization.
 `rawStatus` is OPTIONAL.  
 If present, it MUST be a string.
 
-### 9.14. `tags`
+### 9.16. `tags`
 
 **Description:**  
 A list of simple, keyless classifications associated with the test.
@@ -920,7 +1024,7 @@ Producers SHOULD use `tags` for simple, keyless categorization, such as `"smoke"
 
 ---
 
-### 9.15. `labels`
+### 9.17. `labels`
 
 **Description:**  
 Structured key-value metadata associated with the test, such as ownership, priority, severity, external identifiers, or other named attributes.
@@ -933,7 +1037,7 @@ Array values MAY contain more than one primitive type, but producers SHOULD use 
 Consumers MUST treat label keys as opaque and MUST NOT require any particular keys to be present.  
 Producers SHOULD use `labels` whenever the metadata consists of named attributes and associated values.
 
-### 9.16. `type`
+### 9.18. `type`
 
 **Description:**  
 A classification or category for the test (for example, `"unit"`, `"integration"`, or `"e2e"`).
@@ -942,7 +1046,7 @@ A classification or category for the test (for example, `"unit"`, `"integration"
 `type` is OPTIONAL.  
 If present, it MUST be a string.
 
-### 9.17. `filePath`
+### 9.19. `filePath`
 
 **Description:**  
 The path to the file that defines the test case.
@@ -951,7 +1055,7 @@ The path to the file that defines the test case.
 `filePath` is OPTIONAL.  
 If present, it MUST be a string.
 
-### 9.18. `retries`
+### 9.20. `retries`
 
 **Description:**  
 The number of retries performed for this test case.
@@ -961,7 +1065,7 @@ The number of retries performed for this test case.
 If present, it MUST be a non-negative integer.  
 It SHOULD equal the count of entries in `retryAttempts`.
 
-### 9.19. `retryAttempts`
+### 9.21. `retryAttempts`
 
 **Description:**  
 A list of retry attempts performed for this test case.
@@ -971,7 +1075,7 @@ A list of retry attempts performed for this test case.
 If present, it MUST be an array.  
 Each entry MUST follow the structure defined in Section 11 (Retry Attempt Object).
 
-### 9.20. `flaky`
+### 9.22. `flaky`
 
 **Description:**  
 Indicates whether the test is considered flaky.
@@ -982,7 +1086,7 @@ A test is considered flaky only if its final status is `passed` and it experienc
 `flaky` is OPTIONAL.  
 If present, it MUST be a boolean.
 
-### 9.21. `stdout`
+### 9.23. `stdout`
 
 **Description:**  
 Lines of standard output generated during test execution.
@@ -991,7 +1095,7 @@ Lines of standard output generated during test execution.
 `stdout` is OPTIONAL.  
 If present, it MUST be an array of strings.
 
-### 9.22. `stderr`
+### 9.24. `stderr`
 
 **Description:**  
 Lines of standard error output generated during test execution.
@@ -1000,7 +1104,7 @@ Lines of standard error output generated during test execution.
 `stderr` is OPTIONAL.  
 If present, it MUST be an array of strings.
 
-### 9.23. `threadId`
+### 9.25. `threadId`
 
 **Description:**  
 Identifies the thread or worker on which the test executed.
@@ -1009,7 +1113,7 @@ Identifies the thread or worker on which the test executed.
 `threadId` is OPTIONAL.  
 If present, it MUST be a string.
 
-### 9.24. `browser`
+### 9.26. `browser`
 
 **Description:**  
 Identifies the browser used during test execution (for browser-based tests).
@@ -1018,7 +1122,7 @@ Identifies the browser used during test execution (for browser-based tests).
 `browser` is OPTIONAL.  
 If present, it MUST be a string.
 
-### 9.25. `device`
+### 9.27. `device`
 
 **Description:**  
 Identifies the device or device profile used during test execution.
@@ -1027,7 +1131,7 @@ Identifies the device or device profile used during test execution.
 `device` is OPTIONAL.  
 If present, it MUST be a string.
 
-### 9.26. `screenshot`
+### 9.28. `screenshot`
 
 **Description:**  
 A single base64-encoded screenshot captured during execution of the test case.
@@ -1044,7 +1148,7 @@ Producers MUST use the `attachments` array if providing additional screenshots o
 Screenshots are base64-encoded and may significantly increase document size.  
 Producers SHOULD prefer file-based attachments for large images.
 
-### 9.27. `attachments`
+### 9.29. `attachments`
 
 **Description:**  
 A list of additional artifacts associated with the test case (screenshots, logs, videos, etc.).
@@ -1054,7 +1158,7 @@ A list of additional artifacts associated with the test case (screenshots, logs,
 If present, it MUST be an array.  
 Each entry MUST follow the structure defined in Section 12 (Attachment Object).
 
-### 9.28. `parameters`
+### 9.30. `parameters`
 
 **Description:**  
 A set of test parameters, input values, or contextual data relevant to the execution.
@@ -1064,7 +1168,7 @@ A set of test parameters, input values, or contextual data relevant to the execu
 If present, it MUST be an object.  
 It MAY contain arbitrary fields.
 
-### 9.29. `steps`
+### 9.31. `steps`
 
 **Description:**  
 A list of test steps or sub-operations performed during the test.
@@ -1074,7 +1178,7 @@ A list of test steps or sub-operations performed during the test.
 If present, it MUST be an array.  
 Each element MUST follow the structure defined in Section 13 (Step Object).
 
-### 9.30. `insights`
+### 9.32. `insights`
 
 **Description:**  
 Derived or aggregated insights specific to this test case.
@@ -1083,7 +1187,7 @@ Derived or aggregated insights specific to this test case.
 `insights` is OPTIONAL.  
 If present, it MUST follow the structure defined in Section 15 (Test-Level Insights Object).
 
-### 9.31. `extra`
+### 9.33. `extra`
 
 **Description:**  
 An extensibility object containing arbitrary metadata.
@@ -1242,7 +1346,20 @@ A label indicating the environment under which tests were executed (e.g., local,
 `testEnvironment` is OPTIONAL.  
 If present, it MUST be a string.
 
-### 10.16. `healthy`
+### 10.16. `shardId`
+
+**Description:**  
+A label identifying the shard or partition that produced this document within a logical run.
+
+When a test run is distributed across multiple shards, workers, or machines, `shardId` identifies which partition produced this specific document.
+
+**Requirements:**  
+`shardId` is OPTIONAL.  
+If present, it MUST be a non-empty string.  
+`shardId` values SHOULD be unique within documents sharing the same `runId`.  
+The value MAY be human-readable (e.g. `"shard-1"`, `"worker-3"`).
+
+### 10.17. `healthy`
 
 **Description:**  
 Indicates whether the overall system or environment was considered healthy during the test run.
@@ -1251,7 +1368,7 @@ Indicates whether the overall system or environment was considered healthy durin
 `healthy` is OPTIONAL.  
 If present, it MUST be a boolean.
 
-### 10.17. `extra`
+### 10.18. `extra`
 
 **Description:**  
 An extensibility object containing arbitrary metadata.
@@ -1286,7 +1403,18 @@ The attempt number for this execution of the test case.
 It MUST be an integer greater than or equal to 1.  
 Attempt number 1 represents the first execution; higher numbers represent retries.
 
-### 11.2. `status`
+### 11.2. `attemptId`
+
+**Description:**  
+A unique identifier for this individual retry attempt.
+
+**Requirements:**  
+`attemptId` is OPTIONAL.  
+If present, it MUST be a non-empty string.  
+UUID is RECOMMENDED.  
+`attemptId` SHOULD be unique across attempts.
+
+### 11.3. `status`
 
 **Description:**  
 The outcome of this retry attempt.
@@ -1295,7 +1423,7 @@ The outcome of this retry attempt.
 `status` MUST be present.  
 It MUST be one of the following values: `passed`, `failed`, `skipped`, `pending`, or `other`.
 
-### 11.3. `duration`
+### 11.4. `duration`
 
 **Description:**  
 The execution time of this retry attempt, in milliseconds.
@@ -1304,7 +1432,7 @@ The execution time of this retry attempt, in milliseconds.
 `duration` is OPTIONAL.  
 If present, it MUST be an integer.
 
-### 11.4. `message`
+### 11.5. `message`
 
 **Description:**  
 A human-readable message associated with the attempt outcome, commonly used for error or failure messages.
@@ -1313,7 +1441,7 @@ A human-readable message associated with the attempt outcome, commonly used for 
 `message` is OPTIONAL.  
 If present, it MUST be a string.
 
-### 11.5. `trace`
+### 11.6. `trace`
 
 **Description:**  
 A stack trace or diagnostic trace captured during the attempt.
@@ -1322,7 +1450,7 @@ A stack trace or diagnostic trace captured during the attempt.
 `trace` is OPTIONAL.  
 If present, it MUST be a string.
 
-### 11.6. `line`
+### 11.7. `line`
 
 **Description:**  
 The line number in the source file where the failure occurred, if applicable.
@@ -1331,7 +1459,7 @@ The line number in the source file where the failure occurred, if applicable.
 `line` is OPTIONAL.  
 If present, it MUST be a number.
 
-### 11.7. `snippet`
+### 11.8. `snippet`
 
 **Description:**  
 A source code snippet or excerpt relevant to the attempt.
@@ -1340,7 +1468,7 @@ A source code snippet or excerpt relevant to the attempt.
 `snippet` is OPTIONAL.  
 If present, it MUST be a string.
 
-### 11.8. `stdout`
+### 11.9. `stdout`
 
 **Description:**  
 A list of standard output lines captured during the attempt.
@@ -1349,7 +1477,7 @@ A list of standard output lines captured during the attempt.
 `stdout` is OPTIONAL.  
 If present, it MUST be an array of strings.
 
-### 11.9. `stderr`
+### 11.10. `stderr`
 
 **Description:**  
 A list of standard error lines captured during the attempt.
@@ -1358,7 +1486,7 @@ A list of standard error lines captured during the attempt.
 `stderr` is OPTIONAL.  
 If present, it MUST be an array of strings.
 
-### 11.10. `start`
+### 11.11. `start`
 
 **Description:**  
 The timestamp indicating when the attempt began, in milliseconds since the Unix epoch.
@@ -1367,7 +1495,7 @@ The timestamp indicating when the attempt began, in milliseconds since the Unix 
 `start` is OPTIONAL.  
 If present, it MUST be an integer.
 
-### 11.11. `stop`
+### 11.12. `stop`
 
 **Description:**  
 The timestamp indicating when the attempt ended, in milliseconds since the Unix epoch.
@@ -1377,7 +1505,7 @@ The timestamp indicating when the attempt ended, in milliseconds since the Unix 
 If present, it MUST be an integer.  
 If both `start` and `stop` are present, `stop` SHOULD be greater than or equal to `start`.
 
-### 11.12. `attachments`
+### 11.13. `attachments`
 
 **Description:**  
 An array of attachment objects associated with this retry attempt.
@@ -1387,7 +1515,7 @@ An array of attachment objects associated with this retry attempt.
 If present, it MUST be an array.  
 Each element MUST follow the structure defined in Section 12 (Attachment Object).
 
-### 11.13. `extra`
+### 11.14. `extra`
 
 **Description:**  
 An extensibility object containing arbitrary metadata.
@@ -1441,7 +1569,18 @@ The specification does not impose any particular URI or path semantics.
 Consumers MUST treat attachment paths as opaque references and MUST NOT assume
 local filesystem access unless explicitly documented by the producer.
 
-### 12.4. `extra`
+### 12.4. `attachmentId`
+
+**Description:**  
+A unique identifier for this attachment reference instance.
+
+**Requirements:**  
+`attachmentId` is OPTIONAL.  
+If present, it MUST be a non-empty string.  
+UUID is RECOMMENDED.  
+`attachmentId` SHOULD be unique within the containing parent object.
+
+### 12.5. `extra`
 
 **Description:**  
 An extensibility object containing arbitrary metadata.
@@ -1832,6 +1971,9 @@ Producers SHOULD:
 - provide diagnostics when available  
 - treat emitted CTRF documents as immutable artifacts
 - emit a new CTRF document when performing post-processing after initial report generation and, when `reportId` is used, assign a different `reportId` value rather than modifying an emitted CTRF document
+- assign identity fields (`testId`, `executionId`, `attemptId`, `attachmentId`) when traceability is meaningful for their workflow
+- avoid duplicate identity values when duplicates would make correlation ambiguous
+- prefer `testId` over the legacy `id` field for new implementations
 
 ---
 
@@ -1848,6 +1990,9 @@ Consumers:
 - SHOULD compute insights when sufficient historical data is available
 - SHOULD assume that CTRF documents are immutable once emitted
 - MUST NOT rely on in-place modification of existing reports
+- SHOULD use `testId` in preference to `id` when both are present
+- MAY use `runId` to merge or correlate documents from the same logical run
+- MUST NOT assume that identity fields are present; all identity fields are OPTIONAL
 
 ---
 
@@ -1900,9 +2045,15 @@ to this specification.
       "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
     },
     "reportId": {
-      "description": "Unique identifier for this report instance (UUID)",
+      "description": "Unique identifier for this CTRF document instance (UUID). Identifies the serialized artifact",
       "type": "string",
-      "format": "uuid"
+      "format": "uuid",
+      "minLength": 1
+    },
+    "runId": {
+      "description": "Identifier for the logical test run. Shared across shards/documents belonging to the same run",
+      "type": "string",
+      "minLength": 1
     },
     "timestamp": {
       "description": "Report generation time (RFC 3339 / ISO 8601)",
@@ -2017,9 +2168,20 @@ to this specification.
             "required": [ "name", "status", "duration" ],
             "properties": {
               "id": {
-                "description": "Unique, stable identifier for the test case (UUID)",
+                "description": "Legacy identifier for the test case (UUID). New producers should prefer testId",
                 "type": "string",
-                "format": "uuid"
+                "format": "uuid",
+                "minLength": 1
+              },
+              "testId": {
+                "description": "Stable identifier for the logical test case. Should be derived from stable test attributes when generated by a producer",
+                "type": "string",
+                "minLength": 1
+              },
+              "executionId": {
+                "description": "Unique identifier for this specific execution of the test case within a run. UUID recommended",
+                "type": "string",
+                "minLength": 1
               },
               "name": {
                 "description": "Name or title of the test case",
@@ -2140,6 +2302,11 @@ to this specification.
                       "type": "integer",
                       "minimum": 1
                     },
+                    "attemptId": {
+                      "description": "Unique identifier for this individual retry attempt. UUID recommended",
+                      "type": "string",
+                      "minLength": 1
+                    },
                     "status": {
                       "description": "Outcome of this attempt",
                       "enum": [
@@ -2200,6 +2367,11 @@ to this specification.
                         "type": "object",
                         "required": [ "name", "contentType", "path" ],
                         "properties": {
+                          "attachmentId": {
+                            "description": "Unique identifier for this attachment reference instance. UUID recommended",
+                            "type": "string",
+                            "minLength": 1
+                          },
                           "name": {
                             "description": "Display name of the attachment",
                             "type": "string"
@@ -2270,6 +2442,11 @@ to this specification.
                   "type": "object",
                   "required": [ "name", "contentType", "path" ],
                   "properties": {
+                    "attachmentId": {
+                      "description": "Unique identifier for this attachment reference instance. UUID recommended",
+                      "type": "string",
+                      "minLength": 1
+                    },
                     "name": {
                       "description": "Display name of the attachment",
                       "type": "string"
@@ -2431,6 +2608,11 @@ to this specification.
               "description": "Logical test environment (e.g., 'staging', 'production')",
               "type": "string"
             },
+            "shardId": {
+              "description": "Shard or partition label identifying which part of a distributed run produced this document",
+              "type": "string",
+              "minLength": 1
+            },
             "healthy": {
               "description": "Indicates if the run is considered healthy",
               "type": "boolean"
@@ -2496,7 +2678,8 @@ to this specification.
         "reportId": {
           "description": "UUID of the baseline report",
           "type": "string",
-          "format": "uuid"
+          "format": "uuid",
+          "minLength": 1
         },
         "timestamp": {
           "description": "Generation time of the baseline report",
@@ -2561,20 +2744,25 @@ to this specification.
 
 ## Appendix B - Test Identifier Generation (Informative)
 
-Although the `id` field of a test object is OPTIONAL, producers that assign test identifiers SHOULD ensure that they are stable and deterministic across runs.
+Although `testId` (and the legacy `id` field) of a test object is OPTIONAL, producers that assign test identifiers SHOULD ensure that they are stable and deterministic across runs.
 
 Producers SHOULD normalize input values (e.g., trimming whitespace and using consistent path separators) before generating deterministic identifiers.
 
-CTRF RECOMMENDS the following approach:
+CTRF RECOMMENDS deriving producer-generated `testId` values from stable test attributes such as:
 
-- Use UUID version 5 (name-based UUID, SHA-1).
-- Construct a stable identifier string using test properties such as:
-  - test name
-  - suite path
-  - file path
-- Combine these properties into a canonical string and generate a UUID v5 using a fixed namespace UUID.
+- file path
+- suite path
+- test name
 
-This approach ensures that the same test retains the same identifier across runs, enabling consumers to analyze historical trends, flakiness, and stability.
+Producers MAY use the resulting canonical string directly. For example:
+
+```text
+tests/auth/login.test.ts::auth > login::user can log in
+```
+
+Producers MAY also encode the canonical string as a deterministic identifier such as a UUID version 5 or hash.
+
+This approach ensures that the same test retains the same `testId` across runs, enabling consumers to analyze historical trends, flakiness, and stability.
 
 When generating deterministic test identifiers, producers SHOULD:
 
@@ -2582,7 +2770,9 @@ When generating deterministic test identifiers, producers SHOULD:
 - Use a fixed delimiter between components.
 - Normalize string inputs (e.g., case, path separators) consistently.
 
-The namespace UUID is intentionally not fixed by this specification.
+When UUID version 5 is used, the namespace UUID is intentionally not fixed by this specification.
+
+Note: `testId` accepts any string format. Producers MAY use other deterministic schemes provided the output is stable for a given test case.
 
 ---
 
@@ -3020,6 +3210,7 @@ It includes:
   "reportFormat": "CTRF",
   "specVersion": "0.0.0",
   "reportId": "9d2c6a10-3f7a-4e22-9a8f-1a2b3c4d5e6f",
+  "runId": "run-20251124-e2e-staging",
   "timestamp": "2025-11-24T12:00:00Z",
   "generatedBy": "example-ci",
   "extra": {
@@ -3059,6 +3250,8 @@ It includes:
     "tests": [
       {
         "id": "c6c9f8c0-8b5e-5f7a-9e2d-3c91f8a7d7c1",
+        "testId": "c6c9f8c0-8b5e-5f7a-9e2d-3c91f8a7d7c1",
+        "executionId": "a1b2c3d4-1111-4000-a000-000000000001",
         "name": "user can log in",
         "suite": ["auth", "login"],
         "filePath": "tests/auth/login.test.js",
@@ -3075,6 +3268,7 @@ It includes:
         "retryAttempts": [
           {
             "attempt": 1,
+            "attemptId": "f1e2d3c4-2222-4000-b000-000000000001",
             "status": "failed",
             "duration": 1500,
             "message": "Timeout waiting for response",
@@ -3083,6 +3277,7 @@ It includes:
           },
           {
             "attempt": 2,
+            "attemptId": "f1e2d3c4-2222-4000-b000-000000000002",
             "status": "passed",
             "duration": 1500
           }
@@ -3102,6 +3297,8 @@ It includes:
       },
       {
         "id": "1e2d4a40-92a4-5d3f-9e3d-3a77fbc2c123",
+        "testId": "1e2d4a40-92a4-5d3f-9e3d-3a77fbc2c123",
+        "executionId": "a1b2c3d4-1111-4000-a000-000000000002",
         "name": "invalid login is rejected",
         "suite": ["auth", "login"],
         "filePath": "tests/auth/login.test.js",
@@ -3114,6 +3311,7 @@ It includes:
         "screenshot": "iVBORw0KGgoAAAANSUhEUgAAAAUA",
         "attachments": [
           {
+            "attachmentId": "b3c4d5e6-3333-4000-c000-000000000001",
             "name": "browser-log.txt",
             "contentType": "text/plain",
             "path": "artifacts/browser-log.txt"
@@ -3153,6 +3351,7 @@ It includes:
       "osRelease": "ubuntu",
       "osVersion": "22.04",
       "testEnvironment": "staging",
+      "shardId": "shard-1",
       "healthy": false,
       "extra": {
         "myorg.ci": {

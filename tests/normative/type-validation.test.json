@@ -43,6 +43,20 @@
       }
     },
     {
+      "description": "Document with runId as number instead of string",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "runId": 12345,
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100 }]
+        }
+      }
+    },
+    {
       "description": "Document with timestamp as number instead of string",
       "valid": false,
       "data": {
@@ -324,6 +338,32 @@
           "tool": { "name": "runner" },
           "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
           "tests": [{ "name": 12345, "status": "passed", "duration": 100 }]
+        }
+      }
+    },
+    {
+      "description": "Test with testId as number instead of string",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "testId": 12345, "status": "passed", "duration": 100 }]
+        }
+      }
+    },
+    {
+      "description": "Test with executionId as number instead of string",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "executionId": 12345, "status": "passed", "duration": 100 }]
         }
       }
     },
@@ -692,6 +732,19 @@
       }
     },
     {
+      "description": "RetryAttempt with attemptId as number instead of string",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100, "retryAttempts": [{ "attempt": 1, "attemptId": 12345, "status": "failed" }] }]
+        }
+      }
+    },
+    {
       "description": "RetryAttempt with status as number instead of string",
       "valid": false,
       "data": {
@@ -796,6 +849,19 @@
       }
     },
     {
+      "description": "Attachment with attachmentId as number instead of string",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100, "attachments": [{ "attachmentId": 12345, "name": "file", "contentType": "text/plain", "path": "/path" }] }]
+        }
+      }
+    },
+    {
       "description": "Test with parameters as array instead of object",
       "valid": false,
       "data": {
@@ -885,6 +951,20 @@
           "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
           "tests": [{ "name": "test", "status": "passed", "duration": 100 }],
           "environment": { "buildNumber": "123" }
+        }
+      }
+    },
+    {
+      "description": "Environment with shardId as number instead of string",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100 }],
+          "environment": { "shardId": 1 }
         }
       }
     },
