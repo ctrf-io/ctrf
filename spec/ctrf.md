@@ -333,8 +333,6 @@ A CTRF document MUST include:
 - `specVersion` - MUST follow Semantic Versioning 2.0.0.  
 - `results` - MUST contain the results of a single test execution run.
 
-Additional top-level fields MUST be included within an `extra` object.
-
 ### 4.3. Schema Conformance
 
 The document MUST validate against the normative JSON Schema provided in Appendix A.  
@@ -353,10 +351,50 @@ Consumers MUST reject any document containing unknown properties outside of `ext
 
 ### 4.6. Extension Mechanism
 
-- Objects named `extra` MAY contain arbitrary data and are the only supported extensibility points in CTRF.  
-- Producers MAY include tool-specific or domain-specific metadata within an `extra` object.  
-- Consumers MAY require particular fields within an `extra` object for their platform or workflow; such fields MUST NOT appear outside `extra`.  
-- Consumers SHOULD ignore unrecognized fields inside any `extra` object unless they explicitly depend on them.
+Objects named `extra` are the only supported extensibility points in CTRF.
+
+Producers MAY include tool-specific or domain-specific metadata within an `extra` object.  
+Consumers MUST ignore unrecognized fields within any `extra` object and MUST NOT reject documents solely due to their presence.
+
+The `extra` object defines a mapping of extension keys to values.
+
+#### 4.6.1. Extension Keys
+
+Each property within an `extra` object represents a distinct extension.
+
+Extension keys:
+
+- MUST be strings
+- SHOULD be namespaced to avoid collisions
+- SHOULD use a stable, recognizable prefix identifying the extension owner (e.g. `myorg.myproject`)
+- SHOULD include a delimiter (e.g. `.` or `/`) separating the namespace from the identifier
+
+The `ctrf.` and `ctrf/` namespace prefixes are reserved for CTRF-defined extensions.  
+Producers other than CTRF MUST NOT use extension keys beginning with `ctrf.` or `ctrf/`.
+
+Extension keys are opaque identifiers.  
+Consumers MUST NOT interpret extension keys as hierarchical paths.
+
+A producer SHOULD use the same namespace prefix consistently across all `extra` objects within a single document.  
+If a producer contributes extensions at multiple levels (for example, at the top level, within `results`, `summary`, or individual tests), the same namespace prefix SHOULD be used for all of that producer's extension keys throughout the document.
+
+#### 4.6.2. Extension Values
+
+Each extension key maps to a value.
+
+- The value MAY be any valid JSON type.
+- Extensions containing multiple related fields SHOULD use an object value.
+- Extensions with a single value MAY use a scalar.
+
+Producers SHOULD group related extension data under a single extension key.
+
+#### 4.6.3. Extension Semantics
+
+The structure and semantics of each extension value are defined by the extension producer.
+
+- CTRF does not define or validate extension value structure.
+- Consumers MUST treat values for unrecognized extension keys as opaque.
+- Consumers MUST NOT assume the presence or meaning of any extension unless explicitly supported.
 
 ### 4.7. Versioning and Forward Compatibility
 
@@ -2985,15 +3023,19 @@ It includes:
   "timestamp": "2025-11-24T12:00:00Z",
   "generatedBy": "example-ci",
   "extra": {
-    "pipelineStage": "e2e",
-    "trigger": "pull_request"
+    "myorg.ci": {
+      "pipelineStage": "e2e",
+      "trigger": "pull_request"
+    }
   },
   "results": {
     "tool": {
       "name": "example-runner",
       "version": "5.0.0",
       "extra": {
-        "parallel": true
+        "myorg.ci": {
+          "parallel": true
+        }
       }
     },
     "summary": {
@@ -3009,7 +3051,9 @@ It includes:
       "stop": 1700000312000,
       "duration": 12000,
       "extra": {
-        "reportedBy": "summary-module"
+        "myorg.ci": {
+          "reportedBy": "summary-module"
+        }
       }
     },
     "tests": [
@@ -3111,11 +3155,15 @@ It includes:
       "testEnvironment": "staging",
       "healthy": false,
       "extra": {
-        "container": "node:18"
+        "myorg.ci": {
+          "container": "node:18"
+        }
       }
     },
     "extra": {
-      "runShard": 1
+      "myorg.ci": {
+        "runShard": 1
+      }
     }
   },
   "insights": {
@@ -3139,7 +3187,95 @@ It includes:
     "source": "main branch - last stable build",
     "buildNumber": 9800,
     "extra": {
-      "note": "Release candidate baseline"
+      "myorg.ci": {
+        "note": "Release candidate baseline"
+      }
+    }
+  }
+}
+```
+
+### D.6. CTRF Document with Namespaced Extra Objects
+
+This example demonstrates how producers SHOULD use namespaced extension keys within `extra` objects, grouping related fields under a single key as an object value, and using the same namespace prefix consistently across all `extra` objects in the document.
+
+Two producers contribute extensions in this example:
+
+- `myorg.ci` (the CI system) contributes extensions at the top level, `results`, `summary`, and per-test level — using the `myorg.ci` namespace key consistently throughout.
+- `acme.test-management` (a test management integration) contributes extensions at the per-test level only — using the `acme.test-management` namespace key consistently.
+
+The `ctrf.` and `ctrf/` namespace prefixes are reserved for CTRF-defined extensions and MUST NOT be used by other producers.
+
+```json title="CTRF document with namespaced extra objects"
+{
+  "reportFormat": "CTRF",
+  "specVersion": "0.0.0",
+  "extra": {
+    "myorg.ci": {
+      "pipeline": {
+        "stage": "e2e",
+        "triggerEvent": "pull_request",
+        "region": "us-east-1"
+      }
+    }
+  },
+  "results": {
+    "tool": {
+      "name": "example-runner",
+      "version": "2.0.0"
+    },
+    "summary": {
+      "tests": 2,
+      "passed": 1,
+      "failed": 1,
+      "skipped": 0,
+      "pending": 0,
+      "other": 0,
+      "start": 1700000000000,
+      "stop": 1700000005000,
+      "extra": {
+        "myorg.ci": {
+          "retryBudgetUsed": 2,
+          "retryBudgetTotal": 10
+        }
+      }
+    },
+    "tests": [
+      {
+        "name": "checkout flow completes",
+        "status": "passed",
+        "duration": 2000,
+        "extra": {
+          "myorg.ci": {
+            "featureFlag": "new-checkout-ui"
+          },
+          "acme.test-management": {
+            "issueKey": "SHOP-1234",
+            "testCycleName": "Sprint 42 Regression"
+          }
+        }
+      },
+      {
+        "name": "payment fails gracefully",
+        "status": "failed",
+        "duration": 3000,
+        "message": "Expected error banner to be visible",
+        "extra": {
+          "myorg.ci": {
+            "featureFlag": "new-payment-ui"
+          },
+          "acme.test-management": {
+            "issueKey": "SHOP-1235",
+            "testCycleName": "Sprint 42 Regression"
+          }
+        }
+      }
+    ],
+    "extra": {
+      "myorg.ci": {
+        "deploymentId": "deploy-abc123",
+        "environment": "staging"
+      }
     }
   }
 }
