@@ -1786,14 +1786,14 @@ Producers:
 - MUST NOT introduce fields outside `extra` objects  
 - MUST NOT emit invalid enum values (status, etc.)
 - MAY include `insights` if historical or aggregate data is available
-- SHOULD treat emitted CTRF documents as immutable artifacts
-- SHOULD emit a new CTRF document when performing post-processing after initial report generation and, when `reportId` is used, assign a different `reportId` value rather than modifying an emitted CTRF document
 
 Producers SHOULD:
 
 - provide timestamps  
 - provide environment/build metadata  
 - provide diagnostics when available  
+- treat emitted CTRF documents as immutable artifacts
+- emit a new CTRF document when performing post-processing after initial report generation and, when `reportId` is used, assign a different `reportId` value rather than modifying an emitted CTRF document
 
 ---
 
