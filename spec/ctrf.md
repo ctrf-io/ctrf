@@ -418,7 +418,7 @@ CTRF defines a layered identity model that enables correlation of test data acro
 
 Each layer addresses a distinct identification concern:
 
-1. **Document**: `reportId` identifies the emitted CTRF document as a serialized artifact. Each CTRF file SHOULD have exactly one `reportId`.
+1. **Document**: `reportId` identifies the emitted CTRF document as a serialized artifact. When `reportId` is used, each CTRF document SHOULD have exactly one `reportId`.
 2. **Run**: `runId` identifies the logical test run. Multiple CTRF documents MAY share the same `runId` when they represent shards or partitions of a single coordinated execution.
 3. **Test case**: `testId` identifies the logical test case. It SHOULD be deterministic and stable across runs, enabling cross-run analysis, trending, and flake detection.
 4. **Execution**: `executionId` identifies a concrete execution of a test case within a run. An execution MAY include multiple retry attempts represented in `retryAttempts`.
@@ -430,20 +430,20 @@ All identity fields are OPTIONAL. Producers SHOULD assign them when the correspo
 
 #### 4.9.1. Uniqueness
 
-Each identity field has a defined uniqueness scope:
+Each identity field has an intended uniqueness scope:
 
 | Field | Uniqueness Scope |
 |---|---|
-| `reportId` | Globally unique |
-| `runId` | Globally unique |
+| `reportId` | Unique per document |
+| `runId` | Unique per logical run |
 | `testId` | Unique within the document |
-| `executionId` | Globally unique |
-| `attemptId` | Globally unique |
+| `executionId` | Unique per execution |
+| `attemptId` | Unique per attempt |
 | `attachmentId` | Unique within the containing parent object |
 | `shardId` | Unique within a logical run |
 
-Producers MUST NOT emit duplicate values for fields designated as globally unique.
-Producers SHOULD NOT emit duplicate values for fields with narrower uniqueness scopes.
+Producers SHOULD NOT knowingly reuse identity values outside their intended scope.
+Producers SHOULD NOT emit duplicate identity values within a single CTRF document when those duplicates would make correlation ambiguous.
 
 #### 4.9.2. Stability
 
@@ -514,7 +514,7 @@ A unique identifier for this CTRF document instance.
 **Requirements:**  
 `reportId` is OPTIONAL.  
 If present, it MUST be a valid UUID as defined in [RFC4122].  
-Each emitted document SHOULD receive a distinct `reportId`.
+When `reportId` is used, each emitted document SHOULD receive a distinct `reportId`.
 
 Each emitted CTRF document represents a distinct report instance. If a new CTRF document is produced through post-processing, it SHOULD use a different `reportId` value than the source document when `reportId` is used.
 
@@ -530,7 +530,7 @@ A logical run MAY span multiple CTRF documents (for example, when tests are dist
 **Requirements:**  
 `runId` is OPTIONAL.  
 If present, it MUST be a string.  
-Producers SHOULD ensure that `runId` is globally unique across distinct runs.  
+Producers SHOULD ensure that `runId` is unique across distinct logical runs.  
 Consumers MAY use `runId` to merge or correlate documents from the same logical run.
 
 ---
@@ -892,7 +892,7 @@ An execution represents a single reported outcome for a test case in this docume
 `executionId` is OPTIONAL.  
 If present, it MUST be a string.  
 UUID is RECOMMENDED.  
-`executionId` SHOULD be globally unique and MUST NOT be reused across runs.
+`executionId` SHOULD be unique across executions and SHOULD NOT be reused across runs.
 
 ### 9.4. `name`
 
@@ -1404,7 +1404,7 @@ A unique identifier for this individual retry attempt.
 `attemptId` is OPTIONAL.  
 If present, it MUST be a string.  
 UUID is RECOMMENDED.  
-`attemptId` SHOULD be globally unique.
+`attemptId` SHOULD be unique across attempts.
 
 ### 11.3. `status`
 
@@ -1954,7 +1954,6 @@ Producers:
 - MUST follow rules for retry attempts  
 - MUST NOT introduce fields outside `extra` objects  
 - MUST NOT emit invalid enum values (status, etc.)
-- MUST NOT emit duplicate values for identity fields designated as globally unique (see Section 4.9.1)
 - MAY include `insights` if historical or aggregate data is available
 
 Producers SHOULD:
@@ -1965,6 +1964,7 @@ Producers SHOULD:
 - treat emitted CTRF documents as immutable artifacts
 - emit a new CTRF document when performing post-processing after initial report generation and, when `reportId` is used, assign a different `reportId` value rather than modifying an emitted CTRF document
 - assign identity fields (`testId`, `executionId`, `attemptId`, `attachmentId`) when traceability is meaningful for their workflow
+- avoid duplicate identity values when duplicates would make correlation ambiguous
 - prefer `testId` over the deprecated `id` field for new implementations
 
 ---
@@ -2037,9 +2037,13 @@ to this specification.
       "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
     },
     "reportId": {
-      "description": "Unique identifier for this report instance (UUID)",
+      "description": "Unique identifier for this CTRF document instance (UUID). Identifies the serialized artifact.",
       "type": "string",
       "format": "uuid"
+    },
+    "runId": {
+      "description": "Identifier for the logical test run. Shared across shards/documents belonging to the same run.",
+      "type": "string"
     },
     "timestamp": {
       "description": "Report generation time (RFC 3339 / ISO 8601)",
@@ -2154,9 +2158,17 @@ to this specification.
             "required": [ "name", "status", "duration" ],
             "properties": {
               "id": {
-                "description": "Unique, stable identifier for the test case (UUID)",
+                "description": "Deprecated: use testId instead. Unique, stable identifier for the test case (UUID)",
                 "type": "string",
                 "format": "uuid"
+              },
+              "testId": {
+                "description": "Stable identifier for the logical test case. Should be deterministic and stable across runs.",
+                "type": "string"
+              },
+              "executionId": {
+                "description": "Unique identifier for this specific execution of the test case within a run. UUID recommended.",
+                "type": "string"
               },
               "name": {
                 "description": "Name or title of the test case",
@@ -2277,6 +2289,10 @@ to this specification.
                       "type": "integer",
                       "minimum": 1
                     },
+                    "attemptId": {
+                      "description": "Unique identifier for this individual retry attempt. UUID recommended.",
+                      "type": "string"
+                    },
                     "status": {
                       "description": "Outcome of this attempt",
                       "enum": [
@@ -2337,6 +2353,10 @@ to this specification.
                         "type": "object",
                         "required": [ "name", "contentType", "path" ],
                         "properties": {
+                          "attachmentId": {
+                            "description": "Unique identifier for this attachment reference instance. UUID recommended.",
+                            "type": "string"
+                          },
                           "name": {
                             "description": "Display name of the attachment",
                             "type": "string"
@@ -2407,6 +2427,10 @@ to this specification.
                   "type": "object",
                   "required": [ "name", "contentType", "path" ],
                   "properties": {
+                    "attachmentId": {
+                      "description": "Unique identifier for this attachment reference instance. UUID recommended.",
+                      "type": "string"
+                    },
                     "name": {
                       "description": "Display name of the attachment",
                       "type": "string"
@@ -2566,6 +2590,10 @@ to this specification.
             },
             "testEnvironment": {
               "description": "Logical test environment (e.g., 'staging', 'production')",
+              "type": "string"
+            },
+            "shardId": {
+              "description": "Shard or partition label identifying which part of a distributed run produced this document",
               "type": "string"
             },
             "healthy": {

@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Added an optional identity and lineage model for CTRF documents, logical runs, test cases, executions, attempts, attachments, and shards.
 - Clarified namespace guidance for `extra` extension keys and examples ([#56](https://github.com/ctrf-io/ctrf/pull/56)).
 - Clarified immutability guidance for emitted CTRF report artifacts ([#55](https://github.com/ctrf-io/ctrf/pull/55)).
 - Clarified `tags` as simple keyless classifications and `labels` as structured key-value test metadata ([#54](https://github.com/ctrf-io/ctrf/pull/54)).
