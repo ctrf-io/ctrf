@@ -186,6 +186,20 @@
           "environment": { "shardId": "" }
         }
       }
+    },
+    {
+      "description": "Baseline with empty reportId violating minLength constraint",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "1.0.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
+          "tests": [{ "name": "test", "status": "passed", "duration": 100 }]
+        },
+        "baseline": { "reportId": "" }
+      }
     }
   ]
 }
