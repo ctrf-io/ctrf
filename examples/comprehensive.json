@@ -5,15 +5,19 @@
   "timestamp": "2025-11-24T12:00:00Z",
   "generatedBy": "example-ci",
   "extra": {
-    "pipelineStage": "e2e",
-    "trigger": "pull_request"
+    "myorg.ci": {
+      "pipelineStage": "e2e",
+      "trigger": "pull_request"
+    }
   },
   "results": {
     "tool": {
       "name": "example-runner",
       "version": "3.5.0",
       "extra": {
-        "plugins": ["retry", "screenshots", "video"]
+        "myorg.ci": {
+          "plugins": ["retry", "screenshots", "video"]
+        }
       }
     },
     "summary": {
@@ -216,13 +220,17 @@
       "testEnvironment": "staging",
       "healthy": false,
       "extra": {
-        "nodeVersion": "18.0.0",
-        "region": "us-west-2"
+        "myorg.ci": {
+          "nodeVersion": "18.0.0",
+          "region": "us-west-2"
+        }
       }
     },
     "extra": {
-      "shardIndex": 1,
-      "totalShards": 4
+      "myorg.ci": {
+        "shardIndex": 1,
+        "totalShards": 4
+      }
     }
   },
   "insights": {
@@ -267,7 +275,9 @@
     "buildUrl": "https://ci.example.com/builds/442",
     "commit": "f6e5d4c3b2a1",
     "extra": {
-      "branch": "main"
+      "myorg.ci": {
+        "branch": "main"
+      }
     }
   }
 }
