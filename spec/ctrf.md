@@ -2011,14 +2011,14 @@ to this specification.
                 "type": "string"
               },
               "tags": {
-                "description": "Simple keyless classifications associated with the test case",
+                "description": "Simple, keyless classifications used to categorize the test case",
                 "type": "array",
                 "items": {
                   "type": "string"
                 }
               },
               "labels": {
-                "description": "Structured key-value metadata for the test case. Values may be scalar primitives or non-empty arrays of primitive values",
+                "description": "Structured key-value metadata describing the test case. Values may be scalar primitives or non-empty arrays of primitive values",
                 "type": "object",
                 "additionalProperties": {
                   "anyOf": [
