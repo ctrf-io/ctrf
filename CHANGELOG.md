@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Clarified `retryAttempts` as the ordered history preceding the final attempt, aligned `retries` counting semantics, and updated the schema and examples accordingly ([#62](https://github.com/ctrf-io/ctrf/pull/62)).
 - Added an optional identity model for CTRF documents, logical runs, test cases, executions, attempts, attachments, and shards ([#57](https://github.com/ctrf-io/ctrf/pull/57)).
 - Clarified namespace guidance for `extra` extension keys and examples ([#56](https://github.com/ctrf-io/ctrf/pull/56)).
 - Clarified immutability guidance for emitted CTRF report artifacts ([#55](https://github.com/ctrf-io/ctrf/pull/55)).
