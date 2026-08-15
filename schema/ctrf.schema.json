@@ -256,29 +256,31 @@
                 "type": "string"
               },
               "retries": {
-                "description": "Number of retry attempts performed",
-                "type": "integer"
+                "description": "Number of times the test was re-executed after its initial attempt",
+                "type": "integer",
+                "minimum": 0
               },
               "retryAttempts": {
-                "description": "List of retry attempts for this test",
+                "description": "Ordered history of attempts completed before the final attempt represented by the test object",
                 "type": "array",
+                "minItems": 1,
                 "items": {
-                  "description": "Single retry attempt result",
+                  "description": "Attempt completed before the final attempt",
                   "type": "object",
                   "required": [ "attempt", "status" ],
                   "properties": {
                     "attempt": {
-                      "description": "Attempt number (1 = first execution)",
+                      "description": "Original sequence number for this previous attempt (1 = initial execution)",
                       "type": "integer",
                       "minimum": 1
                     },
                     "attemptId": {
-                      "description": "Unique identifier for this individual retry attempt. UUID recommended",
+                      "description": "Unique identifier for this individual previous attempt. UUID recommended",
                       "type": "string",
                       "minLength": 1
                     },
                     "status": {
-                      "description": "Outcome of this attempt",
+                      "description": "Outcome of this previous attempt",
                       "enum": [
                         "passed",
                         "failed",
@@ -288,15 +290,16 @@
                       ]
                     },
                     "duration": {
-                      "description": "Attempt execution time (milliseconds)",
-                      "type": "integer"
+                      "description": "Previous attempt execution time (milliseconds)",
+                      "type": "integer",
+                      "minimum": 0
                     },
                     "message": {
-                      "description": "Error or failure message for this attempt",
+                      "description": "Error or failure message for this previous attempt",
                       "type": "string"
                     },
                     "trace": {
-                      "description": "Stack trace for this attempt",
+                      "description": "Stack trace for this previous attempt",
                       "type": "string"
                     },
                     "line": {
@@ -304,33 +307,33 @@
                       "type": "integer"
                     },
                     "snippet": {
-                      "description": "Code snippet for this attempt",
+                      "description": "Code snippet for this previous attempt",
                       "type": "string"
                     },
                     "stdout": {
-                      "description": "Standard output lines from this attempt",
+                      "description": "Standard output lines from this previous attempt",
                       "type": "array",
                       "items": {
                         "type": "string"
                       }
                     },
                     "stderr": {
-                      "description": "Standard error lines from this attempt",
+                      "description": "Standard error lines from this previous attempt",
                       "type": "array",
                       "items": {
                         "type": "string"
                       }
                     },
                     "start": {
-                      "description": "Attempt start time (milliseconds since Unix epoch)",
+                      "description": "Previous attempt start time (milliseconds since Unix epoch)",
                       "type": "integer"
                     },
                     "stop": {
-                      "description": "Attempt end time (milliseconds since Unix epoch)",
+                      "description": "Previous attempt end time (milliseconds since Unix epoch)",
                       "type": "integer"
                     },
                     "attachments": {
-                      "description": "Artifacts from this attempt",
+                      "description": "Artifacts from this previous attempt",
                       "type": "array",
                       "items": {
                         "description": "External file or resource reference",

@@ -79,8 +79,8 @@
         "name": "user can checkout",
         "status": "passed",
         "duration": 5200,
-        "start": 1609459203500,
-        "stop": 1609459208700,
+        "start": 1609459208700,
+        "stop": 1609459213900,
         "suite": ["Checkout"],
         "type": "e2e",
         "tags": ["smoke"],
@@ -113,14 +113,6 @@
                 "path": "/artifacts/retry-1.png"
               }
             ]
-          },
-          {
-            "attempt": 2,
-            "attemptId": "48c3f90b-95a9-4c13-a42f-0888bb0b1002",
-            "status": "passed",
-            "duration": 5200,
-            "start": 1609459208700,
-            "stop": 1609459213900
           }
         ],
         "insights": {
