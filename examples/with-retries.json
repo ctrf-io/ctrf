@@ -26,7 +26,7 @@
       {
         "name": "flaky test",
         "status": "passed",
-        "duration": 300,
+        "duration": 140,
         "flaky": true,
         "retries": 2,
         "retryAttempts": [
@@ -41,11 +41,6 @@
             "status": "failed",
             "duration": 130,
             "message": "Connection timeout"
-          },
-          {
-            "attempt": 3,
-            "status": "passed",
-            "duration": 140
           }
         ]
       }
