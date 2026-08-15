@@ -270,17 +270,17 @@
                   "required": [ "attempt", "status" ],
                   "properties": {
                     "attempt": {
-                      "description": "Original sequence number for this previous attempt (1 = initial execution)",
+                      "description": "Original sequence number for this attempt (1 = initial execution)",
                       "type": "integer",
                       "minimum": 1
                     },
                     "attemptId": {
-                      "description": "Unique identifier for this individual previous attempt. UUID recommended",
+                      "description": "Unique identifier for this individual attempt. UUID recommended",
                       "type": "string",
                       "minLength": 1
                     },
                     "status": {
-                      "description": "Outcome of this previous attempt",
+                      "description": "Outcome of this attempt",
                       "enum": [
                         "passed",
                         "failed",
@@ -290,16 +290,16 @@
                       ]
                     },
                     "duration": {
-                      "description": "Previous attempt execution time (milliseconds)",
+                      "description": "Attempt execution time (milliseconds)",
                       "type": "integer",
                       "minimum": 0
                     },
                     "message": {
-                      "description": "Error or failure message for this previous attempt",
+                      "description": "Error or failure message for this attempt",
                       "type": "string"
                     },
                     "trace": {
-                      "description": "Stack trace for this previous attempt",
+                      "description": "Stack trace for this attempt",
                       "type": "string"
                     },
                     "line": {
@@ -307,33 +307,33 @@
                       "type": "integer"
                     },
                     "snippet": {
-                      "description": "Code snippet for this previous attempt",
+                      "description": "Code snippet for this attempt",
                       "type": "string"
                     },
                     "stdout": {
-                      "description": "Standard output lines from this previous attempt",
+                      "description": "Standard output lines from this attempt",
                       "type": "array",
                       "items": {
                         "type": "string"
                       }
                     },
                     "stderr": {
-                      "description": "Standard error lines from this previous attempt",
+                      "description": "Standard error lines from this attempt",
                       "type": "array",
                       "items": {
                         "type": "string"
                       }
                     },
                     "start": {
-                      "description": "Previous attempt start time (milliseconds since Unix epoch)",
+                      "description": "Attempt start time (milliseconds since Unix epoch)",
                       "type": "integer"
                     },
                     "stop": {
-                      "description": "Previous attempt end time (milliseconds since Unix epoch)",
+                      "description": "Attempt end time (milliseconds since Unix epoch)",
                       "type": "integer"
                     },
                     "attachments": {
-                      "description": "Artifacts from this previous attempt",
+                      "description": "Artifacts from this attempt",
                       "type": "array",
                       "items": {
                         "description": "External file or resource reference",

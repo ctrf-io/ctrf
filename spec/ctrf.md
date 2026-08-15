@@ -452,7 +452,7 @@ Each identity field has an intended uniqueness scope:
 | `runId` | Unique per logical run |
 | `testId` | Stable within the producer's chosen scope for the logical test case |
 | `executionId` | Unique for one execution of a logical test case within a run |
-| `attemptId` | Unique for one recorded previous attempt within an execution |
+| `attemptId` | Unique for one recorded attempt within an execution |
 | `attachmentId` | Unique within the containing parent object |
 | `shardId` | Unique within a logical run |
 
@@ -469,7 +469,7 @@ Identity fields differ in whether their values persist across runs or are unique
 | `runId` | Stable across all documents belonging to the same logical run |
 | `testId` | Stable across runs for the same logical test case within the producer's chosen scope |
 | `executionId` | Unique per execution; not stable across runs |
-| `attemptId` | Unique per recorded previous attempt; not stable across runs |
+| `attemptId` | Unique per recorded attempt; not stable across runs |
 | `attachmentId` | Unique per attachment reference instance |
 | `shardId` | Stable across retransmissions of the same shard |
 
@@ -1420,7 +1420,7 @@ Each field within an attempt history entry object is described in the subsection
 ### 11.1. `attempt`
 
 **Description:**  
-The original sequence number for this previous execution of the test case.
+The original sequence number for this attempt.
 
 **Requirements:**  
 `attempt` MUST be present.  
@@ -1432,7 +1432,7 @@ The final attempt is not included in `retryAttempts`; its attempt number is `ret
 ### 11.2. `attemptId`
 
 **Description:**  
-A unique identifier for this individual previous attempt.
+A unique identifier for this individual attempt.
 
 **Requirements:**  
 `attemptId` is OPTIONAL.  
@@ -1443,7 +1443,7 @@ UUID is RECOMMENDED.
 ### 11.3. `status`
 
 **Description:**  
-The outcome of this previous attempt.
+The outcome of this attempt.
 
 **Requirements:**  
 `status` MUST be present.  
@@ -1452,7 +1452,7 @@ It MUST be one of the following values: `passed`, `failed`, `skipped`, `pending`
 ### 11.4. `duration`
 
 **Description:**  
-The execution time of this previous attempt, in milliseconds.
+The execution time of this attempt, in milliseconds.
 
 **Requirements:**  
 `duration` is OPTIONAL.  
@@ -1534,7 +1534,7 @@ If both `start` and `stop` are present, `stop` SHOULD be greater than or equal t
 ### 11.13. `attachments`
 
 **Description:**  
-An array of attachment objects associated with this previous attempt.
+An array of attachment objects associated with this attempt.
 
 **Requirements:**  
 `attachments` is OPTIONAL.  
@@ -2326,17 +2326,17 @@ to this specification.
                   "required": [ "attempt", "status" ],
                   "properties": {
                     "attempt": {
-                      "description": "Original sequence number for this previous attempt (1 = initial execution)",
+                      "description": "Original sequence number for this attempt (1 = initial execution)",
                       "type": "integer",
                       "minimum": 1
                     },
                     "attemptId": {
-                      "description": "Unique identifier for this individual previous attempt. UUID recommended",
+                      "description": "Unique identifier for this individual attempt. UUID recommended",
                       "type": "string",
                       "minLength": 1
                     },
                     "status": {
-                      "description": "Outcome of this previous attempt",
+                      "description": "Outcome of this attempt",
                       "enum": [
                         "passed",
                         "failed",
@@ -2346,16 +2346,16 @@ to this specification.
                       ]
                     },
                     "duration": {
-                      "description": "Previous attempt execution time (milliseconds)",
+                      "description": "Attempt execution time (milliseconds)",
                       "type": "integer",
                       "minimum": 0
                     },
                     "message": {
-                      "description": "Error or failure message for this previous attempt",
+                      "description": "Error or failure message for this attempt",
                       "type": "string"
                     },
                     "trace": {
-                      "description": "Stack trace for this previous attempt",
+                      "description": "Stack trace for this attempt",
                       "type": "string"
                     },
                     "line": {
@@ -2363,33 +2363,33 @@ to this specification.
                       "type": "integer"
                     },
                     "snippet": {
-                      "description": "Code snippet for this previous attempt",
+                      "description": "Code snippet for this attempt",
                       "type": "string"
                     },
                     "stdout": {
-                      "description": "Standard output lines from this previous attempt",
+                      "description": "Standard output lines from this attempt",
                       "type": "array",
                       "items": {
                         "type": "string"
                       }
                     },
                     "stderr": {
-                      "description": "Standard error lines from this previous attempt",
+                      "description": "Standard error lines from this attempt",
                       "type": "array",
                       "items": {
                         "type": "string"
                       }
                     },
                     "start": {
-                      "description": "Previous attempt start time (milliseconds since Unix epoch)",
+                      "description": "Attempt start time (milliseconds since Unix epoch)",
                       "type": "integer"
                     },
                     "stop": {
-                      "description": "Previous attempt end time (milliseconds since Unix epoch)",
+                      "description": "Attempt end time (milliseconds since Unix epoch)",
                       "type": "integer"
                     },
                     "attachments": {
-                      "description": "Artifacts from this previous attempt",
+                      "description": "Artifacts from this attempt",
                       "type": "array",
                       "items": {
                         "description": "External file or resource reference",
