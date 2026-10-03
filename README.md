@@ -45,7 +45,8 @@ The written specification defines the semantics and rules.
 
 CTRF follows Semantic Versioning.
 
-Releases are defined in [Releases](https://github.com/ctrf-io/ctrf/releases).
+Published specification versions are defined by annotated Git tags. See the
+[release process](RELEASE.md) for the current pre-1.0 policy.
 
 ## Reference Implementation
 

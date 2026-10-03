@@ -2,10 +2,10 @@
 
 ## Common Test Report Format
 
-**Version:** 0.0.0
+**Version:** 0.1.0
 (This version corresponds directly to the CTRF `specVersion` field.)
 
-**Date:** 2025-11-24
+**Date:** 2026-10-03
 
 **Status:** Working Draft
 
@@ -206,13 +206,20 @@ This reduces ambiguity and ensures consistent interpretation across consumers.
 
 CTRF follows Semantic Versioning and is designed to evolve without breaking existing consumers.
 
-Backward-compatible additions are introduced through:
+Before CTRF `1.0.0`, MINOR versions may introduce additions or breaking contract
+changes, while PATCH versions preserve compatibility.
+
+Beginning with CTRF `1.0.0`:
+
+- MAJOR versions contain breaking changes.
+- MINOR versions contain backward-compatible additions.
+- PATCH versions contain backward-compatible corrections and clarifications.
+
+Backward-compatible additions may be introduced through:
 
 - optional fields
 - new insight metrics
 - use of `extra` objects
-
-Breaking changes are reserved for major version increments.
 
 ---
 
@@ -1964,9 +1971,25 @@ It is the ONLY permitted extension point within the baseline object.
 
 CTRF follows **Semantic Versioning**.
 
-- MAJOR = breaking changes  
-- MINOR = backward-compatible additions  
-- PATCH = non-breaking fixes  
+This document defines CTRF version `0.1.0`.
+
+Before CTRF `1.0.0`:
+
+- MINOR versions MAY add capabilities or introduce breaking contract changes.
+- PATCH versions MUST preserve compatibility and are reserved for compatible
+  corrections and clarifications.
+- Breaking changes MUST be identified in the changelog and include migration
+  guidance where action is required from producers or consumers.
+
+Consumers MUST treat different pre-1.0 MINOR versions as potentially
+incompatible. Consumers SHOULD support PATCH releases within a supported
+pre-1.0 MINOR version.
+
+Beginning with CTRF `1.0.0`:
+
+- MAJOR versions contain breaking changes.
+- MINOR versions contain backward-compatible additions.
+- PATCH versions contain backward-compatible corrections and clarifications.
 
 Consumers MUST reject incompatible MAJOR versions.
 
@@ -2967,7 +2990,7 @@ It includes:
 ```json title="Minimal CTRF document"
 {
   "reportFormat": "CTRF",
-  "specVersion": "0.0.0",
+  "specVersion": "0.1.0",
   "results": {
     "tool": {
       "name": "example-runner"
@@ -3008,7 +3031,7 @@ It includes:
 ```json title="CTRF document with retries"
 {
   "reportFormat": "CTRF",
-  "specVersion": "0.0.0",
+  "specVersion": "0.1.0",
   "results": {
     "tool": {
       "name": "example-runner",
@@ -3065,7 +3088,7 @@ It includes:
 ```json title="CTRF document with diagnostics"
 {
   "reportFormat": "CTRF",
-  "specVersion": "0.0.0",
+  "specVersion": "0.1.0",
   "results": {
     "tool": {
       "name": "example-runner",
@@ -3129,7 +3152,7 @@ It includes:
 ```json title="CTRF document with insights and baseline"
 {
   "reportFormat": "CTRF",
-  "specVersion": "0.0.0",
+  "specVersion": "0.1.0",
   "reportId": "7c4e1c20-7c89-4f30-9b52-1f6f9d6b8f21",
   "results": {
     "tool": {
@@ -3232,7 +3255,7 @@ It includes:
 ```json title="Comprehensive CTRF document"
 {
   "reportFormat": "CTRF",
-  "specVersion": "0.0.0",
+  "specVersion": "0.1.0",
   "reportId": "9d2c6a10-3f7a-4e22-9a8f-1a2b3c4d5e6f",
   "runId": "run-20251124-e2e-staging",
   "timestamp": "2025-11-24T12:00:00Z",
@@ -3426,7 +3449,7 @@ The `ctrf.` and `ctrf/` namespace prefixes are reserved for CTRF-defined extensi
 ```json title="CTRF document with namespaced extra objects"
 {
   "reportFormat": "CTRF",
-  "specVersion": "0.0.0",
+  "specVersion": "0.1.0",
   "extra": {
     "myorg.ci": {
       "pipeline": {

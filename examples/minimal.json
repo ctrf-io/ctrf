@@ -1,6 +1,6 @@
 {
   "reportFormat": "CTRF",
-  "specVersion": "1.0.0",
+  "specVersion": "0.1.0",
   "results": {
     "tool": {
       "name": "example-runner"
