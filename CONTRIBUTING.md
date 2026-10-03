@@ -88,8 +88,10 @@ If the schema and specification disagree, the **written specification takes prec
 
 Backward compatibility is a core CTRF principle.
 
-- PATCH and MINOR releases MUST NOT introduce breaking changes
-- Breaking changes MUST be explicit and well-justified
+- PATCH releases MUST NOT introduce breaking changes
+- Before `1.0.0`, MINOR releases MAY introduce breaking contract changes
+- Breaking changes MUST be explicit, well-justified, and documented with
+  migration guidance when action is required
 
 ---
 
