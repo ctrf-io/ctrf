@@ -32,7 +32,7 @@
       "valid": true,
       "data": {
         "reportFormat": "CTRF",
-        "specVersion": "1.0.0",
+        "specVersion": "0.1.0",
         "runId": "run-1",
         "results": {
           "tool": { "name": "runner" },

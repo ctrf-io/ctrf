@@ -20,7 +20,7 @@
       "valid": false,
       "data": {
         "reportFormat": "CTRF",
-        "specVersion": "1.0.0",
+        "specVersion": "0.1.0",
         "reportId": "",
         "results": {
           "tool": { "name": "runner" },
@@ -34,7 +34,7 @@
       "valid": false,
       "data": {
         "reportFormat": "CTRF",
-        "specVersion": "1.0.0",
+        "specVersion": "0.1.0",
         "runId": "",
         "results": {
           "tool": { "name": "runner" },
@@ -48,7 +48,7 @@
       "valid": false,
       "data": {
         "reportFormat": "CTRF",
-        "specVersion": "1.0.0",
+        "specVersion": "0.1.0",
         "results": {
           "tool": { "name": "" },
           "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
@@ -61,7 +61,7 @@
       "valid": false,
       "data": {
         "reportFormat": "CTRF",
-        "specVersion": "1.0.0",
+        "specVersion": "0.1.0",
         "results": {
           "tool": { "name": "runner" },
           "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
@@ -74,7 +74,7 @@
       "valid": false,
       "data": {
         "reportFormat": "CTRF",
-        "specVersion": "1.0.0",
+        "specVersion": "0.1.0",
         "results": {
           "tool": { "name": "runner" },
           "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
@@ -87,7 +87,7 @@
       "valid": false,
       "data": {
         "reportFormat": "CTRF",
-        "specVersion": "1.0.0",
+        "specVersion": "0.1.0",
         "results": {
           "tool": { "name": "runner" },
           "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
@@ -100,7 +100,7 @@
       "valid": false,
       "data": {
         "reportFormat": "CTRF",
-        "specVersion": "1.0.0",
+        "specVersion": "0.1.0",
         "results": {
           "tool": { "name": "runner" },
           "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
@@ -113,7 +113,7 @@
       "valid": false,
       "data": {
         "reportFormat": "CTRF",
-        "specVersion": "1.0.0",
+        "specVersion": "0.1.0",
         "results": {
           "tool": { "name": "runner" },
           "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
@@ -126,7 +126,7 @@
       "valid": false,
       "data": {
         "reportFormat": "CTRF",
-        "specVersion": "1.0.0",
+        "specVersion": "0.1.0",
         "results": {
           "tool": { "name": "runner" },
           "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
@@ -139,7 +139,7 @@
       "valid": false,
       "data": {
         "reportFormat": "CTRF",
-        "specVersion": "1.0.0",
+        "specVersion": "0.1.0",
         "results": {
           "tool": { "name": "runner" },
           "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
@@ -152,7 +152,7 @@
       "valid": false,
       "data": {
         "reportFormat": "CTRF",
-        "specVersion": "1.0.0",
+        "specVersion": "0.1.0",
         "results": {
           "tool": { "name": "runner" },
           "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
@@ -165,7 +165,7 @@
       "valid": false,
       "data": {
         "reportFormat": "CTRF",
-        "specVersion": "1.0.0",
+        "specVersion": "0.1.0",
         "results": {
           "tool": { "name": "runner" },
           "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
@@ -178,7 +178,7 @@
       "valid": false,
       "data": {
         "reportFormat": "CTRF",
-        "specVersion": "1.0.0",
+        "specVersion": "0.1.0",
         "results": {
           "tool": { "name": "runner" },
           "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
@@ -192,7 +192,7 @@
       "valid": false,
       "data": {
         "reportFormat": "CTRF",
-        "specVersion": "1.0.0",
+        "specVersion": "0.1.0",
         "results": {
           "tool": { "name": "runner" },
           "summary": { "tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 1609459200000, "stop": 1609459201000 },
