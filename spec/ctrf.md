@@ -206,13 +206,20 @@ This reduces ambiguity and ensures consistent interpretation across consumers.
 
 CTRF follows Semantic Versioning and is designed to evolve without breaking existing consumers.
 
-Backward-compatible additions are introduced through:
+Before CTRF `1.0.0`, MINOR versions may introduce additions or breaking contract
+changes, while PATCH versions preserve compatibility.
+
+Beginning with CTRF `1.0.0`:
+
+- MAJOR versions contain breaking changes.
+- MINOR versions contain backward-compatible additions.
+- PATCH versions contain backward-compatible corrections and clarifications.
+
+Backward-compatible additions may be introduced through:
 
 - optional fields
 - new insight metrics
 - use of `extra` objects
-
-Breaking changes are reserved for major version increments.
 
 ---
 
@@ -1977,6 +1984,12 @@ Before CTRF `1.0.0`:
 Consumers MUST treat different pre-1.0 MINOR versions as potentially
 incompatible. Consumers SHOULD support PATCH releases within a supported
 pre-1.0 MINOR version.
+
+Beginning with CTRF `1.0.0`:
+
+- MAJOR versions contain breaking changes.
+- MINOR versions contain backward-compatible additions.
+- PATCH versions contain backward-compatible corrections and clarifications.
 
 Consumers MUST reject incompatible MAJOR versions.
 

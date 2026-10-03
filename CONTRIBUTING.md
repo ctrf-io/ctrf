@@ -77,7 +77,8 @@ The normative JSON Schema lives at:
 Schema changes MUST:
 
 - match the written specification
-- avoid breaking existing valid documents
+- avoid breaking existing valid documents except for an explicitly approved
+  pre-1.0 MINOR release
 - use consistent validation constraints
 
 If the schema and specification disagree, the **written specification takes precedence**.
@@ -90,6 +91,8 @@ Backward compatibility is a core CTRF principle.
 
 - PATCH releases MUST NOT introduce breaking changes
 - Before `1.0.0`, MINOR releases MAY introduce breaking contract changes
+- Beginning with `1.0.0`, breaking changes require a MAJOR release and MINOR
+  releases contain only backward-compatible additions
 - Breaking changes MUST be explicit, well-justified, and documented with
   migration guidance when action is required
 

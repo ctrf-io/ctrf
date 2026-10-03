@@ -14,8 +14,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Established the first internally consistent CTRF specification release: the
   specification header, inline examples, standalone examples, and conformance
   fixtures now identify version `0.1.0`.
-- Defined the pre-1.0 versioning policy: PATCH releases preserve compatibility,
-  while MINOR releases may contain additions or breaking contract changes.
+- Defined the versioning policy: before `1.0.0`, PATCH releases preserve
+  compatibility while MINOR releases may contain additions or breaking contract
+  changes; from `1.0.0`, breaking changes require a MAJOR release.
 - No report-shape or validation changes were introduced relative to `v0.0.4`;
   producers should emit `"specVersion": "0.1.0"` for this release.
 

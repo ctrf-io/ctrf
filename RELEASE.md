@@ -18,6 +18,12 @@ Before `1.0.0`:
 Different pre-1.0 MINOR versions may be incompatible. PATCH versions within the
 same MINOR version are compatible.
 
+Beginning with `1.0.0`:
+
+- MAJOR versions contain breaking changes.
+- MINOR versions contain backward-compatible additions.
+- PATCH versions contain backward-compatible corrections and clarifications.
+
 ## Releases
 
 Before `1.0.0`, CTRF specification releases are published as annotated Git tags
@@ -25,6 +31,8 @@ named `vMAJOR.MINOR.PATCH`.
 
 The tag and its repository contents are the canonical release record. Published
 tags are immutable; corrections are published as a new version.
+
+GitHub Releases are not used during the pre-1.0 tags-only period.
 
 Release changes are reviewed through a pull request. Merging the pull request
 does not publish the release; publication occurs when the version tag is pushed.
