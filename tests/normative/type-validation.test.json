@@ -1079,6 +1079,161 @@
         },
         "insights": { "passRate": { "current": 0.95, "baseline": 0.90, "change": "0.05" } }
       }
+    },
+    {
+      "description": "Test with attemptId as number instead of string",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.2.0",
+        "results": {
+          "tool": {
+            "name": "runner"
+          },
+          "summary": {
+            "tests": 1,
+            "passed": 1,
+            "failed": 0,
+            "pending": 0,
+            "skipped": 0,
+            "other": 0,
+            "start": 1609459200000,
+            "stop": 1609459201000
+          },
+          "tests": [
+            {
+              "name": "test",
+              "status": "passed",
+              "duration": 100,
+              "attemptId": 12345
+            }
+          ]
+        }
+      }
+    },
+    {
+      "description": "Test with attemptId as null instead of string",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.2.0",
+        "results": {
+          "tool": {
+            "name": "runner"
+          },
+          "summary": {
+            "tests": 1,
+            "passed": 1,
+            "failed": 0,
+            "pending": 0,
+            "skipped": 0,
+            "other": 0,
+            "start": 1609459200000,
+            "stop": 1609459201000
+          },
+          "tests": [
+            {
+              "name": "test",
+              "status": "passed",
+              "duration": 100,
+              "attemptId": null
+            }
+          ]
+        }
+      }
+    },
+    {
+      "description": "Test with attemptId as boolean instead of string",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.2.0",
+        "results": {
+          "tool": {
+            "name": "runner"
+          },
+          "summary": {
+            "tests": 1,
+            "passed": 1,
+            "failed": 0,
+            "pending": 0,
+            "skipped": 0,
+            "other": 0,
+            "start": 1609459200000,
+            "stop": 1609459201000
+          },
+          "tests": [
+            {
+              "name": "test",
+              "status": "passed",
+              "duration": 100,
+              "attemptId": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "description": "Test with attemptId as array instead of string",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.2.0",
+        "results": {
+          "tool": {
+            "name": "runner"
+          },
+          "summary": {
+            "tests": 1,
+            "passed": 1,
+            "failed": 0,
+            "pending": 0,
+            "skipped": 0,
+            "other": 0,
+            "start": 1609459200000,
+            "stop": 1609459201000
+          },
+          "tests": [
+            {
+              "name": "test",
+              "status": "passed",
+              "duration": 100,
+              "attemptId": []
+            }
+          ]
+        }
+      }
+    },
+    {
+      "description": "Test with attemptId as object instead of string",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.2.0",
+        "results": {
+          "tool": {
+            "name": "runner"
+          },
+          "summary": {
+            "tests": 1,
+            "passed": 1,
+            "failed": 0,
+            "pending": 0,
+            "skipped": 0,
+            "other": 0,
+            "start": 1609459200000,
+            "stop": 1609459201000
+          },
+          "tests": [
+            {
+              "name": "test",
+              "status": "passed",
+              "duration": 100,
+              "attemptId": {}
+            }
+          ]
+        }
+      }
     }
   ]
 }

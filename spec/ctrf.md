@@ -2,10 +2,10 @@
 
 ## Common Test Report Format
 
-**Version:** 0.1.0
+**Version:** 0.2.0
 (This version corresponds directly to the CTRF `specVersion` field.)
 
-**Date:** 2026-10-03
+**Date:** 2026-10-10
 
 **Status:** Working Draft
 
@@ -441,7 +441,7 @@ Each layer addresses a distinct identification concern:
 2. **Run**: `runId` identifies the logical test run. Multiple CTRF documents MAY share the same `runId` when they represent shards or partitions of a single coordinated execution.
 3. **Test case**: `testId` identifies the logical test case within the producer's chosen scope. It SHOULD be deterministic and stable across runs within that scope, enabling cross-run analysis, trending, and flake detection.
 4. **Execution**: `executionId` identifies the complete execution lifecycle of a test case within a run. An execution MAY include previous attempts represented in `retryAttempts` followed by the final attempt represented by the test object.
-5. **Attempt**: `attemptId` identifies an individual attempt history entry within an execution.
+5. **Attempt**: `attemptId` identifies an individual attempt within an execution, either the final attempt on the test object or an earlier attempt in `retryAttempts`.
 6. **Attachment**: `attachmentId` identifies a specific attachment reference instance.
 7. **Shard**: `shardId` labels the partition or shard that produced this document within a logical run.
 
@@ -922,6 +922,17 @@ The test object represents the final attempt in that execution. When retries occ
 If present, it MUST be a non-empty string.  
 UUID is RECOMMENDED.  
 `executionId` SHOULD be unique across executions and SHOULD NOT be reused across runs.
+
+### 9.3.1. `attemptId`
+
+**Description:**
+A unique identifier for the final attempt represented by this test object, including an initial attempt when no retry occurred.
+
+**Requirements:**
+`attemptId` is OPTIONAL.
+If present, it MUST be a non-empty string.
+UUID is RECOMMENDED.
+`attemptId` SHOULD be unique within the enclosing execution.
 
 ### 9.4. `name`
 
@@ -1971,7 +1982,7 @@ It is the ONLY permitted extension point within the baseline object.
 
 CTRF follows **Semantic Versioning**.
 
-This document defines CTRF version `0.1.0`.
+This document defines CTRF version `0.2.0`.
 
 Before CTRF `1.0.0`:
 
@@ -2229,6 +2240,11 @@ to this specification.
               },
               "executionId": {
                 "description": "Unique identifier for this specific execution of the test case within a run. UUID recommended",
+                "type": "string",
+                "minLength": 1
+              },
+              "attemptId": {
+                "description": "Unique identifier for this individual attempt. UUID recommended",
                 "type": "string",
                 "minLength": 1
               },
@@ -3255,7 +3271,7 @@ It includes:
 ```json title="Comprehensive CTRF document"
 {
   "reportFormat": "CTRF",
-  "specVersion": "0.1.0",
+  "specVersion": "0.2.0",
   "reportId": "9d2c6a10-3f7a-4e22-9a8f-1a2b3c4d5e6f",
   "runId": "run-20251124-e2e-staging",
   "timestamp": "2025-11-24T12:00:00Z",
@@ -3299,6 +3315,7 @@ It includes:
         "id": "c6c9f8c0-8b5e-5f7a-9e2d-3c91f8a7d7c1",
         "testId": "c6c9f8c0-8b5e-5f7a-9e2d-3c91f8a7d7c1",
         "executionId": "a1b2c3d4-1111-4000-a000-000000000001",
+        "attemptId": "f1e2d3c4-2222-4000-b000-000000000002",
         "name": "user can log in",
         "suite": ["auth", "login"],
         "filePath": "tests/auth/login.test.js",
