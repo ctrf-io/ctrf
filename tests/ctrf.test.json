@@ -190,19 +190,9 @@
       }
     },
     {
-      "description": "raw-initial-attempt.json",
+      "description": "test-attempt-id.json",
       "valid": true,
-      "dataPath": "../examples/raw-initial-attempt.json"
-    },
-    {
-      "description": "raw-final-attempt.json",
-      "valid": true,
-      "dataPath": "../examples/raw-final-attempt.json"
-    },
-    {
-      "description": "merged-attempts.json",
-      "valid": true,
-      "dataPath": "../examples/merged-attempts.json"
+      "dataPath": "../examples/test-attempt-id.json"
     }
   ]
 }

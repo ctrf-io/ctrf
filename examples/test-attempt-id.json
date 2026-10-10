@@ -1,0 +1,27 @@
+{
+  "reportFormat": "CTRF",
+  "specVersion": "0.2.0",
+  "results": {
+    "tool": {
+      "name": "example-runner"
+    },
+    "summary": {
+      "tests": 1,
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "skipped": 0,
+      "other": 0,
+      "start": 1609459200000,
+      "stop": 1609459201000
+    },
+    "tests": [
+      {
+        "name": "should pass",
+        "status": "passed",
+        "duration": 100,
+        "attemptId": "a1b2c3d4-1111-4000-a000-000000000001"
+      }
+    ]
+  }
+}

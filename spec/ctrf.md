@@ -5,7 +5,7 @@
 **Version:** 0.2.0
 (This version corresponds directly to the CTRF `specVersion` field.)
 
-**Date:** 2026-10-08
+**Date:** 2026-10-10
 
 **Status:** Working Draft
 
@@ -465,8 +465,6 @@ Each identity field has an intended uniqueness scope:
 
 Producers SHOULD NOT knowingly reuse identity values outside their intended scope.
 Producers SHOULD NOT emit duplicate identity values within a single CTRF document when those duplicates would make correlation ambiguous.
-
-An attempt ID identifies the attempt, not its representation or containing document. Producers SHOULD preserve it when the same raw result is included as a merged final result or moved into `retryAttempts`. Distinct attempts within the same execution SHOULD have distinct attempt IDs, including the final attempt and all history entries. Retransmitting the same attempt or representing it in another document SHOULD retain its ID; this reuse does not identify a new attempt. Consumers SHOULD correlate using the enclosing execution identity and attempt ID together, and SHOULD NOT count repeated representations as additional attempts. An ID alone does not establish a retry relationship or resolve conflicting result payloads.
 
 #### 4.9.2. Stability
 
@@ -928,18 +926,15 @@ UUID is RECOMMENDED.
 ### 9.3.1. `attemptId`
 
 **Description:**
-The identifier for the final attempt represented by this test object, including an initial attempt when no retry occurred.
+A unique identifier for the final attempt represented by this test object, including an initial attempt when no retry occurred.
 
 **Requirements:**
 `attemptId` is OPTIONAL.
 If present, it MUST be a non-empty string.
-UUID is RECOMMENDED, consistently with history-entry `attemptId` (Section 11.2).
-Consumers MUST treat the value as opaque.
-The uniqueness and preservation guidance in Section 4.9.1 applies across final and history representations.
+UUID is RECOMMENDED.
+`attemptId` SHOULD be unique within the enclosing execution.
 
-This property is introduced in CTRF 0.2.0. Reports emitting it MUST declare a `specVersion` supporting it; the 0.1.0 schema rejects it. Until the new schema is released, producers MAY retain an attempt key under their own namespace in `extra`. Legacy inputs without attempt identity MAY omit `attemptId`; consumers MUST NOT infer it from `executionId`, which identifies the complete lifecycle rather than one attempt.
-
-Adding `attemptId` does not change retry semantics: the final attempt stays on the test object, earlier attempts stay in `retryAttempts`, and `retries` retains its existing meaning. There is no new all-attempts array.
+This property is introduced in CTRF 0.2.0 and uses the same identifier contract as `retryAttempts[].attemptId` (Section 11.2).
 
 ### 9.4. `name`
 
@@ -1463,7 +1458,7 @@ A unique identifier for this individual attempt.
 `attemptId` is OPTIONAL.  
 If present, it MUST be a non-empty string.  
 UUID is RECOMMENDED.  
-`attemptId` SHOULD be unique within the enclosing execution, including the final attempt (Section 9.3.1). The preservation and retransmission guidance in Section 4.9.1 also applies to history entries.
+`attemptId` SHOULD be unique within the enclosing execution.
 
 ### 11.3. `status`
 
@@ -2251,7 +2246,7 @@ to this specification.
                 "minLength": 1
               },
               "attemptId": {
-                "description": "Unique identifier for the final attempt represented by this test. Preserve across raw and merged representations of the same attempt. UUID recommended",
+                "description": "Unique identifier for this individual attempt. UUID recommended",
                 "type": "string",
                 "minLength": 1
               },
@@ -3544,125 +3539,36 @@ The `ctrf.` and `ctrf/` namespace prefixes are reserved for CTRF-defined extensi
 }
 ```
 
-### D.8. Correlating raw and merged attempts
+### D.8. Test Attempt Identifier
 
-These three documents describe one coordinated lifecycle. Each raw document represents the final result available in that process; the orchestrator knows that the second process is a retry. The merged document preserves both attempt IDs, keeps the successful final attempt on Test, and records the earlier failed attempt as history. `executionId` and `testId` remain shared; each document has a distinct `reportId`. This example does not prescribe a merge algorithm or introduce the separate provenance proposal.
-
-**raw-initial-attempt.json**
+This example gives the attempt represented by the test object an optional identifier.
 
 ```json
 {
   "reportFormat": "CTRF",
   "specVersion": "0.2.0",
-  "runId": "run-login-1",
   "results": {
     "tool": {
-      "name": "coordinated-runner"
-    },
-    "summary": {
-      "tests": 1,
-      "passed": 0,
-      "failed": 1,
-      "skipped": 0,
-      "pending": 0,
-      "other": 0,
-      "start": 1000,
-      "stop": 1100
-    },
-    "tests": [
-      {
-        "name": "login(alice)",
-        "testId": "login/alice",
-        "executionId": "login-alice-run-1",
-        "attemptId": "login-alice-attempt-1",
-        "status": "failed",
-        "duration": 100
-      }
-    ]
-  },
-  "reportId": "11111111-1111-4111-8111-111111111111"
-}
-```
-
-**raw-final-attempt.json**
-
-```json
-{
-  "reportFormat": "CTRF",
-  "specVersion": "0.2.0",
-  "runId": "run-login-1",
-  "results": {
-    "tool": {
-      "name": "coordinated-runner"
+      "name": "example-runner"
     },
     "summary": {
       "tests": 1,
       "passed": 1,
       "failed": 0,
-      "skipped": 0,
       "pending": 0,
+      "skipped": 0,
       "other": 0,
-      "start": 1200,
-      "stop": 1250
+      "start": 1609459200000,
+      "stop": 1609459201000
     },
     "tests": [
       {
-        "name": "login(alice)",
-        "testId": "login/alice",
-        "executionId": "login-alice-run-1",
-        "attemptId": "login-alice-attempt-2",
+        "name": "should pass",
         "status": "passed",
-        "duration": 50
+        "duration": 100,
+        "attemptId": "a1b2c3d4-1111-4000-a000-000000000001"
       }
     ]
-  },
-  "reportId": "22222222-2222-4222-8222-222222222222"
-}
-```
-
-**merged-attempts.json**
-
-```json
-{
-  "reportFormat": "CTRF",
-  "specVersion": "0.2.0",
-  "runId": "run-login-1",
-  "results": {
-    "tool": {
-      "name": "coordinated-runner"
-    },
-    "summary": {
-      "tests": 1,
-      "passed": 1,
-      "failed": 0,
-      "skipped": 0,
-      "pending": 0,
-      "other": 0,
-      "start": 1000,
-      "stop": 1250,
-      "flaky": 1
-    },
-    "tests": [
-      {
-        "name": "login(alice)",
-        "testId": "login/alice",
-        "executionId": "login-alice-run-1",
-        "attemptId": "login-alice-attempt-2",
-        "status": "passed",
-        "duration": 50,
-        "retries": 1,
-        "flaky": true,
-        "retryAttempts": [
-          {
-            "attempt": 1,
-            "attemptId": "login-alice-attempt-1",
-            "status": "failed",
-            "duration": 100
-          }
-        ]
-      }
-    ]
-  },
-  "reportId": "33333333-3333-4333-8333-333333333333"
+  }
 }
 ```
