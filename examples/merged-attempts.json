@@ -1,0 +1,42 @@
+{
+  "reportFormat": "CTRF",
+  "specVersion": "0.2.0",
+  "runId": "run-login-1",
+  "results": {
+    "tool": {
+      "name": "coordinated-runner"
+    },
+    "summary": {
+      "tests": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "pending": 0,
+      "other": 0,
+      "start": 1000,
+      "stop": 1250,
+      "flaky": 1
+    },
+    "tests": [
+      {
+        "name": "login(alice)",
+        "testId": "login/alice",
+        "executionId": "login-alice-run-1",
+        "attemptId": "login-alice-attempt-2",
+        "status": "passed",
+        "duration": 50,
+        "retries": 1,
+        "flaky": true,
+        "retryAttempts": [
+          {
+            "attempt": 1,
+            "attemptId": "login-alice-attempt-1",
+            "status": "failed",
+            "duration": 100
+          }
+        ]
+      }
+    ]
+  },
+  "reportId": "33333333-3333-4333-8333-333333333333"
+}

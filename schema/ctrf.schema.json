@@ -153,6 +153,11 @@
                 "type": "string",
                 "minLength": 1
               },
+              "attemptId": {
+                "description": "Unique identifier for the final attempt represented by this test. Preserve across raw and merged representations of the same attempt. UUID recommended",
+                "type": "string",
+                "minLength": 1
+              },
               "name": {
                 "description": "Name or title of the test case",
                 "type": "string",

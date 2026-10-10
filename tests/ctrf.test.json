@@ -188,6 +188,21 @@
           "tests": [{ "name": "test", "status": "passed", "duration": 100 }]
         }
       }
+    },
+    {
+      "description": "raw-initial-attempt.json",
+      "valid": true,
+      "dataPath": "../examples/raw-initial-attempt.json"
+    },
+    {
+      "description": "raw-final-attempt.json",
+      "valid": true,
+      "dataPath": "../examples/raw-final-attempt.json"
+    },
+    {
+      "description": "merged-attempts.json",
+      "valid": true,
+      "dataPath": "../examples/merged-attempts.json"
     }
   ]
 }
