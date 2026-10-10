@@ -188,11 +188,6 @@
           "tests": [{ "name": "test", "status": "passed", "duration": 100 }]
         }
       }
-    },
-    {
-      "description": "test-attempt-id.json",
-      "valid": true,
-      "dataPath": "../examples/test-attempt-id.json"
     }
   ]
 }

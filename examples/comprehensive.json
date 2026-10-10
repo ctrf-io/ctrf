@@ -1,6 +1,6 @@
 {
   "reportFormat": "CTRF",
-  "specVersion": "0.1.0",
+  "specVersion": "0.2.0",
   "reportId": "9d2c6a10-3f7a-4e22-9a8f-1a2b3c4d5e6f",
   "runId": "run-2025-11-24-pr-123",
   "timestamp": "2025-11-24T12:00:00Z",
@@ -76,6 +76,7 @@
         "id": "550e8400-e29b-41d4-a716-446655440001",
         "testId": "checkout-user-can-checkout",
         "executionId": "2cf7e0b4-ea0c-4ef4-a18a-b9d6f6f0e101",
+        "attemptId": "48c3f90b-95a9-4c13-a42f-0888bb0b1002",
         "name": "user can checkout",
         "status": "passed",
         "duration": 5200,

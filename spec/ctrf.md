@@ -934,8 +934,6 @@ If present, it MUST be a non-empty string.
 UUID is RECOMMENDED.
 `attemptId` SHOULD be unique within the enclosing execution.
 
-This property is introduced in CTRF 0.2.0 and uses the same identifier contract as `retryAttempts[].attemptId` (Section 11.2).
-
 ### 9.4. `name`
 
 **Description:**  
@@ -3273,7 +3271,7 @@ It includes:
 ```json title="Comprehensive CTRF document"
 {
   "reportFormat": "CTRF",
-  "specVersion": "0.1.0",
+  "specVersion": "0.2.0",
   "reportId": "9d2c6a10-3f7a-4e22-9a8f-1a2b3c4d5e6f",
   "runId": "run-20251124-e2e-staging",
   "timestamp": "2025-11-24T12:00:00Z",
@@ -3317,6 +3315,7 @@ It includes:
         "id": "c6c9f8c0-8b5e-5f7a-9e2d-3c91f8a7d7c1",
         "testId": "c6c9f8c0-8b5e-5f7a-9e2d-3c91f8a7d7c1",
         "executionId": "a1b2c3d4-1111-4000-a000-000000000001",
+        "attemptId": "f1e2d3c4-2222-4000-b000-000000000002",
         "name": "user can log in",
         "suite": ["auth", "login"],
         "filePath": "tests/auth/login.test.js",
@@ -3535,40 +3534,6 @@ The `ctrf.` and `ctrf/` namespace prefixes are reserved for CTRF-defined extensi
         "environment": "staging"
       }
     }
-  }
-}
-```
-
-### D.8. Test Attempt Identifier
-
-This example gives the attempt represented by the test object an optional identifier.
-
-```json
-{
-  "reportFormat": "CTRF",
-  "specVersion": "0.2.0",
-  "results": {
-    "tool": {
-      "name": "example-runner"
-    },
-    "summary": {
-      "tests": 1,
-      "passed": 1,
-      "failed": 0,
-      "pending": 0,
-      "skipped": 0,
-      "other": 0,
-      "start": 1609459200000,
-      "stop": 1609459201000
-    },
-    "tests": [
-      {
-        "name": "should pass",
-        "status": "passed",
-        "duration": 100,
-        "attemptId": "a1b2c3d4-1111-4000-a000-000000000001"
-      }
-    ]
   }
 }
 ```
