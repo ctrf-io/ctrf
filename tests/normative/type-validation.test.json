@@ -1234,6 +1234,191 @@
           ]
         }
       }
+    },
+    {
+      "description": "Test description rejects null",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": {
+            "name": "example-runner"
+          },
+          "summary": {
+            "tests": 1,
+            "passed": 1,
+            "failed": 0,
+            "pending": 0,
+            "skipped": 0,
+            "other": 0,
+            "start": 1609459200000,
+            "stop": 1609459201000
+          },
+          "tests": [
+            {
+              "name": "test_icmp_ping",
+              "status": "passed",
+              "duration": 100,
+              "description": null,
+              "suite": [
+                "tests",
+                "test_ping",
+                "TestPingTestCase"
+              ],
+              "filePath": "tests/test_ping.py"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "description": "Test description rejects number",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": {
+            "name": "example-runner"
+          },
+          "summary": {
+            "tests": 1,
+            "passed": 1,
+            "failed": 0,
+            "pending": 0,
+            "skipped": 0,
+            "other": 0,
+            "start": 1609459200000,
+            "stop": 1609459201000
+          },
+          "tests": [
+            {
+              "name": "test_icmp_ping",
+              "status": "passed",
+              "duration": 100,
+              "description": 42,
+              "suite": [
+                "tests",
+                "test_ping",
+                "TestPingTestCase"
+              ],
+              "filePath": "tests/test_ping.py"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "description": "Test description rejects boolean",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": {
+            "name": "example-runner"
+          },
+          "summary": {
+            "tests": 1,
+            "passed": 1,
+            "failed": 0,
+            "pending": 0,
+            "skipped": 0,
+            "other": 0,
+            "start": 1609459200000,
+            "stop": 1609459201000
+          },
+          "tests": [
+            {
+              "name": "test_icmp_ping",
+              "status": "passed",
+              "duration": 100,
+              "description": false,
+              "suite": [
+                "tests",
+                "test_ping",
+                "TestPingTestCase"
+              ],
+              "filePath": "tests/test_ping.py"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "description": "Test description rejects array",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": {
+            "name": "example-runner"
+          },
+          "summary": {
+            "tests": 1,
+            "passed": 1,
+            "failed": 0,
+            "pending": 0,
+            "skipped": 0,
+            "other": 0,
+            "start": 1609459200000,
+            "stop": 1609459201000
+          },
+          "tests": [
+            {
+              "name": "test_icmp_ping",
+              "status": "passed",
+              "duration": 100,
+              "description": [],
+              "suite": [
+                "tests",
+                "test_ping",
+                "TestPingTestCase"
+              ],
+              "filePath": "tests/test_ping.py"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "description": "Test description rejects object",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": {
+            "name": "example-runner"
+          },
+          "summary": {
+            "tests": 1,
+            "passed": 1,
+            "failed": 0,
+            "pending": 0,
+            "skipped": 0,
+            "other": 0,
+            "start": 1609459200000,
+            "stop": 1609459201000
+          },
+          "tests": [
+            {
+              "name": "test_icmp_ping",
+              "status": "passed",
+              "duration": 100,
+              "description": {},
+              "suite": [
+                "tests",
+                "test_ping",
+                "TestPingTestCase"
+              ],
+              "filePath": "tests/test_ping.py"
+            }
+          ]
+        }
+      }
     }
   ]
 }

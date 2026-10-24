@@ -967,6 +967,17 @@ The name or title of the test case.
 `name` MUST be present.  
 It MUST be a non-empty string.
 
+### 9.4.1. `description`
+
+**Description:**
+A human-readable description of the test case, such as its purpose or the behavior it checks.
+
+`name` remains the case's primary display name, and `suite` describes its grouping hierarchy. `description` provides additional context; attempt-specific failure diagnostics belong in `message` and `trace`.
+
+**Requirements:**
+`description` is OPTIONAL.
+If present, it MUST be a string.
+
 ### 9.5. `status`
 
 **Description:**  
@@ -2284,6 +2295,10 @@ to this specification.
                 "description": "Name or title of the test case",
                 "type": "string",
                 "minLength": 1
+              },
+              "description": {
+                "description": "Optional human-readable description of the test case, separate from its name, suite hierarchy and attempt diagnostics",
+                "type": "string"
               },
               "status": {
                 "description": "Final outcome of the test case",
@@ -3873,6 +3888,49 @@ This example matches `examples/portable-attachments.json`.
             ]
           }
         ]
+      }
+    ]
+  }
+}
+```
+
+
+### D.10. Test Case Description
+
+`name` is the case's primary display name, `suite` is its grouping hierarchy, and `description` provides additional human-readable context. No description is required, and it does not replace failure diagnostics.
+
+This example matches `examples/with-description.json`.
+
+```json title="Test case description"
+{
+  "reportFormat": "CTRF",
+  "specVersion": "0.3.0",
+  "results": {
+    "tool": {
+      "name": "example-runner"
+    },
+    "summary": {
+      "tests": 1,
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "skipped": 0,
+      "other": 0,
+      "start": 1609459200000,
+      "stop": 1609459201000
+    },
+    "tests": [
+      {
+        "name": "test_icmp_ping",
+        "status": "passed",
+        "duration": 100,
+        "description": "Test reachability with ICMP ping",
+        "suite": [
+          "tests",
+          "test_ping",
+          "TestPingTestCase"
+        ],
+        "filePath": "tests/test_ping.py"
       }
     ]
   }

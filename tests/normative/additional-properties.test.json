@@ -211,6 +211,50 @@
           }]
         }
       }
+    },
+    {
+      "description": "Description is a Test field, not an attempt history field",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": {
+            "name": "example-runner"
+          },
+          "summary": {
+            "tests": 1,
+            "passed": 1,
+            "failed": 0,
+            "pending": 0,
+            "skipped": 0,
+            "other": 0,
+            "start": 1609459200000,
+            "stop": 1609459201000
+          },
+          "tests": [
+            {
+              "name": "test_icmp_ping",
+              "status": "passed",
+              "duration": 100,
+              "suite": [
+                "tests",
+                "test_ping",
+                "TestPingTestCase"
+              ],
+              "filePath": "tests/test_ping.py",
+              "retries": 1,
+              "retryAttempts": [
+                {
+                  "attempt": 1,
+                  "status": "failed",
+                  "description": "Not an attempt field"
+                }
+              ]
+            }
+          ]
+        }
+      }
     }
   ]
 }

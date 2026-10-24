@@ -100,6 +100,85 @@
           ]
         }
       }
+    },
+    {
+      "description": "Test case with an optional human-readable description",
+      "valid": true,
+      "dataPath": "../../examples/with-description.json"
+    },
+    {
+      "description": "Test description accepts empty string",
+      "valid": true,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": {
+            "name": "example-runner"
+          },
+          "summary": {
+            "tests": 1,
+            "passed": 1,
+            "failed": 0,
+            "pending": 0,
+            "skipped": 0,
+            "other": 0,
+            "start": 1609459200000,
+            "stop": 1609459201000
+          },
+          "tests": [
+            {
+              "name": "test_icmp_ping",
+              "status": "passed",
+              "duration": 100,
+              "description": "",
+              "suite": [
+                "tests",
+                "test_ping",
+                "TestPingTestCase"
+              ],
+              "filePath": "tests/test_ping.py"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "description": "Test description accepts multiline string",
+      "valid": true,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": {
+            "name": "example-runner"
+          },
+          "summary": {
+            "tests": 1,
+            "passed": 1,
+            "failed": 0,
+            "pending": 0,
+            "skipped": 0,
+            "other": 0,
+            "start": 1609459200000,
+            "stop": 1609459201000
+          },
+          "tests": [
+            {
+              "name": "test_icmp_ping",
+              "status": "passed",
+              "duration": 100,
+              "description": "Checks reachability.\nUses ICMP echo.",
+              "suite": [
+                "tests",
+                "test_ping",
+                "TestPingTestCase"
+              ],
+              "filePath": "tests/test_ping.py"
+            }
+          ]
+        }
+      }
     }
   ]
 }

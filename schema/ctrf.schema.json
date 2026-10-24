@@ -163,6 +163,10 @@
                 "type": "string",
                 "minLength": 1
               },
+              "description": {
+                "description": "Optional human-readable description of the test case, separate from its name, suite hierarchy and attempt diagnostics",
+                "type": "string"
+              },
               "status": {
                 "description": "Final outcome of the test case",
                 "enum": [ "passed", "failed", "skipped", "pending", "other" ]
