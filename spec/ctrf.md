@@ -286,7 +286,9 @@ A tool, system, or process that generates CTRF reports by capturing and structur
 A tool, system, or process that reads and interprets CTRF reports for purposes such as analysis, visualization, alerting, or trend detection.
 
 **Test Case**:  
-An individual executable test, represented in CTRF as an entry within the `tests` array.
+An individual executable test. For parameterized tests, each distinct combination of test logic and case-defining parameter values constitutes a separate test case.
+For example, `login(username="alice")` and `login(username="bob")` are distinct test cases that use the same test logic.
+The Test object records an execution of a test case; its retries are attempts of that same case.
 
 **Status**:  
 The final outcome of a test case. The `status` field MUST be one of: `passed`, `failed`, `skipped`, `pending`, or `other`.
@@ -309,8 +311,8 @@ The last execution of a test case. Its outcome and execution data are represente
 **Retry History**:  
 The ordered previous attempts recorded in `retryAttempts`. Despite the field name, this history includes the initial attempt when a retry occurred and excludes the final attempt represented by the test object.
 
-**Flaky Test**:  
-A test is considered flaky only if its final status is `passed` and it experienced one or more failed attempts before passing.
+**Flaky Test Case**:\
+A test case is considered flaky only if its final status is `passed` and it experienced one or more failed attempts before passing.
 
 **Environment**:  
 The system, platform, or context in which tests were executed, including build, commit, branch, OS, and other metadata.
@@ -439,7 +441,7 @@ Each layer addresses a distinct identification concern:
 
 1. **Document**: `reportId` identifies the emitted CTRF document as a serialized artifact. When `reportId` is used, each CTRF document SHOULD have exactly one `reportId`.
 2. **Run**: `runId` identifies the logical test run. Multiple CTRF documents MAY share the same `runId` when they represent shards or partitions of a single coordinated execution.
-3. **Test case**: `testId` identifies the logical test case within the producer's chosen scope. It SHOULD be deterministic and stable across runs within that scope, enabling cross-run analysis, trending, and flake detection.
+3. **Test case**: `testId` identifies the test case within the producer's chosen scope. It SHOULD be deterministic and stable across runs within that scope, enabling cross-run analysis, trending, and flake detection.
 4. **Execution**: `executionId` identifies the complete execution lifecycle of a test case within a run. An execution MAY include previous attempts represented in `retryAttempts` followed by the final attempt represented by the test object.
 5. **Attempt**: `attemptId` identifies an individual attempt within an execution, either the final attempt on the test object or an earlier attempt in `retryAttempts`.
 6. **Attachment**: `attachmentId` identifies a specific attachment reference instance.
@@ -457,8 +459,8 @@ Each identity field has an intended uniqueness scope:
 |---|---|
 | `reportId` | Unique per document |
 | `runId` | Unique per logical run |
-| `testId` | Stable within the producer's chosen scope for the logical test case |
-| `executionId` | Unique for one execution of a logical test case within a run |
+| `testId` | Stable within the producer's chosen scope for the test case |
+| `executionId` | Unique for one execution of a test case within a run |
 | `attemptId` | Unique for one recorded attempt within an execution |
 | `attachmentId` | Unique within the containing parent object |
 | `shardId` | Unique within a logical run |
@@ -474,7 +476,7 @@ Identity fields differ in whether their values persist across runs or are unique
 |---|---|
 | `reportId` | Stable across retransmissions of the same report; changes for materially changed report content |
 | `runId` | Stable across all documents belonging to the same logical run |
-| `testId` | Stable across runs for the same logical test case within the producer's chosen scope |
+| `testId` | Stable across runs for the same test case within the producer's chosen scope |
 | `executionId` | Unique per execution; not stable across runs |
 | `attemptId` | Unique per recorded attempt; not stable across runs |
 | `attachmentId` | Unique per attachment reference instance |
@@ -754,7 +756,7 @@ Each field within the `summary` object is described in the subsections below.
 ### 8.1. `tests`
 
 **Description:**  
-The total number of tests executed in the run.
+The total number of test cases executed in the run.
 
 **Requirements:**  
 `tests` MUST be present.  
@@ -764,7 +766,7 @@ It SHOULD equal the length of the `tests` array in the `results` object.
 ### 8.2. `passed`
 
 **Description:**  
-The count of tests that completed with a status of `passed`.
+The count of test cases that completed with a status of `passed`.
 
 **Requirements:**  
 `passed` MUST be present.  
@@ -773,7 +775,7 @@ It MUST be a non-negative integer.
 ### 8.3. `failed`
 
 **Description:**  
-The count of tests that completed with a status of `failed`.
+The count of test cases that completed with a status of `failed`.
 
 **Requirements:**  
 `failed` MUST be present.  
@@ -782,7 +784,7 @@ It MUST be a non-negative integer.
 ### 8.4. `pending`
 
 **Description:**  
-The count of tests whose status is `pending`.
+The count of test cases whose status is `pending`.
 
 **Requirements:**  
 `pending` MUST be present.  
@@ -791,7 +793,7 @@ It MUST be a non-negative integer.
 ### 8.5. `skipped`
 
 **Description:**  
-The count of tests whose status is `skipped`.
+The count of test cases whose status is `skipped`.
 
 **Requirements:**  
 `skipped` MUST be present.  
@@ -800,7 +802,7 @@ It MUST be a non-negative integer.
 ### 8.6. `other`
 
 **Description:**  
-The count of tests whose status is `other`.
+The count of test cases whose status is `other`.
 
 **Requirements:**  
 `other` MUST be present.  
@@ -809,12 +811,12 @@ It MUST be a non-negative integer.
 ### 8.7. `flaky`
 
 **Description:**  
-The count of tests that were identified as flaky.
+The count of test cases that were identified as flaky.
 
 **Requirements:**  
 `flaky` is OPTIONAL.  
 If present, it MUST be a non-negative integer.  
-A test is considered flaky only if its final status is `passed` and it experienced one or more failed attempts before passing.
+A test case is considered flaky only if its final status is `passed` and it experienced one or more failed attempts before passing.
 
 ### 8.8. `suites`
 
@@ -894,9 +896,9 @@ Consumers SHOULD treat `id` as legacy unless a producer documents stronger seman
 ### 9.2. `testId`
 
 **Description:**  
-A stable identifier for the logical test case.
+A stable identifier for the test case.
 
-`testId` identifies the test case itself, independent of any particular run or execution. Producers SHOULD keep `testId` stable for the same logical test within their own documented scope.
+`testId` identifies the test case itself, independent of any particular run or execution. Producers SHOULD keep `testId` stable for the same test case within their own documented scope.
 
 **Requirements:**  
 `testId` is OPTIONAL.  
@@ -913,7 +915,7 @@ Consumers MUST NOT assume that `testId` values generated by different producers 
 ### 9.3. `executionId`
 
 **Description:**  
-A unique identifier for the specific reported execution of a logical test case within a run.
+A unique identifier for the specific reported execution of a test case within a run.
 
 An execution represents a single reported outcome for a test case in this document. An execution MAY include previous attempts represented in `retryAttempts`.
 
@@ -1122,7 +1124,7 @@ Each entry MUST follow the structure defined in Section 11 (Attempt History Entr
 **Description:**  
 Indicates whether the test is considered flaky.
 
-A test is considered flaky only if its final status is `passed` and it experienced one or more failed attempts before passing.
+A test case is considered flaky only if its final status is `passed` and it experienced one or more failed attempts before passing.
 
 **Requirements:**  
 `flaky` is OPTIONAL.  
@@ -2171,31 +2173,31 @@ to this specification.
           ],
           "properties": {
             "tests": {
-              "description": "Total number of tests executed",
+              "description": "Total number of test cases executed",
               "type": "integer"
             },
             "passed": {
-              "description": "Count of tests with status 'passed'",
+              "description": "Count of test cases with status 'passed'",
               "type": "integer"
             },
             "failed": {
-              "description": "Count of tests with status 'failed'",
+              "description": "Count of test cases with status 'failed'",
               "type": "integer"
             },
             "skipped": {
-              "description": "Count of tests with status 'skipped'",
+              "description": "Count of test cases with status 'skipped'",
               "type": "integer"
             },
             "pending": {
-              "description": "Count of tests with status 'pending'",
+              "description": "Count of test cases with status 'pending'",
               "type": "integer"
             },
             "other": {
-              "description": "Count of tests with status 'other'",
+              "description": "Count of test cases with status 'other'",
               "type": "integer"
             },
             "flaky": {
-              "description": "Count of flaky tests (passed after failed attempts)",
+              "description": "Count of flaky test cases (passed after failed attempts)",
               "type": "integer"
             },
             "suites": {
@@ -2236,7 +2238,7 @@ to this specification.
                 "minLength": 1
               },
               "testId": {
-                "description": "Stable identifier for the logical test case. Should be derived from stable test attributes when generated by a producer",
+                "description": "Stable identifier for the test case. Should be derived from stable test attributes when generated by a producer",
                 "type": "string",
                 "minLength": 1
               },
@@ -2471,7 +2473,7 @@ to this specification.
                 }
               },
               "flaky": {
-                "description": "True if test passed after one or more failed attempts",
+                "description": "True if the test case passed after one or more failed attempts",
                 "type": "boolean"
               },
               "stdout": {
@@ -2877,28 +2879,28 @@ These metrics are typically generated by consumers that analyze multiple CTRF do
 #### C.1.1. `passRate`
 
 **Description:**
-The proportion of tests that completed with status `passed` out of all tests executed across the analyzed runs.
+The proportion of test cases that completed with status `passed` out of all test cases executed across the analyzed runs.
 
 **Type:** Percentage metric (0-1).
 
 #### C.1.2. `failRate`
 
 **Description:**
-The proportion of tests that completed with status `failed` out of all tests executed across the analyzed runs.
+The proportion of test cases that completed with status `failed` out of all test cases executed across the analyzed runs.
 
 **Type:** Percentage metric (0-1).
 
 #### C.1.3. `flakyRate`
 
 **Description:**
-The proportion of tests that were flaky across the analyzed runs.
+The proportion of test cases that were flaky across the analyzed runs.
 
-A test is considered flaky only if:
+A test case is considered flaky only if:
 
 - Its final recorded status is `passed`, and
 - It encountered one or more failed attempts before passing.
 
-Retries that never pass (tests whose final status is `failed`) do not count toward flakiness.
+Retries that never pass (test cases whose final status is `failed`) do not count toward flakiness.
 
 **Type:** Percentage metric (0-1).
 
@@ -2947,7 +2949,7 @@ The proportion of runs in which this test ended with status `failed`.
 **Description:**
 The proportion of runs in which this test was flaky.
 
-A test is flaky if its final status was `passed` but it experienced one or more failed attempts.
+A test case is flaky if its final status was `passed` but it experienced one or more failed attempts.
 
 **Type:** Percentage metric (0-1).
 
