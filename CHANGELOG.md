@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Clarified output-line arrays and valid omission or empty arrays when no stdout or stderr was captured, on final results and previous attempts.
+
 - Documented legacy `id` removal in 1.0.0 and version-based migration while retaining current acceptance and optional `testId`.
 
 - Clarified durable attachment references, optional producer-local paths and producer-defined digest metadata.
