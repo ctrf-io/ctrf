@@ -138,7 +138,7 @@
             "required": [ "name", "status", "duration" ],
             "properties": {
               "id": {
-                "description": "Legacy identifier for the test case (UUID). New producers should prefer testId",
+                "description": "Deprecated test-case identifier (UUID), scheduled for removal in CTRF 1.0.0. Still accepted in this version; prefer optional testId when providing case identity",
                 "type": "string",
                 "format": "uuid",
                 "minLength": 1
