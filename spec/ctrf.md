@@ -2,10 +2,10 @@
 
 ## Common Test Report Format
 
-**Version:** 0.2.0
+**Version:** 0.3.0
 (This version corresponds directly to the CTRF `specVersion` field.)
 
-**Date:** 2026-10-10
+**Date:** 2026-10-24
 
 **Status:** Working Draft
 
@@ -2025,7 +2025,7 @@ It is the ONLY permitted extension point within the baseline object.
 
 CTRF follows **Semantic Versioning**.
 
-This document defines CTRF version `0.2.0`.
+This document defines CTRF version `0.3.0`.
 
 Before CTRF `1.0.0`:
 
@@ -3065,7 +3065,7 @@ It includes:
 ```json title="Minimal CTRF document"
 {
   "reportFormat": "CTRF",
-  "specVersion": "0.1.0",
+  "specVersion": "0.3.0",
   "results": {
     "tool": {
       "name": "example-runner"
@@ -3106,7 +3106,7 @@ It includes:
 ```json title="CTRF document with retries"
 {
   "reportFormat": "CTRF",
-  "specVersion": "0.1.0",
+  "specVersion": "0.3.0",
   "results": {
     "tool": {
       "name": "example-runner",
@@ -3163,7 +3163,7 @@ It includes:
 ```json title="CTRF document with diagnostics"
 {
   "reportFormat": "CTRF",
-  "specVersion": "0.1.0",
+  "specVersion": "0.3.0",
   "results": {
     "tool": {
       "name": "example-runner",
@@ -3227,7 +3227,7 @@ It includes:
 ```json title="CTRF document with insights and baseline"
 {
   "reportFormat": "CTRF",
-  "specVersion": "0.1.0",
+  "specVersion": "0.3.0",
   "reportId": "7c4e1c20-7c89-4f30-9b52-1f6f9d6b8f21",
   "results": {
     "tool": {
@@ -3330,7 +3330,7 @@ It includes:
 ```json title="Comprehensive CTRF document"
 {
   "reportFormat": "CTRF",
-  "specVersion": "0.2.0",
+  "specVersion": "0.3.0",
   "reportId": "9d2c6a10-3f7a-4e22-9a8f-1a2b3c4d5e6f",
   "runId": "run-20251124-e2e-staging",
   "timestamp": "2025-11-24T12:00:00Z",
@@ -3525,7 +3525,7 @@ The `ctrf.` and `ctrf/` namespace prefixes are reserved for CTRF-defined extensi
 ```json title="CTRF document with namespaced extra objects"
 {
   "reportFormat": "CTRF",
-  "specVersion": "0.1.0",
+  "specVersion": "0.3.0",
   "extra": {
     "myorg.ci": {
       "pipeline": {
@@ -3607,7 +3607,7 @@ This example matches `examples/parameterized-cases.json`.
 ```json title="Parameterized test cases"
 {
   "reportFormat": "CTRF",
-  "specVersion": "0.2.0",
+  "specVersion": "0.3.0",
   "runId": "example-parameterized-run",
   "results": {
     "tool": {
@@ -3669,7 +3669,7 @@ Each block below matches its named standalone example.
 ```json title="Initial process report"
 {
   "reportFormat": "CTRF",
-  "specVersion": "0.2.0",
+  "specVersion": "0.3.0",
   "reportId": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
   "runId": "coordinated-example-run",
   "results": {
@@ -3718,7 +3718,7 @@ Each block below matches its named standalone example.
 ```json title="Retry process report"
 {
   "reportFormat": "CTRF",
-  "specVersion": "0.2.0",
+  "specVersion": "0.3.0",
   "reportId": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
   "runId": "coordinated-example-run",
   "results": {
@@ -3756,7 +3756,7 @@ Each block below matches its named standalone example.
 ```json title="Merged coordinated retry report"
 {
   "reportFormat": "CTRF",
-  "specVersion": "0.2.0",
+  "specVersion": "0.3.0",
   "reportId": "cccccccc-cccc-4ccc-8ccc-cccccccccccc",
   "runId": "coordinated-example-run",
   "results": {
@@ -3823,7 +3823,7 @@ This example matches `examples/portable-attachments.json`.
 ```json title="Portable attachment references"
 {
   "reportFormat": "CTRF",
-  "specVersion": "0.2.0",
+  "specVersion": "0.3.0",
   "results": {
     "tool": {
       "name": "example-runner"
