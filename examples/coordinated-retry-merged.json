@@ -1,0 +1,57 @@
+{
+  "reportFormat": "CTRF",
+  "specVersion": "0.2.0",
+  "reportId": "cccccccc-cccc-4ccc-8ccc-cccccccccccc",
+  "runId": "coordinated-example-run",
+  "results": {
+    "tool": {
+      "name": "example-orchestrator"
+    },
+    "summary": {
+      "tests": 2,
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "pending": 0,
+      "other": 0,
+      "start": 1700000000000,
+      "stop": 1700000000550,
+      "flaky": 1
+    },
+    "tests": [
+      {
+        "name": "case A",
+        "testId": "case-a",
+        "executionId": "execution-a",
+        "attemptId": "11111111-1111-4111-8111-111111111111",
+        "status": "passed",
+        "duration": 100,
+        "start": 1700000000000,
+        "stop": 1700000000100
+      },
+      {
+        "name": "case B",
+        "testId": "case-b",
+        "executionId": "execution-b",
+        "attemptId": "33333333-3333-4333-8333-333333333333",
+        "status": "passed",
+        "duration": 150,
+        "start": 1700000000400,
+        "stop": 1700000000550,
+        "retries": 1,
+        "flaky": true,
+        "retryAttempts": [
+          {
+            "attempt": 1,
+            "attemptId": "22222222-2222-4222-8222-222222222222",
+            "status": "failed",
+            "duration": 200,
+            "start": 1700000000100,
+            "stop": 1700000000300,
+            "message": "Expected response was unavailable"
+          }
+        ]
+      }
+    ]
+  }
+}

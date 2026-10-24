@@ -21,7 +21,7 @@
       "minLength": 1
     },
     "runId": {
-      "description": "Identifier for the logical test run. Shared across shards/documents belonging to the same run",
+      "description": "Identifier for the logical test run. Shared across coordinated module, shard and retry-process reports, including their merged report when produced",
       "type": "string",
       "minLength": 1
     },
@@ -168,7 +168,7 @@
                 "enum": [ "passed", "failed", "skipped", "pending", "other" ]
               },
               "duration": {
-                "description": "Test execution time (milliseconds)",
+                "description": "Execution time of the final attempt represented by the test object (milliseconds), not the sum of earlier attempts",
                 "type": "integer"
               },
               "start": {

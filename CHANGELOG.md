@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Added coordinated cross-process retry examples and clarified logical-run correlation and final-attempt duration.
+
 - Clarified parameterized case identity, rename and path scopes, and execution identity across coordinated retry processes.
 
 - Defined parameterized test cases and clarified test-case terminology without changing execution or retry semantics.
