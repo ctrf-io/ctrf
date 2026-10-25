@@ -97,11 +97,6 @@
       }
     },
     {
-      "description": "Test case with an optional human-readable description",
-      "valid": true,
-      "dataPath": "../../examples/with-description.json"
-    },
-    {
       "description": "Test description accepts empty string",
       "valid": true,
       "data": {

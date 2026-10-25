@@ -164,7 +164,7 @@
                 "minLength": 1
               },
               "description": {
-                "description": "Optional human-readable description of the test case, separate from its name, suite hierarchy and attempt diagnostics",
+                "description": "Human-readable description of the test case",
                 "type": "string"
               },
               "status": {

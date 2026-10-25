@@ -2295,7 +2295,7 @@ to this specification.
                 "minLength": 1
               },
               "description": {
-                "description": "Optional human-readable description of the test case, separate from its name, suite hierarchy and attempt diagnostics",
+                "description": "Human-readable description of the test case",
                 "type": "string"
               },
               "status": {
@@ -3793,49 +3793,6 @@ Each block below matches its named standalone example.
             "message": "Expected response was unavailable"
           }
         ]
-      }
-    ]
-  }
-}
-```
-
-
-### D.9. Test Case Description
-
-`name` is the case's primary display name, `suite` is its grouping hierarchy, and `description` provides additional human-readable context. No description is required, and it does not replace failure diagnostics.
-
-This example matches `examples/with-description.json`.
-
-```json title="Test case description"
-{
-  "reportFormat": "CTRF",
-  "specVersion": "0.3.0",
-  "results": {
-    "tool": {
-      "name": "example-runner"
-    },
-    "summary": {
-      "tests": 1,
-      "passed": 1,
-      "failed": 0,
-      "pending": 0,
-      "skipped": 0,
-      "other": 0,
-      "start": 1609459200000,
-      "stop": 1609459201000
-    },
-    "tests": [
-      {
-        "name": "test_icmp_ping",
-        "status": "passed",
-        "duration": 100,
-        "description": "Test reachability with ICMP ping",
-        "suite": [
-          "tests",
-          "test_ping",
-          "TestPingTestCase"
-        ],
-        "filePath": "tests/test_ping.py"
       }
     ]
   }
