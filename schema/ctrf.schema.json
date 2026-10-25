@@ -130,7 +130,7 @@
           "additionalProperties": false
         },
         "tests": {
-          "description": "List of test cases executed during the run",
+          "description": "List of test case results for the run",
           "type": "array",
           "items": {
             "description": "Individual test case result",
@@ -176,15 +176,15 @@
                 "type": "integer"
               },
               "start": {
-                "description": "Test start time (milliseconds since Unix epoch)",
+                "description": "Test case execution start time (milliseconds since Unix epoch)",
                 "type": "integer"
               },
               "stop": {
-                "description": "Test end time (milliseconds since Unix epoch)",
+                "description": "Test case execution end time (milliseconds since Unix epoch)",
                 "type": "integer"
               },
               "suite": {
-                "description": "Suite hierarchy from top-level to immediate parent",
+                "description": "Suite hierarchy for the test case, from top-level to immediate parent",
                 "type": "array",
                 "minItems": 1,
                 "items": {
@@ -204,7 +204,7 @@
                 "type": "string"
               },
               "ai": {
-                "description": "AI-generated diagnostic data or suggestions",
+                "description": "AI-generated diagnostic data or suggestions related to the test result",
                 "type": "string"
               },
               "line": {
@@ -257,15 +257,15 @@
                 }
               },
               "type": {
-                "description": "Test classification (e.g., 'unit', 'integration', 'e2e')",
+                "description": "Test case classification (e.g., 'unit', 'integration', 'e2e')",
                 "type": "string"
               },
               "filePath": {
-                "description": "Path to the file defining this test",
+                "description": "Path to the file defining this test case",
                 "type": "string"
               },
               "retries": {
-                "description": "Number of times the test was re-executed after its initial attempt",
+                "description": "Number of times the test case was re-executed after its initial attempt",
                 "type": "integer",
                 "minimum": 0
               },
@@ -401,7 +401,7 @@
                 }
               },
               "threadId": {
-                "description": "Thread or worker identifier",
+                "description": "Thread or worker that executed the test case",
                 "type": "string"
               },
               "browser": {
@@ -450,11 +450,11 @@
                 }
               },
               "parameters": {
-                "description": "Test parameters or input values",
+                "description": "Test parameters, input values, or contextual data relevant to the execution",
                 "type": "object"
               },
               "steps": {
-                "description": "Test steps or sub-operations",
+                "description": "Steps or sub-operations performed during test execution",
                 "type": "array",
                 "items": {
                   "description": "Individual test step",
@@ -484,7 +484,7 @@
                 }
               },
               "insights": {
-                "description": "Derived metrics for this test across runs",
+                "description": "Derived metrics for this test case across runs",
                 "type": "object",
                 "properties": {
                   "passRate": {
@@ -508,7 +508,7 @@
                     "$ref": "#/definitions/metricDelta"
                   },
                   "executedInRuns": {
-                    "description": "Number of runs this test was executed in",
+                    "description": "Number of runs this test case was executed in",
                     "type": "integer"
                   },
                   "extra": {
@@ -638,7 +638,7 @@
           "$ref": "#/definitions/metricDelta"
         },
         "averageTestDuration": {
-          "description": "Average test duration with baseline comparison",
+          "description": "Average duration of test case executions with baseline comparison",
           "$ref": "#/definitions/metricDelta"
         },
         "runsAnalyzed": {
