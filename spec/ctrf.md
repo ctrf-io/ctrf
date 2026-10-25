@@ -2254,12 +2254,12 @@ to this specification.
                 "minLength": 1
               },
               "testId": {
-                "description": "Stable identifier for the test case within the producer's documented scope. Distinct parameterized cases should have distinct identifiers; retries retain the same identifier. No particular generation algorithm is required",
+                "description": "Stable identifier for the test case across runs within the producer's documented scope",
                 "type": "string",
                 "minLength": 1
               },
               "executionId": {
-                "description": "Identifier for one execution lifecycle of a test case within a run, including known coordinated retries across processes and their merged result. Independent executions should have different identifiers. UUID recommended",
+                "description": "Identifier for one execution lifecycle of a test case within a run, including coordinated retries. UUID recommended",
                 "type": "string",
                 "minLength": 1
               },
