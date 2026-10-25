@@ -128,7 +128,7 @@ At the same time, CTRF remains human-readable JSON to support debugging, inspect
 
 ### 2.3. Flat Test Result Representation
 
-CTRF represents test results as a flat collection of test cases rather than a nested suite hierarchy.
+CTRF represents test case results as a flat collection rather than a nested suite hierarchy.
 
 Logical grouping and hierarchy are expressed through explicit metadata fields such as `suite`, `filePath`, `tags`, and `parameters`, rather than through document structure.
 
@@ -136,7 +136,7 @@ This approach:
 
 - simplifies merging of sharded or parallel executions
 - avoids assumptions imposed by specific test frameworks
-- enables stable test identification across runs
+- enables stable test case identification across runs
 - supports efficient aggregation and filtering
 
 Consumers MAY reconstruct hierarchical views for presentation purposes, but such hierarchy is not encoded structurally in the CTRF document.
@@ -194,7 +194,7 @@ CTRF favors explicit fields and documented semantics over inferred or implicit b
 
 For example:
 
-- test retry histories are represented explicitly as attempt history entries
+- retry histories for test cases are represented explicitly as attempt history entries
 - derived metrics are represented as insights rather than inferred
 - hierarchy is expressed as metadata rather than structure
 
@@ -276,7 +276,7 @@ interpreted as described in [RFC2119].
 The complete CTRF document. A report always contains the results of a single test execution run, and MAY additionally include derived insights computed across multiple runs.
 
 **Run**:  
-A single **logical** execution of a test suite or collection of tests.  
+A single **logical** execution of a test suite or collection of test cases.  
 A run MAY consist of multiple physical executions (for example, shards or parallel workers) that are part of the same coordinated execution context.
 
 **Producer**:  
@@ -286,7 +286,7 @@ A tool, system, or process that generates CTRF reports by capturing and structur
 A tool, system, or process that reads and interprets CTRF reports for purposes such as analysis, visualization, alerting, or trend detection.
 
 **Test Case**:  
-An individual executable test. For parameterized tests, each distinct combination of test logic and case-defining parameter values constitutes a separate test case.
+An individual executable test. For parameterized tests, each distinct combination of test logic and case-defining parameters constitutes a separate test case.
 For example, `login(username="alice")` and `login(username="bob")` are distinct test cases that use the same test logic.
 The Test object records an execution of a test case; its retries are attempts of that same case.
 
@@ -294,19 +294,19 @@ The Test object records an execution of a test case; its retries are attempts of
 The final outcome of a test case. The `status` field MUST be one of: `passed`, `failed`, `skipped`, `pending`, or `other`.
 
 **Attempt**:  
-A single execution of a test case. The first execution is attempt number 1. Subsequent executions of the same test case, performed because the test was retried, are also attempts with incrementing attempt numbers.
+A single execution of a test case. The first execution is attempt number 1. Subsequent executions of the same test case, performed because the test case was retried, are also attempts with incrementing attempt numbers.
 
 **Initial Attempt**:  
 The first execution of a test case. The initial attempt has attempt number 1 and is not a retry.
 
 **Retry** / **Retry Attempt**:  
-Any attempt with an attempt number greater than 1. Retries occur when a test is re-executed after a failure or based on a retry policy.
+Any attempt with an attempt number greater than 1. Retries occur when a test case is re-executed after a failure or based on a retry policy.
 
 **Previous Attempt**:  
 Any attempt completed before the final attempt. A previous attempt may be the initial attempt or an earlier retry.
 
 **Final Attempt**:  
-The last execution of a test case. Its outcome and execution data are represented by the test object. When a test is not retried, the initial attempt is also the final attempt.
+The last execution of a test case. Its outcome and execution data are represented by the test object. When a test case is not retried, the initial attempt is also the final attempt.
 
 **Retry History**:  
 The ordered previous attempts recorded in `retryAttempts`. Despite the field name, this history includes the initial attempt when a retry occurred and excludes the final attempt represented by the test object.
@@ -315,10 +315,10 @@ The ordered previous attempts recorded in `retryAttempts`. Despite the field nam
 A test case is considered flaky only if its final status is `passed` and it experienced one or more failed attempts before passing.
 
 **Environment**:  
-The system, platform, or context in which tests were executed, including build, commit, branch, OS, and other metadata.
+The system, platform, or context in which test cases were executed, including build, commit, branch, OS, and other metadata.
 
 **Build**:  
-The CI/CD pipeline execution or build context in which the tests were run. Build metadata appears in the `environment` object.
+The CI/CD pipeline execution or build context in which the test cases were run. Build metadata appears in the `environment` object.
 
 **Baseline**:  
 A previously generated CTRF report used as a reference for comparison with the current report when evaluating trends or regressions.
@@ -327,7 +327,7 @@ A previously generated CTRF report used as a reference for comparison with the c
 Derived or aggregated metrics calculated across one or more test runs. Insights MAY be applied at the run-level or at the individual test case level.
 
 **Metric**:  
-A quantitative value describing some property of a set of tests or runs (for example, pass rate or average duration). Metrics are often represented as `metricDelta` objects within insights.
+A quantitative value describing some property of a set of test cases or runs (for example, pass rate or average duration). Metrics are often represented as `metricDelta` objects within insights.
 
 **Metric Delta**:  
 A structure describing a metric’s `current` value, the corresponding value from a `baseline` run, and the computed `change` between them.
@@ -398,7 +398,7 @@ Extension keys are opaque identifiers.
 Consumers MUST NOT interpret extension keys as hierarchical paths.
 
 A producer SHOULD use the same namespace prefix consistently across all `extra` objects within a single document.  
-If a producer contributes extensions at multiple levels (for example, at the top level, within `results`, `summary`, or individual tests), the same namespace prefix SHOULD be used for all of that producer's extension keys throughout the document.
+If a producer contributes extensions at multiple levels (for example, at the top level, within `results`, `summary`, or individual test objects), the same namespace prefix SHOULD be used for all of that producer's extension keys throughout the document.
 
 #### 4.6.2. Extension Values
 
@@ -550,7 +550,7 @@ If a materially changed, regenerated, merged, filtered, or transformed CTRF docu
 **Description:**  
 Identifies the logical test run to which this document belongs.
 
-A logical run MAY span multiple CTRF documents (for example, when tests are distributed across shards or parallel workers). All documents belonging to the same coordinated execution SHOULD share the same `runId`.
+A logical run MAY span multiple CTRF documents (for example, when test cases are distributed across shards or parallel workers). All documents belonging to the same coordinated execution SHOULD share the same `runId`.
 
 Multiple CTRF documents MAY share the same `runId` when they describe results from the same logical run.
 
@@ -668,7 +668,7 @@ It MUST follow the structure defined in Section 8 (Summary Object).
 ### 6.3. `tests`
 
 **Description:**  
-Contains the list of test cases executed during the test run.
+Contains the results of test cases executed during the test run.
 
 **Requirements:**  
 `tests` MUST be present.  
@@ -745,7 +745,7 @@ It is the ONLY permitted extension point directly under the `tool` object.
 
 ## 8. Summary Object
 
-The `summary` object provides a high-level overview of the test run, including counts of test outcomes and timing information. It offers an at-a-glance representation of the overall state of the run.
+The `summary` object provides a high-level overview of the test run, including counts of test case outcomes and timing information. It offers an at-a-glance representation of the overall state of the run.
 
 The `summary` object MUST be present within the `results` object.
 
@@ -871,7 +871,7 @@ It is the ONLY permitted extension point directly under the `summary` object.
 ## 9. Test Object
 
 Each entry in the `tests` array represents a single executed test case.
-A test object captures the identity, outcome, timing, diagnostics, and optional retry data for that test.
+A test object captures the identity, outcome, timing, diagnostics, and optional retry data for an execution of that test case.
 
 Each element of the `tests` array MUST follow the structure defined in this section.
 
@@ -980,7 +980,7 @@ It MUST be an integer representing milliseconds.
 ### 9.7. `start`
 
 **Description:**  
-The timestamp when test execution began.
+The timestamp when execution of the test case began.
 
 **Requirements:**  
 `start` is OPTIONAL.  
@@ -989,7 +989,7 @@ If present, it MUST be an integer representing milliseconds since the Unix epoch
 ### 9.8. `stop`
 
 **Description:**  
-The timestamp when test execution ended.
+The timestamp when execution of the test case ended.
 
 **Requirements:**  
 `stop` is OPTIONAL.  
@@ -999,12 +999,12 @@ If both `start` and `stop` are present, `stop` SHOULD be greater than or equal t
 ### 9.9. `suite`
 
 **Description:**  
-An ordered list of suite or grouping names to which this test belongs, ordered from the top-level suite to the immediate parent of the test.
+An ordered list of suite or grouping names to which this test case belongs, ordered from the top-level suite to the immediate parent of the test case.
 
 **Requirements:**  
 `suite` is OPTIONAL.  
 If present, it MUST be an array of strings containing at least one entry.  
-The array MUST be ordered from the top-level suite to the immediate parent suite of the test.
+The array MUST be ordered from the top-level suite to the immediate parent suite of the test case.
 
 ### 9.10. `message`
 
@@ -1036,7 +1036,7 @@ If present, it MUST be a string.
 ### 9.13. `ai`
 
 **Description:**  
-AI-generated diagnostic data, commentary, or suggestions related to the test.
+AI-generated diagnostic data, commentary, or suggestions related to the test result.
 
 **Requirements:**  
 `ai` is OPTIONAL.  
@@ -1063,7 +1063,7 @@ If present, it MUST be a string.
 ### 9.16. `tags`
 
 **Description:**  
-A list of simple, keyless classifications associated with the test.
+A list of simple, keyless classifications associated with the test case.
 
 **Requirements:**  
 `tags` is OPTIONAL.  
@@ -1075,7 +1075,7 @@ Producers SHOULD use `tags` for simple, keyless categorization, such as `"smoke"
 ### 9.17. `labels`
 
 **Description:**  
-Structured key-value metadata associated with the test, such as ownership, priority, severity, external identifiers, or other named attributes.
+Structured key-value metadata associated with the test case, such as ownership, priority, severity, external identifiers, or other named attributes.
 
 **Requirements:**  
 `labels` is OPTIONAL.  
@@ -1088,7 +1088,7 @@ Producers SHOULD use `labels` whenever the metadata consists of named attributes
 ### 9.18. `type`
 
 **Description:**  
-A classification or category for the test (for example, `"unit"`, `"integration"`, or `"e2e"`).
+A classification or category for the test case (for example, `"unit"`, `"integration"`, or `"e2e"`).
 
 **Requirements:**  
 `type` is OPTIONAL.  
@@ -1134,7 +1134,7 @@ Each entry MUST follow the structure defined in Section 11 (Attempt History Entr
 ### 9.22. `flaky`
 
 **Description:**  
-Indicates whether the test is considered flaky.
+Indicates whether the test case is considered flaky.
 
 A test case is considered flaky only if its final status is `passed` and it experienced one or more failed attempts before passing.
 
@@ -1163,7 +1163,7 @@ If present, it MUST be an array of strings.
 ### 9.25. `threadId`
 
 **Description:**  
-Identifies the thread or worker on which the test executed.
+Identifies the thread or worker that executed the test case.
 
 **Requirements:**  
 `threadId` is OPTIONAL.  
@@ -1227,7 +1227,7 @@ It MAY contain arbitrary fields.
 ### 9.31. `steps`
 
 **Description:**  
-A list of test steps or sub-operations performed during the test.
+A list of test steps or sub-operations performed during test execution.
 
 **Requirements:**  
 `steps` is OPTIONAL.  
@@ -1655,7 +1655,7 @@ It is the ONLY permitted extension point directly under an attachment object.
 ## 13. Step Object
 
 The `steps` array within a test object provides a structured representation of the actions performed during the execution of a test case.
-Steps may be used to document sub-actions, checkpoints, validations, or diagnostic events that occurred during the test.
+Steps may be used to document sub-actions, checkpoints, validations, or diagnostic events that occurred during test execution.
 
 Each step object describes a single action.
 
@@ -1730,7 +1730,7 @@ If present, it MUST be a valid metric delta object.
 ### 14.3. `flakyRate`
 
 **Description:**  
-A `metricDelta` object representing the rate of flaky tests across all analyzed runs.
+A `metricDelta` object representing the rate of flaky test cases across all analyzed runs.
 
 **Requirements:**  
 `flakyRate` is OPTIONAL.  
@@ -1757,7 +1757,7 @@ If present, it MUST follow the metric delta structure.
 ### 14.6. `averageTestDuration`
 
 **Description:**  
-A `metricDelta` object representing the average duration of individual tests across all runs.
+A `metricDelta` object representing the average duration of test case executions across all runs.
 
 **Requirements:**  
 `averageTestDuration` is OPTIONAL.  
@@ -2236,7 +2236,7 @@ to this specification.
           "additionalProperties": false
         },
         "tests": {
-          "description": "List of test cases executed during the run",
+          "description": "List of test case results for the run",
           "type": "array",
           "items": {
             "description": "Individual test case result",
@@ -2274,19 +2274,19 @@ to this specification.
                 "enum": [ "passed", "failed", "skipped", "pending", "other" ]
               },
               "duration": {
-                "description": "Test execution time (milliseconds)",
+                "description": "Execution time of the test case (milliseconds)",
                 "type": "integer"
               },
               "start": {
-                "description": "Test start time (milliseconds since Unix epoch)",
+                "description": "Test case execution start time (milliseconds since Unix epoch)",
                 "type": "integer"
               },
               "stop": {
-                "description": "Test end time (milliseconds since Unix epoch)",
+                "description": "Test case execution end time (milliseconds since Unix epoch)",
                 "type": "integer"
               },
               "suite": {
-                "description": "Suite hierarchy from top-level to immediate parent",
+                "description": "Suite hierarchy for the test case, from top-level to immediate parent",
                 "type": "array",
                 "minItems": 1,
                 "items": {
@@ -2306,7 +2306,7 @@ to this specification.
                 "type": "string"
               },
               "ai": {
-                "description": "AI-generated diagnostic data or suggestions",
+                "description": "AI-generated diagnostic data or suggestions related to the test result",
                 "type": "string"
               },
               "line": {
@@ -2359,15 +2359,15 @@ to this specification.
                 }
               },
               "type": {
-                "description": "Test classification (e.g., 'unit', 'integration', 'e2e')",
+                "description": "Test case classification (e.g., 'unit', 'integration', 'e2e')",
                 "type": "string"
               },
               "filePath": {
-                "description": "Path to the file defining this test",
+                "description": "Path to the file defining this test case",
                 "type": "string"
               },
               "retries": {
-                "description": "Number of times the test was re-executed after its initial attempt",
+                "description": "Number of times the test case was re-executed after its initial attempt",
                 "type": "integer",
                 "minimum": 0
               },
@@ -2503,7 +2503,7 @@ to this specification.
                 }
               },
               "threadId": {
-                "description": "Thread or worker identifier",
+                "description": "Thread or worker that executed the test case",
                 "type": "string"
               },
               "browser": {
@@ -2552,11 +2552,11 @@ to this specification.
                 }
               },
               "parameters": {
-                "description": "Test parameters or input values",
+                "description": "Test parameters, input values, or contextual data relevant to the execution",
                 "type": "object"
               },
               "steps": {
-                "description": "Test steps or sub-operations",
+                "description": "Steps or sub-operations performed during test execution",
                 "type": "array",
                 "items": {
                   "description": "Individual test step",
@@ -2586,7 +2586,7 @@ to this specification.
                 }
               },
               "insights": {
-                "description": "Derived metrics for this test across runs",
+                "description": "Derived metrics for this test case across runs",
                 "type": "object",
                 "properties": {
                   "passRate": {
@@ -2610,7 +2610,7 @@ to this specification.
                     "$ref": "#/definitions/metricDelta"
                   },
                   "executedInRuns": {
-                    "description": "Number of runs this test was executed in",
+                    "description": "Number of runs this test case was executed in",
                     "type": "integer"
                   },
                   "extra": {
@@ -2740,7 +2740,7 @@ to this specification.
           "$ref": "#/definitions/metricDelta"
         },
         "averageTestDuration": {
-          "description": "Average test duration with baseline comparison",
+          "description": "Average duration of test case executions with baseline comparison",
           "$ref": "#/definitions/metricDelta"
         },
         "runsAnalyzed": {
@@ -2873,7 +2873,7 @@ The selection of runs, time windows, and statistical methods used to compute met
 
 ### C.1. Run-Level Metrics
 
-Run-level metrics are computed using all tests from all runs in consideration.
+Run-level metrics are computed using all test case results from all runs in consideration.
 These metrics are typically generated by consumers that analyze multiple CTRF documents.
 
 #### C.1.1. `passRate`
@@ -2928,26 +2928,26 @@ The average duration of all test executions across the analyzed runs.
 ### C.2. Test-Level Metrics
 
 Test-level metrics are computed using all executions of a single test case across analyzed runs.
-These metrics characterize long-term stability and performance of individual tests.
+These metrics characterize long-term stability and performance of individual test cases.
 
 #### C.2.1. `passRate`
 
 **Description:**
-The proportion of runs in which this test ended with status `passed`.
+The proportion of runs in which this test case ended with status `passed`.
 
 **Type:** Percentage metric (0-1).
 
 #### C.2.2. `failRate`
 
 **Description:**
-The proportion of runs in which this test ended with status `failed`.
+The proportion of runs in which this test case ended with status `failed`.
 
 **Type:** Percentage metric (0-1).
 
 #### C.2.3. `flakyRate`
 
 **Description:**
-The proportion of runs in which this test was flaky.
+The proportion of runs in which this test case was flaky.
 
 A test case is flaky if its final status was `passed` but it experienced one or more failed attempts.
 
@@ -2956,21 +2956,21 @@ A test case is flaky if its final status was `passed` but it experienced one or 
 #### C.2.4. `averageTestDuration`
 
 **Description:**
-The average duration of all attempts of this specific test across analyzed runs.
+The average duration of all attempts of this specific test case across analyzed runs.
 
 **Type:** Absolute metric (milliseconds).
 
 #### C.2.5. `p95TestDuration`
 
 **Description:**
-The 95th percentile duration of all executions of this specific test.
+The 95th percentile duration of all executions of this specific test case.
 
 **Type:** Absolute metric (milliseconds).
 
 #### C.2.6. `executedInRuns`
 
 **Description:**
-The total number of runs in which this test appeared.
+The total number of runs in which this test case appeared.
 
 **Type:** Absolute metric (integer).
 
@@ -3050,15 +3050,15 @@ It includes:
 
 ### D.2. CTRF Document with Retries
 
-This example demonstrates how CTRF represents previous attempts and flaky tests.
+This example demonstrates how CTRF represents previous attempts and flaky test cases.
 
 It includes:
 
 - multiple test cases
 - previous attempts recorded in `retryAttempts`
-- a test that fails initially and passes on retry
-- a flaky test indicated by `flaky: true`
-- a final test status of `passed` after retries
+- a test case that fails initially and passes on retry
+- a flaky test case indicated by `flaky: true`
+- a final test case status of `passed` after retries
 
 ```json title="CTRF document with retries"
 {
@@ -3108,7 +3108,7 @@ It includes:
 
 ### D.3. CTRF Document with Diagnostics
 
-This example demonstrates how CTRF represents diagnostic information when a test fails.
+This example demonstrates how CTRF represents diagnostic information when a test case fails.
 
 It includes:
 
@@ -3275,7 +3275,7 @@ It includes:
 - tool metadata and versioning
 - summary statistics and timing data
 - multiple test cases
-- retries and flaky test behavior
+- retries and flaky test case behavior
 - diagnostic information (messages, traces, stdout, stderr)
 - base64-encoded screenshots
 - file-based attachments
@@ -3474,8 +3474,8 @@ This example demonstrates how producers SHOULD use namespaced extension keys wit
 
 Two producers contribute extensions in this example:
 
-- `myorg.ci` (the CI system) contributes extensions at the top level, `results`, `summary`, and per-test level — using the `myorg.ci` namespace key consistently throughout.
-- `acme.test-management` (a test management integration) contributes extensions at the per-test level only — using the `acme.test-management` namespace key consistently.
+- `myorg.ci` (the CI system) contributes extensions at the top level and within `results`, `summary`, and individual test objects — using the `myorg.ci` namespace key consistently throughout.
+- `acme.test-management` (a test management integration) contributes extensions within individual test objects only — using the `acme.test-management` namespace key consistently.
 
 The `ctrf.` and `ctrf/` namespace prefixes are reserved for CTRF-defined extensions and MUST NOT be used by other producers.
 
