@@ -48,6 +48,21 @@
       "description": "Parameterized cases have distinct case and execution identities",
       "valid": true,
       "dataPath": "../../examples/parameterized-cases.json"
+    },
+    {
+      "description": "Initial process report",
+      "valid": true,
+      "dataPath": "../../examples/coordinated-retry-initial.json"
+    },
+    {
+      "description": "Retry process report",
+      "valid": true,
+      "dataPath": "../../examples/coordinated-retry-rerun.json"
+    },
+    {
+      "description": "Merged coordinated retry report",
+      "valid": true,
+      "dataPath": "../../examples/coordinated-retry-merged.json"
     }
   ]
 }

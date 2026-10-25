@@ -560,6 +560,10 @@ If present, it MUST be a non-empty string.
 Producers SHOULD ensure that `runId` is unique across distinct logical runs.  
 Consumers MAY use `runId` to merge or correlate documents from the same logical run.
 
+A multi-project test invocation is one logical run when its modules are coordinated by that invocation. Its module processes and their retry processes contribute to the same run and SHOULD share a `runId`. Supplying a shared value from the coordinator enables correlation; omitting the optional field is valid when that context is unavailable.
+
+Raw retry-process reports and a report merging those attempts SHOULD share the same `runId`. They are distinct immutable report artifacts, with distinct `reportId` values when report identity is supplied. A shared `runId` does not by itself identify which artifacts a consumer should select for analysis. See Appendix D.8.
+
 ---
 
 ### 5.5. `timestamp`
@@ -937,7 +941,7 @@ Known attempts of one coordinated execution SHOULD share an `executionId`, inclu
 
 An independent execution of the same test case SHOULD have a different `executionId`. Merging reports does not itself establish that their executions are retries; that relationship comes from the coordinated workflow.
 
-`testId` identifies the case across runs, while `executionId` identifies one execution lifecycle, including its retries. See Appendix D.7 for parameterized cases.
+`testId` identifies the case across runs, while `executionId` identifies one execution lifecycle, including its retries. See Appendix D.7 for parameterized cases and Appendix D.8 for coordinated retry reports.
 
 ### 9.3.1. `attemptId`
 
@@ -971,7 +975,7 @@ It MUST be one of: `passed`, `failed`, `skipped`, `pending`, or `other`.
 ### 9.6. `duration`
 
 **Description:**  
-The total execution time for the test case.
+The execution time of the final attempt represented by this test object, including when previous attempts ran in separate processes and were combined into a merged result. Earlier attempts retain their own durations in `retryAttempts`; this field does not sum the attempt durations.
 
 **Requirements:**  
 `duration` MUST be present.  
@@ -2127,7 +2131,7 @@ to this specification.
       "minLength": 1
     },
     "runId": {
-      "description": "Identifier for the logical test run. Shared across shards/documents belonging to the same run",
+      "description": "Identifier for the logical test run. Shared across coordinated module, shard and retry-process reports, including their merged report when produced",
       "type": "string",
       "minLength": 1
     },
@@ -2274,7 +2278,7 @@ to this specification.
                 "enum": [ "passed", "failed", "skipped", "pending", "other" ]
               },
               "duration": {
-                "description": "Execution time of the test case (milliseconds)",
+                "description": "Execution time of the final attempt represented by the test object (milliseconds), not the sum of earlier attempts",
                 "type": "integer"
               },
               "start": {
@@ -3600,6 +3604,170 @@ This example matches `examples/parameterized-cases.json`.
         "parameters": {
           "username": "bob"
         }
+      }
+    ]
+  }
+}
+```
+
+
+### D.8. Coordinated Retry Reports
+
+A coordinator executes cases A and B. A passes; B fails. It then starts another process to retry only B, which passes. The two raw process reports are retained unchanged, and the coordinator produces a third, merged report.
+
+All three documents share one `runId` and have distinct `reportId` values. Case B retains one `testId` and `executionId` across processes; each attempt has its own `attemptId`. The merged result preserves those attempt identities.
+
+The raw reports contain the attempts observed by each process. The retry process need not repeat history it did not observe; its optional `retries`, `retryAttempts` and `flaky` fields are omitted here. The coordinator knows the relationship between the attempts and records that history in the merged report.
+
+The merged report contains two test results, rather than the three entries obtained by concatenating the raw reports. Case B's final duration is 150 ms, with the earlier 200 ms attempt in history, rather than a summed duration of 350 ms. It is flaky because it passed after a failed attempt.
+
+These are alternative views of the same coordinated execution, not three independent runs. Ingesting both raw reports and their merged result as independent results would double-count the attempts. Core CTRF does not yet standardize artifact-selection or merge-completeness metadata; schema validity alone does not establish that all expected inputs were supplied.
+
+Each block below matches its named standalone example.
+
+`examples/coordinated-retry-initial.json`:
+
+```json title="Initial process report"
+{
+  "reportFormat": "CTRF",
+  "specVersion": "0.2.0",
+  "reportId": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+  "runId": "coordinated-example-run",
+  "results": {
+    "tool": {
+      "name": "example-orchestrator"
+    },
+    "summary": {
+      "tests": 2,
+      "passed": 1,
+      "failed": 1,
+      "skipped": 0,
+      "pending": 0,
+      "other": 0,
+      "start": 1700000000000,
+      "stop": 1700000000300
+    },
+    "tests": [
+      {
+        "name": "case A",
+        "testId": "case-a",
+        "executionId": "execution-a",
+        "attemptId": "11111111-1111-4111-8111-111111111111",
+        "status": "passed",
+        "duration": 100,
+        "start": 1700000000000,
+        "stop": 1700000000100
+      },
+      {
+        "name": "case B",
+        "testId": "case-b",
+        "executionId": "execution-b",
+        "attemptId": "22222222-2222-4222-8222-222222222222",
+        "status": "failed",
+        "duration": 200,
+        "start": 1700000000100,
+        "stop": 1700000000300,
+        "message": "Expected response was unavailable"
+      }
+    ]
+  }
+}
+```
+
+`examples/coordinated-retry-rerun.json`:
+
+```json title="Retry process report"
+{
+  "reportFormat": "CTRF",
+  "specVersion": "0.2.0",
+  "reportId": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+  "runId": "coordinated-example-run",
+  "results": {
+    "tool": {
+      "name": "example-orchestrator"
+    },
+    "summary": {
+      "tests": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "pending": 0,
+      "other": 0,
+      "start": 1700000000400,
+      "stop": 1700000000550
+    },
+    "tests": [
+      {
+        "name": "case B",
+        "testId": "case-b",
+        "executionId": "execution-b",
+        "attemptId": "33333333-3333-4333-8333-333333333333",
+        "status": "passed",
+        "duration": 150,
+        "start": 1700000000400,
+        "stop": 1700000000550
+      }
+    ]
+  }
+}
+```
+
+`examples/coordinated-retry-merged.json`:
+
+```json title="Merged coordinated retry report"
+{
+  "reportFormat": "CTRF",
+  "specVersion": "0.2.0",
+  "reportId": "cccccccc-cccc-4ccc-8ccc-cccccccccccc",
+  "runId": "coordinated-example-run",
+  "results": {
+    "tool": {
+      "name": "example-orchestrator"
+    },
+    "summary": {
+      "tests": 2,
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "pending": 0,
+      "other": 0,
+      "start": 1700000000000,
+      "stop": 1700000000550,
+      "flaky": 1
+    },
+    "tests": [
+      {
+        "name": "case A",
+        "testId": "case-a",
+        "executionId": "execution-a",
+        "attemptId": "11111111-1111-4111-8111-111111111111",
+        "status": "passed",
+        "duration": 100,
+        "start": 1700000000000,
+        "stop": 1700000000100
+      },
+      {
+        "name": "case B",
+        "testId": "case-b",
+        "executionId": "execution-b",
+        "attemptId": "33333333-3333-4333-8333-333333333333",
+        "status": "passed",
+        "duration": 150,
+        "start": 1700000000400,
+        "stop": 1700000000550,
+        "retries": 1,
+        "flaky": true,
+        "retryAttempts": [
+          {
+            "attempt": 1,
+            "attemptId": "22222222-2222-4222-8222-222222222222",
+            "status": "failed",
+            "duration": 200,
+            "start": 1700000000100,
+            "stop": 1700000000300,
+            "message": "Expected response was unavailable"
+          }
+        ]
       }
     ]
   }
