@@ -311,7 +311,7 @@ The last execution of a test case. Its outcome and execution data are represente
 **Retry History**:  
 The ordered previous attempts recorded in `retryAttempts`. Despite the field name, this history includes the initial attempt when a retry occurred and excludes the final attempt represented by the test object.
 
-**Flaky Test Case**:\
+**Flaky Test Case**:  
 A test case is considered flaky only if its final status is `passed` and it experienced one or more failed attempts before passing.
 
 **Environment**:  
