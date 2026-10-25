@@ -2421,7 +2421,32 @@ to this specification.
                 "type": "array",
                 "minItems": 1,
                 "items": {
-                  "$ref": "#/definitions/assertionFailure"
+                  "description": "Details of an individual assertion failure",
+                  "type": "object",
+                  "minProperties": 1,
+                  "properties": {
+                    "message": {
+                      "description": "Message associated with this assertion failure",
+                      "type": "string"
+                    },
+                    "trace": {
+                      "description": "Stack trace associated with this assertion failure",
+                      "type": "string"
+                    },
+                    "expected": {
+                      "description": "Producer-formatted expected value",
+                      "type": "string"
+                    },
+                    "actual": {
+                      "description": "Producer-formatted actual value",
+                      "type": "string"
+                    },
+                    "extra": {
+                      "description": "Extension point for arbitrary metadata",
+                      "type": "object"
+                    }
+                  },
+                  "additionalProperties": false
                 }
               },
               "snippet": {
@@ -2541,7 +2566,32 @@ to this specification.
                       "type": "array",
                       "minItems": 1,
                       "items": {
-                        "$ref": "#/definitions/assertionFailure"
+                        "description": "Details of an individual assertion failure",
+                        "type": "object",
+                        "minProperties": 1,
+                        "properties": {
+                          "message": {
+                            "description": "Message associated with this assertion failure",
+                            "type": "string"
+                          },
+                          "trace": {
+                            "description": "Stack trace associated with this assertion failure",
+                            "type": "string"
+                          },
+                          "expected": {
+                            "description": "Producer-formatted expected value",
+                            "type": "string"
+                          },
+                          "actual": {
+                            "description": "Producer-formatted actual value",
+                            "type": "string"
+                          },
+                          "extra": {
+                            "description": "Extension point for arbitrary metadata",
+                            "type": "object"
+                          }
+                        },
+                        "additionalProperties": false
                       }
                     },
                     "line": {
@@ -2932,34 +2982,6 @@ to this specification.
   },
   "additionalProperties": false,
   "definitions": {
-    "assertionFailure": {
-      "description": "Details of an individual assertion failure",
-      "type": "object",
-      "minProperties": 1,
-      "properties": {
-        "message": {
-          "description": "Message associated with this assertion failure",
-          "type": "string"
-        },
-        "trace": {
-          "description": "Stack trace associated with this assertion failure",
-          "type": "string"
-        },
-        "expected": {
-          "description": "Producer-formatted expected value",
-          "type": "string"
-        },
-        "actual": {
-          "description": "Producer-formatted actual value",
-          "type": "string"
-        },
-        "extra": {
-          "description": "Extension point for arbitrary metadata",
-          "type": "object"
-        }
-      },
-      "additionalProperties": false
-    },
     "metricDelta": {
       "description": "Metric value with baseline comparison",
       "type": "object",
