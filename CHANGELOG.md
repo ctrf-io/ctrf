@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Defined parameterized test cases and consistently distinguished test cases, test objects, and executions throughout the specification and schema descriptions without changing execution or retry semantics.
+
 - Updated UUID references to RFC 9562 and clarified optional deterministic UUID generation for `testId`.
 
 ## [0.2.0] - 2026-10-10
