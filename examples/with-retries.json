@@ -50,6 +50,12 @@
           }
         ]
       }
+    ],
+    "errors": [
+      {
+        "message": "Shared teardown failed",
+        "trace": "Error: Database cleanup failed\n    at cleanup.js:24:5"
+      }
     ]
   }
 }

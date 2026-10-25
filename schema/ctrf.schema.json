@@ -672,6 +672,31 @@
           },
           "additionalProperties": false
         },
+        "errors": {
+          "description": "Global errors associated with the test run",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "description": "Details of a global error",
+            "type": "object",
+            "minProperties": 1,
+            "properties": {
+              "message": {
+                "description": "Message associated with this global error",
+                "type": "string"
+              },
+              "trace": {
+                "description": "Stack trace associated with this global error",
+                "type": "string"
+              },
+              "extra": {
+                "description": "Extension point for arbitrary metadata",
+                "type": "object"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
         "extra": {
           "description": "Extension point for arbitrary metadata",
           "type": "object"

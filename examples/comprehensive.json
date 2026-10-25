@@ -222,6 +222,12 @@
         }
       }
     ],
+    "errors": [
+      {
+        "message": "Worker cleanup failed",
+        "trace": "Error: Worker cleanup failed\n    at worker.js:18:5"
+      }
+    ],
     "environment": {
       "reportName": "PR #123 E2E Tests",
       "appName": "example-app",
