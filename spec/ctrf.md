@@ -1154,8 +1154,9 @@ If present, it MUST be a boolean.
 Lines of standard output generated during test execution.
 
 **Requirements:**  
-`stdout` is OPTIONAL.  
-If present, it MUST be an array of strings.
+`stdout` is OPTIONAL.
+If present, it MUST be an array of strings, with one entry per output line.
+If no output was captured, producers MAY omit `stdout` or emit an empty array.
 
 ### 9.24. `stderr`
 
@@ -1163,8 +1164,9 @@ If present, it MUST be an array of strings.
 Lines of standard error output generated during test execution.
 
 **Requirements:**  
-`stderr` is OPTIONAL.  
-If present, it MUST be an array of strings.
+`stderr` is OPTIONAL.
+If present, it MUST be an array of strings, with one entry per output line.
+If no output was captured, producers MAY omit `stderr` or emit an empty array.
 
 ### 9.25. `threadId`
 
@@ -1540,8 +1542,9 @@ If present, it MUST be a string.
 A list of standard output lines captured during the attempt.
 
 **Requirements:**  
-`stdout` is OPTIONAL.  
-If present, it MUST be an array of strings.
+`stdout` is OPTIONAL.
+If present, it MUST be an array of strings, with one entry per output line.
+If no output was captured, producers MAY omit `stdout` or emit an empty array.
 
 ### 11.10. `stderr`
 
@@ -1549,8 +1552,9 @@ If present, it MUST be an array of strings.
 A list of standard error lines captured during the attempt.
 
 **Requirements:**  
-`stderr` is OPTIONAL.  
-If present, it MUST be an array of strings.
+`stderr` is OPTIONAL.
+If present, it MUST be an array of strings, with one entry per output line.
+If no output was captured, producers MAY omit `stderr` or emit an empty array.
 
 ### 11.11. `start`
 
@@ -2432,14 +2436,14 @@ to this specification.
                       "type": "string"
                     },
                     "stdout": {
-                      "description": "Standard output lines from this attempt",
+                      "description": "Standard output from this attempt, one string per output line",
                       "type": "array",
                       "items": {
                         "type": "string"
                       }
                     },
                     "stderr": {
-                      "description": "Standard error lines from this attempt",
+                      "description": "Standard error from this attempt, one string per output line",
                       "type": "array",
                       "items": {
                         "type": "string"
@@ -2499,14 +2503,14 @@ to this specification.
                 "type": "boolean"
               },
               "stdout": {
-                "description": "Standard output lines from test execution",
+                "description": "Standard output, one string per output line",
                 "type": "array",
                 "items": {
                   "type": "string"
                 }
               },
               "stderr": {
-                "description": "Standard error lines from test execution",
+                "description": "Standard error, one string per output line",
                 "type": "array",
                 "items": {
                   "type": "string"
