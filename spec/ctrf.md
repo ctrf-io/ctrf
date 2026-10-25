@@ -965,6 +965,17 @@ The name or title of the test case.
 `name` MUST be present.  
 It MUST be a non-empty string.
 
+### 9.4.1. `description`
+
+**Description:**
+A human-readable description of the test case, such as its purpose or the behavior it checks.
+
+`name` remains the case's primary display name, and `suite` describes its grouping hierarchy. `description` provides additional context; attempt-specific failure diagnostics belong in `message` and `trace`.
+
+**Requirements:**
+`description` is OPTIONAL.
+If present, it MUST be a string.
+
 ### 9.5. `status`
 
 **Description:**  
@@ -2282,6 +2293,10 @@ to this specification.
                 "description": "Name or title of the test case",
                 "type": "string",
                 "minLength": 1
+              },
+              "description": {
+                "description": "Human-readable description of the test case",
+                "type": "string"
               },
               "status": {
                 "description": "Final outcome of the test case",

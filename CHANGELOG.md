@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Optional Test `description` in specification 0.3.0 for human-readable case context, separate from its name, suite and attempt diagnostics.
+
 ### Changed
 
 - Clarified output-line arrays and valid omission or empty arrays when no stdout or stderr was captured, on final results and previous attempts.
