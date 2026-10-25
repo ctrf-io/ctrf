@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Defined parameterized test cases and clarified test-case terminology without changing execution or retry semantics.
 
-- Clarified deterministic `testId` guidance for UUID version 5 and documented name-based UUID version 8 schemes using RFC 9562.
+- Updated UUID references to RFC 9562 and clarified optional deterministic UUID generation for `testId`.
 
 ## [0.2.0] - 2026-10-10
 
