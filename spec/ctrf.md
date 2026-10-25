@@ -1633,10 +1633,12 @@ The specification does not impose any particular URI or path semantics.
 Consumers MUST treat attachment paths as opaque references and MUST NOT assume
 local filesystem access unless explicitly documented by the producer.
 
+When both a durable artifact reference and a producer-local path are available, producers SHOULD prefer the durable reference in `path`. The original local path MAY be retained in producer-namespaced attachment `extra` when useful. A local file path remains valid when no durable reference is available; producers are not required to upload attachments.
+
 ### 12.4. `attachmentId`
 
 **Description:**  
-A unique identifier for this attachment reference instance.
+A unique identifier for this attachment reference instance. It is not a content digest and MUST NOT be interpreted as one.
 
 **Requirements:**  
 `attachmentId` is OPTIONAL.  
@@ -1653,6 +1655,8 @@ An extensibility object containing arbitrary metadata.
 `extra` is OPTIONAL.  
 It MAY contain arbitrary fields.  
 It is the ONLY permitted extension point directly under an attachment object.
+
+Producer-specific original local paths and content-digest metadata MAY be carried in producer-namespaced objects here. CTRF does not standardize their keys or value structure. Producers carrying digest metadata SHOULD document its algorithm and encoding.
 
 ---
 
@@ -2469,7 +2473,7 @@ to this specification.
                             "type": "string"
                           },
                           "path": {
-                            "description": "Path or URI to the attachment",
+                            "description": "Opaque reference to the attachment (URL or file path)",
                             "type": "string"
                           },
                           "extra": {
@@ -2544,7 +2548,7 @@ to this specification.
                       "type": "string"
                     },
                     "path": {
-                      "description": "Path or URI to the attachment",
+                      "description": "Opaque reference to the attachment (URL or file path)",
                       "type": "string"
                     },
                     "extra": {
