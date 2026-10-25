@@ -350,7 +350,7 @@
                         "required": [ "name", "contentType", "path" ],
                         "properties": {
                           "attachmentId": {
-                            "description": "Unique identifier for this attachment reference instance, not a content digest. UUID recommended",
+                            "description": "Unique identifier for this attachment reference instance. UUID recommended",
                             "type": "string",
                             "minLength": 1
                           },
@@ -363,7 +363,7 @@
                             "type": "string"
                           },
                           "path": {
-                            "description": "Opaque attachment reference (URL or file path). Prefer a durable reference when available; an original local path may be retained in producer-namespaced extra. Uploading is not required",
+                            "description": "Opaque reference to the attachment (URL or file path)",
                             "type": "string"
                           },
                           "extra": {
@@ -425,7 +425,7 @@
                   "required": [ "name", "contentType", "path" ],
                   "properties": {
                     "attachmentId": {
-                      "description": "Unique identifier for this attachment reference instance, not a content digest. UUID recommended",
+                      "description": "Unique identifier for this attachment reference instance. UUID recommended",
                       "type": "string",
                       "minLength": 1
                     },
@@ -438,7 +438,7 @@
                       "type": "string"
                     },
                     "path": {
-                      "description": "Opaque attachment reference (URL or file path). Prefer a durable reference when available; an original local path may be retained in producer-namespaced extra. Uploading is not required",
+                      "description": "Opaque reference to the attachment (URL or file path)",
                       "type": "string"
                     },
                     "extra": {

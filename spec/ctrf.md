@@ -1673,7 +1673,7 @@ An extensibility object containing arbitrary metadata.
 It MAY contain arbitrary fields.  
 It is the ONLY permitted extension point directly under an attachment object.
 
-Producer-specific original local paths and content-digest metadata MAY be carried in producer-namespaced objects here. CTRF does not standardize their keys or value structure. Producers carrying digest metadata SHOULD document its algorithm and encoding. See Appendix D.9 for an example on both the final result and a previous attempt.
+Producer-specific original local paths and content-digest metadata MAY be carried in producer-namespaced objects here. CTRF does not standardize their keys or value structure. Producers carrying digest metadata SHOULD document its algorithm and encoding.
 
 ---
 
@@ -2481,7 +2481,7 @@ to this specification.
                         "required": [ "name", "contentType", "path" ],
                         "properties": {
                           "attachmentId": {
-                            "description": "Unique identifier for this attachment reference instance, not a content digest. UUID recommended",
+                            "description": "Unique identifier for this attachment reference instance. UUID recommended",
                             "type": "string",
                             "minLength": 1
                           },
@@ -2494,7 +2494,7 @@ to this specification.
                             "type": "string"
                           },
                           "path": {
-                            "description": "Opaque attachment reference (URL or file path). Prefer a durable reference when available; an original local path may be retained in producer-namespaced extra. Uploading is not required",
+                            "description": "Opaque reference to the attachment (URL or file path)",
                             "type": "string"
                           },
                           "extra": {
@@ -2556,7 +2556,7 @@ to this specification.
                   "required": [ "name", "contentType", "path" ],
                   "properties": {
                     "attachmentId": {
-                      "description": "Unique identifier for this attachment reference instance, not a content digest. UUID recommended",
+                      "description": "Unique identifier for this attachment reference instance. UUID recommended",
                       "type": "string",
                       "minLength": 1
                     },
@@ -2569,7 +2569,7 @@ to this specification.
                       "type": "string"
                     },
                     "path": {
-                      "description": "Opaque attachment reference (URL or file path). Prefer a durable reference when available; an original local path may be retained in producer-namespaced extra. Uploading is not required",
+                      "description": "Opaque reference to the attachment (URL or file path)",
                       "type": "string"
                     },
                     "extra": {
@@ -3800,88 +3800,7 @@ Each block below matches its named standalone example.
 ```
 
 
-### D.9. Portable Attachment References
-
-The final result and previous attempt use durable artifact references in `path`, with their original local paths and digests under the producer-owned `example.reporter` namespace. The `localPath` and `digest` structures shown here are illustrative producer-defined metadata, not standardized CTRF fields. The producer documents SHA-256 with hexadecimal encoding for this example.
-
-This example matches `examples/portable-attachments.json`.
-
-```json title="Portable attachment references"
-{
-  "reportFormat": "CTRF",
-  "specVersion": "0.3.0",
-  "results": {
-    "tool": {
-      "name": "example-runner"
-    },
-    "summary": {
-      "tests": 1,
-      "passed": 1,
-      "failed": 0,
-      "skipped": 0,
-      "pending": 0,
-      "other": 0,
-      "flaky": 1,
-      "start": 1700000000000,
-      "stop": 1700000000300
-    },
-    "tests": [
-      {
-        "name": "request succeeds after retry",
-        "status": "passed",
-        "duration": 100,
-        "retries": 1,
-        "flaky": true,
-        "attachments": [
-          {
-            "name": "retry.log",
-            "contentType": "text/plain",
-            "path": "https://artifacts.example.com/run-42/retry.log",
-            "extra": {
-              "example.reporter": {
-                "localPath": "/work/results/retry.log",
-                "digest": {
-                  "algorithm": "sha256",
-                  "encoding": "hex",
-                  "value": "385c7da7a539a88aafb70a49549d3642a4e52c0fb23cf58e80f1b5e82e69bc67"
-                }
-              }
-            }
-          }
-        ],
-        "retryAttempts": [
-          {
-            "attempt": 1,
-            "status": "failed",
-            "duration": 200,
-            "message": "Request timed out",
-            "attachments": [
-              {
-                "name": "initial.log",
-                "contentType": "text/plain",
-                "path": "https://artifacts.example.com/run-42/initial.log",
-                "extra": {
-                  "example.reporter": {
-                    "localPath": "/work/results/initial.log",
-                    "digest": {
-                      "algorithm": "sha256",
-                      "encoding": "hex",
-                      "value": "fe37d563cf87595eb141374a73f3f5e88cf7f097d56eebc2c34e766bdc66f7c7"
-                    }
-                  }
-                }
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
-}
-```
-
-
-### D.10. Test Case Description
+### D.9. Test Case Description
 
 `name` is the case's primary display name, `suite` is its grouping hierarchy, and `description` provides additional human-readable context. No description is required, and it does not replace failure diagnostics.
 

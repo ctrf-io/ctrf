@@ -210,11 +210,6 @@
       "dataPath": "../examples/coordinated-retry-merged.json"
     },
     {
-      "description": "Durable attachment references with producer-defined local paths and digests",
-      "valid": true,
-      "dataPath": "../examples/portable-attachments.json"
-    },
-    {
       "description": "Test case with an optional human-readable description",
       "valid": true,
       "dataPath": "../examples/with-description.json"
