@@ -885,7 +885,7 @@ Each field within the test object is described in the subsections below.
 
 ### 9.1. `id`
 
-> **Legacy.** `id` is retained for backward compatibility. New producers SHOULD prefer `testId` (Section 9.2).
+> **Deprecated.** `id` is retained for backward compatibility and is scheduled for removal in CTRF 1.0.0. Producers SHOULD use `testId` (Section 9.2) instead when providing test-case identity; `testId` remains OPTIONAL.
 
 **Description:**  
 A unique, stable identifier for the test case.
@@ -895,7 +895,9 @@ A unique, stable identifier for the test case.
 If present, it MUST be a valid UUID as defined in [RFC9562].  
 Producers SHOULD prefer `testId` for new implementations.  
 When both `id` and `testId` are present, consumers SHOULD use `testId`.
-Consumers SHOULD treat `id` as legacy unless a producer documents stronger semantics.
+Consumers SHOULD treat `id` as legacy.
+
+Migration follows the document's declared specification version. Reports declaring CTRF 1.0.0 will be required to omit `id`; producers emitting earlier specification versions can continue to follow those versions' contracts. Consumers reading those earlier reports SHOULD use `testId` in preference to `id` when both are present. This deprecation notice does not remove `id` from the current schema or require producers to supply `testId`.
 
 ### 9.2. `testId`
 
@@ -2252,7 +2254,7 @@ to this specification.
             "required": [ "name", "status", "duration" ],
             "properties": {
               "id": {
-                "description": "Legacy identifier for the test case (UUID). New producers should prefer testId",
+                "description": "Deprecated test-case identifier (UUID), scheduled for removal in CTRF 1.0.0. Still accepted in this version; prefer optional testId when providing case identity",
                 "type": "string",
                 "format": "uuid",
                 "minLength": 1

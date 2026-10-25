@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Documented legacy `id` removal in 1.0.0 and version-based migration while retaining current acceptance and optional `testId`.
+
 - Clarified durable attachment references, optional producer-local paths and producer-defined digest metadata.
 
 - Added coordinated cross-process retry examples and clarified logical-run correlation and final-attempt duration.
