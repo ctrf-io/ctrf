@@ -188,6 +188,11 @@
           "tests": [{ "name": "test", "status": "passed", "duration": 100 }]
         }
       }
+    },
+    {
+      "description": "Parameterized cases have distinct case and execution identities",
+      "valid": true,
+      "dataPath": "../examples/parameterized-cases.json"
     }
   ]
 }
