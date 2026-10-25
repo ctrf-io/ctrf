@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Clarified parameterized case identity, rename and path scopes, and execution identity across coordinated retry processes.
 
-- Defined parameterized test cases and clarified test-case terminology without changing execution or retry semantics.
+- Defined parameterized test cases and consistently distinguished test cases, test objects, and executions throughout the specification and schema descriptions without changing execution or retry semantics.
 
 - Updated UUID references to RFC 9562 and clarified optional deterministic UUID generation for `testId`.
 
