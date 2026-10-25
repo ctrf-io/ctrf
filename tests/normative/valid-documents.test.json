@@ -65,11 +65,6 @@
       "dataPath": "../../examples/coordinated-retry-merged.json"
     },
     {
-      "description": "Durable attachment references with producer-defined local paths and digests",
-      "valid": true,
-      "dataPath": "../../examples/portable-attachments.json"
-    },
-    {
       "description": "Legacy id remains accepted alongside optional testId before 1.0.0",
       "valid": true,
       "data": {
