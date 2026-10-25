@@ -159,12 +159,7 @@
             "message": "Metrics should be visible",
             "trace": "Error: Metrics should be visible\n    at dashboard.test.js:42:5",
             "expected": "visible",
-            "actual": "hidden",
-            "extra": {
-              "myorg.assertions": {
-                "matcher": "toBeVisible"
-              }
-            }
+            "actual": "hidden"
           },
           {
             "message": "Dashboard title should match",
