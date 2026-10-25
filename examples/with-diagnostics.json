@@ -23,6 +23,12 @@
         "duration": 5000,
         "message": "Expected element to be visible",
         "trace": "Error: Expected element to be visible\n    at checkVisibility (test.js:45:10)\n    at Object.<anonymous> (test.js:12:5)",
+        "assertionFailures": [
+          {
+            "expected": "visible",
+            "actual": "hidden"
+          }
+        ],
         "screenshot": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==",
         "stdout": [
           "Starting test execution",

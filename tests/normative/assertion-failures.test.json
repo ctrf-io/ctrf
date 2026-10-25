@@ -1,0 +1,838 @@
+{
+  "target": "../../schema/ctrf.schema.json",
+  "$comment": "Normative assertion failure shapes on final results and earlier attempts; source attribution requires producer evidence.",
+  "tests": [
+    {
+      "description": "Final assertion failures: omitted collection",
+      "valid": true,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 0, "failed": 1, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10},
+          "tests": [{"name": "case", "status": "failed", "duration": 1}]
+        }
+      }
+    },
+    {
+      "description": "Final assertion failures: comparison without entry diagnostics",
+      "valid": true,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 0, "failed": 1, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10},
+          "tests": [{"name": "case", "status": "failed", "duration": 1, "assertionFailures": [{"expected": "5", "actual": "2"}]}]
+        }
+      }
+    },
+    {
+      "description": "Final assertion failures: expected only",
+      "valid": true,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 0, "failed": 1, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10},
+          "tests": [{"name": "case", "status": "failed", "duration": 1, "assertionFailures": [{"expected": "5"}]}]
+        }
+      }
+    },
+    {
+      "description": "Final assertion failures: actual only",
+      "valid": true,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 0, "failed": 1, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10},
+          "tests": [{"name": "case", "status": "failed", "duration": 1, "assertionFailures": [{"actual": "2"}]}]
+        }
+      }
+    },
+    {
+      "description": "Final assertion failures: genuine empty comparison strings",
+      "valid": true,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 0, "failed": 1, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10},
+          "tests": [{"name": "case", "status": "failed", "duration": 1, "assertionFailures": [{"expected": "", "actual": ""}]}]
+        }
+      }
+    },
+    {
+      "description": "Final assertion failures: message-only non-comparison assertion",
+      "valid": true,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 0, "failed": 1, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10},
+          "tests": [{"name": "case", "status": "failed", "duration": 1, "assertionFailures": [{"message": "Expected operation to throw"}]}]
+        }
+      }
+    },
+    {
+      "description": "Final assertion failures: trace only",
+      "valid": true,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 0, "failed": 1, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10},
+          "tests": [{"name": "case", "status": "failed", "duration": 1, "assertionFailures": [{"trace": "at test.js:12"}]}]
+        }
+      }
+    },
+    {
+      "description": "Final assertion failures: empty diagnostics remain strings",
+      "valid": true,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 0, "failed": 1, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10},
+          "tests": [{"name": "case", "status": "failed", "duration": 1, "assertionFailures": [{"message": "", "trace": ""}]}]
+        }
+      }
+    },
+    {
+      "description": "Final assertion failures: producer-namespaced extra only",
+      "valid": true,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 0, "failed": 1, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10},
+          "tests": [{"name": "case", "status": "failed", "duration": 1, "assertionFailures": [{"extra": {"myReporter": {"matcher": "custom"}}}]}]
+        }
+      }
+    },
+    {
+      "description": "Final assertion failures: empty extra object only",
+      "valid": true,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 0, "failed": 1, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10},
+          "tests": [{"name": "case", "status": "failed", "duration": 1, "assertionFailures": [{"extra": {}}]}]
+        }
+      }
+    },
+    {
+      "description": "Final assertion failures: multiple failures with independent fields",
+      "valid": true,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 0, "failed": 1, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10},
+          "tests": [{"name": "case", "status": "failed", "duration": 1, "assertionFailures": [{"message": "First", "expected": "5", "actual": "2", "trace": "at test.js:12", "extra": {"myReporter": {"matcher": "equal"}}}, {"message": "Second assertion"}]}]
+        }
+      }
+    },
+    {
+      "description": "Final assertion failures: empty collection",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 0, "failed": 1, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10},
+          "tests": [{"name": "case", "status": "failed", "duration": 1, "assertionFailures": []}]
+        }
+      }
+    },
+    {
+      "description": "Final assertion failures: null collection",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 0, "failed": 1, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10},
+          "tests": [{"name": "case", "status": "failed", "duration": 1, "assertionFailures": null}]
+        }
+      }
+    },
+    {
+      "description": "Final assertion failures: object instead of collection",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 0, "failed": 1, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10},
+          "tests": [{"name": "case", "status": "failed", "duration": 1, "assertionFailures": {"expected": "5"}}]
+        }
+      }
+    },
+    {
+      "description": "Final assertion failures: string instead of collection",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 0, "failed": 1, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10},
+          "tests": [{"name": "case", "status": "failed", "duration": 1, "assertionFailures": "failure"}]
+        }
+      }
+    },
+    {
+      "description": "Final assertion failures: empty entry",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 0, "failed": 1, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10},
+          "tests": [{"name": "case", "status": "failed", "duration": 1, "assertionFailures": [{}]}]
+        }
+      }
+    },
+    {
+      "description": "Final assertion failures: null entry",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 0, "failed": 1, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10},
+          "tests": [{"name": "case", "status": "failed", "duration": 1, "assertionFailures": [null]}]
+        }
+      }
+    },
+    {
+      "description": "Final assertion failures: array entry",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 0, "failed": 1, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10},
+          "tests": [{"name": "case", "status": "failed", "duration": 1, "assertionFailures": [[]]}]
+        }
+      }
+    },
+    {
+      "description": "Final assertion failures: string entry",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 0, "failed": 1, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10},
+          "tests": [{"name": "case", "status": "failed", "duration": 1, "assertionFailures": ["failure"]}]
+        }
+      }
+    },
+    {
+      "description": "Final assertion failures: unknown direct field",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 0, "failed": 1, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10},
+          "tests": [{"name": "case", "status": "failed", "duration": 1, "assertionFailures": [{"expected": "5", "matcher": "equal"}]}]
+        }
+      }
+    },
+    {
+      "description": "Final assertion failures: unknown-only entry",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 0, "failed": 1, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10},
+          "tests": [{"name": "case", "status": "failed", "duration": 1, "assertionFailures": [{"matcher": "equal"}]}]
+        }
+      }
+    },
+    {
+      "description": "Final assertion failures: message rejects null",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 0, "failed": 1, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10},
+          "tests": [{"name": "case", "status": "failed", "duration": 1, "assertionFailures": [{"message": null}]}]
+        }
+      }
+    },
+    {
+      "description": "Final assertion failures: message rejects array",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 0, "failed": 1, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10},
+          "tests": [{"name": "case", "status": "failed", "duration": 1, "assertionFailures": [{"message": []}]}]
+        }
+      }
+    },
+    {
+      "description": "Final assertion failures: trace rejects null",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 0, "failed": 1, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10},
+          "tests": [{"name": "case", "status": "failed", "duration": 1, "assertionFailures": [{"trace": null}]}]
+        }
+      }
+    },
+    {
+      "description": "Final assertion failures: trace rejects object",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 0, "failed": 1, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10},
+          "tests": [{"name": "case", "status": "failed", "duration": 1, "assertionFailures": [{"trace": {}}]}]
+        }
+      }
+    },
+    {
+      "description": "Final assertion failures: expected rejects null",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 0, "failed": 1, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10},
+          "tests": [{"name": "case", "status": "failed", "duration": 1, "assertionFailures": [{"expected": null}]}]
+        }
+      }
+    },
+    {
+      "description": "Final assertion failures: expected rejects number",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 0, "failed": 1, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10},
+          "tests": [{"name": "case", "status": "failed", "duration": 1, "assertionFailures": [{"expected": 5}]}]
+        }
+      }
+    },
+    {
+      "description": "Final assertion failures: actual rejects null",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 0, "failed": 1, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10},
+          "tests": [{"name": "case", "status": "failed", "duration": 1, "assertionFailures": [{"actual": null}]}]
+        }
+      }
+    },
+    {
+      "description": "Final assertion failures: actual rejects boolean",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 0, "failed": 1, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10},
+          "tests": [{"name": "case", "status": "failed", "duration": 1, "assertionFailures": [{"actual": false}]}]
+        }
+      }
+    },
+    {
+      "description": "Final assertion failures: extra rejects null",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 0, "failed": 1, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10},
+          "tests": [{"name": "case", "status": "failed", "duration": 1, "assertionFailures": [{"extra": null}]}]
+        }
+      }
+    },
+    {
+      "description": "Final assertion failures: extra rejects array",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 0, "failed": 1, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10},
+          "tests": [{"name": "case", "status": "failed", "duration": 1, "assertionFailures": [{"extra": []}]}]
+        }
+      }
+    },
+    {
+      "description": "Final assertion failures: extra rejects string",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 0, "failed": 1, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10},
+          "tests": [{"name": "case", "status": "failed", "duration": 1, "assertionFailures": [{"extra": "metadata"}]}]
+        }
+      }
+    },
+    {
+      "description": "History assertion failures: omitted collection",
+      "valid": true,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10, "flaky": 1},
+          "tests": [{"name": "case", "status": "passed", "duration": 1, "flaky": true, "retries": 1, "retryAttempts": [{"attempt": 1, "status": "failed", "duration": 1}]}]
+        }
+      }
+    },
+    {
+      "description": "History assertion failures: comparison without entry diagnostics",
+      "valid": true,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10, "flaky": 1},
+          "tests": [{"name": "case", "status": "passed", "duration": 1, "flaky": true, "retries": 1, "retryAttempts": [{"attempt": 1, "status": "failed", "duration": 1, "assertionFailures": [{"expected": "5", "actual": "2"}]}]}]
+        }
+      }
+    },
+    {
+      "description": "History assertion failures: expected only",
+      "valid": true,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10, "flaky": 1},
+          "tests": [{"name": "case", "status": "passed", "duration": 1, "flaky": true, "retries": 1, "retryAttempts": [{"attempt": 1, "status": "failed", "duration": 1, "assertionFailures": [{"expected": "5"}]}]}]
+        }
+      }
+    },
+    {
+      "description": "History assertion failures: actual only",
+      "valid": true,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10, "flaky": 1},
+          "tests": [{"name": "case", "status": "passed", "duration": 1, "flaky": true, "retries": 1, "retryAttempts": [{"attempt": 1, "status": "failed", "duration": 1, "assertionFailures": [{"actual": "2"}]}]}]
+        }
+      }
+    },
+    {
+      "description": "History assertion failures: genuine empty comparison strings",
+      "valid": true,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10, "flaky": 1},
+          "tests": [{"name": "case", "status": "passed", "duration": 1, "flaky": true, "retries": 1, "retryAttempts": [{"attempt": 1, "status": "failed", "duration": 1, "assertionFailures": [{"expected": "", "actual": ""}]}]}]
+        }
+      }
+    },
+    {
+      "description": "History assertion failures: message-only non-comparison assertion",
+      "valid": true,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10, "flaky": 1},
+          "tests": [{"name": "case", "status": "passed", "duration": 1, "flaky": true, "retries": 1, "retryAttempts": [{"attempt": 1, "status": "failed", "duration": 1, "assertionFailures": [{"message": "Expected operation to throw"}]}]}]
+        }
+      }
+    },
+    {
+      "description": "History assertion failures: trace only",
+      "valid": true,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10, "flaky": 1},
+          "tests": [{"name": "case", "status": "passed", "duration": 1, "flaky": true, "retries": 1, "retryAttempts": [{"attempt": 1, "status": "failed", "duration": 1, "assertionFailures": [{"trace": "at test.js:12"}]}]}]
+        }
+      }
+    },
+    {
+      "description": "History assertion failures: empty diagnostics remain strings",
+      "valid": true,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10, "flaky": 1},
+          "tests": [{"name": "case", "status": "passed", "duration": 1, "flaky": true, "retries": 1, "retryAttempts": [{"attempt": 1, "status": "failed", "duration": 1, "assertionFailures": [{"message": "", "trace": ""}]}]}]
+        }
+      }
+    },
+    {
+      "description": "History assertion failures: producer-namespaced extra only",
+      "valid": true,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10, "flaky": 1},
+          "tests": [{"name": "case", "status": "passed", "duration": 1, "flaky": true, "retries": 1, "retryAttempts": [{"attempt": 1, "status": "failed", "duration": 1, "assertionFailures": [{"extra": {"myReporter": {"matcher": "custom"}}}]}]}]
+        }
+      }
+    },
+    {
+      "description": "History assertion failures: empty extra object only",
+      "valid": true,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10, "flaky": 1},
+          "tests": [{"name": "case", "status": "passed", "duration": 1, "flaky": true, "retries": 1, "retryAttempts": [{"attempt": 1, "status": "failed", "duration": 1, "assertionFailures": [{"extra": {}}]}]}]
+        }
+      }
+    },
+    {
+      "description": "History assertion failures: multiple failures with independent fields",
+      "valid": true,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10, "flaky": 1},
+          "tests": [{"name": "case", "status": "passed", "duration": 1, "flaky": true, "retries": 1, "retryAttempts": [{"attempt": 1, "status": "failed", "duration": 1, "assertionFailures": [{"message": "First", "expected": "5", "actual": "2", "trace": "at test.js:12", "extra": {"myReporter": {"matcher": "equal"}}}, {"message": "Second assertion"}]}]}]
+        }
+      }
+    },
+    {
+      "description": "History assertion failures: empty collection",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10, "flaky": 1},
+          "tests": [{"name": "case", "status": "passed", "duration": 1, "flaky": true, "retries": 1, "retryAttempts": [{"attempt": 1, "status": "failed", "duration": 1, "assertionFailures": []}]}]
+        }
+      }
+    },
+    {
+      "description": "History assertion failures: null collection",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10, "flaky": 1},
+          "tests": [{"name": "case", "status": "passed", "duration": 1, "flaky": true, "retries": 1, "retryAttempts": [{"attempt": 1, "status": "failed", "duration": 1, "assertionFailures": null}]}]
+        }
+      }
+    },
+    {
+      "description": "History assertion failures: object instead of collection",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10, "flaky": 1},
+          "tests": [{"name": "case", "status": "passed", "duration": 1, "flaky": true, "retries": 1, "retryAttempts": [{"attempt": 1, "status": "failed", "duration": 1, "assertionFailures": {"expected": "5"}}]}]
+        }
+      }
+    },
+    {
+      "description": "History assertion failures: string instead of collection",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10, "flaky": 1},
+          "tests": [{"name": "case", "status": "passed", "duration": 1, "flaky": true, "retries": 1, "retryAttempts": [{"attempt": 1, "status": "failed", "duration": 1, "assertionFailures": "failure"}]}]
+        }
+      }
+    },
+    {
+      "description": "History assertion failures: empty entry",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10, "flaky": 1},
+          "tests": [{"name": "case", "status": "passed", "duration": 1, "flaky": true, "retries": 1, "retryAttempts": [{"attempt": 1, "status": "failed", "duration": 1, "assertionFailures": [{}]}]}]
+        }
+      }
+    },
+    {
+      "description": "History assertion failures: null entry",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10, "flaky": 1},
+          "tests": [{"name": "case", "status": "passed", "duration": 1, "flaky": true, "retries": 1, "retryAttempts": [{"attempt": 1, "status": "failed", "duration": 1, "assertionFailures": [null]}]}]
+        }
+      }
+    },
+    {
+      "description": "History assertion failures: array entry",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10, "flaky": 1},
+          "tests": [{"name": "case", "status": "passed", "duration": 1, "flaky": true, "retries": 1, "retryAttempts": [{"attempt": 1, "status": "failed", "duration": 1, "assertionFailures": [[]]}]}]
+        }
+      }
+    },
+    {
+      "description": "History assertion failures: string entry",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10, "flaky": 1},
+          "tests": [{"name": "case", "status": "passed", "duration": 1, "flaky": true, "retries": 1, "retryAttempts": [{"attempt": 1, "status": "failed", "duration": 1, "assertionFailures": ["failure"]}]}]
+        }
+      }
+    },
+    {
+      "description": "History assertion failures: unknown direct field",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10, "flaky": 1},
+          "tests": [{"name": "case", "status": "passed", "duration": 1, "flaky": true, "retries": 1, "retryAttempts": [{"attempt": 1, "status": "failed", "duration": 1, "assertionFailures": [{"expected": "5", "matcher": "equal"}]}]}]
+        }
+      }
+    },
+    {
+      "description": "History assertion failures: unknown-only entry",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10, "flaky": 1},
+          "tests": [{"name": "case", "status": "passed", "duration": 1, "flaky": true, "retries": 1, "retryAttempts": [{"attempt": 1, "status": "failed", "duration": 1, "assertionFailures": [{"matcher": "equal"}]}]}]
+        }
+      }
+    },
+    {
+      "description": "History assertion failures: message rejects null",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10, "flaky": 1},
+          "tests": [{"name": "case", "status": "passed", "duration": 1, "flaky": true, "retries": 1, "retryAttempts": [{"attempt": 1, "status": "failed", "duration": 1, "assertionFailures": [{"message": null}]}]}]
+        }
+      }
+    },
+    {
+      "description": "History assertion failures: message rejects array",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10, "flaky": 1},
+          "tests": [{"name": "case", "status": "passed", "duration": 1, "flaky": true, "retries": 1, "retryAttempts": [{"attempt": 1, "status": "failed", "duration": 1, "assertionFailures": [{"message": []}]}]}]
+        }
+      }
+    },
+    {
+      "description": "History assertion failures: trace rejects null",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10, "flaky": 1},
+          "tests": [{"name": "case", "status": "passed", "duration": 1, "flaky": true, "retries": 1, "retryAttempts": [{"attempt": 1, "status": "failed", "duration": 1, "assertionFailures": [{"trace": null}]}]}]
+        }
+      }
+    },
+    {
+      "description": "History assertion failures: trace rejects object",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10, "flaky": 1},
+          "tests": [{"name": "case", "status": "passed", "duration": 1, "flaky": true, "retries": 1, "retryAttempts": [{"attempt": 1, "status": "failed", "duration": 1, "assertionFailures": [{"trace": {}}]}]}]
+        }
+      }
+    },
+    {
+      "description": "History assertion failures: expected rejects null",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10, "flaky": 1},
+          "tests": [{"name": "case", "status": "passed", "duration": 1, "flaky": true, "retries": 1, "retryAttempts": [{"attempt": 1, "status": "failed", "duration": 1, "assertionFailures": [{"expected": null}]}]}]
+        }
+      }
+    },
+    {
+      "description": "History assertion failures: expected rejects number",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10, "flaky": 1},
+          "tests": [{"name": "case", "status": "passed", "duration": 1, "flaky": true, "retries": 1, "retryAttempts": [{"attempt": 1, "status": "failed", "duration": 1, "assertionFailures": [{"expected": 5}]}]}]
+        }
+      }
+    },
+    {
+      "description": "History assertion failures: actual rejects null",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10, "flaky": 1},
+          "tests": [{"name": "case", "status": "passed", "duration": 1, "flaky": true, "retries": 1, "retryAttempts": [{"attempt": 1, "status": "failed", "duration": 1, "assertionFailures": [{"actual": null}]}]}]
+        }
+      }
+    },
+    {
+      "description": "History assertion failures: actual rejects boolean",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10, "flaky": 1},
+          "tests": [{"name": "case", "status": "passed", "duration": 1, "flaky": true, "retries": 1, "retryAttempts": [{"attempt": 1, "status": "failed", "duration": 1, "assertionFailures": [{"actual": false}]}]}]
+        }
+      }
+    },
+    {
+      "description": "History assertion failures: extra rejects null",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10, "flaky": 1},
+          "tests": [{"name": "case", "status": "passed", "duration": 1, "flaky": true, "retries": 1, "retryAttempts": [{"attempt": 1, "status": "failed", "duration": 1, "assertionFailures": [{"extra": null}]}]}]
+        }
+      }
+    },
+    {
+      "description": "History assertion failures: extra rejects array",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10, "flaky": 1},
+          "tests": [{"name": "case", "status": "passed", "duration": 1, "flaky": true, "retries": 1, "retryAttempts": [{"attempt": 1, "status": "failed", "duration": 1, "assertionFailures": [{"extra": []}]}]}]
+        }
+      }
+    },
+    {
+      "description": "History assertion failures: extra rejects string",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": { "name": "runner" },
+          "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10, "flaky": 1},
+          "tests": [{"name": "case", "status": "passed", "duration": 1, "flaky": true, "retries": 1, "retryAttempts": [{"attempt": 1, "status": "failed", "duration": 1, "assertionFailures": [{"extra": "metadata"}]}]}]
+        }
+      }
+    }
+  ]
+}

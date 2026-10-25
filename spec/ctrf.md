@@ -1041,6 +1041,37 @@ A stack trace or structured trace information describing the failure.
 `trace` is OPTIONAL.  
 If present, it MUST be a string.
 
+### 9.11.1. `assertionFailures`
+
+**Description:**
+Structured details of assertion failures from the final attempt represented by this test object.
+
+**Requirements:**
+`assertionFailures` is OPTIONAL.
+If present, it MUST be a non-empty array of assertion failure objects as defined below.
+Producers MUST omit the array when no assertion failures are reported for this attempt.
+Each entry MUST describe an assertion failure attributable to this attempt; runtime errors are not automatically assertion failures.
+Producers MAY report only the assertion failures and details available from their source. They MUST NOT reconstruct unavailable comparisons by parsing diagnostic messages.
+Assertion failures from earlier attempts MUST remain on their corresponding `retryAttempts` entries and MUST NOT be carried onto a later passing result.
+
+#### Assertion failure object
+
+Each entry MUST be a non-empty object. All fields are OPTIONAL:
+
+| Property | Type | Description |
+| --- | --- | --- |
+| `message` | string | Message associated with this assertion failure. |
+| `trace` | string | Stack trace associated with this assertion failure. |
+| `expected` | string | Producer-formatted expected value. |
+| `actual` | string | Producer-formatted actual value. |
+| `extra` | object | Extension point for arbitrary metadata (Section 4.6.1). |
+
+`expected` and `actual` are independently optional. Unavailable values MUST be omitted, rather than represented as `null` or placeholder strings. Empty strings are valid when they are genuine producer-formatted values; absence is distinct from an empty string. The strings are display representations, not a requirement to preserve original value types or use a canonical serialization.
+
+An entry MAY contain only comparison values, only diagnostics, or only `extra`. Unknown fields MUST NOT appear directly in an assertion failure object; custom metadata MUST be placed within `extra`.
+
+Test-level `message` and `trace` retain the diagnostics supplied for the overall attempt. Entry-level `message` and `trace`, when present, MUST be attributable to that individual assertion failure. They MAY repeat overall diagnostics for a single failure, but duplication is not required. A missing entry-level field does not inherit the overall diagnostics.
+
 ### 9.12. `snippet`
 
 **Description:**  
@@ -1528,6 +1559,16 @@ A stack trace or diagnostic trace captured during the attempt.
 **Requirements:**  
 `trace` is OPTIONAL.  
 If present, it MUST be a string.
+
+### 11.6.1. `assertionFailures`
+
+**Description:**
+Structured details of assertion failures from this earlier attempt.
+
+**Requirements:**
+`assertionFailures` is OPTIONAL.
+If present, it MUST follow the same array and assertion failure object requirements as Section 9.11.1, with every entry attributable only to this history entry's attempt.
+The enclosing history entry's `message` and `trace` provide overall diagnostics for that attempt; they are not inherited by individual assertion failure entries.
 
 ### 11.7. `line`
 
@@ -2330,6 +2371,14 @@ to this specification.
                 "description": "Stack trace or failure trace information",
                 "type": "string"
               },
+              "assertionFailures": {
+                "description": "Assertion failures attributable to this attempt",
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "$ref": "#/definitions/assertionFailure"
+                }
+              },
               "snippet": {
                 "description": "Code snippet associated with the failure",
                 "type": "string"
@@ -2441,6 +2490,14 @@ to this specification.
                     "trace": {
                       "description": "Stack trace for this attempt",
                       "type": "string"
+                    },
+                    "assertionFailures": {
+                      "description": "Assertion failures attributable to this attempt",
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "$ref": "#/definitions/assertionFailure"
+                      }
                     },
                     "line": {
                       "description": "Line number associated with failure",
@@ -2830,6 +2887,34 @@ to this specification.
   },
   "additionalProperties": false,
   "definitions": {
+    "assertionFailure": {
+      "description": "Details of an individual assertion failure",
+      "type": "object",
+      "minProperties": 1,
+      "properties": {
+        "message": {
+          "description": "Message associated with this assertion failure",
+          "type": "string"
+        },
+        "trace": {
+          "description": "Stack trace associated with this assertion failure",
+          "type": "string"
+        },
+        "expected": {
+          "description": "Producer-formatted expected value",
+          "type": "string"
+        },
+        "actual": {
+          "description": "Producer-formatted actual value",
+          "type": "string"
+        },
+        "extra": {
+          "description": "Extension point for arbitrary metadata",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false
+    },
     "metricDelta": {
       "description": "Metric value with baseline comparison",
       "type": "object",
@@ -3121,7 +3206,13 @@ It includes:
             "attempt": 1,
             "status": "failed",
             "duration": 900,
-            "message": "Assertion failed"
+            "message": "Service should be ready",
+            "assertionFailures": [
+              {
+                "expected": "ready",
+                "actual": "starting"
+              }
+            ]
           }
         ]
       },
@@ -3141,7 +3232,7 @@ This example demonstrates how CTRF represents diagnostic information when a test
 
 It includes:
 
-- failure message and stack trace
+- failure message, stack trace and a structured assertion comparison
 - stdout and stderr output
 - a base64-encoded screenshot string
 - file-based attachments
@@ -3178,6 +3269,12 @@ It includes:
         ],
         "stderr": [
           "Received unexpected response"
+        ],
+        "assertionFailures": [
+          {
+            "expected": "200",
+            "actual": "500"
+          }
         ],
         "screenshot": "iVBORw0KGgoAAAANSUhEUgAAAAUA",
         "attachments": [
@@ -3306,6 +3403,7 @@ It includes:
 - multiple test cases
 - retries and flaky test case behavior
 - diagnostic information (messages, traces, stdout, stderr)
+- multiple assertion failures with individual comparisons and metadata
 - base64-encoded screenshots
 - file-based attachments
 - execution environment metadata
@@ -3407,8 +3505,26 @@ It includes:
         "filePath": "tests/auth/login.test.js",
         "status": "failed",
         "duration": 4000,
-        "message": "Expected error message not shown",
-        "trace": "AssertionError: error message missing\n  at login.test.js:42",
+        "message": "Two login assertions failed",
+        "trace": "AssertionError: Two login assertions failed\n  at login.test.js:42",
+        "assertionFailures": [
+          {
+            "message": "Error message should be visible",
+            "trace": "AssertionError: error message missing\n  at login.test.js:42",
+            "expected": "visible",
+            "actual": "hidden"
+          },
+          {
+            "message": "Login form should remain visible",
+            "expected": "visible",
+            "actual": "hidden",
+            "extra": {
+              "myorg.assertions": {
+                "matcher": "toBeVisible"
+              }
+            }
+          }
+        ],
         "stdout": ["Submitting invalid credentials"],
         "stderr": ["Validation error"],
         "screenshot": "iVBORw0KGgoAAAANSUhEUgAAAAUA",

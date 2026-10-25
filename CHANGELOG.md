@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Optional `assertionFailures` on final test results and retry history, with producer-formatted comparisons, individual diagnostics and `extra` metadata.
+
 - Optional Test `description` in specification 0.3.0 for human-readable case context, separate from its name, suite and attempt diagnostics.
 
 ### Changed

@@ -152,9 +152,28 @@
         "line": 42,
         "browser": "chromium",
         "threadId": "worker-1",
-        "message": "Element not found: .dashboard-metrics",
-        "trace": "Error: Element not found: .dashboard-metrics\n    at waitForElement (test.js:45:10)\n    at Object.<anonymous> (dashboard.test.js:42:5)",
-        "snippet": "const metrics = await page.locator('.dashboard-metrics');\nawait expect(metrics).toBeVisible();",
+        "message": "Two dashboard assertions failed",
+        "trace": "Error: Two dashboard assertions failed\n    at Object.<anonymous> (dashboard.test.js:42:5)",
+        "assertionFailures": [
+          {
+            "message": "Metrics should be visible",
+            "trace": "Error: Metrics should be visible\n    at dashboard.test.js:42:5",
+            "expected": "visible",
+            "actual": "hidden",
+            "extra": {
+              "myorg.assertions": {
+                "matcher": "toBeVisible"
+              }
+            }
+          },
+          {
+            "message": "Dashboard title should match",
+            "trace": "Error: Dashboard title should match\n    at dashboard.test.js:43:5",
+            "expected": "Dashboard",
+            "actual": "Loading"
+          }
+        ],
+        "snippet": "await expect.soft(page.locator('.dashboard-metrics')).toBeVisible();\nawait expect.soft(page.locator('.dashboard-title')).toHaveText('Dashboard');",
         "screenshot": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==",
         "stdout": [
           "Loading admin dashboard",
