@@ -2436,14 +2436,14 @@ to this specification.
                       "type": "string"
                     },
                     "stdout": {
-                      "description": "Standard output from this attempt, one string per output line. May be omitted or empty when no output was captured",
+                      "description": "Standard output from this attempt, one string per output line",
                       "type": "array",
                       "items": {
                         "type": "string"
                       }
                     },
                     "stderr": {
-                      "description": "Standard error from this attempt, one string per output line. May be omitted or empty when no output was captured",
+                      "description": "Standard error from this attempt, one string per output line",
                       "type": "array",
                       "items": {
                         "type": "string"
@@ -2503,14 +2503,14 @@ to this specification.
                 "type": "boolean"
               },
               "stdout": {
-                "description": "Standard output, one string per output line. May be omitted or empty when no output was captured",
+                "description": "Standard output, one string per output line",
                 "type": "array",
                 "items": {
                   "type": "string"
                 }
               },
               "stderr": {
-                "description": "Standard error, one string per output line. May be omitted or empty when no output was captured",
+                "description": "Standard error, one string per output line",
                 "type": "array",
                 "items": {
                   "type": "string"
