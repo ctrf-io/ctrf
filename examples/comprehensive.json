@@ -104,6 +104,7 @@
             "duration": 5100,
             "start": 1609459203500,
             "stop": 1609459208600,
+            "threadId": "worker-1",
             "message": "Payment gateway timeout",
             "trace": "Error: Payment gateway timeout\n    at processPayment (payment.js:23:10)",
             "attachments": [
