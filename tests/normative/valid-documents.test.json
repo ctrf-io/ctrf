@@ -169,6 +169,52 @@
           ]
         }
       }
+    },
+    {
+      "description": "Previous attempt threadId differs from the final attempt threadId",
+      "valid": true,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": {
+            "name": "runner"
+          },
+          "summary": {
+            "tests": 1,
+            "passed": 1,
+            "failed": 0,
+            "pending": 0,
+            "skipped": 0,
+            "other": 0,
+            "flaky": 1,
+            "start": 1609459200000,
+            "stop": 1609459201000
+          },
+          "tests": [
+            {
+              "name": "checkout accepts a saved card",
+              "status": "passed",
+              "duration": 500,
+              "start": 1609459200500,
+              "stop": 1609459201000,
+              "threadId": "fork-2/Test worker",
+              "flaky": true,
+              "retries": 1,
+              "retryAttempts": [
+                {
+                  "attempt": 1,
+                  "status": "failed",
+                  "duration": 400,
+                  "start": 1609459200000,
+                  "stop": 1609459200400,
+                  "threadId": "fork-1/Test worker"
+                }
+              ]
+            }
+          ]
+        }
+      }
     }
   ]
 }
