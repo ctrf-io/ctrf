@@ -1419,6 +1419,196 @@
           ]
         }
       }
+    },
+    {
+      "description": "RetryAttempt with threadId as number instead of string",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": {
+            "name": "runner"
+          },
+          "summary": {
+            "tests": 1,
+            "passed": 1,
+            "failed": 0,
+            "pending": 0,
+            "skipped": 0,
+            "other": 0,
+            "start": 1609459200000,
+            "stop": 1609459201000
+          },
+          "tests": [
+            {
+              "name": "test",
+              "status": "passed",
+              "duration": 100,
+              "retries": 1,
+              "retryAttempts": [
+                {
+                  "attempt": 1,
+                  "status": "failed",
+                  "threadId": 12345
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "description": "RetryAttempt with threadId as null instead of string",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": {
+            "name": "runner"
+          },
+          "summary": {
+            "tests": 1,
+            "passed": 1,
+            "failed": 0,
+            "pending": 0,
+            "skipped": 0,
+            "other": 0,
+            "start": 1609459200000,
+            "stop": 1609459201000
+          },
+          "tests": [
+            {
+              "name": "test",
+              "status": "passed",
+              "duration": 100,
+              "retries": 1,
+              "retryAttempts": [
+                {
+                  "attempt": 1,
+                  "status": "failed",
+                  "threadId": null
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "description": "RetryAttempt with threadId as boolean instead of string",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": {
+            "name": "runner"
+          },
+          "summary": {
+            "tests": 1,
+            "passed": 1,
+            "failed": 0,
+            "pending": 0,
+            "skipped": 0,
+            "other": 0,
+            "start": 1609459200000,
+            "stop": 1609459201000
+          },
+          "tests": [
+            {
+              "name": "test",
+              "status": "passed",
+              "duration": 100,
+              "retries": 1,
+              "retryAttempts": [
+                {
+                  "attempt": 1,
+                  "status": "failed",
+                  "threadId": true
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "description": "RetryAttempt with threadId as array instead of string",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": {
+            "name": "runner"
+          },
+          "summary": {
+            "tests": 1,
+            "passed": 1,
+            "failed": 0,
+            "pending": 0,
+            "skipped": 0,
+            "other": 0,
+            "start": 1609459200000,
+            "stop": 1609459201000
+          },
+          "tests": [
+            {
+              "name": "test",
+              "status": "passed",
+              "duration": 100,
+              "retries": 1,
+              "retryAttempts": [
+                {
+                  "attempt": 1,
+                  "status": "failed",
+                  "threadId": []
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "description": "RetryAttempt with threadId as object instead of string",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "results": {
+          "tool": {
+            "name": "runner"
+          },
+          "summary": {
+            "tests": 1,
+            "passed": 1,
+            "failed": 0,
+            "pending": 0,
+            "skipped": 0,
+            "other": 0,
+            "start": 1609459200000,
+            "stop": 1609459201000
+          },
+          "tests": [
+            {
+              "name": "test",
+              "status": "passed",
+              "duration": 100,
+              "retries": 1,
+              "retryAttempts": [
+                {
+                  "attempt": 1,
+                  "status": "failed",
+                  "threadId": {}
+                }
+              ]
+            }
+          ]
+        }
+      }
     }
   ]
 }

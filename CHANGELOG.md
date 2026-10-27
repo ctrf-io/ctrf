@@ -9,9 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Optional `threadId` on attempt history entries in specification 0.3.0, using the same contract as Test `threadId`, so previous attempts can record the thread or worker that executed them (#74).
+
 - Optional Test `description` in specification 0.3.0 for human-readable case context, separate from its name, suite and attempt diagnostics.
 
 ### Changed
+
+- Clarified that Test `threadId` identifies the thread or worker that executed the final attempt, and recommended qualifying `threadId` values when test cases run across processes or hosts (#74).
 
 - Clarified output-line arrays and valid omission or empty arrays when no stdout or stderr was captured, on final results and previous attempts.
 
