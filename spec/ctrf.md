@@ -432,11 +432,9 @@ Extensions MUST NOT redefine, weaken, or contradict the structure or semantics o
 
 CTRF recognizes three extension ownership categories:
 
-| Category | Owner | Namespace and authority |
-|---|---|---|
-| Official CTRF extension | CTRF project | Published by the CTRF project and uses a reserved `ctrf.` or `ctrf/` key |
-| Third-party extension | Tool, vendor, community project, or other external publisher | Uses a stable namespace controlled or clearly identified by that publisher |
-| Private extension | Organization or user | Uses a namespace that is controlled by, or unambiguously local to, that organization or user |
+- **Official CTRF extension:** Published by the CTRF project using a reserved `ctrf.` or `ctrf/` key.
+- **Third-party extension:** Published by a tool, vendor or community project using a namespace controlled or clearly identified by that publisher.
+- **Private extension:** Used by an organization or user with a namespace they control or that is unambiguously local to them.
 
 Only extensions published by the CTRF project are official CTRF extensions.
 
