@@ -285,6 +285,14 @@ A tool, system, or process that generates CTRF reports by capturing and structur
 **Consumer**:  
 A tool, system, or process that reads and interprets CTRF reports for purposes such as analysis, visualization, alerting, or trend detection.
 
+**Extension**:
+
+A namespaced key and its associated value within an `extra` object. An extension adds metadata or optional behavior without changing the CTRF document structure.
+
+**Extension Definition**:
+
+Published documentation and any accompanying machine-readable schemas that define an extension's owner, key, allowed locations, value semantics, and compatibility policy.
+
 **Test Case**:  
 An individual executable test. For parameterized tests, each distinct combination of test logic and case-defining parameters constitutes a separate test case.
 For example, `login(username="alice")` and `login(username="bob")` are distinct test cases that use the same test logic.
@@ -414,9 +422,126 @@ Producers SHOULD group related extension data under a single extension key.
 
 The structure and semantics of each extension value are defined by the extension producer.
 
-- CTRF does not define or validate extension value structure.
+- The CTRF document schema does not validate extension value structure.
 - Consumers MUST treat values for unrecognized extension keys as opaque.
 - Consumers MUST NOT assume the presence or meaning of any extension unless explicitly supported.
+
+Extensions MUST NOT redefine, weaken, or contradict the structure or semantics of fields defined in this specification.
+
+#### 4.6.4. Extension Ownership
+
+CTRF recognizes three extension ownership categories:
+
+- **Official CTRF extension:** Published by the CTRF project using a reserved `ctrf.` or `ctrf/` key.
+- **Third-party extension:** Published by a tool, vendor or community project using a namespace controlled or clearly identified by that publisher.
+- **Private extension:** Used by an organization or user with a namespace they control or that is unambiguously local to them.
+
+Only extensions published by the CTRF project are official CTRF extensions.
+
+An extension does not become part of this specification solely because it is widely used or uses an `extra` object.
+
+Official extension status does not make an extension required for CTRF conformance.
+
+Third-party and private extensions are valid when they follow the extension rules in this section.
+
+#### 4.6.5. Extension Definitions
+
+A published extension definition SHOULD identify:
+
+- the complete extension key and its owner
+- the CTRF object locations where the extension is allowed
+- the structure and semantics of the value at each allowed location
+- its versioning and compatibility policy
+- a machine-readable schema when structural validation is intended
+
+Every official CTRF extension publication MUST include:
+
+- a normative Markdown specification published by the CTRF project
+- one or more JSON Schemas covering every distinct value structure
+- an explicit mapping from each allowed CTRF location to its applicable schema
+- at least one valid example for each allowed location
+- conformance cases covering valid and invalid extension values
+
+The normative specification MUST identify the extension's complete key, ownership, allowed locations, value semantics, and versioning and compatibility policy.
+
+Each JSON Schema MUST validate the extension value rather than a complete CTRF document.
+
+It MUST declare its JSON Schema dialect.
+
+The same extension key MAY be used at multiple `extra` locations.
+
+Its definition MAY assign a different value structure or schema to each location when the semantics differ.
+
+A consumer that supports an extension MUST apply the definition for the exact location and extension version in which the extension appears.
+
+It MUST NOT assume that a value valid at one location is valid at another location unless the extension definition says so.
+
+This specification does not define a universal property for a third-party or private extension schema URL or version.
+
+Third-party and private extensions MAY define such metadata within their own values. Consumers MUST use the extension definition, rather than the extension key alone, to interpret that metadata.
+
+#### 4.6.6. Official Extension Versioning
+
+Each official CTRF extension is versioned independently from the CTRF specification and every other extension.
+
+Official extensions MUST follow Semantic Versioning 2.0.0:
+
+- MAJOR versions contain incompatible extension changes.
+- MINOR versions contain backward-compatible extension additions.
+- PATCH versions contain backward-compatible corrections or clarifications.
+
+An official extension release versions its normative specification, JSON Schemas, examples, and conformance cases as one unit.
+
+Publishing an extension release does not require a CTRF specification version change.
+
+Every official extension value MUST be a JSON object containing an `extensionVersion` property.
+
+`extensionVersion` MUST be a non-empty string containing the complete Semantic Version of the official extension definition to which the value conforms.
+
+Each versioned official extension schema MUST require `extensionVersion` and constrain it to the exact version represented by that schema.
+
+When the same official extension key appears at multiple locations in one CTRF document, every instance MUST use the same `extensionVersion`.
+
+Consumers SHOULD support all PATCH-level changes within a supported official extension MAJOR.MINOR version.
+
+Consumers MUST NOT assume compatibility across official extension MAJOR versions.
+
+Support for an official extension MUST be described using both its extension key and supported version or version range.
+
+Support for the CTRF specification does not imply support for any extension.
+
+#### 4.6.7. Layered Validation and Conformance
+
+CTRF conformance and extension conformance are separate validation layers:
+
+1. The complete document is validated against the CTRF document schema and the normative requirements of this specification.
+2. A consumer MAY identify extensions it recognizes and validate each value against the definition for its location and version.
+
+An extension validation failure does not, by itself, make a document non-conformant to CTRF because the CTRF document schema intentionally permits arbitrary values inside `extra`.
+
+It means the extension instance does not conform to the recognized extension definition.
+
+A consumer MAY fail an operation that explicitly requires a supported extension to be valid.
+
+When reporting such a failure, the consumer SHOULD distinguish extension conformance from CTRF conformance.
+
+A consumer MUST continue to ignore unrecognized extensions and MUST NOT require extension validation for CTRF conformance.
+
+A claim of extension conformance SHOULD identify the extension key and the version or published definition being implemented.
+
+This specification does not define a universal syntax for expressing that claim inside a report.
+
+#### 4.6.8. Extension Lifecycle (Informative)
+
+An extension can evolve independently of the CTRF specification. A typical path is:
+
+1. private or experimental use
+2. a published third-party definition
+3. adoption by multiple producers and consumers
+4. publication as an official CTRF extension
+5. possible inclusion in the CTRF specification through the normal specification process
+
+Promotion is not automatic. Specialized or fast-moving capabilities may remain official extensions permanently so the CTRF specification stays focused on broadly interoperable test-reporting concepts.
 
 ### 4.7. Versioning and Forward Compatibility
 
@@ -2204,6 +2329,7 @@ Producers:
 - MUST include all required fields  
 - MUST follow rules for retry histories  
 - MUST NOT introduce fields outside `extra` objects  
+- MUST NOT use extensions to redefine, weaken, or contradict fields defined in this specification
 - MUST NOT emit invalid enum values (status, etc.)
 - MAY include `insights` if historical or aggregate data is available
 
@@ -2217,6 +2343,9 @@ Producers SHOULD:
 - assign identity fields (`testId`, `executionId`, `attemptId`, `attachmentId`) when traceability is meaningful for their workflow
 - avoid duplicate identity values when duplicates would make correlation ambiguous
 - prefer `testId` over the legacy `id` field for new implementations
+- document the ownership, allowed locations, semantics, and compatibility policy of published extensions
+- identify the extension definition and version when claiming conformance to an extension
+- include the required specification, schemas, examples, conformance cases, and `extensionVersion` when publishing an official CTRF extension
 
 ---
 
@@ -2226,6 +2355,9 @@ Consumers:
 
 - MUST validate required fields  
 - MUST reject unknown fields not in `extra`  
+- MUST validate CTRF conformance independently of extension conformance
+- MUST ignore unrecognized extensions and treat their keys and values as opaque
+- MUST apply a recognized extension definition to the exact `extra` location and extension version being validated
 - SHOULD handle missing optional fields gracefully  
 - SHOULD compute missing `duration` when possible  
 - MUST NOT require optional fields to be present
@@ -2236,6 +2368,7 @@ Consumers:
 - SHOULD use `testId` in preference to `id` when both are present
 - MAY use `runId` to merge or correlate documents from the same logical run
 - MUST NOT assume that identity fields are present; all identity fields are OPTIONAL
+- SHOULD distinguish extension validation failures from CTRF validation failures
 
 ---
 
