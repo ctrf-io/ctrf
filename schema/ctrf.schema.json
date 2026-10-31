@@ -217,11 +217,11 @@
                       "type": "string"
                     },
                     "expected": {
-                      "description": "Producer-formatted expected value",
+                      "description": "String representation of the expected value",
                       "type": "string"
                     },
                     "actual": {
-                      "description": "Producer-formatted actual value",
+                      "description": "String representation of the actual value",
                       "type": "string"
                     },
                     "extra": {
@@ -362,11 +362,11 @@
                             "type": "string"
                           },
                           "expected": {
-                            "description": "Producer-formatted expected value",
+                            "description": "String representation of the expected value",
                             "type": "string"
                           },
                           "actual": {
-                            "description": "Producer-formatted actual value",
+                            "description": "String representation of the actual value",
                             "type": "string"
                           },
                           "extra": {
