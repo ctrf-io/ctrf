@@ -1805,7 +1805,7 @@ Stack trace associated with this assertion failure.
 
 **Description:**
 
-Producer-formatted expected value.
+String representation of the expected value.
 
 **Requirements:**
 
@@ -1816,7 +1816,7 @@ Unavailable values MUST be omitted. Empty strings are valid formatted values.
 
 **Description:**
 
-Producer-formatted actual value.
+String representation of the actual value.
 
 **Requirements:**
 
@@ -2625,11 +2625,11 @@ to this specification.
                       "type": "string"
                     },
                     "expected": {
-                      "description": "Producer-formatted expected value",
+                      "description": "String representation of the expected value",
                       "type": "string"
                     },
                     "actual": {
-                      "description": "Producer-formatted actual value",
+                      "description": "String representation of the actual value",
                       "type": "string"
                     },
                     "extra": {
@@ -2770,11 +2770,11 @@ to this specification.
                             "type": "string"
                           },
                           "expected": {
-                            "description": "Producer-formatted expected value",
+                            "description": "String representation of the expected value",
                             "type": "string"
                           },
                           "actual": {
-                            "description": "Producer-formatted actual value",
+                            "description": "String representation of the actual value",
                             "type": "string"
                           },
                           "extra": {
