@@ -823,12 +823,12 @@ If present, it MUST follow the structure defined in Section 10 (Environment Obje
 
 **Description:**
 
-Global errors associated with the test run rather than an individual test result.
+Errors associated with the test run rather than an individual test result.
 
 **Requirements:**
 
 `errors` is OPTIONAL. If present, it MUST be a non-empty array of Global Error Objects (Section 13).
-Producers MUST NOT add test results or increment summary test counts solely to represent a global error.
+Global errors MUST NOT be counted as test results.
 Consumers MUST account for reported global errors when interpreting the run; passing test results alone do not establish an error-free run.
 Omission means no global errors were reported; it does not establish run completeness.
 
@@ -3081,7 +3081,7 @@ to this specification.
           "additionalProperties": false
         },
         "errors": {
-          "description": "Global errors associated with the test run",
+          "description": "Errors associated with the test run rather than an individual test result",
           "type": "array",
           "minItems": 1,
           "items": {
