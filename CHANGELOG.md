@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Formalized the extension model for `extra`, including ownership categories, location-specific definitions, independently versioned official contracts and separate Core/extension validation and conformance.
+- Formalized the extension model for `extra`, including ownership categories, location-specific definitions, independently versioned official contracts and separate CTRF and extension validation and conformance.
 
 - Clarified output-line arrays and valid omission or empty arrays when no stdout or stderr was captured, on final results and previous attempts.
 
