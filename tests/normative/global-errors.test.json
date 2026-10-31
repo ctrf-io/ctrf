@@ -1,0 +1,166 @@
+{
+  "target": "../../schema/ctrf.schema.json",
+  "$comment": "Normative global error shape; attribution and native run/count semantics require producer/consumer evidence.",
+  "tests": [
+    {
+      "description": "Global errors: omitted",
+      "valid": true,
+      "data": {"reportFormat": "CTRF", "specVersion": "0.3.0", "results": {"tool": {"name": "runner"}, "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10}, "tests": [{"name": "case", "status": "passed", "duration": 1}]}}
+    },
+    {
+      "description": "Global errors: message only",
+      "valid": true,
+      "data": {"reportFormat": "CTRF", "specVersion": "0.3.0", "results": {"tool": {"name": "runner"}, "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10}, "tests": [{"name": "case", "status": "passed", "duration": 1}], "errors": [{"message": "Shared teardown failed"}]}}
+    },
+    {
+      "description": "Global errors: trace only",
+      "valid": true,
+      "data": {"reportFormat": "CTRF", "specVersion": "0.3.0", "results": {"tool": {"name": "runner"}, "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10}, "tests": [{"name": "case", "status": "passed", "duration": 1}], "errors": [{"trace": "at cleanup.js:24:5"}]}}
+    },
+    {
+      "description": "Global errors: message and trace",
+      "valid": true,
+      "data": {"reportFormat": "CTRF", "specVersion": "0.3.0", "results": {"tool": {"name": "runner"}, "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10}, "tests": [{"name": "case", "status": "passed", "duration": 1}], "errors": [{"message": "Shared teardown failed", "trace": "Error: cleanup failed\n    at cleanup.js:24:5"}]}}
+    },
+    {
+      "description": "Global errors: extra only",
+      "valid": true,
+      "data": {"reportFormat": "CTRF", "specVersion": "0.3.0", "results": {"tool": {"name": "runner"}, "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10}, "tests": [{"name": "case", "status": "passed", "duration": 1}], "errors": [{"extra": {"myReporter": {"phase": "teardown", "scope": "suite"}}}]}}
+    },
+    {
+      "description": "Global errors: empty extra object only",
+      "valid": true,
+      "data": {"reportFormat": "CTRF", "specVersion": "0.3.0", "results": {"tool": {"name": "runner"}, "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10}, "tests": [{"name": "case", "status": "passed", "duration": 1}], "errors": [{"extra": {}}]}}
+    },
+    {
+      "description": "Global errors: empty diagnostic strings",
+      "valid": true,
+      "data": {"reportFormat": "CTRF", "specVersion": "0.3.0", "results": {"tool": {"name": "runner"}, "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10}, "tests": [{"name": "case", "status": "passed", "duration": 1}], "errors": [{"message": "", "trace": ""}]}}
+    },
+    {
+      "description": "Global errors: multiple global errors",
+      "valid": true,
+      "data": {"reportFormat": "CTRF", "specVersion": "0.3.0", "results": {"tool": {"name": "runner"}, "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10}, "tests": [{"name": "case", "status": "passed", "duration": 1}], "errors": [{"message": "Worker cleanup failed"}, {"message": "Shared teardown failed", "trace": "at cleanup.js:24:5"}]}}
+    },
+    {
+      "description": "Global errors: diagnostics and extensible metadata",
+      "valid": true,
+      "data": {"reportFormat": "CTRF", "specVersion": "0.3.0", "results": {"tool": {"name": "runner"}, "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10}, "tests": [{"name": "case", "status": "passed", "duration": 1}], "errors": [{"message": "Shared teardown failed", "extra": {"myReporter": {"exitCode": 10, "detail": null}}}]}}
+    },
+    {
+      "description": "Global errors: empty collection",
+      "valid": false,
+      "data": {"reportFormat": "CTRF", "specVersion": "0.3.0", "results": {"tool": {"name": "runner"}, "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10}, "tests": [{"name": "case", "status": "passed", "duration": 1}], "errors": []}}
+    },
+    {
+      "description": "Global errors: null collection",
+      "valid": false,
+      "data": {"reportFormat": "CTRF", "specVersion": "0.3.0", "results": {"tool": {"name": "runner"}, "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10}, "tests": [{"name": "case", "status": "passed", "duration": 1}], "errors": null}}
+    },
+    {
+      "description": "Global errors: object instead of array",
+      "valid": false,
+      "data": {"reportFormat": "CTRF", "specVersion": "0.3.0", "results": {"tool": {"name": "runner"}, "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10}, "tests": [{"name": "case", "status": "passed", "duration": 1}], "errors": {"message": "error"}}}
+    },
+    {
+      "description": "Global errors: string instead of array",
+      "valid": false,
+      "data": {"reportFormat": "CTRF", "specVersion": "0.3.0", "results": {"tool": {"name": "runner"}, "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10}, "tests": [{"name": "case", "status": "passed", "duration": 1}], "errors": "error"}}
+    },
+    {
+      "description": "Global errors: number instead of array",
+      "valid": false,
+      "data": {"reportFormat": "CTRF", "specVersion": "0.3.0", "results": {"tool": {"name": "runner"}, "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10}, "tests": [{"name": "case", "status": "passed", "duration": 1}], "errors": 1}}
+    },
+    {
+      "description": "Global errors: empty entry",
+      "valid": false,
+      "data": {"reportFormat": "CTRF", "specVersion": "0.3.0", "results": {"tool": {"name": "runner"}, "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10}, "tests": [{"name": "case", "status": "passed", "duration": 1}], "errors": [{}]}}
+    },
+    {
+      "description": "Global errors: null entry",
+      "valid": false,
+      "data": {"reportFormat": "CTRF", "specVersion": "0.3.0", "results": {"tool": {"name": "runner"}, "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10}, "tests": [{"name": "case", "status": "passed", "duration": 1}], "errors": [null]}}
+    },
+    {
+      "description": "Global errors: string entry",
+      "valid": false,
+      "data": {"reportFormat": "CTRF", "specVersion": "0.3.0", "results": {"tool": {"name": "runner"}, "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10}, "tests": [{"name": "case", "status": "passed", "duration": 1}], "errors": ["error"]}}
+    },
+    {
+      "description": "Global errors: number entry",
+      "valid": false,
+      "data": {"reportFormat": "CTRF", "specVersion": "0.3.0", "results": {"tool": {"name": "runner"}, "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10}, "tests": [{"name": "case", "status": "passed", "duration": 1}], "errors": [1]}}
+    },
+    {
+      "description": "Global errors: array entry",
+      "valid": false,
+      "data": {"reportFormat": "CTRF", "specVersion": "0.3.0", "results": {"tool": {"name": "runner"}, "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10}, "tests": [{"name": "case", "status": "passed", "duration": 1}], "errors": [[]]}}
+    },
+    {
+      "description": "Global errors: null message",
+      "valid": false,
+      "data": {"reportFormat": "CTRF", "specVersion": "0.3.0", "results": {"tool": {"name": "runner"}, "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10}, "tests": [{"name": "case", "status": "passed", "duration": 1}], "errors": [{"message": null}]}}
+    },
+    {
+      "description": "Global errors: number message",
+      "valid": false,
+      "data": {"reportFormat": "CTRF", "specVersion": "0.3.0", "results": {"tool": {"name": "runner"}, "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10}, "tests": [{"name": "case", "status": "passed", "duration": 1}], "errors": [{"message": 1}]}}
+    },
+    {
+      "description": "Global errors: boolean message",
+      "valid": false,
+      "data": {"reportFormat": "CTRF", "specVersion": "0.3.0", "results": {"tool": {"name": "runner"}, "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10}, "tests": [{"name": "case", "status": "passed", "duration": 1}], "errors": [{"message": false}]}}
+    },
+    {
+      "description": "Global errors: null trace",
+      "valid": false,
+      "data": {"reportFormat": "CTRF", "specVersion": "0.3.0", "results": {"tool": {"name": "runner"}, "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10}, "tests": [{"name": "case", "status": "passed", "duration": 1}], "errors": [{"trace": null}]}}
+    },
+    {
+      "description": "Global errors: object trace",
+      "valid": false,
+      "data": {"reportFormat": "CTRF", "specVersion": "0.3.0", "results": {"tool": {"name": "runner"}, "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10}, "tests": [{"name": "case", "status": "passed", "duration": 1}], "errors": [{"trace": {}}]}}
+    },
+    {
+      "description": "Global errors: null extra",
+      "valid": false,
+      "data": {"reportFormat": "CTRF", "specVersion": "0.3.0", "results": {"tool": {"name": "runner"}, "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10}, "tests": [{"name": "case", "status": "passed", "duration": 1}], "errors": [{"extra": null}]}}
+    },
+    {
+      "description": "Global errors: array extra",
+      "valid": false,
+      "data": {"reportFormat": "CTRF", "specVersion": "0.3.0", "results": {"tool": {"name": "runner"}, "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10}, "tests": [{"name": "case", "status": "passed", "duration": 1}], "errors": [{"extra": []}]}}
+    },
+    {
+      "description": "Global errors: string extra",
+      "valid": false,
+      "data": {"reportFormat": "CTRF", "specVersion": "0.3.0", "results": {"tool": {"name": "runner"}, "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10}, "tests": [{"name": "case", "status": "passed", "duration": 1}], "errors": [{"extra": "metadata"}]}}
+    },
+    {
+      "description": "Global errors: unknown direct field",
+      "valid": false,
+      "data": {"reportFormat": "CTRF", "specVersion": "0.3.0", "results": {"tool": {"name": "runner"}, "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10}, "tests": [{"name": "case", "status": "passed", "duration": 1}], "errors": [{"message": "Error", "phase": "setup"}]}}
+    },
+    {
+      "description": "Global errors: unknown-only field",
+      "valid": false,
+      "data": {"reportFormat": "CTRF", "specVersion": "0.3.0", "results": {"tool": {"name": "runner"}, "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10}, "tests": [{"name": "case", "status": "passed", "duration": 1}], "errors": [{"status": "failed"}]}}
+    },
+    {
+      "description": "Global errors: zero reported tests without synthetic results",
+      "valid": true,
+      "data": {"reportFormat": "CTRF", "specVersion": "0.3.0", "results": {"tool": {"name": "runner"}, "summary": {"tests": 0, "passed": 0, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10}, "tests": [], "errors": [{"message": "Startup failed before any tests were discovered"}]}}
+    },
+    {
+      "description": "Global errors: not a Test property",
+      "valid": false,
+      "data": {"reportFormat": "CTRF", "specVersion": "0.3.0", "results": {"tool": {"name": "runner"}, "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10}, "tests": [{"name": "case", "status": "passed", "duration": 1, "errors": [{"message": "Error"}]}]}}
+    },
+    {
+      "description": "Global errors: not a root property",
+      "valid": false,
+      "data": {"reportFormat": "CTRF", "specVersion": "0.3.0", "results": {"tool": {"name": "runner"}, "summary": {"tests": 1, "passed": 1, "failed": 0, "pending": 0, "skipped": 0, "other": 0, "start": 0, "stop": 10}, "tests": [{"name": "case", "status": "passed", "duration": 1}]}, "errors": [{"message": "Error"}]}
+    }
+  ]
+}
