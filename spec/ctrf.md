@@ -145,7 +145,7 @@ Consumers MAY reconstruct hierarchical views for presentation purposes, but such
 
 ### 2.4. Identity Model
 
-CTRF provides a layered identity model that supports stable identifiers for test cases, correlation of documents belonging to the same logical run, deduplication, aggregation, and future provenance support.
+CTRF provides a layered identity model that supports stable identifiers for test cases, correlation of documents belonging to the same logical run, deduplication, aggregation, and document provenance.
 
 Identity fields are OPTIONAL. When provided, they enable:
 
@@ -342,6 +342,9 @@ A structure describing a metric’s `current` value, the corresponding value fro
 
 **Attachment**:  
 An external file or resource referenced by a test case or attempt history entry, such as a screenshot, log file, or other artifact.
+
+**Derived Report**:
+A CTRF document produced by transforming or combining content from one or more existing CTRF documents, including content used to compute derived values.
 
 ---
 
@@ -574,7 +577,7 @@ Each layer addresses a distinct identification concern:
 
 All identity fields are OPTIONAL. Producers SHOULD assign them when the corresponding correlation is meaningful for their workflow.
 
-This identity model provides primitives that can be used by future provenance and lineage extensions. It does not itself define derivation, parent/child report relationships, transformation history, or trust metadata.
+The identity model provides the identifiers used by the optional document provenance model in Section 20. Identity alone does not establish derivation, transformation history, or trust.
 
 #### 4.9.1. Uniqueness
 
@@ -746,7 +749,18 @@ If present, it MUST follow the structure described in Section 19 (Baseline Objec
 
 ---
 
-### 5.10. `extra`
+### 5.10. `provenance`
+
+**Description:**
+Identifies the direct CTRF source documents from which this document was derived.
+
+**Requirements:**
+`provenance` is OPTIONAL.
+If present, it MUST follow the structure described in Section 20 (Provenance Object).
+
+---
+
+### 5.11. `extra`
 
 **Description:**  
 An extensibility object containing arbitrary metadata.
@@ -2288,7 +2302,49 @@ An extensibility object containing arbitrary metadata related to the baseline.
 It MAY contain arbitrary fields.  
 It is the ONLY permitted extension point within the baseline object.
 
-## 20. Versioning
+## 20. Provenance Object
+
+The optional top-level `provenance` object records direct document lineage for a derived CTRF report. Its `inputs` identify the existing CTRF source documents whose content contributed to the output, including content used to compute derived values. A report merely consulted without contributing content is not a provenance input.
+
+Provenance describes observed derivation. It does not assert that all expected shards or reports arrived, that the output replaces its inputs, or that overlapping inputs can safely be counted together. It does not attribute individual tests, attempts, attachments, or errors to a source. A schema-valid report is not evidence of complete or verified lineage.
+
+Unknown fields MUST NOT appear in `provenance` except within its `extra` object.
+
+### 20.1. `inputs`
+
+**Description:**
+All distinct direct CTRF source documents from which the current document was derived.
+
+**Requirements:**
+`inputs` MUST be present when `provenance` is present. It MUST be a non-empty array of objects. Each input object MUST contain only a required `reportId`, which MUST be a non-empty string and a valid UUID.
+
+Input order has no semantic meaning. Each distinct source document MUST appear exactly once, regardless of how many times its content was used. UUID comparison MUST ignore letter case. An input MUST NOT identify the current document itself when the current document has a `reportId`.
+
+Producers MUST list all contributing direct CTRF source documents. If any such source lacks a `reportId`, producers MUST omit `provenance`; they MUST NOT invent an identity for an already-emitted source or list only the identified subset. Omission does not establish that a report is an original source.
+
+Producers MUST reference the immediate source documents rather than copying their `provenance.inputs` or flattening their ancestry. If reports A and B produce C, and C produces D, C lists A and B; D lists C. If A also contributes directly to D, D lists both C and A. These links do not resolve overlapping content or prescribe merge/deduplication behavior.
+
+A derived report SHOULD receive a new `reportId`, distinct from its inputs, consistent with Section 5.3. Reports without provenance or document identity remain valid. Retransmission of the same unchanged artifact SHOULD preserve its `reportId` and provenance. Logical-run correlation remains separate; provenance does not change the single-logical-run scope of `results`.
+
+Input references neither embed nor locate their sources. Following a chain requires access to the referenced documents through a consumer's storage or lookup mechanism. An unavailable ancestor does not invalidate a direct reference. Consumers MUST NOT interpret an input reference alone as proof of completeness, supersession, authenticity, or artifact integrity. A UUID is an identity, not a content digest or retrieval URL.
+
+The JSON Schema checks the object structure, UUID format, non-empty input list and identical duplicate entries. Case-insensitive identity uniqueness and self-reference require semantic checks in addition to JSON Schema validation.
+
+### 20.2. `extra`
+
+**Description:**
+An optional object for provenance-related extension metadata, following Section 4's extension rules.
+
+**Requirements:**
+`extra` MAY contain arbitrary fields. It is the ONLY permitted extension point directly within `provenance`. Input entries do not provide an extension point in this version.
+
+This model is CTRF-native and does not claim conformance to an external provenance or attestation standard. Future integrations can supply additional metadata or separate linked documents without changing the meaning of direct inputs. Expected-input manifests, completeness, supersession, activity details, source lookup and verification are outside this version's provenance contract.
+
+See Appendix D.9 for merge, single-source transformation and multi-hop examples.
+
+---
+
+## 21. Versioning
 
 CTRF follows **Semantic Versioning**.
 
@@ -2320,15 +2376,16 @@ The `specVersion` field in a CTRF document MUST follow these versioning rules.
 
 ---
 
-## 21. Conformance Requirements
+## 22. Conformance Requirements
 
-### 21.1. Producer Conformance
+### 22.1. Producer Conformance
 
 Producers:
 
 - MUST output UTF-8 JSON  
 - MUST set `reportFormat = "CTRF"`  
 - MUST include all required fields  
+- MUST follow the provenance requirements in Section 20 when emitting provenance
 - MUST follow rules for retry histories  
 - MUST NOT introduce fields outside `extra` objects  
 - MUST NOT use extensions to redefine, weaken, or contradict fields defined in this specification
@@ -2351,7 +2408,7 @@ Producers SHOULD:
 
 ---
 
-## 21.2. Consumer Conformance
+## 22.2. Consumer Conformance
 
 Consumers:
 
@@ -2374,7 +2431,9 @@ Consumers:
 
 ---
 
-## 22. Security Considerations
+Consumers MAY follow `provenance.inputs` to inspect document lineage when source reports are available. They MUST apply the interpretation limits in Section 20; lineage alone is not a consumer selection or deduplication policy.
+
+## 23. Security Considerations
 
 CTRF documents may contain sensitive information such as:
 
@@ -2391,7 +2450,7 @@ Consumers SHOULD consider size limits when processing attachments or screenshots
 
 ---
 
-## 23. IANA Considerations
+## 24. IANA Considerations
 
 This document registers **no** IANA resources.
 
@@ -2441,6 +2500,41 @@ to this specification.
     "generatedBy": {
       "description": "Tool or system that produced this CTRF document",
       "type": "string"
+    },
+    "provenance": {
+      "description": "Direct CTRF document sources from which this report was derived; does not establish completeness or supersession",
+      "type": "object",
+      "required": [ "inputs" ],
+      "properties": {
+        "inputs": {
+          "description": "All distinct direct contributing CTRF source documents, without flattening their ancestry; order has no meaning",
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "required": [ "reportId" ],
+            "propertyNames": {
+              "const": "reportId"
+            },
+            "properties": {
+              "reportId": {
+                "description": "The reportId of the contributing document",
+                "type": "string",
+                "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                "format": "uuid",
+                "minLength": 1
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "extra": {
+          "description": "Extension point for arbitrary metadata",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false
     },
     "extra": {
       "description": "Extension point for arbitrary metadata",
@@ -4204,5 +4298,157 @@ Each block below matches its named standalone example.
       }
     ]
   }
+}
+```
+
+### D.9. Direct Document Provenance
+
+The following reports illustrate a merge followed by filtering and enrichment. The source reports identified by the merge inputs are not embedded. Their absence here does not establish whether other shards were expected.
+
+#### D.9.1. Merge of two source reports
+
+GitHub combines reports ending in `0100` and `0101` into a new report ending in `0999`. It records both direct inputs. This example corresponds to `examples/with-provenance.json`.
+
+```json
+{
+  "reportFormat": "CTRF",
+  "specVersion": "0.3.0",
+  "reportId": "550e8400-e29b-41d4-a716-446655440999",
+  "timestamp": "2025-11-24T12:30:00Z",
+  "generatedBy": "github-test-reporter",
+  "results": {
+    "tool": {
+      "name": "playwright"
+    },
+    "summary": {
+      "tests": 2,
+      "passed": 1,
+      "failed": 1,
+      "pending": 0,
+      "skipped": 0,
+      "other": 0,
+      "start": 1609459200000,
+      "stop": 1609459220000
+    },
+    "tests": [
+      {
+        "name": "checkout completes",
+        "status": "passed",
+        "duration": 240
+      },
+      {
+        "name": "dashboard renders metrics",
+        "status": "failed",
+        "duration": 980,
+        "message": "Element not found: .dashboard-metrics"
+      }
+    ]
+  },
+  "provenance": {
+    "inputs": [
+      {
+        "reportId": "550e8400-e29b-41d4-a716-446655440100"
+      },
+      {
+        "reportId": "550e8400-e29b-41d4-a716-446655440101"
+      }
+    ]
+  },
+  "runId": "coordinated-checkout-run"
+}
+```
+
+#### D.9.2. Single-source filtering
+
+A dashboard reads the merged report `0999` and emits report `0998` containing only the failed test. It references `0999`, not that report's ancestors. This example corresponds to `examples/with-provenance-filtered.json`.
+
+```json
+{
+  "reportFormat": "CTRF",
+  "specVersion": "0.3.0",
+  "reportId": "550e8400-e29b-41d4-a716-446655440998",
+  "timestamp": "2025-11-24T12:30:00Z",
+  "generatedBy": "example-dashboard",
+  "results": {
+    "tool": {
+      "name": "playwright"
+    },
+    "summary": {
+      "tests": 1,
+      "passed": 0,
+      "failed": 1,
+      "pending": 0,
+      "skipped": 0,
+      "other": 0,
+      "start": 1609459200000,
+      "stop": 1609459220000
+    },
+    "tests": [
+      {
+        "name": "dashboard renders metrics",
+        "status": "failed",
+        "duration": 980,
+        "message": "Element not found: .dashboard-metrics"
+      }
+    ]
+  },
+  "provenance": {
+    "inputs": [
+      {
+        "reportId": "550e8400-e29b-41d4-a716-446655440999"
+      }
+    ]
+  },
+  "runId": "coordinated-checkout-run"
+}
+```
+
+#### D.9.3. A further derivation
+
+Enrichment of `0998` produces `0997` with a dashboard label. It references only `0998`. Following that report leads to `0999` and, when available, the original sources. This example corresponds to `examples/with-provenance-enriched.json`.
+
+```json
+{
+  "reportFormat": "CTRF",
+  "specVersion": "0.3.0",
+  "reportId": "550e8400-e29b-41d4-a716-446655440997",
+  "timestamp": "2025-11-24T12:30:00Z",
+  "generatedBy": "example-dashboard",
+  "results": {
+    "tool": {
+      "name": "playwright"
+    },
+    "summary": {
+      "tests": 1,
+      "passed": 0,
+      "failed": 1,
+      "pending": 0,
+      "skipped": 0,
+      "other": 0,
+      "start": 1609459200000,
+      "stop": 1609459220000
+    },
+    "tests": [
+      {
+        "name": "dashboard renders metrics",
+        "status": "failed",
+        "duration": 980,
+        "message": "Element not found: .dashboard-metrics"
+      }
+    ]
+  },
+  "provenance": {
+    "inputs": [
+      {
+        "reportId": "550e8400-e29b-41d4-a716-446655440998"
+      }
+    ],
+    "extra": {
+      "example.dashboard": {
+        "label": "triage"
+      }
+    }
+  },
+  "runId": "coordinated-checkout-run"
 }
 ```

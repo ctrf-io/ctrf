@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Optional document `provenance` in specification 0.3.0, recording direct source report identities for derived reports, with explicit lineage and interpretation rules.
+
 - Optional `results.errors` in specification 0.3.0 for global error messages, traces and metadata, separate from individual test results and counts.
 
 - Optional `assertionFailures` on final test results and retry history, with producer-formatted comparisons, individual diagnostics and `extra` metadata.

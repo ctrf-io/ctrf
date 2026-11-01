@@ -34,6 +34,41 @@
       "description": "Tool or system that produced this CTRF document",
       "type": "string"
     },
+    "provenance": {
+      "description": "Direct CTRF document sources from which this report was derived; does not establish completeness or supersession",
+      "type": "object",
+      "required": [ "inputs" ],
+      "properties": {
+        "inputs": {
+          "description": "All distinct direct contributing CTRF source documents, without flattening their ancestry; order has no meaning",
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "required": [ "reportId" ],
+            "propertyNames": {
+              "const": "reportId"
+            },
+            "properties": {
+              "reportId": {
+                "description": "The reportId of the contributing document",
+                "type": "string",
+                "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                "format": "uuid",
+                "minLength": 1
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "extra": {
+          "description": "Extension point for arbitrary metadata",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false
+    },
     "extra": {
       "description": "Extension point for arbitrary metadata",
       "type": "object"

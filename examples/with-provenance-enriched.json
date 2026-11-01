@@ -1,0 +1,43 @@
+{
+  "reportFormat": "CTRF",
+  "specVersion": "0.3.0",
+  "reportId": "550e8400-e29b-41d4-a716-446655440997",
+  "timestamp": "2025-11-24T12:30:00Z",
+  "generatedBy": "example-dashboard",
+  "results": {
+    "tool": {
+      "name": "playwright"
+    },
+    "summary": {
+      "tests": 1,
+      "passed": 0,
+      "failed": 1,
+      "pending": 0,
+      "skipped": 0,
+      "other": 0,
+      "start": 1609459200000,
+      "stop": 1609459220000
+    },
+    "tests": [
+      {
+        "name": "dashboard renders metrics",
+        "status": "failed",
+        "duration": 980,
+        "message": "Element not found: .dashboard-metrics"
+      }
+    ]
+  },
+  "provenance": {
+    "inputs": [
+      {
+        "reportId": "550e8400-e29b-41d4-a716-446655440998"
+      }
+    ],
+    "extra": {
+      "example.dashboard": {
+        "label": "triage"
+      }
+    }
+  },
+  "runId": "coordinated-checkout-run"
+}
