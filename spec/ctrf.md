@@ -2340,7 +2340,7 @@ An optional object for provenance-related extension metadata, following Section 
 
 This model is CTRF-native and does not claim conformance to an external provenance or attestation standard. Future integrations can supply additional metadata or separate linked documents without changing the meaning of direct inputs. Expected-input manifests, completeness, supersession, activity details, source lookup and verification are outside this version's provenance contract.
 
-See Appendix D.9 for merge, single-source transformation and multi-hop examples.
+See Appendix D.8 for a merged report whose provenance references both retained source reports.
 
 ---
 
@@ -4144,6 +4144,8 @@ A coordinator executes cases A and B. A passes; B fails. It then starts another 
 
 All three documents share one `runId` and have distinct `reportId` values. Case B retains one `testId` and `executionId` across processes; each attempt has its own `attemptId`. The merged result preserves those attempt identities.
 
+The merged report’s provenance lists the two raw reports as its direct inputs. It records their contribution without claiming completeness or supersession. A subsequent report derived only from this merged document would reference the merged document, rather than copying its input list.
+
 The raw reports contain the attempts observed by each process. The retry process need not repeat history it did not observe; its optional `retries`, `retryAttempts` and `flaky` fields are omitted here. The coordinator knows the relationship between the attempts and records that history in the merged report.
 
 The merged report contains two test results, rather than the three entries obtained by concatenating the raw reports. Case B's final duration is 150 ms, with the earlier 200 ms attempt in history, rather than a summed duration of 350 ms. It is flaky because it passed after a failed attempt.
@@ -4297,158 +4299,16 @@ Each block below matches its named standalone example.
         ]
       }
     ]
+  },
+  "provenance": {
+    "inputs": [
+      {
+        "reportId": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa"
+      },
+      {
+        "reportId": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb"
+      }
+    ]
   }
-}
-```
-
-### D.9. Direct Document Provenance
-
-The following reports illustrate a merge followed by filtering and enrichment. The source reports identified by the merge inputs are not embedded. Their absence here does not establish whether other shards were expected.
-
-#### D.9.1. Merge of two source reports
-
-GitHub combines reports ending in `0100` and `0101` into a new report ending in `0999`. It records both direct inputs. This example corresponds to `examples/with-provenance.json`.
-
-```json
-{
-  "reportFormat": "CTRF",
-  "specVersion": "0.3.0",
-  "reportId": "550e8400-e29b-41d4-a716-446655440999",
-  "timestamp": "2025-11-24T12:30:00Z",
-  "generatedBy": "github-test-reporter",
-  "results": {
-    "tool": {
-      "name": "playwright"
-    },
-    "summary": {
-      "tests": 2,
-      "passed": 1,
-      "failed": 1,
-      "pending": 0,
-      "skipped": 0,
-      "other": 0,
-      "start": 1609459200000,
-      "stop": 1609459220000
-    },
-    "tests": [
-      {
-        "name": "checkout completes",
-        "status": "passed",
-        "duration": 240
-      },
-      {
-        "name": "dashboard renders metrics",
-        "status": "failed",
-        "duration": 980,
-        "message": "Element not found: .dashboard-metrics"
-      }
-    ]
-  },
-  "provenance": {
-    "inputs": [
-      {
-        "reportId": "550e8400-e29b-41d4-a716-446655440100"
-      },
-      {
-        "reportId": "550e8400-e29b-41d4-a716-446655440101"
-      }
-    ]
-  },
-  "runId": "coordinated-checkout-run"
-}
-```
-
-#### D.9.2. Single-source filtering
-
-A dashboard reads the merged report `0999` and emits report `0998` containing only the failed test. It references `0999`, not that report's ancestors. This example corresponds to `examples/with-provenance-filtered.json`.
-
-```json
-{
-  "reportFormat": "CTRF",
-  "specVersion": "0.3.0",
-  "reportId": "550e8400-e29b-41d4-a716-446655440998",
-  "timestamp": "2025-11-24T12:30:00Z",
-  "generatedBy": "example-dashboard",
-  "results": {
-    "tool": {
-      "name": "playwright"
-    },
-    "summary": {
-      "tests": 1,
-      "passed": 0,
-      "failed": 1,
-      "pending": 0,
-      "skipped": 0,
-      "other": 0,
-      "start": 1609459200000,
-      "stop": 1609459220000
-    },
-    "tests": [
-      {
-        "name": "dashboard renders metrics",
-        "status": "failed",
-        "duration": 980,
-        "message": "Element not found: .dashboard-metrics"
-      }
-    ]
-  },
-  "provenance": {
-    "inputs": [
-      {
-        "reportId": "550e8400-e29b-41d4-a716-446655440999"
-      }
-    ]
-  },
-  "runId": "coordinated-checkout-run"
-}
-```
-
-#### D.9.3. A further derivation
-
-Enrichment of `0998` produces `0997` with a dashboard label. It references only `0998`. Following that report leads to `0999` and, when available, the original sources. This example corresponds to `examples/with-provenance-enriched.json`.
-
-```json
-{
-  "reportFormat": "CTRF",
-  "specVersion": "0.3.0",
-  "reportId": "550e8400-e29b-41d4-a716-446655440997",
-  "timestamp": "2025-11-24T12:30:00Z",
-  "generatedBy": "example-dashboard",
-  "results": {
-    "tool": {
-      "name": "playwright"
-    },
-    "summary": {
-      "tests": 1,
-      "passed": 0,
-      "failed": 1,
-      "pending": 0,
-      "skipped": 0,
-      "other": 0,
-      "start": 1609459200000,
-      "stop": 1609459220000
-    },
-    "tests": [
-      {
-        "name": "dashboard renders metrics",
-        "status": "failed",
-        "duration": 980,
-        "message": "Element not found: .dashboard-metrics"
-      }
-    ]
-  },
-  "provenance": {
-    "inputs": [
-      {
-        "reportId": "550e8400-e29b-41d4-a716-446655440998"
-      }
-    ],
-    "extra": {
-      "example.dashboard": {
-        "label": "triage"
-      }
-    }
-  },
-  "runId": "coordinated-checkout-run"
 }
 ```

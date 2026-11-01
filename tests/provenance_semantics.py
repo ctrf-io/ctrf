@@ -30,9 +30,9 @@ def check_provenance_identities(report):
 class ProvenanceIdentityTests(unittest.TestCase):
     def setUp(self):
         examples = Path(__file__).resolve().parents[1] / "examples"
-        self.merge = json.loads((examples / "with-provenance.json").read_text())
-        self.filtered = json.loads((examples / "with-provenance-filtered.json").read_text())
-        self.enriched = json.loads((examples / "with-provenance-enriched.json").read_text())
+        self.merge = json.loads((examples / "coordinated-retry-merged.json").read_text())
+        self.initial = json.loads((examples / "coordinated-retry-initial.json").read_text())
+        self.rerun = json.loads((examples / "coordinated-retry-rerun.json").read_text())
 
     def test_omission_is_valid(self):
         report = copy.deepcopy(self.merge)
@@ -45,6 +45,9 @@ class ProvenanceIdentityTests(unittest.TestCase):
         check_provenance_identities(report)
 
     def test_distinct_direct_sources_and_unavailable_ancestors_are_valid(self):
+        self.assertEqual(self.merge["provenance"]["inputs"],
+                         [{"reportId": self.initial["reportId"]},
+                          {"reportId": self.rerun["reportId"]}])
         check_provenance_identities(self.merge)
 
     def test_input_order_has_no_meaning(self):
@@ -73,20 +76,20 @@ class ProvenanceIdentityTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "current document"):
             check_provenance_identities(self.merge)
 
-    def test_multi_hop_examples_reference_immediate_sources(self):
-        self.assertEqual(self.filtered["provenance"]["inputs"],
-                         [{"reportId": self.merge["reportId"]}])
-        self.assertEqual(self.enriched["provenance"]["inputs"],
-                         [{"reportId": self.filtered["reportId"]}])
-        self.assertEqual(len({r["reportId"] for r in
-                              (self.merge, self.filtered, self.enriched)}), 3)
-        for report in (self.merge, self.filtered, self.enriched):
-            check_provenance_identities(report)
+    def test_multi_hop_uses_immediate_source(self):
+        downstream = copy.deepcopy(self.merge)
+        downstream["reportId"] = "dddddddd-dddd-4ddd-8ddd-dddddddddddd"
+        downstream["provenance"]["inputs"] = [
+            {"reportId": "cccccccc-cccc-4ccc-8ccc-cccccccccccc"}
+        ]
+        check_provenance_identities(downstream)
 
     def test_ancestor_and_parent_may_both_contribute_directly(self):
-        report = copy.deepcopy(self.enriched)
-        report["provenance"]["inputs"].append({"reportId": self.merge["reportId"]})
-        check_provenance_identities(report)
+        downstream = copy.deepcopy(self.merge)
+        downstream["reportId"] = "dddddddd-dddd-4ddd-8ddd-dddddddddddd"
+        downstream["provenance"]["inputs"].append(
+            {"reportId": "cccccccc-cccc-4ccc-8ccc-cccccccccccc"})
+        check_provenance_identities(downstream)
 
 
 if __name__ == "__main__":
