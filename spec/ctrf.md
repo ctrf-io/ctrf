@@ -145,7 +145,7 @@ Consumers MAY reconstruct hierarchical views for presentation purposes, but such
 
 ### 2.4. Identity Model
 
-CTRF provides a layered identity model that supports stable identifiers for test cases, correlation of documents belonging to the same logical run, deduplication, aggregation, and future provenance support.
+CTRF provides a layered identity model that supports stable identifiers for test cases, correlation of documents belonging to the same logical run, deduplication, aggregation, and document provenance.
 
 Identity fields are OPTIONAL. When provided, they enable:
 
@@ -342,6 +342,9 @@ A structure describing a metric’s `current` value, the corresponding value fro
 
 **Attachment**:  
 An external file or resource referenced by a test case or attempt history entry, such as a screenshot, log file, or other artifact.
+
+**Derived Report**:
+A CTRF document produced by transforming or combining content from one or more existing CTRF documents, including content used to compute derived values.
 
 ---
 
@@ -574,7 +577,7 @@ Each layer addresses a distinct identification concern:
 
 All identity fields are OPTIONAL. Producers SHOULD assign them when the corresponding correlation is meaningful for their workflow.
 
-This identity model provides primitives that can be used by future provenance and lineage extensions. It does not itself define derivation, parent/child report relationships, transformation history, or trust metadata.
+The identity model provides the identifiers used by the optional document provenance model in Section 20. Identity alone does not establish derivation, transformation history, or trust.
 
 #### 4.9.1. Uniqueness
 
@@ -746,7 +749,18 @@ If present, it MUST follow the structure described in Section 19 (Baseline Objec
 
 ---
 
-### 5.10. `extra`
+### 5.10. `provenance`
+
+**Description:**
+Identifies the direct CTRF source documents from which this document was derived.
+
+**Requirements:**
+`provenance` is OPTIONAL.
+If present, it MUST follow the structure described in Section 20 (Provenance Object).
+
+---
+
+### 5.11. `extra`
 
 **Description:**  
 An extensibility object containing arbitrary metadata.
@@ -2288,7 +2302,45 @@ An extensibility object containing arbitrary metadata related to the baseline.
 It MAY contain arbitrary fields.  
 It is the ONLY permitted extension point within the baseline object.
 
-## 20. Versioning
+## 20. Provenance Object
+
+The optional top-level `provenance` object records direct document lineage for a derived CTRF report. Its `inputs` identify the existing CTRF source documents whose content contributed to the output, including content used to compute derived values. A report merely consulted without contributing content is not a provenance input.
+
+Unknown fields MUST NOT appear in `provenance` except within its `extra` object.
+
+### 20.1. `inputs`
+
+**Description:**
+All distinct direct CTRF source documents from which the current document was derived.
+
+**Requirements:**
+`inputs` MUST be present when `provenance` is present. It MUST be a non-empty array of objects. Each input object MUST contain a required `reportId`, which MUST be a non-empty string and a valid UUID. An input MAY also contain an `extra` object for metadata about that source relationship. Unknown fields MUST NOT appear in an input object except within its `extra` object.
+
+Input order has no semantic meaning. Each distinct source document MUST appear exactly once, regardless of how many times its content was used. UUID comparison MUST ignore letter case. An input MUST NOT identify the current document itself when the current document has a `reportId`.
+
+Producers MUST list all contributing direct CTRF source documents. If any such source lacks a `reportId`, producers MUST omit `provenance`; they MUST NOT invent an identity for an already-emitted source or list only the identified subset. Omission does not establish that a report is an original source.
+
+Producers MUST reference the immediate source documents rather than copying their `provenance.inputs` or flattening their ancestry. If reports A and B produce C, and C produces D, C lists A and B; D lists C. If A also contributes directly to D, D lists both C and A.
+
+A derived report SHOULD receive a new `reportId`, distinct from its inputs, consistent with Section 5.3. Reports without provenance or document identity remain valid. Retransmission of the same unchanged artifact SHOULD preserve its `reportId` and provenance. Logical-run correlation remains separate; provenance does not change the single-logical-run scope of `results`.
+
+Input references do not embed source reports. Consumers need access to those reports to follow multi-hop lineage. Input identity is determined by `reportId`, regardless of `extra` metadata.
+
+### 20.2. `extra`
+
+**Description:**
+An optional object for provenance-related extension metadata, following Section 4's extension rules.
+
+**Requirements:**
+`extra` MAY contain arbitrary fields. It is the ONLY permitted extension point directly within `provenance`. Each input object also permits its own optional `extra` object. Both locations follow the extension rules in Section 4.
+
+Completeness and report supersession are outside this provenance model.
+
+See Appendix D.8 for a merged report whose provenance references both retained source reports.
+
+---
+
+## 21. Versioning
 
 CTRF follows **Semantic Versioning**.
 
@@ -2320,15 +2372,16 @@ The `specVersion` field in a CTRF document MUST follow these versioning rules.
 
 ---
 
-## 21. Conformance Requirements
+## 22. Conformance Requirements
 
-### 21.1. Producer Conformance
+### 22.1. Producer Conformance
 
 Producers:
 
 - MUST output UTF-8 JSON  
 - MUST set `reportFormat = "CTRF"`  
 - MUST include all required fields  
+- MUST follow the provenance requirements in Section 20 when emitting provenance
 - MUST follow rules for retry histories  
 - MUST NOT introduce fields outside `extra` objects  
 - MUST NOT use extensions to redefine, weaken, or contradict fields defined in this specification
@@ -2351,7 +2404,7 @@ Producers SHOULD:
 
 ---
 
-## 21.2. Consumer Conformance
+## 22.2. Consumer Conformance
 
 Consumers:
 
@@ -2374,7 +2427,9 @@ Consumers:
 
 ---
 
-## 22. Security Considerations
+Consumers MAY follow `provenance.inputs` to inspect document lineage when source reports are available.
+
+## 23. Security Considerations
 
 CTRF documents may contain sensitive information such as:
 
@@ -2391,7 +2446,7 @@ Consumers SHOULD consider size limits when processing attachments or screenshots
 
 ---
 
-## 23. IANA Considerations
+## 24. IANA Considerations
 
 This document registers **no** IANA resources.
 
@@ -2441,6 +2496,44 @@ to this specification.
     "generatedBy": {
       "description": "Tool or system that produced this CTRF document",
       "type": "string"
+    },
+    "provenance": {
+      "description": "Direct CTRF document sources from which this report was derived",
+      "type": "object",
+      "required": [ "inputs" ],
+      "properties": {
+        "inputs": {
+          "description": "All distinct direct contributing CTRF source documents",
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "required": [ "reportId" ],
+            "propertyNames": {
+              "enum": [ "reportId", "extra" ]
+            },
+            "properties": {
+              "reportId": {
+                "description": "The reportId of the contributing document",
+                "type": "string",
+                "format": "uuid",
+                "minLength": 1
+              },
+              "extra": {
+                "description": "Extension point for arbitrary metadata",
+                "type": "object"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "extra": {
+          "description": "Extension point for arbitrary metadata",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false
     },
     "extra": {
       "description": "Extension point for arbitrary metadata",
@@ -4050,6 +4143,8 @@ A coordinator executes cases A and B. A passes; B fails. It then starts another 
 
 All three documents share one `runId` and have distinct `reportId` values. Case B retains one `testId` and `executionId` across processes; each attempt has its own `attemptId`. The merged result preserves those attempt identities.
 
+The merged report’s provenance lists the two raw reports as its direct inputs. It records their contribution without claiming completeness or supersession. A subsequent report derived only from this merged document would reference the merged document, rather than copying its input list.
+
 The raw reports contain the attempts observed by each process. The retry process need not repeat history it did not observe; its optional `retries`, `retryAttempts` and `flaky` fields are omitted here. The coordinator knows the relationship between the attempts and records that history in the merged report.
 
 The merged report contains two test results, rather than the three entries obtained by concatenating the raw reports. Case B's final duration is 150 ms, with the earlier 200 ms attempt in history, rather than a summed duration of 350 ms. It is flaky because it passed after a failed attempt.
@@ -4201,6 +4296,16 @@ Each block below matches its named standalone example.
             "message": "Expected response was unavailable"
           }
         ]
+      }
+    ]
+  },
+  "provenance": {
+    "inputs": [
+      {
+        "reportId": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa"
+      },
+      {
+        "reportId": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb"
       }
     ]
   }
