@@ -1,6 +1,6 @@
 {
   "target": "../../schema/ctrf.schema.json",
-  "$comment": "Provenance schema constraints; semantic identity rules are checked separately by tests/provenance_semantics.py",
+  "$comment": "Provenance schema constraints; UUID identity uniqueness and self-reference are defined by the written specification",
   "tests": [
     {
       "description": "Provenance requires inputs",

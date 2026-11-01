@@ -2306,8 +2306,6 @@ It is the ONLY permitted extension point within the baseline object.
 
 The optional top-level `provenance` object records direct document lineage for a derived CTRF report. Its `inputs` identify the existing CTRF source documents whose content contributed to the output, including content used to compute derived values. A report merely consulted without contributing content is not a provenance input.
 
-Provenance describes observed derivation. It does not assert that all expected shards or reports arrived, that the output replaces its inputs, or that overlapping inputs can safely be counted together. It does not attribute individual tests, attempts, attachments, or errors to a source. A schema-valid report is not evidence of complete or verified lineage.
-
 Unknown fields MUST NOT appear in `provenance` except within its `extra` object.
 
 ### 20.1. `inputs`
@@ -2322,13 +2320,11 @@ Input order has no semantic meaning. Each distinct source document MUST appear e
 
 Producers MUST list all contributing direct CTRF source documents. If any such source lacks a `reportId`, producers MUST omit `provenance`; they MUST NOT invent an identity for an already-emitted source or list only the identified subset. Omission does not establish that a report is an original source.
 
-Producers MUST reference the immediate source documents rather than copying their `provenance.inputs` or flattening their ancestry. If reports A and B produce C, and C produces D, C lists A and B; D lists C. If A also contributes directly to D, D lists both C and A. These links do not resolve overlapping content or prescribe merge/deduplication behavior.
+Producers MUST reference the immediate source documents rather than copying their `provenance.inputs` or flattening their ancestry. If reports A and B produce C, and C produces D, C lists A and B; D lists C. If A also contributes directly to D, D lists both C and A.
 
 A derived report SHOULD receive a new `reportId`, distinct from its inputs, consistent with Section 5.3. Reports without provenance or document identity remain valid. Retransmission of the same unchanged artifact SHOULD preserve its `reportId` and provenance. Logical-run correlation remains separate; provenance does not change the single-logical-run scope of `results`.
 
-Input references neither embed nor locate their sources. Following a chain requires access to the referenced documents through a consumer's storage or lookup mechanism. An unavailable ancestor does not invalidate a direct reference. Consumers MUST NOT interpret an input reference alone as proof of completeness, supersession, authenticity, or artifact integrity. A UUID is an identity, not a content digest or retrieval URL.
-
-The JSON Schema defines the object structure, UUID format, non-empty input list and identical duplicate entries. Validators that do not assert UUID formats need supplemental UUID validation. Identity uniqueness is based on reportId regardless of extra metadata; case-insensitive identity comparison and self-reference require semantic checks in addition to JSON Schema validation.
+Input references do not embed source reports. Consumers need access to those reports to follow multi-hop lineage. Input identity is determined by `reportId`, regardless of `extra` metadata.
 
 ### 20.2. `extra`
 
@@ -2338,7 +2334,7 @@ An optional object for provenance-related extension metadata, following Section 
 **Requirements:**
 `extra` MAY contain arbitrary fields. It is the ONLY permitted extension point directly within `provenance`. Each input object also permits its own optional `extra` object. Both locations follow the extension rules in Section 4.
 
-This model is CTRF-native and does not claim conformance to an external provenance or attestation standard. Future integrations can supply additional metadata or separate linked documents without changing the meaning of direct inputs. Expected-input manifests, completeness, supersession, activity details, source lookup and verification are outside this version's provenance contract.
+Completeness and report supersession are outside this provenance model.
 
 See Appendix D.8 for a merged report whose provenance references both retained source reports.
 
@@ -2431,7 +2427,7 @@ Consumers:
 
 ---
 
-Consumers MAY follow `provenance.inputs` to inspect document lineage when source reports are available. They MUST apply the interpretation limits in Section 20; lineage alone is not a consumer selection or deduplication policy.
+Consumers MAY follow `provenance.inputs` to inspect document lineage when source reports are available.
 
 ## 23. Security Considerations
 

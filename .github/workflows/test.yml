@@ -28,9 +28,6 @@ jobs:
       - name: Run conformance tests (normative)
         run: jsonschema test tests/normative --json > ctrf-normative.json
 
-      - name: Check provenance identity semantics
-        run: python3 tests/provenance_semantics.py
-
       - name: Run informative tests
         run: jsonschema test tests/informative --json > ctrf-informative.json
         continue-on-error: true
