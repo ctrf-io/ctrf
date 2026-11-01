@@ -150,6 +150,13 @@ jsonschema validate schema/ctrf.schema.json examples/*.json
 
 The `--exclude top_level_examples` flag is used because CTRF maintains examples in the `examples/` directory rather than embedding them in the schema itself.
 
+The provenance identity checks supplement JSON Schema validation with UUID
+identity comparison and self-reference checks from Section 20. Run them with:
+
+```bash
+python3 tests/provenance_semantics.py
+```
+
 ### Adding Tests for Changes
 
 When contributing changes, you SHOULD add or update tests:

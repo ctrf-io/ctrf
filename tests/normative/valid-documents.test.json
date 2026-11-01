@@ -169,6 +169,21 @@
           ]
         }
       }
+    },
+    {
+      "description": "Valid direct provenance: with-provenance.json",
+      "valid": true,
+      "dataPath": "../../examples/with-provenance.json"
+    },
+    {
+      "description": "Valid direct provenance: with-provenance-filtered.json",
+      "valid": true,
+      "dataPath": "../../examples/with-provenance-filtered.json"
+    },
+    {
+      "description": "Valid direct provenance: with-provenance-enriched.json",
+      "valid": true,
+      "dataPath": "../../examples/with-provenance-enriched.json"
     }
   ]
 }

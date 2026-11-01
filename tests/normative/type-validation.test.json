@@ -1419,6 +1419,109 @@
           ]
         }
       }
+    },
+    {
+      "description": "Document with provenance as array instead of object",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "provenance": [],
+        "results": {
+          "tool": {
+            "name": "runner"
+          },
+          "summary": {
+            "tests": 1,
+            "passed": 1,
+            "failed": 0,
+            "pending": 0,
+            "skipped": 0,
+            "other": 0,
+            "start": 1609459200000,
+            "stop": 1609459201000
+          },
+          "tests": [
+            {
+              "name": "test",
+              "status": "passed",
+              "duration": 100
+            }
+          ]
+        }
+      }
+    },
+    {
+      "description": "Provenance with inputs as object instead of array",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "provenance": {
+          "inputs": {
+            "reportId": "550e8400-e29b-41d4-a716-446655440000"
+          }
+        },
+        "results": {
+          "tool": {
+            "name": "runner"
+          },
+          "summary": {
+            "tests": 1,
+            "passed": 1,
+            "failed": 0,
+            "pending": 0,
+            "skipped": 0,
+            "other": 0,
+            "start": 1609459200000,
+            "stop": 1609459201000
+          },
+          "tests": [
+            {
+              "name": "test",
+              "status": "passed",
+              "duration": 100
+            }
+          ]
+        }
+      }
+    },
+    {
+      "description": "Provenance input with reportId as number instead of string",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "provenance": {
+          "inputs": [
+            {
+              "reportId": 12345
+            }
+          ]
+        },
+        "results": {
+          "tool": {
+            "name": "runner"
+          },
+          "summary": {
+            "tests": 1,
+            "passed": 1,
+            "failed": 0,
+            "pending": 0,
+            "skipped": 0,
+            "other": 0,
+            "start": 1609459200000,
+            "stop": 1609459201000
+          },
+          "tests": [
+            {
+              "name": "test",
+              "status": "passed",
+              "duration": 100
+            }
+          ]
+        }
+      }
     }
   ]
 }
