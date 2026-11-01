@@ -327,8 +327,8 @@
       }
     },
     {
-      "description": "Per-input extra is not defined in this version",
-      "valid": false,
+      "description": "Per-input extra metadata is allowed",
+      "valid": true,
       "data": {
         "reportFormat": "CTRF",
         "specVersion": "0.3.0",
@@ -367,7 +367,11 @@
           "inputs": [
             {
               "reportId": "550e8400-e29b-41d4-a716-446655440100",
-              "extra": {}
+              "extra": {
+                "example.source": {
+                  "label": "initial"
+                }
+              }
             }
           ]
         },
@@ -553,7 +557,9 @@
           ]
         },
         "provenance": {
-          "inputs": [ "550e8400-e29b-41d4-a716-446655440100" ]
+          "inputs": [
+            "550e8400-e29b-41d4-a716-446655440100"
+          ]
         },
         "runId": "coordinated-checkout-run"
       }
@@ -598,53 +604,6 @@
         "provenance": {
           "inputs": [
             {}
-          ]
-        },
-        "runId": "coordinated-checkout-run"
-      }
-    },
-    {
-      "description": "Invalid UUID is rejected",
-      "valid": false,
-      "data": {
-        "reportFormat": "CTRF",
-        "specVersion": "0.3.0",
-        "reportId": "550e8400-e29b-41d4-a716-446655440999",
-        "timestamp": "2025-11-24T12:30:00Z",
-        "generatedBy": "github-test-reporter",
-        "results": {
-          "tool": {
-            "name": "playwright"
-          },
-          "summary": {
-            "tests": 2,
-            "passed": 1,
-            "failed": 1,
-            "pending": 0,
-            "skipped": 0,
-            "other": 0,
-            "start": 1609459200000,
-            "stop": 1609459220000
-          },
-          "tests": [
-            {
-              "name": "checkout completes",
-              "status": "passed",
-              "duration": 240
-            },
-            {
-              "name": "dashboard renders metrics",
-              "status": "failed",
-              "duration": 980,
-              "message": "Element not found: .dashboard-metrics"
-            }
-          ]
-        },
-        "provenance": {
-          "inputs": [
-            {
-              "reportId": "not-a-uuid"
-            }
           ]
         },
         "runId": "coordinated-checkout-run"
@@ -745,6 +704,198 @@
               "note": "derived"
             }
           }
+        },
+        "runId": "coordinated-checkout-run"
+      }
+    },
+    {
+      "description": "Input extra rejects non-object null",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "reportId": "550e8400-e29b-41d4-a716-446655440999",
+        "timestamp": "2025-11-24T12:30:00Z",
+        "generatedBy": "github-test-reporter",
+        "results": {
+          "tool": {
+            "name": "playwright"
+          },
+          "summary": {
+            "tests": 2,
+            "passed": 1,
+            "failed": 1,
+            "pending": 0,
+            "skipped": 0,
+            "other": 0,
+            "start": 1609459200000,
+            "stop": 1609459220000
+          },
+          "tests": [
+            {
+              "name": "checkout completes",
+              "status": "passed",
+              "duration": 240
+            },
+            {
+              "name": "dashboard renders metrics",
+              "status": "failed",
+              "duration": 980,
+              "message": "Element not found: .dashboard-metrics"
+            }
+          ]
+        },
+        "provenance": {
+          "inputs": [
+            {
+              "reportId": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+              "extra": null
+            }
+          ]
+        },
+        "runId": "coordinated-checkout-run"
+      }
+    },
+    {
+      "description": "Input extra rejects non-object []",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "reportId": "550e8400-e29b-41d4-a716-446655440999",
+        "timestamp": "2025-11-24T12:30:00Z",
+        "generatedBy": "github-test-reporter",
+        "results": {
+          "tool": {
+            "name": "playwright"
+          },
+          "summary": {
+            "tests": 2,
+            "passed": 1,
+            "failed": 1,
+            "pending": 0,
+            "skipped": 0,
+            "other": 0,
+            "start": 1609459200000,
+            "stop": 1609459220000
+          },
+          "tests": [
+            {
+              "name": "checkout completes",
+              "status": "passed",
+              "duration": 240
+            },
+            {
+              "name": "dashboard renders metrics",
+              "status": "failed",
+              "duration": 980,
+              "message": "Element not found: .dashboard-metrics"
+            }
+          ]
+        },
+        "provenance": {
+          "inputs": [
+            {
+              "reportId": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+              "extra": []
+            }
+          ]
+        },
+        "runId": "coordinated-checkout-run"
+      }
+    },
+    {
+      "description": "Input extra rejects non-object 42",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "reportId": "550e8400-e29b-41d4-a716-446655440999",
+        "timestamp": "2025-11-24T12:30:00Z",
+        "generatedBy": "github-test-reporter",
+        "results": {
+          "tool": {
+            "name": "playwright"
+          },
+          "summary": {
+            "tests": 2,
+            "passed": 1,
+            "failed": 1,
+            "pending": 0,
+            "skipped": 0,
+            "other": 0,
+            "start": 1609459200000,
+            "stop": 1609459220000
+          },
+          "tests": [
+            {
+              "name": "checkout completes",
+              "status": "passed",
+              "duration": 240
+            },
+            {
+              "name": "dashboard renders metrics",
+              "status": "failed",
+              "duration": 980,
+              "message": "Element not found: .dashboard-metrics"
+            }
+          ]
+        },
+        "provenance": {
+          "inputs": [
+            {
+              "reportId": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+              "extra": 42
+            }
+          ]
+        },
+        "runId": "coordinated-checkout-run"
+      }
+    },
+    {
+      "description": "Input extra rejects non-object \"metadata\"",
+      "valid": false,
+      "data": {
+        "reportFormat": "CTRF",
+        "specVersion": "0.3.0",
+        "reportId": "550e8400-e29b-41d4-a716-446655440999",
+        "timestamp": "2025-11-24T12:30:00Z",
+        "generatedBy": "github-test-reporter",
+        "results": {
+          "tool": {
+            "name": "playwright"
+          },
+          "summary": {
+            "tests": 2,
+            "passed": 1,
+            "failed": 1,
+            "pending": 0,
+            "skipped": 0,
+            "other": 0,
+            "start": 1609459200000,
+            "stop": 1609459220000
+          },
+          "tests": [
+            {
+              "name": "checkout completes",
+              "status": "passed",
+              "duration": 240
+            },
+            {
+              "name": "dashboard renders metrics",
+              "status": "failed",
+              "duration": 980,
+              "message": "Element not found: .dashboard-metrics"
+            }
+          ]
+        },
+        "provenance": {
+          "inputs": [
+            {
+              "reportId": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+              "extra": "metadata"
+            }
+          ]
         },
         "runId": "coordinated-checkout-run"
       }

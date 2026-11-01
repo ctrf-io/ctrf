@@ -2316,7 +2316,7 @@ Unknown fields MUST NOT appear in `provenance` except within its `extra` object.
 All distinct direct CTRF source documents from which the current document was derived.
 
 **Requirements:**
-`inputs` MUST be present when `provenance` is present. It MUST be a non-empty array of objects. Each input object MUST contain only a required `reportId`, which MUST be a non-empty string and a valid UUID.
+`inputs` MUST be present when `provenance` is present. It MUST be a non-empty array of objects. Each input object MUST contain a required `reportId`, which MUST be a non-empty string and a valid UUID. An input MAY also contain an `extra` object for metadata about that source relationship. Unknown fields MUST NOT appear in an input object except within its `extra` object.
 
 Input order has no semantic meaning. Each distinct source document MUST appear exactly once, regardless of how many times its content was used. UUID comparison MUST ignore letter case. An input MUST NOT identify the current document itself when the current document has a `reportId`.
 
@@ -2328,7 +2328,7 @@ A derived report SHOULD receive a new `reportId`, distinct from its inputs, cons
 
 Input references neither embed nor locate their sources. Following a chain requires access to the referenced documents through a consumer's storage or lookup mechanism. An unavailable ancestor does not invalidate a direct reference. Consumers MUST NOT interpret an input reference alone as proof of completeness, supersession, authenticity, or artifact integrity. A UUID is an identity, not a content digest or retrieval URL.
 
-The JSON Schema checks the object structure, UUID format, non-empty input list and identical duplicate entries. Case-insensitive identity uniqueness and self-reference require semantic checks in addition to JSON Schema validation.
+The JSON Schema defines the object structure, UUID format, non-empty input list and identical duplicate entries. Validators that do not assert UUID formats need supplemental UUID validation. Identity uniqueness is based on reportId regardless of extra metadata; case-insensitive identity comparison and self-reference require semantic checks in addition to JSON Schema validation.
 
 ### 20.2. `extra`
 
@@ -2336,7 +2336,7 @@ The JSON Schema checks the object structure, UUID format, non-empty input list a
 An optional object for provenance-related extension metadata, following Section 4's extension rules.
 
 **Requirements:**
-`extra` MAY contain arbitrary fields. It is the ONLY permitted extension point directly within `provenance`. Input entries do not provide an extension point in this version.
+`extra` MAY contain arbitrary fields. It is the ONLY permitted extension point directly within `provenance`. Each input object also permits its own optional `extra` object. Both locations follow the extension rules in Section 4.
 
 This model is CTRF-native and does not claim conformance to an external provenance or attestation standard. Future integrations can supply additional metadata or separate linked documents without changing the meaning of direct inputs. Expected-input manifests, completeness, supersession, activity details, source lookup and verification are outside this version's provenance contract.
 
@@ -2502,12 +2502,12 @@ to this specification.
       "type": "string"
     },
     "provenance": {
-      "description": "Direct CTRF document sources from which this report was derived; does not establish completeness or supersession",
+      "description": "Direct CTRF document sources from which this report was derived",
       "type": "object",
       "required": [ "inputs" ],
       "properties": {
         "inputs": {
-          "description": "All distinct direct contributing CTRF source documents, without flattening their ancestry; order has no meaning",
+          "description": "All distinct direct contributing CTRF source documents",
           "type": "array",
           "minItems": 1,
           "uniqueItems": true,
@@ -2515,15 +2515,18 @@ to this specification.
             "type": "object",
             "required": [ "reportId" ],
             "propertyNames": {
-              "const": "reportId"
+              "enum": [ "reportId", "extra" ]
             },
             "properties": {
               "reportId": {
                 "description": "The reportId of the contributing document",
                 "type": "string",
-                "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
                 "format": "uuid",
                 "minLength": 1
+              },
+              "extra": {
+                "description": "Extension point for arbitrary metadata",
+                "type": "object"
               }
             },
             "additionalProperties": false
@@ -4303,12 +4306,22 @@ Each block below matches its named standalone example.
   "provenance": {
     "inputs": [
       {
-        "reportId": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa"
+        "reportId": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "extra": {
+          "example.coordinator": {
+            "label": "initial process"
+          }
+        }
       },
       {
         "reportId": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb"
       }
-    ]
+    ],
+    "extra": {
+      "example.coordinator": {
+        "label": "coordinated retry merge"
+      }
+    }
   }
 }
 ```

@@ -1,4 +1,4 @@
-"""Reference checks for Section 20 identity rules, after JSON Schema validation.
+"""Reference checks for Section 20 UUID and identity rules, after shape validation.
 
 These checks complement the normative JSON Schema corpus. They do not verify
 source availability, all-input inclusion, graph completeness or authenticity.
@@ -12,14 +12,27 @@ from pathlib import Path
 from uuid import UUID
 
 
+def provenance_uuid(value):
+    """Use the same UUID syntax as format:uuid, including case-insensitive hex."""
+    if not isinstance(value, str):
+        raise ValueError("invalid provenance UUID")
+    try:
+        parsed = UUID(value)
+    except ValueError as error:
+        raise ValueError("invalid provenance UUID") from error
+    if str(parsed) != value.lower():
+        raise ValueError("invalid provenance UUID")
+    return parsed
+
+
 def check_provenance_identities(report):
-    """Reject duplicate UUID identities and self-reference in a schema-valid report."""
+    """Check UUID format, identity uniqueness and self-reference after shape validation."""
     if "provenance" not in report:
         return
-    own_id = UUID(report["reportId"]) if "reportId" in report else None
+    own_id = provenance_uuid(report["reportId"]) if "reportId" in report else None
     seen = set()
     for source in report["provenance"]["inputs"]:
-        source_id = UUID(source["reportId"])
+        source_id = provenance_uuid(source["reportId"])
         if source_id in seen:
             raise ValueError("duplicate provenance input identity")
         if source_id == own_id:
@@ -45,7 +58,8 @@ class ProvenanceIdentityTests(unittest.TestCase):
         check_provenance_identities(report)
 
     def test_distinct_direct_sources_and_unavailable_ancestors_are_valid(self):
-        self.assertEqual(self.merge["provenance"]["inputs"],
+        self.assertEqual([{"reportId": source["reportId"]}
+                          for source in self.merge["provenance"]["inputs"]],
                          [{"reportId": self.initial["reportId"]},
                           {"reportId": self.rerun["reportId"]}])
         check_provenance_identities(self.merge)
@@ -75,6 +89,34 @@ class ProvenanceIdentityTests(unittest.TestCase):
         self.merge["provenance"]["inputs"] = [{"reportId": self.merge["reportId"].upper()}]
         with self.assertRaisesRegex(ValueError, "current document"):
             check_provenance_identities(self.merge)
+
+    def test_duplicate_identity_with_different_metadata_is_invalid(self):
+        inputs = self.merge["provenance"]["inputs"]
+        inputs[0]["extra"] = {"example.source": {"label": "first"}}
+        inputs.append({"reportId": inputs[0]["reportId"],
+                       "extra": {"example.source": {"label": "second"}}})
+        with self.assertRaisesRegex(ValueError, "duplicate"):
+            check_provenance_identities(self.merge)
+
+    def test_metadata_at_both_levels_is_valid(self):
+        self.merge["provenance"]["extra"] = {"example.merge": {"note": "combined"}}
+        self.merge["provenance"]["inputs"][0]["extra"] = {
+            "example.source": {"note": "initial process"}}
+        check_provenance_identities(self.merge)
+
+    def test_uppercase_uuid_is_valid(self):
+        self.merge["provenance"]["inputs"][0]["reportId"] = (
+            self.merge["provenance"]["inputs"][0]["reportId"].upper())
+        check_provenance_identities(self.merge)
+
+    def test_malformed_input_uuid_is_invalid(self):
+        for value in ("not-a-uuid", "", "aaaaaaaaaaaa4aaa8aaaaaaaaaaaaaaa",
+                      "{aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa}",
+                      "urn:uuid:aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa"):
+            with self.subTest(value=value):
+                self.merge["provenance"]["inputs"] = [{"reportId": value}]
+                with self.assertRaisesRegex(ValueError, "invalid provenance UUID"):
+                    check_provenance_identities(self.merge)
 
     def test_multi_hop_uses_immediate_source(self):
         downstream = copy.deepcopy(self.merge)
