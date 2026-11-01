@@ -4302,22 +4302,12 @@ Each block below matches its named standalone example.
   "provenance": {
     "inputs": [
       {
-        "reportId": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
-        "extra": {
-          "example.coordinator": {
-            "label": "initial process"
-          }
-        }
+        "reportId": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa"
       },
       {
         "reportId": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb"
       }
-    ],
-    "extra": {
-      "example.coordinator": {
-        "label": "coordinated retry merge"
-      }
-    }
+    ]
   }
 }
 ```
