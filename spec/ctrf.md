@@ -831,7 +831,6 @@ Consumers MUST account for reported global errors when interpreting the run; pas
 Omission means no global errors were reported; it does not establish run completeness.
 
 When merging reports, producers SHOULD concatenate `errors` from all input reports without deduplicating entries.
-Producers MAY record source or shard context in each entry's `extra` object.
 
 ---
 

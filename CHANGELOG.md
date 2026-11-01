@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Defined global error merge guidance: concatenate entries from all input reports without deduplication, with optional source or shard context in `extra`.
+- Defined global error merge guidance: concatenate entries from all input reports without deduplication.
 
 - Formalized the extension model for `extra`, including ownership categories, location-specific definitions, independently versioned official contracts and separate CTRF and extension validation and conformance.
 
