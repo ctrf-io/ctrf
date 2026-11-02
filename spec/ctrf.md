@@ -1147,11 +1147,12 @@ If present, it MUST be an array of strings.
 ### 9.25. `threadId`
 
 **Description:**  
-Identifies the thread or worker on which the test executed.
+Identifies the thread or worker that executed the final attempt represented by this test object. Earlier attempts can record their own `threadId` in `retryAttempts` (Section 11).
 
 **Requirements:**  
 `threadId` is OPTIONAL.  
-If present, it MUST be a string.
+If present, it MUST be a string.  
+When test cases run in more than one process or on more than one host, producers SHOULD qualify the value with the process or host to avoid collisions, for example, `"host-a/worker-1"`.
 
 ### 9.26. `browser`
 
@@ -1548,6 +1549,16 @@ The timestamp indicating when the attempt ended, in milliseconds since the Unix 
 `stop` is OPTIONAL.  
 If present, it MUST be an integer.  
 If both `start` and `stop` are present, `stop` SHOULD be greater than or equal to `start`.
+
+### 11.12.1. `threadId`
+
+**Description:**  
+Identifies the thread or worker that executed this attempt.
+
+**Requirements:**  
+`threadId` is OPTIONAL.  
+If present, it MUST be a string.  
+When test cases run in more than one process or on more than one host, producers SHOULD qualify the value with the process or host to avoid collisions, for example, `"host-a/worker-1"`.
 
 ### 11.13. `attachments`
 
@@ -2427,6 +2438,10 @@ to this specification.
                       "description": "Attempt end time (milliseconds since Unix epoch)",
                       "type": "integer"
                     },
+                    "threadId": {
+                      "description": "Thread or worker that executed this attempt",
+                      "type": "string"
+                    },
                     "attachments": {
                       "description": "Artifacts from this attempt",
                       "type": "array",
@@ -2487,7 +2502,7 @@ to this specification.
                 }
               },
               "threadId": {
-                "description": "Thread or worker identifier",
+                "description": "Thread or worker that executed the final attempt represented by the test object",
                 "type": "string"
               },
               "browser": {
@@ -3337,10 +3352,12 @@ It includes:
             "duration": 1500,
             "message": "Timeout waiting for response",
             "stdout": ["Submitting login form"],
-            "stderr": ["Request timed out"]
+            "stderr": ["Request timed out"],
+            "threadId": "worker-1"
           }
         ],
         "stdout": ["Test completed successfully"],
+        "threadId": "worker-2",
         "insights": {
           "passRate": {
             "current": 0.9,
