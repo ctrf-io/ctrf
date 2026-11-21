@@ -1350,11 +1350,12 @@ If no output was captured, producers MAY omit `stderr` or emit an empty array.
 ### 9.26. `threadId`
 
 **Description:**  
-Identifies the thread or worker that executed the test case.
+Identifies the thread or worker that executed the final attempt represented by this test object. Earlier attempts can record their own `threadId` in `retryAttempts` (Section 11).
 
 **Requirements:**  
 `threadId` is OPTIONAL.  
-If present, it MUST be a string.
+If present, it MUST be a string.  
+When test cases run in more than one process or on more than one host, producers SHOULD qualify the value with the process or host to avoid collisions, for example, `"host-a/worker-1"`.
 
 ### 9.27. `browser`
 
@@ -1765,7 +1766,17 @@ The timestamp indicating when the attempt ended, in milliseconds since the Unix 
 If present, it MUST be an integer.  
 If both `start` and `stop` are present, `stop` SHOULD be greater than or equal to `start`.
 
-### 11.14. `attachments`
+### 11.14. `threadId`
+
+**Description:**  
+Identifies the thread or worker that executed this attempt.
+
+**Requirements:**  
+`threadId` is OPTIONAL.  
+If present, it MUST be a string.  
+When test cases run in more than one process or on more than one host, producers SHOULD qualify the value with the process or host to avoid collisions, for example, `"host-a/worker-1"`.
+
+### 11.15. `attachments`
 
 **Description:**  
 An array of attachment objects associated with this attempt.
@@ -1775,7 +1786,7 @@ An array of attachment objects associated with this attempt.
 If present, it MUST be an array.  
 Each element MUST follow the structure defined in Section 14 (Attachment Object).
 
-### 11.15. `extra`
+### 11.16. `extra`
 
 **Description:**  
 An extensibility object containing arbitrary metadata.
@@ -2908,6 +2919,10 @@ to this specification.
                       "description": "Attempt end time (milliseconds since Unix epoch)",
                       "type": "integer"
                     },
+                    "threadId": {
+                      "description": "Thread or worker that executed this attempt",
+                      "type": "string"
+                    },
                     "attachments": {
                       "description": "Artifacts from this attempt",
                       "type": "array",
@@ -2968,7 +2983,7 @@ to this specification.
                 }
               },
               "threadId": {
-                "description": "Thread or worker that executed the test case",
+                "description": "Thread or worker that executed the final attempt represented by the test object",
                 "type": "string"
               },
               "browser": {
@@ -3864,10 +3879,12 @@ It includes:
             "duration": 1500,
             "message": "Timeout waiting for response",
             "stdout": ["Submitting login form"],
-            "stderr": ["Request timed out"]
+            "stderr": ["Request timed out"],
+            "threadId": "worker-1"
           }
         ],
         "stdout": ["Test completed successfully"],
+        "threadId": "worker-2",
         "insights": {
           "passRate": {
             "current": 0.9,
