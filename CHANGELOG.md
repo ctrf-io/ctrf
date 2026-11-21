@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Optional `threadId` on attempt history entries, using the same contract as Test
+  `threadId`, so previous attempts can record the thread or worker that executed
+  them (#74).
+
+### Changed
+
+- Clarified that Test `threadId` identifies the thread or worker that executed the
+  final attempt, and recommended qualifying `threadId` values when test cases run
+  across processes or hosts (#74).
+
 ## [0.2.0] - 2026-10-10
 
 ### Added
