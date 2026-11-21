@@ -45,6 +45,11 @@
       }
     },
     {
+      "description": "Parameterized cases have distinct case and execution identities",
+      "valid": true,
+      "dataPath": "../../examples/parameterized-cases.json"
+    },
+    {
       "description": "Previous attempt threadId differs from the final attempt threadId",
       "valid": true,
       "data": {

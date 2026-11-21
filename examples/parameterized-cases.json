@@ -1,0 +1,42 @@
+{
+  "reportFormat": "CTRF",
+  "specVersion": "0.2.0",
+  "runId": "example-parameterized-run",
+  "results": {
+    "tool": {
+      "name": "example-runner"
+    },
+    "summary": {
+      "tests": 2,
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "pending": 0,
+      "other": 0,
+      "start": 1700000000000,
+      "stop": 1700000000020
+    },
+    "tests": [
+      {
+        "name": "login",
+        "testId": "login-case-alice",
+        "executionId": "login-execution-alice",
+        "status": "passed",
+        "duration": 10,
+        "parameters": {
+          "username": "alice"
+        }
+      },
+      {
+        "name": "login",
+        "testId": "login-case-bob",
+        "executionId": "login-execution-bob",
+        "status": "passed",
+        "duration": 10,
+        "parameters": {
+          "username": "bob"
+        }
+      }
+    ]
+  }
+}
