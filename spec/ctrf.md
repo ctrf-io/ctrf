@@ -5,7 +5,7 @@
 **Version:** 0.3.0
 (This version corresponds directly to the CTRF `specVersion` field.)
 
-**Date:** 2026-10-24
+**Date:** 2026-11-21
 
 **Status:** Working Draft
 
