@@ -606,7 +606,7 @@ Contains aggregated or derived metrics computed across multiple test runs.
 
 **Requirements:**  
 `insights` is OPTIONAL.  
-If present, it MUST follow the structure described in Section 15 (Run-Level Insights Object).
+If present, it MUST follow the structure described in Section 16 (Run-Level Insights Object).
 
 ---
 
@@ -617,7 +617,7 @@ Identifies a previous report used as a comparison reference when computing insig
 
 **Requirements:**  
 `baseline` is OPTIONAL.  
-If present, it MUST follow the structure described in Section 18 (Baseline Object).
+If present, it MUST follow the structure described in Section 19 (Baseline Object).
 
 ---
 
@@ -692,7 +692,22 @@ If present, it MUST follow the structure defined in Section 10 (Environment Obje
 
 ---
 
-### 6.5. `extra`
+### 6.5. `errors`
+
+**Description:**
+
+Errors associated with the test run rather than an individual test result.
+
+**Requirements:**
+
+`errors` is OPTIONAL. If present, it MUST be a non-empty array of Global Error Objects (Section 13).
+Global errors MUST NOT be counted as test results.
+Consumers MUST account for reported global errors when interpreting the run; passing test results alone do not establish an error-free run.
+Omission means no global errors were reported; it does not establish run completeness.
+
+---
+
+### 6.6. `extra`
 
 **Description:**  
 An extensibility object containing arbitrary metadata.
@@ -1244,7 +1259,7 @@ A list of additional artifacts associated with the test case (screenshots, logs,
 **Requirements:**  
 `attachments` is OPTIONAL.  
 If present, it MUST be an array.  
-Each entry MUST follow the structure defined in Section 13 (Attachment Object).
+Each entry MUST follow the structure defined in Section 14 (Attachment Object).
 
 ### 9.31. `parameters`
 
@@ -1264,7 +1279,7 @@ A list of test steps or sub-operations performed during test execution.
 **Requirements:**  
 `steps` is OPTIONAL.  
 If present, it MUST be an array.  
-Each element MUST follow the structure defined in Section 14 (Step Object).
+Each element MUST follow the structure defined in Section 15 (Step Object).
 
 ### 9.33. `insights`
 
@@ -1273,7 +1288,7 @@ Derived or aggregated insights specific to this test case.
 
 **Requirements:**  
 `insights` is OPTIONAL.  
-If present, it MUST follow the structure defined in Section 16 (Test-Level Insights Object).
+If present, it MUST follow the structure defined in Section 17 (Test-Level Insights Object).
 
 ### 9.34. `extra`
 
@@ -1628,7 +1643,7 @@ An array of attachment objects associated with this attempt.
 **Requirements:**  
 `attachments` is OPTIONAL.  
 If present, it MUST be an array.  
-Each element MUST follow the structure defined in Section 13 (Attachment Object).
+Each element MUST follow the structure defined in Section 14 (Attachment Object).
 
 ### 11.16. `extra`
 
@@ -1705,7 +1720,48 @@ It MAY contain arbitrary fields and is the ONLY permitted extension point direct
 
 ---
 
-## 13. Attachment Object
+## 13. Global Error Object
+
+Each object describes an error associated with the run rather than an individual test result, such as a shared setup, teardown or infrastructure error.
+Global reporting does not imply that every test was affected.
+
+Each object MUST be non-empty. All fields are OPTIONAL.
+Unknown fields MUST NOT appear except within `extra`.
+
+### 13.1. `message`
+
+**Description:**
+
+Message associated with this global error.
+
+**Requirements:**
+
+`message` is OPTIONAL. If present, it MUST be a string.
+
+### 13.2. `trace`
+
+**Description:**
+
+Stack trace associated with this global error.
+
+**Requirements:**
+
+`trace` is OPTIONAL. If present, it MUST be a string.
+
+### 13.3. `extra`
+
+**Description:**
+
+An extensibility object containing arbitrary metadata.
+
+**Requirements:**
+
+`extra` is OPTIONAL. If present, it MUST be an object.
+It MAY contain arbitrary fields and is the ONLY permitted extension point directly under a global error object (Section 4.6.1).
+
+---
+
+## 14. Attachment Object
 
 The `attachments` array provides references to external artifacts associated with a test case or attempt history entry. Attachments may include screenshots, logs, videos, performance traces, or any other files needed for diagnostic or reporting purposes.
 
@@ -1715,7 +1771,7 @@ Unknown fields MUST NOT appear in an attachment object except within an `extra` 
 
 Each field within an attachment object is described in the subsections below.
 
-### 13.1. `name`
+### 14.1. `name`
 
 **Description:**  
 A human-readable name for the attachment.
@@ -1724,7 +1780,7 @@ A human-readable name for the attachment.
 `name` MUST be present.  
 It MUST be a string.
 
-### 13.2. `contentType`
+### 14.2. `contentType`
 
 **Description:**  
 The MIME type of the attached resource (e.g., `image/png`, `application/json`, `text/plain`).
@@ -1734,7 +1790,7 @@ The MIME type of the attached resource (e.g., `image/png`, `application/json`, `
 It MUST be a string.  
 It SHOULD follow standard MIME type conventions.
 
-### 13.3. `path`
+### 14.3. `path`
 
 **Description:**
 A reference to the location of the attachment resource.
@@ -1749,7 +1805,7 @@ local filesystem access unless explicitly documented by the producer.
 
 When both a durable artifact reference and a producer-local path are available, producers SHOULD prefer the durable reference in `path`. The original local path MAY be retained in producer-namespaced attachment `extra` when useful. A local file path remains valid when no durable reference is available; producers are not required to upload attachments.
 
-### 13.4. `attachmentId`
+### 14.4. `attachmentId`
 
 **Description:**  
 A unique identifier for this attachment reference instance. It is not a content digest and MUST NOT be interpreted as one.
@@ -1760,7 +1816,7 @@ If present, it MUST be a non-empty string.
 UUID is RECOMMENDED.  
 `attachmentId` SHOULD be unique within the containing parent object.
 
-### 13.5. `extra`
+### 14.5. `extra`
 
 **Description:**  
 An extensibility object containing arbitrary metadata.
@@ -1774,7 +1830,7 @@ Producer-specific original local paths and content-digest metadata MAY be carrie
 
 ---
 
-## 14. Step Object
+## 15. Step Object
 
 The `steps` array within a test object provides a structured representation of the actions performed during the execution of a test case.
 Steps may be used to document sub-actions, checkpoints, validations, or diagnostic events that occurred during test execution.
@@ -1785,7 +1841,7 @@ Unknown fields MUST NOT appear in a step object except within an `extra` object.
 
 Each field within a step object is described in the subsections below.
 
-### 14.1. `name`
+### 15.1. `name`
 
 **Description:**  
 A human-readable name or description of the step.
@@ -1794,7 +1850,7 @@ A human-readable name or description of the step.
 `name` MUST be present.  
 It MUST be a string.
 
-### 14.2. `status`
+### 15.2. `status`
 
 **Description:**  
 The outcome of this step.
@@ -1805,7 +1861,7 @@ It MUST be one of the following values: `passed`, `failed`, `skipped`, `pending`
 
 A step's `status` does not determine the test case's final status, but may provide diagnostic detail.
 
-### 14.3. `extra`
+### 15.3. `extra`
 
 **Description:**  
 An extensibility object containing arbitrary metadata related to the step.
@@ -1817,7 +1873,7 @@ It is the ONLY permitted extension point directly under a step object.
 
 ---
 
-## 15. Run-Level Insights Object
+## 16. Run-Level Insights Object
 
 The run-level insights object appears at the root of a CTRF document.
 It provides aggregated metrics computed across multiple test runs.
@@ -1831,7 +1887,7 @@ Producers MAY include insights directly, but consumers MUST NOT require their pr
 
 Each field within the run-level insights object is described in the subsections below.
 
-### 15.1. `passRate`
+### 16.1. `passRate`
 
 **Description:**  
 A `metricDelta` object representing the overall pass rate across all analyzed runs.
@@ -1840,7 +1896,7 @@ A `metricDelta` object representing the overall pass rate across all analyzed ru
 `passRate` is OPTIONAL.  
 If present, it MUST follow the metric delta structure.
 
-### 15.2. `failRate`
+### 16.2. `failRate`
 
 **Description:**  
 A `metricDelta` object representing the overall failure rate.
@@ -1849,7 +1905,7 @@ A `metricDelta` object representing the overall failure rate.
 `failRate` is OPTIONAL.  
 If present, it MUST be a valid metric delta object.
 
-### 15.3. `flakyRate`
+### 16.3. `flakyRate`
 
 **Description:**  
 A `metricDelta` object representing the rate of flaky test cases across all analyzed runs.
@@ -1858,7 +1914,7 @@ A `metricDelta` object representing the rate of flaky test cases across all anal
 `flakyRate` is OPTIONAL.  
 If present, it MUST follow the metric delta structure.
 
-### 15.4. `averageRunDuration`
+### 16.4. `averageRunDuration`
 
 **Description:**  
 A `metricDelta` object representing the average total duration of test runs.
@@ -1867,7 +1923,7 @@ A `metricDelta` object representing the average total duration of test runs.
 `averageRunDuration` is OPTIONAL.  
 If present, it MUST be a valid metric delta object.
 
-### 15.5. `p95RunDuration`
+### 16.5. `p95RunDuration`
 
 **Description:**  
 A `metricDelta` object representing the 95th percentile of run durations.
@@ -1876,7 +1932,7 @@ A `metricDelta` object representing the 95th percentile of run durations.
 `p95RunDuration` is OPTIONAL.  
 If present, it MUST follow the metric delta structure.
 
-### 15.6. `averageTestDuration`
+### 16.6. `averageTestDuration`
 
 **Description:**  
 A `metricDelta` object representing the average duration of test case executions across all runs.
@@ -1885,7 +1941,7 @@ A `metricDelta` object representing the average duration of test case executions
 `averageTestDuration` is OPTIONAL.  
 If present, it MUST be a valid metric delta object.
 
-### 15.7. `runsAnalyzed`
+### 16.7. `runsAnalyzed`
 
 **Description:**  
 The number of test runs included when calculating these insights.
@@ -1894,7 +1950,7 @@ The number of test runs included when calculating these insights.
 `runsAnalyzed` is OPTIONAL.  
 If present, it MUST be a non-negative integer.
 
-### 15.8. `extra`
+### 16.8. `extra`
 
 **Description:**  
 An extensibility object containing arbitrary metadata.
@@ -1906,7 +1962,7 @@ It is the ONLY permitted extension point in the run-level insights object.
 
 ---
 
-## 16. Test-Level Insights Object
+## 17. Test-Level Insights Object
 
 The test-level insights object appears inside an individual test object.
 It provides aggregated metrics for that specific test case across multiple runs.
@@ -1920,16 +1976,16 @@ Producers MAY include insights directly, but consumers MUST NOT require their pr
 
 Each field within the test-level insights object is described in the subsections below.
 
-### 16.1. `passRate`
+### 17.1. `passRate`
 
 **Description:**  
 A `metricDelta` object representing the pass rate for this test case across analyzed runs.
 
 **Requirements:**  
 `passRate` is OPTIONAL.  
-If present, it MUST follow the structure defined in Section 17 (Metric Delta Object).
+If present, it MUST follow the structure defined in Section 18 (Metric Delta Object).
 
-### 16.2. `failRate`
+### 17.2. `failRate`
 
 **Description:**  
 A `metricDelta` object representing the failure rate for this test case.
@@ -1938,7 +1994,7 @@ A `metricDelta` object representing the failure rate for this test case.
 `failRate` is OPTIONAL.  
 If present, it MUST be a valid metric delta object.
 
-### 16.3. `flakyRate`
+### 17.3. `flakyRate`
 
 **Description:**  
 A `metricDelta` object representing the flakiness rate of this test case.
@@ -1947,7 +2003,7 @@ A `metricDelta` object representing the flakiness rate of this test case.
 `flakyRate` is OPTIONAL.  
 If present, it MUST follow the metric delta structure.
 
-### 16.4. `averageTestDuration`
+### 17.4. `averageTestDuration`
 
 **Description:**  
 A `metricDelta` object representing the average duration of this specific test case across runs.
@@ -1956,7 +2012,7 @@ A `metricDelta` object representing the average duration of this specific test c
 `averageTestDuration` is OPTIONAL.  
 If present, it MUST be a valid metric delta object.
 
-### 16.5. `p95TestDuration`
+### 17.5. `p95TestDuration`
 
 **Description:**  
 A `metricDelta` object representing the 95th percentile execution duration for this test case.
@@ -1965,7 +2021,7 @@ A `metricDelta` object representing the 95th percentile execution duration for t
 `p95TestDuration` is OPTIONAL.  
 If present, it MUST be a metric delta object.
 
-### 16.6. `executedInRuns`
+### 17.6. `executedInRuns`
 
 **Description:**  
 The number of runs in which this test case was executed.
@@ -1974,7 +2030,7 @@ The number of runs in which this test case was executed.
 `executedInRuns` is OPTIONAL.  
 If present, it MUST be a non-negative integer.
 
-### 16.7. `extra`
+### 17.7. `extra`
 
 **Description:**  
 An extensibility object containing arbitrary metadata.
@@ -1986,7 +2042,7 @@ It is the ONLY permitted extension point within a test-level insights object.
 
 ---
 
-## 17. Metric Delta Object
+## 18. Metric Delta Object
 
 The `metricDelta` object represents a numeric metric and its change relative to a baseline.
 
@@ -2000,7 +2056,7 @@ Unlike other objects in this specification, the `metricDelta` object does not in
 This is intentional: metric deltas are simple, self-contained numeric structures that represent computed values.
 Extensibility at the metric level is not required; producers requiring additional context SHOULD use the `extra` object on the parent insights object instead.
 
-### 17.1. `current`
+### 18.1. `current`
 
 **Description:**  
 The current value of the metric.
@@ -2009,7 +2065,7 @@ The current value of the metric.
 `current` is OPTIONAL.  
 If present, it MUST be a number.
 
-### 17.2. `baseline`
+### 18.2. `baseline`
 
 **Description:**  
 The metric value from the selected baseline run.
@@ -2018,7 +2074,7 @@ The metric value from the selected baseline run.
 `baseline` is OPTIONAL.  
 If present, it MUST be a number.
 
-### 17.3. `change`
+### 18.3. `change`
 
 **Description:**  
 The computed difference between `current` and `baseline`.
@@ -2029,7 +2085,7 @@ If present, it MUST be a number.
 
 ---
 
-## 18. Baseline Object
+## 19. Baseline Object
 
 The `baseline` object identifies a previously generated CTRF report that is used as a reference point when computing insights and metric deltas.
 
@@ -2040,7 +2096,7 @@ Unknown fields MUST NOT appear in the `baseline` object except within an `extra`
 
 Each field within the `baseline` object is described in the subsections below.
 
-### 18.1. `reportId`
+### 19.1. `reportId`
 
 **Description:**  
 The unique identifier of the baseline report.
@@ -2050,7 +2106,7 @@ The unique identifier of the baseline report.
 It MUST be a valid UUID as defined in [RFC9562].  
 The referenced report SHOULD correspond to a valid CTRF document.
 
-### 18.2. `timestamp`
+### 19.2. `timestamp`
 
 **Description:**  
 The timestamp indicating when the baseline report was generated.
@@ -2059,7 +2115,7 @@ The timestamp indicating when the baseline report was generated.
 `timestamp` is OPTIONAL.  
 If present, it MUST be a valid RFC 3339 / ISO 8601 date-time string.
 
-### 18.3. `source`
+### 19.3. `source`
 
 **Description:**  
 A human-readable identifier describing the origin of the baseline report.
@@ -2070,7 +2126,7 @@ This value MAY be a descriptive label (for example, a branch name or environment
 `source` is OPTIONAL.  
 No specific format is required.
 
-### 18.4. `buildNumber`
+### 19.4. `buildNumber`
 
 **Description:**  
 The build number associated with the baseline report.
@@ -2079,7 +2135,7 @@ The build number associated with the baseline report.
 `buildNumber` is OPTIONAL.  
 If present, it MUST be an integer.
 
-### 18.5. `buildName`
+### 19.5. `buildName`
 
 **Description:**  
 The name or label of the build associated with the baseline report.
@@ -2088,7 +2144,7 @@ The name or label of the build associated with the baseline report.
 `buildName` is OPTIONAL.  
 No specific format is required.
 
-### 18.6. `buildUrl`
+### 19.6. `buildUrl`
 
 **Description:**  
 A URL pointing to the build or pipeline execution associated with the baseline report.
@@ -2097,7 +2153,7 @@ A URL pointing to the build or pipeline execution associated with the baseline r
 `buildUrl` is OPTIONAL.  
 If present, it MUST be a valid URI as defined in [RFC3986].
 
-### 18.7. `commit`
+### 19.7. `commit`
 
 **Description:**  
 The source control commit identifier associated with the baseline report.
@@ -2106,7 +2162,7 @@ The source control commit identifier associated with the baseline report.
 `commit` is OPTIONAL.  
 No specific format is required.
 
-### 18.8. `extra`
+### 19.8. `extra`
 
 **Description:**  
 An extensibility object containing arbitrary metadata related to the baseline.
@@ -2116,7 +2172,7 @@ An extensibility object containing arbitrary metadata related to the baseline.
 It MAY contain arbitrary fields.  
 It is the ONLY permitted extension point within the baseline object.
 
-## 19. Versioning
+## 20. Versioning
 
 CTRF follows **Semantic Versioning**.
 
@@ -2148,9 +2204,9 @@ The `specVersion` field in a CTRF document MUST follow these versioning rules.
 
 ---
 
-## 20. Conformance Requirements
+## 21. Conformance Requirements
 
-### 20.1. Producer Conformance
+### 21.1. Producer Conformance
 
 Producers:
 
@@ -2175,7 +2231,7 @@ Producers SHOULD:
 
 ---
 
-## 20.2. Consumer Conformance
+## 21.2. Consumer Conformance
 
 Consumers:
 
@@ -2194,7 +2250,7 @@ Consumers:
 
 ---
 
-## 21. Security Considerations
+## 22. Security Considerations
 
 CTRF documents may contain sensitive information such as:
 
@@ -2211,7 +2267,7 @@ Consumers SHOULD consider size limits when processing attachments or screenshots
 
 ---
 
-## 22. IANA Considerations
+## 23. IANA Considerations
 
 This document registers **no** IANA resources.
 
@@ -2904,6 +2960,31 @@ to this specification.
           },
           "additionalProperties": false
         },
+        "errors": {
+          "description": "Errors associated with the test run rather than an individual test result",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "description": "Details of a global error",
+            "type": "object",
+            "minProperties": 1,
+            "properties": {
+              "message": {
+                "description": "Message associated with this global error",
+                "type": "string"
+              },
+              "trace": {
+                "description": "Stack trace associated with this global error",
+                "type": "string"
+              },
+              "extra": {
+                "description": "Extension point for arbitrary metadata",
+                "type": "object"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
         "extra": {
           "description": "Extension point for arbitrary metadata",
           "type": "object"
@@ -3203,7 +3284,7 @@ Examples are illustrative and omit fields not relevant to the scenario being dem
 
 Metrics shown are illustrative and may not reflect exact counts implied by the example data.
 
-See Sections 5-17 for normative definitions of the objects shown below.
+See Sections 5-18 for normative definitions of the objects shown below.
 
 ### D.1. Minimal CTRF Document
 
@@ -3255,6 +3336,7 @@ It includes:
 - a test case that fails initially and passes on retry
 - a flaky test case indicated by `flaky: true`
 - a final test case status of `passed` after retries
+- a global teardown error reported separately from passing test results
 
 ```json title="CTRF document with retries"
 {
@@ -3302,6 +3384,12 @@ It includes:
         "name": "passes without retry",
         "status": "passed",
         "duration": 500
+      }
+    ],
+    "errors": [
+      {
+        "message": "Shared teardown failed",
+        "trace": "Error: Database cleanup failed\n    at cleanup.js:24:5"
       }
     ]
   }
@@ -3486,6 +3574,7 @@ It includes:
 - retries and flaky test case behavior
 - diagnostic information (messages, traces, stdout, stderr)
 - multiple assertion failures with individual comparisons and diagnostics
+- a global error reported independently of test results
 - base64-encoded screenshots
 - file-based attachments
 - execution environment metadata
@@ -3631,6 +3720,12 @@ It includes:
         "name": "health check endpoint",
         "status": "passed",
         "duration": 500
+      }
+    ],
+    "errors": [
+      {
+        "message": "Worker cleanup failed",
+        "trace": "Error: Worker cleanup failed\n    at worker.js:18:5"
       }
     ],
     "environment": {
