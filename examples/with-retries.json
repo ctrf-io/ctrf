@@ -34,7 +34,13 @@
             "attempt": 1,
             "status": "failed",
             "duration": 120,
-            "message": "Connection timeout"
+            "message": "Service should be ready",
+            "assertionFailures": [
+              {
+                "expected": "ready",
+                "actual": "starting"
+              }
+            ]
           },
           {
             "attempt": 2,
