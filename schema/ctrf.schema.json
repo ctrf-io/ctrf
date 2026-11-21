@@ -341,6 +341,10 @@
                       "description": "Attempt end time (milliseconds since Unix epoch)",
                       "type": "integer"
                     },
+                    "threadId": {
+                      "description": "Thread or worker that executed this attempt",
+                      "type": "string"
+                    },
                     "attachments": {
                       "description": "Artifacts from this attempt",
                       "type": "array",
@@ -401,7 +405,7 @@
                 }
               },
               "threadId": {
-                "description": "Thread or worker that executed the test case",
+                "description": "Thread or worker that executed the final attempt represented by the test object",
                 "type": "string"
               },
               "browser": {
