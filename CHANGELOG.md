@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Updated UUID references to RFC 9562 and clarified optional deterministic UUID generation for `testId`.
+
 - Clarified that Test `threadId` identifies the thread or worker that executed the
   final attempt, and recommended qualifying `threadId` values when test cases run
   across processes or hosts (#74).
