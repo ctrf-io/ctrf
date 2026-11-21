@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Optional Test `description` in specification 0.3.0 for human-readable case context, separate from its name, suite and attempt diagnostics.
+
 - Optional `threadId` on attempt history entries, using the same contract as Test
   `threadId`, so previous attempts can record the thread or worker that executed
   them (#74).

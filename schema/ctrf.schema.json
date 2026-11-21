@@ -163,6 +163,10 @@
                 "type": "string",
                 "minLength": 1
               },
+              "description": {
+                "description": "Human-readable description of the test case",
+                "type": "string"
+              },
               "status": {
                 "description": "Final outcome of the test case",
                 "enum": [ "passed", "failed", "skipped", "pending", "other" ]
