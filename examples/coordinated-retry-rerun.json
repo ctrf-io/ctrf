@@ -1,0 +1,33 @@
+{
+  "reportFormat": "CTRF",
+  "specVersion": "0.2.0",
+  "reportId": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+  "runId": "coordinated-example-run",
+  "results": {
+    "tool": {
+      "name": "example-orchestrator"
+    },
+    "summary": {
+      "tests": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "pending": 0,
+      "other": 0,
+      "start": 1700000000400,
+      "stop": 1700000000550
+    },
+    "tests": [
+      {
+        "name": "case B",
+        "testId": "case-b",
+        "executionId": "execution-b",
+        "attemptId": "33333333-3333-4333-8333-333333333333",
+        "status": "passed",
+        "duration": 150,
+        "start": 1700000000400,
+        "stop": 1700000000550
+      }
+    ]
+  }
+}
