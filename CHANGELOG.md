@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Optional `threadId` on attempt history entries, using the same contract as Test
+  `threadId`, so previous attempts can record the thread or worker that executed
+  them (#74).
+
 ### Changed
 
 - Documented legacy `id` removal in 1.0.0 and version-based migration while retaining current acceptance and optional `testId`.
@@ -20,6 +26,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Defined parameterized test cases and consistently distinguished test cases, test objects, and executions throughout the specification and schema descriptions without changing execution or retry semantics.
 
 - Updated UUID references to RFC 9562 and clarified optional deterministic UUID generation for `testId`.
+
+- Clarified that Test `threadId` identifies the thread or worker that executed the
+  final attempt, and recommended qualifying `threadId` values when test cases run
+  across processes or hosts (#74).
 
 ## [0.2.0] - 2026-10-10
 
