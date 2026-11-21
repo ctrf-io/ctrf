@@ -363,7 +363,7 @@
                             "type": "string"
                           },
                           "path": {
-                            "description": "Path or URI to the attachment",
+                            "description": "Opaque reference to the attachment (URL or file path)",
                             "type": "string"
                           },
                           "extra": {
@@ -438,7 +438,7 @@
                       "type": "string"
                     },
                     "path": {
-                      "description": "Path or URI to the attachment",
+                      "description": "Opaque reference to the attachment (URL or file path)",
                       "type": "string"
                     },
                     "extra": {
